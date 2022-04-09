@@ -23,6 +23,13 @@ const ScanScreen = ({ navigation }) => {
     alert(`Bar code with type ${type} and data ${data} has been scanned!`);
   };
 
+  if (hasPermission === null) {
+    alert('Requesting for camera permission');
+  }
+  if (hasPermission === false) {
+    alert('No access to camera');
+  }
+
   return (
     <View style={StylesMain.mainView}>
       <FadeInView style={{ flex: 1, width: '100%', height: '100%' }}>

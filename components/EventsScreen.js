@@ -50,9 +50,25 @@ const EventsScreen = ({ navigation }) => {
     setLoading(false);
   };
 
+  const likeItem = (id) => {
+    console.log('like');
+    // set like on element of events with id
+    let newEvents = events.map((item) => {
+      if (item.id === id) {
+        item.liked = !item.liked;
+      }
+      return item;
+    });
+    setEvents(newEvents);
+  };
+
   const RenderElement = ({ item }) => {
     const img = item.artist_item.image ? { uri: 'https://admin.poolbar.at/assets/' + item.artist_item.image + '?fit=cover&width=500&height=200&quality=80' } : { uri: 'https://admin.poolbar.at/assets/9c6f223c-795a-4bf5-b8c0-0630a555e465?fit=cover&width=500&height=200&quality=80' };
-    console.log(item.artist_item);
+
+    let dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    let date = new Date(item.day_item.date_start);
+    const dateString = date.toLocaleDateString('de-DE', dateOptions);
+
     return (
       <TouchableOpacity
         onPress={() =>
@@ -61,11 +77,17 @@ const EventsScreen = ({ navigation }) => {
           })
         }
       >
-        <View style={{ flex: 1, width: '100%' }}>
-          <ImageBackground source={img} resizeMode="cover" style={{ flex: 1, width: '100%', height: 200 }}>
+        <View key={item.id} style={{ flex: 1, width: '100%' }}>
+          <ImageBackground source={img} resizeMode="cover" style={{ flex: 1, width: '100%', height: 300 }}>
             <Text style={StylesMain.labelMain}>{item.name}</Text>
-            <Text style={StylesMain.labelMain}>{item.day_item.date_start}</Text>
+            <Text style={StylesMain.labelMain}>{dateString}</Text>
             <Text style={StylesMain.labelMain}>{item.artist_item.name}</Text>
+            <Button
+              title={item.liked ? 'liked' : 'like'}
+              onPress={() => {
+                likeItem(item.id);
+              }}
+            />
           </ImageBackground>
         </View>
       </TouchableOpacity>
