@@ -13,7 +13,7 @@ const StylesMain = StyleSheet.create({
     fontSize: 44,
   },
   mainView: {
-    //fontFamily: 'Outfit_900Black',
+    fontFamily: 'Helviotopia',
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
@@ -23,6 +23,7 @@ const StylesMain = StyleSheet.create({
     height: '100%',
   },
   buttonMain: {
+    fontFamily: 'Helviotopia',
     alignSelf: 'center',
     fontSize: 30,
     backgroundColor: '#2ECDA7',
@@ -33,7 +34,7 @@ const StylesMain = StyleSheet.create({
     paddingBottom: 10,
   },
   buttonMainText: {
-    //fontFamily: 'Outfit_900Black',
+    fontFamily: 'Helviotopia',
     fontWeight: '500',
     color: '#fff',
     alignSelf: 'center',
@@ -42,7 +43,7 @@ const StylesMain = StyleSheet.create({
     textAlign: 'center',
   },
   buttonSecond: {
-    //fontFamily: 'Outfit_900Black',
+    fontFamily: 'Helviotopia',
     color: '#fff',
     alignSelf: 'center',
     marginTop: 'auto',
@@ -52,10 +53,8 @@ const StylesMain = StyleSheet.create({
     textAlign: 'center',
   },
   labelMain: {
-    //fontFamily: 'Outfit_900Black',
+    fontFamily: 'Helviotopia',
     color: '#fff',
-    alignSelf: 'center',
-    marginTop: 'auto',
     marginBottom: 10,
     fontSize: 30,
     backgroundColor: '#0d1117',

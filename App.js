@@ -11,8 +11,10 @@ import ArtistScreen from './components/ArtistScreen';
 import EventsScreen from './components/EventsScreen';
 import ScanScreen from './components/ScanScreen';
 import StylesMain from './styles/StylesMain';
-
 import PoolbarLogo from './components/PoolbarLogo';
+import * as Linking from 'expo-linking';
+
+const prefix = Linking.createURL('/');
 
 import { useFonts, Outfit_900Black } from '@expo-google-fonts/outfit';
 
@@ -45,15 +47,19 @@ const HomeScreen = ({ navigation }) => {
 const Stack = createNativeStackNavigator();
 
 const App = () => {
-  let [fontsLoaded] = useFonts({
-    Outfit_900Black,
+  const [fontsLoaded] = useFonts({
+    Helviotopia: require('./assets/fonts/Helviotopia/Helviotopia-Regular.otf'),
   });
+
+  const linking = {
+    prefixes: [prefix],
+  };
 
   if (!fontsLoaded) {
     return <AppLoading />;
   } else {
     return (
-      <NavigationContainer>
+      <NavigationContainer linking={linking} fallback={<Text>Loading...</Text>}>
         <Stack.Navigator>
           <Stack.Screen name="Home" component={HomeScreen} options={{ title: 'Welcome', headerShown: false }} />
           <Stack.Screen name="Events" component={EventsScreen} />

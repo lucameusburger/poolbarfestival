@@ -115,20 +115,21 @@ const EventsScreen = ({ router, navigation }) => {
           })
         }
       >
-        <View key={item.id} style={{ flex: 1, width: '100%' }}>
+        <View key={item.id} style={{ flex: 1, flexDirection: 'row', flexWrap: 'wrap' }}>
           <ImageBackground source={img} resizeMode="cover" style={{ flex: 1, width: '100%', height: 300 }}>
-            <Text style={StylesMain.labelMain}>{item.name}</Text>
-            <Text style={StylesMain.labelMain}>{dateString}</Text>
-            <Text style={StylesMain.labelMain}>{item.artist_item.name}</Text>
-            <FontAwesome
-              style={{ alignSelf: 'flex-end', marginRight: 10, marginBottom: 10 }}
-              name={item.liked ? 'heart' : 'heart-o'}
-              size={32}
-              color="black"
-              onPress={() => {
-                likeItem(item.id);
-              }}
-            />
+            <View style={{ width: '100%', marginTop: 'auto' }}>
+              <FontAwesome
+                style={{ alignSelf: 'flex-end', marginRight: 10, marginBottom: 10 }}
+                name={item.liked ? 'heart' : 'heart-o'}
+                size={32}
+                color="black"
+                onPress={() => {
+                  likeItem(item.id);
+                }}
+              />
+              <Text style={StylesMain.labelMain}>{item.name || item.artist_item.name}</Text>
+              <Text style={StylesMain.labelMain}>{dateString}</Text>
+            </View>
           </ImageBackground>
         </View>
       </TouchableOpacity>
