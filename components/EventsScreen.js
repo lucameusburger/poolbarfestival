@@ -6,19 +6,21 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import AppButton from '../modules/AppButton';
 import FadeInView from '../modules/FadeInView';
 import StylesMain from '../styles/StylesMain';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { FontAwesome } from '@expo/vector-icons';
 
-const EventsScreen = ({ navigation }) => {
+const EventsScreen = ({ router, navigation }) => {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const fetchEvents = async () => {
     const resp = await fetch('https://www.admin.poolbar.at/items/events');
     const data = await resp.json();
-    let events = data.data;
+    let fetchedEvents = data.data;
 
     // fetch day
     await Promise.all(
-      events.map(async (item) => {
+      fetchedEvents.map(async (item) => {
         item.day_item = {};
         if (!item.day) return item;
         const resp = await fetch('https://www.admin.poolbar.at/items/days/' + item.day);
@@ -32,7 +34,7 @@ const EventsScreen = ({ navigation }) => {
 
     // fetch artist
     await Promise.all(
-      events.map(async (item) => {
+      fetchedEvents.map(async (item) => {
         item.artist_item = {};
         if (!item.artist) return item;
         const resp = await fetch('https://www.admin.poolbar.at/items/artists/' + item.artist);
@@ -44,9 +46,24 @@ const EventsScreen = ({ navigation }) => {
       })
     );
 
+    // load local storage
+    const localEvents = await getEvents();
+    console.log(localEvents);
+    await Promise.all(
+      fetchedEvents.map(async (item) => {
+        if (localEvents.find((x) => x.id === item.id).liked) {
+          item.liked = true;
+        } else {
+          item.liked = false;
+        }
+
+        return item;
+      })
+    );
+
     //console.log(events);
 
-    setEvents(events);
+    setEvents(fetchedEvents);
     setLoading(false);
   };
 
@@ -60,6 +77,27 @@ const EventsScreen = ({ navigation }) => {
       return item;
     });
     setEvents(newEvents);
+    storeEvents(events);
+  };
+
+  const storeEvents = async (events) => {
+    try {
+      const jsonValue = JSON.stringify(events);
+      await AsyncStorage.setItem('events', jsonValue);
+    } catch (e) {
+      // saving error
+      alert(e);
+    }
+  };
+
+  const getEvents = async () => {
+    try {
+      const jsonValue = await AsyncStorage.getItem('events');
+      return jsonValue != null ? JSON.parse(jsonValue) : null;
+    } catch (e) {
+      // error reading value
+      alert('error loading');
+    }
   };
 
   const RenderElement = ({ item }) => {
@@ -82,8 +120,11 @@ const EventsScreen = ({ navigation }) => {
             <Text style={StylesMain.labelMain}>{item.name}</Text>
             <Text style={StylesMain.labelMain}>{dateString}</Text>
             <Text style={StylesMain.labelMain}>{item.artist_item.name}</Text>
-            <Button
-              title={item.liked ? 'liked' : 'like'}
+            <FontAwesome
+              style={{ alignSelf: 'flex-end', marginRight: 10, marginBottom: 10 }}
+              name={item.liked ? 'heart' : 'heart-o'}
+              size={32}
+              color="black"
               onPress={() => {
                 likeItem(item.id);
               }}
