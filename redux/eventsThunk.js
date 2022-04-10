@@ -1,53 +1,55 @@
+import { fetchArtists } from "./artistsThunk"
+
 const BASE_URL = 'https://www.admin.poolbar.at/'
 
-function setArtists(artists) {
+function setEvents(artists) {
     return {
-        type: "SET_ARTISTS",
+        type: "SET_EVENTS",
         payload: artists
     }
 }
 
 function setIsFetchingData(isFetching) {
     return {
-        type: "SET_IS_FETCHING_DATA",
+        type: "SET_IS_FETCHING_EVENTS",
         payload: isFetching
     }
 }
 
 function setHasFetchingDataError(hasError) {
     return {
-        type: "SET_HAS_FETCHING_DATA_ERROR",
+        type: "SET_HAS_FETCHING_EVENTS_ERROR",
         payload: hasError
     }
 }
 
-export function fetchArtists() {
+export function fetchEvents() {
     return (dispatch, getState) => {
-        const isFetchingData = getState().artists.isFetchingData;
+        const isFetchingData = getState().events.isFetchingData;
         if (isFetchingData) {
             return;
         } else {
+            console.log("fetching events...");
             dispatch(setIsFetchingData(true));
-            fetch(BASE_URL + 'items/artists')
+            dispatch(fetchArtists())
+            fetch(BASE_URL + 'items/events')
                 .then(async response => {
                     // check for error response
-                    console.log(response.ok);
-
                     if (response.ok) {
                         const data = await response.json();
-                        dispatch(setArtists(data.data));
+                        dispatch(setEvents(data.data));
                     } else {
                         const error = (data && data.message) || response.status;
-                        console.log("Fetching Artist Error: ", error);
+                        console.log("Fetching Events Error: ", error);
                         dispatch(setHasFetchingDataError(true));
                     }
                 })
                 .catch(error => {
-                    console.error('Error loading Artists: ', error);
+                    console.error('Error loading Events: ', error);
                     dispatch(setHasFetchingDataError(true));
                 })
                 .finally(() => {
-                    console.log('Finished loading Artists');
+                    console.log('Finished loading Events');
                     dispatch(setIsFetchingData(false));
                 })
         }
@@ -65,9 +67,11 @@ export function fetchArtist(artistId) {
             fetch(BASE_URL + 'items/artists')
                 .then(async response => {
                     // check for error response
+                    console.log(response.ok);
+
                     if (response.ok) {
                         const data = await response.json();
-                        dispatch(setArtists(data.data));
+                        dispatch(setEvents(data.data));
                     } else {
                         const error = (data && data.message) || response.status;
                         console.log("Fetching Artist Error: ", error);

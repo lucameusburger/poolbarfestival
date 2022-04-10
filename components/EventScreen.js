@@ -9,11 +9,29 @@ import NavBar from '../modules/NavBar';
 import FadeInView from '../modules/FadeInView';
 import StylesMain from '../styles/StylesMain';
 import { FontAwesome } from '@expo/vector-icons';
+import { useDispatch, useSelector } from 'react-redux';
+
 
 const EventScreen = ({ route, navigation }) => {
   const { id } = route.params;
   const [event, setEvent] = useState([]);
   const [loading, setLoading] = useState(true);
+  const likedEvents = useSelector((state) => state.favorites.likedEvents);
+  const dispatch = useDispatch();
+
+  const likeEvent = (id) => {
+    dispatch({
+      type: 'ADD_TO_LIKED_EVENTS',
+      payload: id
+    })
+  };
+
+  const unLikeEvent = (id) => {
+    dispatch({
+      type: 'REMOVE_FROM_LIKED_EVENTS',
+      payload: id
+    })
+  };
 
   const fetchEvent = async () => {
     const resp = await fetch('https://www.admin.poolbar.at/items/events/' + id);
@@ -60,6 +78,9 @@ const EventScreen = ({ route, navigation }) => {
       dateString = date.toLocaleDateString('en-US', dateOptions);
     }
 
+    const isLiked = likedEvents.includes(item.id);
+
+
     return (
       <View style={{ flex: 1, width: '100%', height: '100%' }}>
         <View style={{ margin: 20 }}>
@@ -70,11 +91,19 @@ const EventScreen = ({ route, navigation }) => {
             <Text>{item.artist && item.artist_item.category ? item.artist_item.category : 'unknown'}</Text>
             <FontAwesome
               style={{ alignSelf: 'flex-end', marginRight: 10, marginBottom: 10 }}
-              name={item.liked ? 'heart' : 'heart-o'}
+              name={
+                isLiked ?
+                  'heart' :
+                  'heart-o'
+              }
               size={32}
-              color="#fff"
+              color="#2ECDA7"
               onPress={() => {
-                likeItem(item.id);
+                if (isLiked) {
+                  unLikeEvent(item.id);
+                } else {
+                  likeEvent(item.id);
+                }
               }}
             />
           </View>
