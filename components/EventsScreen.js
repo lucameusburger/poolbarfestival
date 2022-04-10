@@ -10,13 +10,18 @@ import FadeInView from '../modules/FadeInView';
 import StylesMain from '../styles/StylesMain';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { FontAwesome } from '@expo/vector-icons';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchEvents } from '../redux/eventsThunk';
 
 const EventsScreen = ({ router, navigation }) => {
-  const [events, setEvents] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const dispatch = useDispatch();
+  const loading = !useSelector((state) => state.events.isLoaded);
+  const events = useSelector((state) => state.events.data);
+  const likedEvents = useSelector((state) => state.favorites.likedEvents);
+  const artists = useSelector((state) => state.artists.artists);
 
-  const fetchEvents = async () => {
-    const resp = await fetch('https://www.admin.poolbar.at/items/events?sort=day,asc');
+  const fetchEvents1 = async () => {
+    const resp = await fetch('https://www.admin.poolbar.at/items/events');
     const data = await resp.json();
     let fetchedEvents = data.data;
 
@@ -75,41 +80,24 @@ const EventsScreen = ({ router, navigation }) => {
     setLoading(false);
   };
 
-  const likeItem = (id) => {
-    console.log('like');
-    // set like on element of events with id
-    let newEvents = events.map((item) => {
-      if (item.id === id) {
-        item.liked = !item.liked;
-      }
-      return item;
+  const likeEvent = (id) => {
+    dispatch({
+      type: 'ADD_TO_LIKED_EVENTS',
+      payload: id,
     });
-    setEvents(newEvents);
-    storeEvents(events);
   };
 
-  const storeEvents = async (events) => {
-    try {
-      const jsonValue = JSON.stringify(events);
-      await AsyncStorage.setItem('events', jsonValue);
-    } catch (e) {
-      // saving error
-      alert(e);
-    }
-  };
-
-  const getEvents = async () => {
-    try {
-      const jsonValue = await AsyncStorage.getItem('events');
-      return jsonValue != null ? JSON.parse(jsonValue) : null;
-    } catch (e) {
-      // error reading value
-      alert('error loading');
-    }
+  const unLikeEvent = (id) => {
+    dispatch({
+      type: 'REMOVE_FROM_LIKED_EVENTS',
+      payload: id,
+    });
   };
 
   const RenderElement = ({ item }) => {
-    const img = item.artist_item.image ? { uri: 'https://admin.poolbar.at/assets/' + item.artist_item.image + '?fit=cover&width=500&height=200&quality=80' } : { uri: 'https://admin.poolbar.at/assets/9c6f223c-795a-4bf5-b8c0-0630a555e465?fit=cover&width=500&height=200&quality=80' };
+    const artist = artists.find((x) => x.id === item.artist);
+    console.log(item.artist, ' : ', artist);
+    const img = artist?.image ? { uri: 'https://admin.poolbar.at/assets/' + artist.image + '?fit=cover&width=500&height=200&quality=80' } : { uri: 'https://admin.poolbar.at/assets/9c6f223c-795a-4bf5-b8c0-0630a555e465?fit=cover&width=500&height=200&quality=80' };
 
     let dateString = 'tba';
     if (item.day_item && item.day_item.date_start) {
@@ -117,6 +105,8 @@ const EventsScreen = ({ router, navigation }) => {
       let date = new Date(item.day_item.date_start);
       dateString = date.toLocaleDateString('de-DE', dateOptions);
     }
+
+    const isLiked = likedEvents.includes(item.id);
 
     return (
       <TouchableOpacity
@@ -135,11 +125,15 @@ const EventsScreen = ({ router, navigation }) => {
             <View style={{ width: '20%' }}>
               <FontAwesome
                 style={{ alignSelf: 'flex-end', marginBottom: 'auto', marginTop: 'auto' }}
-                name={item.liked ? 'heart' : 'heart-o'}
+                name={isLiked ? 'heart' : 'heart-o'}
                 size={32}
                 color="#2ECDA7"
                 onPress={() => {
-                  likeItem(item.id);
+                  if (isLiked) {
+                    unLikeEvent(item.id);
+                  } else {
+                    likeEvent(item.id);
+                  }
                 }}
               />
             </View>
@@ -150,9 +144,10 @@ const EventsScreen = ({ router, navigation }) => {
   };
 
   useEffect(() => {
-    fetchEvents();
+    dispatch(fetchEvents());
   }, []);
 
+  console.log(events);
   return (
     <View style={StylesMain.mainView}>
       <FadeInView style={{ flex: 1, width: '100%', height: '100%' }}>
