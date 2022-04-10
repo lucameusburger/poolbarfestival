@@ -16,6 +16,14 @@ import PoolbarLogo from './components/PoolbarLogo';
 import * as Linking from 'expo-linking';
 import TypeWriter from 'react-native-typewriter';
 
+import { Provider } from "react-redux"
+import { PersistGate } from 'redux-persist/integration/react'
+
+import { persistor, store } from './redux/store';
+
+import { navigationRef } from './core/RootNavigation';
+
+
 const prefix = Linking.createURL('/');
 
 import { useFonts } from '@expo-google-fonts/outfit';
@@ -75,16 +83,24 @@ const App = () => {
     return <AppLoading />;
   } else {
     return (
-      <NavigationContainer linking={linking} fallback={<Text>Loading...</Text>}>
-        <Stack.Navigator>
-          <Stack.Screen name="Home" component={HomeScreen} options={{ title: 'Welcome', headerShown: false }} />
-          <Stack.Screen name="Events" component={EventsScreen} options={{ title: 'Events', headerShown: false }} />
-          <Stack.Screen name="Event" component={EventScreen} options={{ title: 'Event', headerShown: false }} />
-          <Stack.Screen name="Artists" component={ArtistsScreen} options={{ title: 'Artists', headerShown: false }} />
-          <Stack.Screen name="Artist" component={ArtistScreen} options={{ title: 'Artist', headerShown: false }} />
-          <Stack.Screen name="Scan" component={ScanScreen} options={{ title: 'Scan', headerShown: false }} />
-        </Stack.Navigator>
-      </NavigationContainer>
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <NavigationContainer 
+            linking={linking} 
+            fallback={<Text>Loading...</Text>}
+            ref={navigationRef}
+          >
+            <Stack.Navigator>
+              <Stack.Screen name="Home" component={HomeScreen} options={{ title: 'Welcome', headerShown: false }} />
+              <Stack.Screen name="Events" component={EventsScreen} options={{ title: 'Events', headerShown: false }} />
+              <Stack.Screen name="Event" component={EventScreen} options={{ title: 'Event', headerShown: false }} />
+              <Stack.Screen name="Artists" component={ArtistsScreen} options={{ title: 'Artists', headerShown: false }} />
+              <Stack.Screen name="Artist" component={ArtistScreen} options={{ title: 'Artist', headerShown: false }} />
+              <Stack.Screen name="Scan" component={ScanScreen} options={{ title: 'Scan', headerShown: false }} />
+            </Stack.Navigator>
+          </NavigationContainer>
+        </PersistGate>
+      </Provider>
     );
   }
 };
