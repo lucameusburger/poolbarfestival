@@ -101,9 +101,9 @@ const EventsScreen = ({ router, navigation }) => {
 
     let dateString = 'tba';
     if (item.day_item && item.day_item.date_start) {
-      let dateOptions = { weekday: 'short', year: 'numeric', month: 'long', day: 'numeric' };
+      let dateOptions = { day: 'numeric', month: 'long' };
       let date = new Date(item.day_item.date_start);
-      dateString = date.toLocaleDateString('de-DE', dateOptions);
+      dateString = date.toLocaleDateString('en-US', dateOptions);
     }
 
     const isLiked = likedEvents.includes(item.id);
