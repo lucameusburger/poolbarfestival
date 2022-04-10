@@ -63,7 +63,6 @@ const StylesMain = StyleSheet.create({
   },
   labelContainer: {
     fontFamily: 'Helviotopia',
-    alignSelf: 'center',
     fontSize: 30,
     backgroundColor: '#2ECDA7',
     borderRadius: 30,
@@ -74,7 +73,7 @@ const StylesMain = StyleSheet.create({
     paddingLeft: 20,
     paddingRight: 20,
     marginTop: 'auto',
-    marginBottom: 'auto',
+    marginBottom: 20,
   },
   labelText: {
     fontFamily: 'Helviotopia',

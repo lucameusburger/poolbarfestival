@@ -1,21 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Button, Item, FlatList, ImageBackground, TouchableOpacity } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Text, View, FlatList, ImageBackground, TouchableOpacity } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
 import NavBar from '../modules/NavBar';
 import LoadingText from '../modules/LoadingText';
 import FadeInView from '../modules/FadeInView';
 import StylesMain from '../styles/StylesMain';
-import fetchArtists from '../redux/artistsThunk';
+import { fetchArtists } from '../redux/artistsThunk';
 import { navigate } from '../core/RootNavigation';
 
 const BASE_URL = 'https://www.admin.poolbar.at/';
 
 const ArtistComponent = ({ item }) => {
-  const img = item.image ? { uri: BASE_URL + 'assets/' + item.image + '?fit=cover&width=500&height=200&quality=80' } : { uri: BASE_URL + '/assets/9c6f223c-795a-4bf5-b8c0-0630a555e465?fit=cover&width=500&height=200&quality=80' };
+  const img = item.image ?
+    { uri: BASE_URL + 'assets/' + item.image + '?fit=cover&width=500&height=200&quality=80' } :
+    { uri: BASE_URL + 'assets/9c6f223c-795a-4bf5-b8c0-0630a555e465?fit=cover&width=500&height=200&quality=80' };
 
   return (
     <TouchableOpacity
@@ -53,7 +53,15 @@ const ArtistsScreen = ({ navigation }) => {
     <View style={StylesMain.mainView}>
       <FadeInView style={{ flex: 1, width: '100%', height: '100%' }}>
         <NavBar navigation={navigation} title="artists" />
-        <View style={{ flex: 1, marginBottom: 'auto', marginTop: 'auto' }}>{!isLoaded ? <LoadingText /> : artists ? <ArtistsList artists={artists} /> : <LoadingText />}</View>
+        <View style={{ flex: 1, marginBottom: 'auto', marginTop: 'auto' }}>
+          {
+            !isLoaded ?
+              <LoadingText /> :
+              artists ?
+                <ArtistsList artists={artists} /> :
+                <LoadingText />
+          }
+        </View>
         <StatusBar style="auto" />
       </FadeInView>
     </View>

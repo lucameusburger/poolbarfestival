@@ -9,7 +9,6 @@ export const initialState = {
 export function reducer(state = initialState, action) {
     switch (action.type) {
         case 'SET_ARTISTS':
-            console.log("SET_ARTISTS", action.payload)
             return {
                 ...state,
                 artists: action.payload,
