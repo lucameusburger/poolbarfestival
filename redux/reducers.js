@@ -1,13 +1,12 @@
 import { combineReducers } from 'redux'
 
-import { reducer as locationReducer, initialState as locationInitialState } from './locationReducer';
-
+import { reducer as artistsReducers, initialState as artistsInitialState } from './artistsReducer';
 
 export const initialState = {
-    location: locationInitialState,
+    artists: artistsInitialState
 }
 
 export const rootReducer =
     combineReducers({
-        location: locationReducer,
+        artists: artistsReducers
     })
