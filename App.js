@@ -16,6 +16,7 @@ import StylesMain from './styles/StylesMain';
 import PoolbarLogo from './components/PoolbarLogo';
 import * as Linking from 'expo-linking';
 import TypeWriter from 'react-native-typewriter';
+import { FontAwesome } from '@expo/vector-icons';
 
 const prefix = Linking.createURL('/');
 
@@ -57,6 +58,18 @@ const HomeScreen = ({ navigation }) => {
           <AppButton title="scan" onPress={() => navigation.navigate('Scan')} />
           <View style={{ height: 20 }}></View>
           <AppButton title="generator" onPress={() => navigation.navigate('Generators')} />
+
+          {/* <TouchableOpacity onPress={() => navigation.navigate('Scan')}>
+            <FontAwesome
+              style={{ position: 'fixed', bottom: 10, right: 10 }}
+              name={'camera'}
+              size={32}
+              color="#2ECDA7"
+              onPress={() => {
+                likeItem(item.id);
+              }}
+            />
+          </TouchableOpacity> */}
         </View>
       </FadeInView>
       <StatusBar style="auto" />

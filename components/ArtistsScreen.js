@@ -4,6 +4,7 @@ import { StyleSheet, Text, View, Button, Item, FlatList, ImageBackground, Toucha
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import NavBar from '../modules/NavBar';
+import LoadingText from '../modules/LoadingText';
 import FadeInView from '../modules/FadeInView';
 import StylesMain from '../styles/StylesMain';
 
@@ -48,7 +49,7 @@ const ArtistsScreen = ({ navigation }) => {
       <FadeInView style={{ flex: 1, width: '100%', height: '100%' }}>
         <NavBar navigation={navigation} title="artists" />
         <View style={{ flex: 1, marginBottom: 'auto', marginTop: 'auto' }}>
-          {loading && <Text style={{ flex: 1, color: '#fff', fontSize: 33, alignSelf: 'center', marginTop: 'auto', marginBottom: 'auto', backgroundColor: '#000' }}>loading</Text>}
+          {loading && <LoadingText />}
           {artists && <FlatList style={{ flex: 1 }} data={artists} renderItem={RenderElement} keyExtractor={(item) => item.id} />}
         </View>
 
