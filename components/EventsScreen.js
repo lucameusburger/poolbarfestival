@@ -16,7 +16,7 @@ const EventsScreen = ({ router, navigation }) => {
   const [loading, setLoading] = useState(true);
 
   const fetchEvents = async () => {
-    const resp = await fetch('https://www.admin.poolbar.at/items/events');
+    const resp = await fetch('https://www.admin.poolbar.at/items/events?sort=day,asc');
     const data = await resp.json();
     let fetchedEvents = data.data;
 
@@ -51,7 +51,7 @@ const EventsScreen = ({ router, navigation }) => {
     // load local storage
     const localEvents = await getEvents();
     console.log(localEvents);
-    if (localEvents) {
+    if (localEvents && 1 == 2) {
       await Promise.all(
         fetchedEvents.map(async (item) => {
           if (localEvents.find((x) => x.id === item.id).liked) {
@@ -64,6 +64,12 @@ const EventsScreen = ({ router, navigation }) => {
         })
       );
     }
+
+    fetchedEvents.sort(function (a, b) {
+      // Turn your strings into dates, and then subtract them
+      // to get a value that is either negative, positive, or zero.
+      return new Date(b.day_item.date_start) - new Date(a.day_item.date_start);
+    });
 
     setEvents(fetchedEvents);
     setLoading(false);
@@ -105,9 +111,12 @@ const EventsScreen = ({ router, navigation }) => {
   const RenderElement = ({ item }) => {
     const img = item.artist_item.image ? { uri: 'https://admin.poolbar.at/assets/' + item.artist_item.image + '?fit=cover&width=500&height=200&quality=80' } : { uri: 'https://admin.poolbar.at/assets/9c6f223c-795a-4bf5-b8c0-0630a555e465?fit=cover&width=500&height=200&quality=80' };
 
-    let dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-    let date = new Date(item.day_item.date_start);
-    const dateString = date.toLocaleDateString('de-DE', dateOptions);
+    let dateString = 'tba';
+    if (item.day_item && item.day_item.date_start) {
+      let dateOptions = { weekday: 'short', year: 'numeric', month: 'long', day: 'numeric' };
+      let date = new Date(item.day_item.date_start);
+      dateString = date.toLocaleDateString('de-DE', dateOptions);
+    }
 
     return (
       <TouchableOpacity
@@ -117,19 +126,23 @@ const EventsScreen = ({ router, navigation }) => {
           })
         }
       >
-        <View key={item.id} style={{ flex: 1, flexDirection: 'row', flexWrap: 'wrap' }}>
-          <View style={{ width: '100%', marginTop: 'auto' }}>
-            <FontAwesome
-              style={{ alignSelf: 'flex-end', marginRight: 10, marginBottom: 10 }}
-              name={item.liked ? 'heart' : 'heart-o'}
-              size={32}
-              color="#2ECDA7"
-              onPress={() => {
-                likeItem(item.id);
-              }}
-            />
-            <Text style={StylesMain.labelMain}>{item.name || item.artist_item.name}</Text>
-            <Text style={StylesMain.labelText}>{dateString}</Text>
+        <View key={item.id} style={{ flex: 1, flexDirection: 'row', flexWrap: 'wrap', marginBottom: 30 }}>
+          <View style={{ width: '100%', marginTop: 'auto', flexDirection: 'row' }}>
+            <View style={{ width: '80%' }}>
+              <Text style={StylesMain.eventDateText}>{dateString}</Text>
+              <Text style={StylesMain.eventMainText}>{item.name || item.artist_item.name}</Text>
+            </View>
+            <View style={{ width: '20%' }}>
+              <FontAwesome
+                style={{ alignSelf: 'flex-end', marginBottom: 'auto', marginTop: 'auto' }}
+                name={item.liked ? 'heart' : 'heart-o'}
+                size={32}
+                color="#2ECDA7"
+                onPress={() => {
+                  likeItem(item.id);
+                }}
+              />
+            </View>
           </View>
         </View>
       </TouchableOpacity>
@@ -144,7 +157,7 @@ const EventsScreen = ({ router, navigation }) => {
     <View style={StylesMain.mainView}>
       <FadeInView style={{ flex: 1, width: '100%', height: '100%' }}>
         <NavBar title="events" navigation={navigation} />
-        <View style={{ flex: 1, marginBottom: 'auto', marginTop: 'auto' }}>
+        <View style={{ flex: 1, margin: 20 }}>
           {loading && <LoadingText />}
           {events && <FlatList style={{ flex: 1 }} data={events} renderItem={RenderElement} keyExtractor={(item) => item.id} />}
         </View>
