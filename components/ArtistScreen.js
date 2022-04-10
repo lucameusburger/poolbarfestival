@@ -6,6 +6,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import AppButton from '../modules/AppButton';
 import AppHeading from '../modules/AppHeading';
+import NavBar from '../modules/NavBar';
 import FadeInView from '../modules/FadeInView';
 import StylesMain from '../styles/StylesMain';
 
@@ -30,6 +31,7 @@ const ArtistScreen = ({ route, navigation }) => {
         <View style={{ alignSelf: 'center' }}>
           <AppHeading title={item.name} />
           {item.url_spotify && <AppButton title="play on spotify" onPress={() => Linking.openURL(item.url_spotify)} />}
+          <Image source={img} resizeMode="cover" style={{ flex: 1, width: '100%', height: 300 }} />
         </View>
       </View>
     );
@@ -42,6 +44,7 @@ const ArtistScreen = ({ route, navigation }) => {
   return (
     <View style={StylesMain.mainView}>
       <FadeInView style={{ flex: 1, width: '100%' }}>
+        <NavBar navigation={navigation} title={artist.name} />
         <View style={{ marginBottom: 'auto', marginTop: 'auto', flex: 1 }}>
           {loading && <Text style={{ color: '#fff', fontSize: 33, alignSelf: 'center' }}>loading</Text>}
           {artist && <RenderElement item={artist} />}

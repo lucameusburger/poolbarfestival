@@ -117,21 +117,19 @@ const EventsScreen = ({ router, navigation }) => {
         }
       >
         <View key={item.id} style={{ flex: 1, flexDirection: 'row', flexWrap: 'wrap' }}>
-          <ImageBackground source={img} resizeMode="cover" style={{ flex: 1, width: '100%', height: 300 }}>
-            <View style={{ width: '100%', marginTop: 'auto' }}>
-              <FontAwesome
-                style={{ alignSelf: 'flex-end', marginRight: 10, marginBottom: 10 }}
-                name={item.liked ? 'heart' : 'heart-o'}
-                size={32}
-                color="#E35169"
-                onPress={() => {
-                  likeItem(item.id);
-                }}
-              />
-              <Text style={StylesMain.labelMain}>{item.name || item.artist_item.name}</Text>
-              <Text style={StylesMain.labelMain}>{dateString}</Text>
-            </View>
-          </ImageBackground>
+          <View style={{ width: '100%', marginTop: 'auto' }}>
+            <FontAwesome
+              style={{ alignSelf: 'flex-end', marginRight: 10, marginBottom: 10 }}
+              name={item.liked ? 'heart' : 'heart-o'}
+              size={32}
+              color="#2ECDA7"
+              onPress={() => {
+                likeItem(item.id);
+              }}
+            />
+            <Text style={StylesMain.labelMain}>{item.name || item.artist_item.name}</Text>
+            <Text style={StylesMain.labelText}>{dateString}</Text>
+          </View>
         </View>
       </TouchableOpacity>
     );
@@ -146,7 +144,7 @@ const EventsScreen = ({ router, navigation }) => {
       <FadeInView style={{ flex: 1, width: '100%', height: '100%' }}>
         <NavBar title="events" navigation={navigation} />
         <View style={{ flex: 1, marginBottom: 'auto', marginTop: 'auto' }}>
-          {loading && <Text style={{ flex: 1, color: '#fff', fontSize: 33, alignSelf: 'center', marginTop: 'auto', marginBottom: 'auto', backgroundColor: '#000' }}>laden</Text>}
+          {loading && <Text style={{ flex: 1, color: '#fff', fontSize: 33, alignSelf: 'center', marginTop: 'auto', marginBottom: 'auto', backgroundColor: '#2ECDA7' }}>laden</Text>}
           {events && <FlatList style={{ flex: 1 }} data={events} renderItem={RenderElement} keyExtractor={(item) => item.id} />}
         </View>
 

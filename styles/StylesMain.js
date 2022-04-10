@@ -44,8 +44,7 @@ const StylesMain = StyleSheet.create({
   card: {
     marginTop: 10,
     padding: 16,
-    backgroundColor: '#eee',
-    justifyContent: 'center',
+    backgroundColor: '#2ECDA7',
     borderRadius: 26,
   },
   card_header: {
@@ -61,6 +60,31 @@ const StylesMain = StyleSheet.create({
     backgroundColor: '#fff',
     borderRadius: 12,
     overflow: 'hidden',
+  },
+
+  labelContainer: {
+    fontFamily: 'Helviotopia',
+    alignSelf: 'center',
+    fontSize: 30,
+    backgroundColor: '#2ECDA7',
+    borderRadius: 30,
+    minWidth: 140,
+    textAlign: 'center',
+    paddingTop: 10,
+    paddingBottom: 10,
+    paddingLeft: 20,
+    paddingRight: 20,
+    marginTop: 'auto',
+    marginBottom: 'auto',
+  },
+  labelText: {
+    fontFamily: 'Helviotopia',
+    fontWeight: '500',
+    color: '#000',
+    alignSelf: 'center',
+    marginTop: 'auto',
+    fontSize: 24,
+    textAlign: 'center',
   },
 });
 

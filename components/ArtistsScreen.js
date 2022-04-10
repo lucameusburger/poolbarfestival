@@ -29,8 +29,10 @@ const ArtistsScreen = ({ navigation }) => {
         }
       >
         <View style={{ flex: 1, width: '100%' }}>
-          <ImageBackground source={img} resizeMode="cover" style={{ flex: 1, width: '100%', height: 200 }}>
-            <Text style={StylesMain.labelMain}>{item.name}</Text>
+          <ImageBackground source={img} resizeMode="cover" style={{ display: 'block', width: '100%', height: 300, alignItems: 'center' }}>
+            <View style={StylesMain.labelContainer}>
+              <Text style={StylesMain.labelText}>{item.name}</Text>
+            </View>
           </ImageBackground>
         </View>
       </TouchableOpacity>
