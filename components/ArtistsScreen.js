@@ -38,22 +38,6 @@ const ArtistComponent = ({ item }) => {
 
 const ArtistsList = ({ artists }) => <FlatList style={{ flex: 1 }} data={artists} renderItem={ArtistComponent} keyExtractor={(item) => item.id} />;
 
-const Loading = () => (
-  <Text
-    style={{
-      flex: 1,
-      color: '#fff',
-      fontSize: 33,
-      alignSelf: 'center',
-      marginTop: 'auto',
-      marginBottom: 'auto',
-      backgroundColor: '#000',
-    }}
-  >
-    loading
-  </Text>
-);
-
 const ArtistsScreen = ({ navigation }) => {
   const dispatch = useDispatch();
 
@@ -69,7 +53,7 @@ const ArtistsScreen = ({ navigation }) => {
     <View style={StylesMain.mainView}>
       <FadeInView style={{ flex: 1, width: '100%', height: '100%' }}>
         <NavBar navigation={navigation} title="artists" />
-        <View style={{ flex: 1, marginBottom: 'auto', marginTop: 'auto' }}>{!isLoaded ? <Loading /> : artists ? <ArtistsList artists={artists} /> : <Loading />}</View>
+        <View style={{ flex: 1, marginBottom: 'auto', marginTop: 'auto' }}>{!isLoaded ? <LoadingText /> : artists ? <ArtistsList artists={artists} /> : <LoadingText />}</View>
         <StatusBar style="auto" />
       </FadeInView>
     </View>
