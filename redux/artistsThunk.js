@@ -28,7 +28,6 @@ function fetchArtists() {
             return;
         } else {
             dispatch(setIsFetchingData(true));
-            console.log('Fetching Artists');
             fetch(BASE_URL + 'items/artists')
                 .then(async response => {
                     // check for error response
@@ -44,7 +43,7 @@ function fetchArtists() {
                     }
                 })
                 .catch(error => {
-                    console.error('There was an error!', error);
+                    console.error('Error loading Artists: ', error);
                     dispatch(setHasFetchingDataError(true));
                 })
                 .finally(() => {
