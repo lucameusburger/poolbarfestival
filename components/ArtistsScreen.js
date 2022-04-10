@@ -16,7 +16,7 @@ const BASE_URL = 'https://www.admin.poolbar.at/'
 const ArtistComponent = ({ item }) => {
   const img = item.image ?
     { uri: BASE_URL + 'assets/' + item.image + '?fit=cover&width=500&height=200&quality=80' } :
-    { uri: BASE_URL + '/assets/9c6f223c-795a-4bf5-b8c0-0630a555e465?fit=cover&width=500&height=200&quality=80' };
+    { uri: BASE_URL + 'assets/9c6f223c-795a-4bf5-b8c0-0630a555e465?fit=cover&width=500&height=200&quality=80' };
 
   return (
     <TouchableOpacity
