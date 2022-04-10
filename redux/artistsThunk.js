@@ -21,7 +21,7 @@ function setHasFetchingDataError(hasError) {
     }
 }
 
-function fetchArtists() {
+export function fetchArtists() {
     return (dispatch, getState) => {
         const isFetchingData = getState().artists.isFetchingData;
         if (isFetchingData) {
@@ -54,4 +54,37 @@ function fetchArtists() {
     }
 }
 
-export default fetchArtists;
+
+export function fetchArtist(artistId) {
+    return (dispatch, getState) => {
+        const isFetchingData = getState().artists.isFetchingData;
+        if (isFetchingData) {
+            return;
+        } else {
+            dispatch(setIsFetchingData(true));
+            fetch(BASE_URL + 'items/artists')
+                .then(async response => {
+                    // check for error response
+                    console.log(response.ok);
+
+                    if (response.ok) {
+                        const data = await response.json();
+                        dispatch(setArtists(data.data));
+                    } else {
+                        const error = (data && data.message) || response.status;
+                        console.log("Fetching Artist Error: ", error);
+                        dispatch(setHasFetchingDataError(true));
+                    }
+                })
+                .catch(error => {
+                    console.error('Error loading Artists: ', error);
+                    dispatch(setHasFetchingDataError(true));
+                })
+                .finally(() => {
+                    console.log('Finished loading Artists');
+                    dispatch(setIsFetchingData(false));
+                })
+        }
+    }
+}
+

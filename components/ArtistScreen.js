@@ -9,49 +9,74 @@ import AppHeading from '../modules/AppHeading';
 import NavBar from '../modules/NavBar';
 import FadeInView from '../modules/FadeInView';
 import StylesMain from '../styles/StylesMain';
+import { useDispatch, useSelector } from 'react-redux';
+import LoadingText from '../modules/LoadingText';
+
+import { fetchArtist } from '../redux/artistsThunk';
+
+
+const BASE_URL = 'https://www.admin.poolbar.at/';
+
+const ArtistDetails = ({ artist }) => {
+  const img = artist.image ?
+    { uri: BASE_URL + 'assets/' + artist.image + '?fit=cover&width=500&height=200&quality=80' } :
+    { uri: BASE_URL + 'assets/9c6f223c-795a-4bf5-b8c0-0630a555e465?fit=cover&width=500&height=200&quality=80' };
+
+  return (
+    <View style={{ flex: 1, width: '100%', height: '100%' }}>
+      <View style={{ alignSelf: 'center' }}>
+        <AppHeading title={artist.name} />
+        {
+          artist.url_spotify &&
+          <AppButton
+            title="play on spotify"
+            onPress={() => Linking.openURL(artist.url_spotify)}
+          />
+        }
+        <Image
+          source={img}
+          resizeMode="cover"
+          style={{
+            flex: 1,
+            width: '100%',
+            height: 300
+          }}
+
+        />
+      </View>
+    </View>
+  );
+};
 
 const ArtistScreen = ({ route, navigation }) => {
   const { id } = route.params;
-  const [artist, setArtist] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const artists = useSelector((state) => state.artists.artists);
+  const [selectedArtist, setSelectedArtist] = useState(null);
+  const dispatch = useDispatch();
 
-  const fetchArtist = async () => {
-    const resp = await fetch('https://www.admin.poolbar.at/items/artists/' + id);
-    const data = await resp.json();
-    console.log(data.data);
-    setArtist(data.data);
-    setLoading(false);
-  };
-
-  const RenderElement = ({ item }) => {
-    const img = item.image ? { uri: 'https://admin.poolbar.at/assets/' + item.image + '?fit=cover&width=500&height=200&quality=30' } : { uri: 'https://admin.poolbar.at/assets/9c6f223c-795a-4bf5-b8c0-0630a555e465?fit=cover&width=500&height=200&quality=30' };
-    console.log(img);
-    return (
-      <View style={{ flex: 1, width: '100%', height: '100%' }}>
-        <View style={{ alignSelf: 'center' }}>
-          <AppHeading title={item.name} />
-          {item.url_spotify && <AppButton title="play on spotify" onPress={() => Linking.openURL(item.url_spotify)} />}
-          <Image source={img} resizeMode="cover" style={{ flex: 1, width: '100%', height: 300 }} />
-        </View>
-      </View>
-    );
-  };
 
   useEffect(() => {
-    fetchArtist();
+    dispatch(fetchArtist(id));
   }, []);
+
+  useEffect(() => {
+    setSelectedArtist(artists.find((artist) => artist.id === id));
+  }, [artists]);
 
   return (
     <View style={StylesMain.mainView}>
       <FadeInView style={{ flex: 1, width: '100%' }}>
-        <NavBar navigation={navigation} title={artist.name} />
+        <NavBar navigation={navigation} title={selectedArtist?.name} />
         <View style={{ marginBottom: 'auto', marginTop: 'auto', flex: 1 }}>
-          {loading && <Text style={{ color: '#fff', fontSize: 33, alignSelf: 'center' }}>loading</Text>}
-          {artist && <RenderElement item={artist} />}
+          {
+            selectedArtist ?
+              <ArtistDetails artist={selectedArtist} /> :
+              <LoadingText />
+          }
         </View>
         <StatusBar style="auto" />
-      </FadeInView>
-    </View>
+      </FadeInView >
+    </View >
   );
 };
 
