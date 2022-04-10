@@ -4,6 +4,7 @@ import { StyleSheet, Text, View, Button, Item, FlatList, ImageBackground, Toucha
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import AppButton from '../modules/AppButton';
+import LoadingText from '../modules/LoadingText';
 import NavBar from '../modules/NavBar';
 import FadeInView from '../modules/FadeInView';
 import StylesMain from '../styles/StylesMain';
@@ -144,7 +145,7 @@ const EventsScreen = ({ router, navigation }) => {
       <FadeInView style={{ flex: 1, width: '100%', height: '100%' }}>
         <NavBar title="events" navigation={navigation} />
         <View style={{ flex: 1, marginBottom: 'auto', marginTop: 'auto' }}>
-          {loading && <Text style={{ flex: 1, color: '#fff', fontSize: 33, alignSelf: 'center', marginTop: 'auto', marginBottom: 'auto', backgroundColor: '#2ECDA7' }}>laden</Text>}
+          {loading && <LoadingText />}
           {events && <FlatList style={{ flex: 1 }} data={events} renderItem={RenderElement} keyExtractor={(item) => item.id} />}
         </View>
 

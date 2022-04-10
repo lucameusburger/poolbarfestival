@@ -14,14 +14,12 @@ const FadeInView = ({ children, style, duration = 1000 }) => {
 
   return (
     <Animated.View // Special animatable View
-      style={
-        [
-          style,
-          {
-            opacity: fadeAnim, // Bind opacity to animated value
-          }
-        ]
-      }
+      style={[
+        style,
+        {
+          opacity: fadeAnim, // Bind opacity to animated value
+        },
+      ]}
     >
       {children}
     </Animated.View>
