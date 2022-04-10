@@ -8,6 +8,7 @@ import AppLoading from 'expo-app-loading';
 import FadeInView from './modules/FadeInView';
 import GeneratorsScreen from './components/GeneratorsScreen';
 import ArtistsScreen from './components/ArtistsScreen';
+import ArtistsHistoryScreen from './components/ArtistsHistoryScreen';
 import ArtistScreen from './components/ArtistScreen';
 import EventsScreen from './components/EventsScreen';
 import EventScreen from './components/EventScreen';
@@ -62,6 +63,8 @@ const HomeScreen = ({ navigation }) => {
           <View style={{ height: 20 }}></View>
           <AppButton title="artists" onPress={() => navigation.navigate('Artists')} />
           <View style={{ height: 20 }}></View>
+          <AppButton title="all artists" onPress={() => navigation.navigate('All artists')} />
+          <View style={{ height: 20 }}></View>
           <AppButton title="scan" onPress={() => navigation.navigate('Scan')} />
           <View style={{ height: 20 }}></View>
           <AppButton title="generator" onPress={() => navigation.navigate('Generators')} />
@@ -110,6 +113,7 @@ const App = () => {
               <Stack.Screen name="Events" component={EventsScreen} options={{ title: 'Events', headerShown: false }} />
               <Stack.Screen name="Event" component={EventScreen} options={{ title: 'Event', headerShown: false }} />
               <Stack.Screen name="Artists" component={ArtistsScreen} options={{ title: 'Artists', headerShown: false }} />
+              <Stack.Screen name="All artists" component={AllArtistsScreen} options={{ title: 'All Artists', headerShown: false }} />
               <Stack.Screen name="Artist" component={ArtistScreen} options={{ title: 'Artist', headerShown: false }} />
               <Stack.Screen name="Scan" component={ScanScreen} options={{ title: 'Scan', headerShown: false }} />
             </Stack.Navigator>
