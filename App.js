@@ -18,6 +18,13 @@ import * as Linking from 'expo-linking';
 import TypeWriter from 'react-native-typewriter';
 import { FontAwesome } from '@expo/vector-icons';
 
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
+
+import { persistor, store } from './redux/store';
+
+import { navigationRef } from './core/RootNavigation';
+
 const prefix = Linking.createURL('/');
 
 import { useFonts } from '@expo-google-fonts/outfit';
@@ -27,7 +34,7 @@ const HomeScreen = ({ navigation }) => {
 
   return (
     <View style={StylesMain.mainView}>
-      <FadeInView style={{ display: 'block', flex: 1, width: '100%', height: '100%' }}>
+      <FadeInView style={{ flex: 1, width: '100%', height: '100%' }}>
         <TypeWriter
           style={{ position: 'absolute', width: '200%', left: '-50%', top: '-5%', color: '#2ECDA7', textAlign: 'justify', opacity: 1, fontFamily: 'Helviotopia', letterSpacing: 10, lineHeight: 14, transform: [{ rotate: '12deg' }] }}
           typing={typing}
@@ -95,17 +102,20 @@ const App = () => {
     return <AppLoading />;
   } else {
     return (
-      <NavigationContainer linking={linking} fallback={<Text>Loading...</Text>}>
-        <Stack.Navigator>
-          <Stack.Screen name="Home" component={HomeScreen} options={{ title: 'Welcome', headerShown: false }} />
-          <Stack.Screen name="Events" component={EventsScreen} options={{ title: 'Events', headerShown: false }} />
-          <Stack.Screen name="Event" component={EventScreen} options={{ title: 'Event', headerShown: false }} />
-          <Stack.Screen name="Artists" component={ArtistsScreen} options={{ title: 'Artists', headerShown: false }} />
-          <Stack.Screen name="Artist" component={ArtistScreen} options={{ title: 'Artist', headerShown: false }} />
-          <Stack.Screen name="Generators" component={GeneratorsScreen} options={{ title: 'Generator', headerShown: false }} />
-          <Stack.Screen name="Scan" component={ScanScreen} options={{ title: 'Scan', headerShown: false }} />
-        </Stack.Navigator>
-      </NavigationContainer>
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <NavigationContainer linking={linking} fallback={<Text>Loading...</Text>} ref={navigationRef}>
+            <Stack.Navigator>
+              <Stack.Screen name="Home" component={HomeScreen} options={{ title: 'Welcome', headerShown: false }} />
+              <Stack.Screen name="Events" component={EventsScreen} options={{ title: 'Events', headerShown: false }} />
+              <Stack.Screen name="Event" component={EventScreen} options={{ title: 'Event', headerShown: false }} />
+              <Stack.Screen name="Artists" component={ArtistsScreen} options={{ title: 'Artists', headerShown: false }} />
+              <Stack.Screen name="Artist" component={ArtistScreen} options={{ title: 'Artist', headerShown: false }} />
+              <Stack.Screen name="Scan" component={ScanScreen} options={{ title: 'Scan', headerShown: false }} />
+            </Stack.Navigator>
+          </NavigationContainer>
+        </PersistGate>
+      </Provider>
     );
   }
 };
