@@ -29,7 +29,7 @@ const ArtistsScreen = ({ navigation }) => {
         }
       >
         <View style={{ flex: 1, width: '100%' }}>
-          <ImageBackground source={img} resizeMode="cover" style={{ display: 'block', width: '100%', height: 300, alignItems: 'center' }}>
+          <ImageBackground source={img} resizeMode="cover" style={{ width: '100%', height: 300, alignItems: 'center' }}>
             <View style={StylesMain.labelContainer}>
               <Text style={StylesMain.labelText}>{item.name}</Text>
             </View>

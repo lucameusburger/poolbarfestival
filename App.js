@@ -33,7 +33,7 @@ const HomeScreen = ({ navigation }) => {
 
   return (
     <View style={StylesMain.mainView}>
-      <FadeInView style={{ display: 'block', flex: 1, width: '100%', height: '100%' }}>
+      <FadeInView style={{ flex: 1, width: '100%', height: '100%' }}>
         <TypeWriter
           style={{ position: 'absolute', width: '110%', left: '-5%', color: '#2ECDA7', textAlign: 'justify', opacity: 1, fontFamily: 'Helviotopia', letterSpacing: 10, lineHeight: 14 }}
           typing={typing}
@@ -85,8 +85,8 @@ const App = () => {
     return (
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-          <NavigationContainer 
-            linking={linking} 
+          <NavigationContainer
+            linking={linking}
             fallback={<Text>Loading...</Text>}
             ref={navigationRef}
           >
