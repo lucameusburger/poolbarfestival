@@ -14,7 +14,8 @@ const AppHeading = ({ onPress, title, type }) => {
 const styles = StyleSheet.create({
   heading: {
     fontFamily: 'Helviotopia',
-    fontSize: 40,
+    fontSize: 80,
+    color: '#2ECDA7',
     alignSelf: 'center',
   },
 });

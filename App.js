@@ -111,6 +111,7 @@ const App = () => {
               <Stack.Screen name="Event" component={EventScreen} options={{ title: 'Event', headerShown: false }} />
               <Stack.Screen name="Artists" component={ArtistsScreen} options={{ title: 'Artists', headerShown: false }} />
               <Stack.Screen name="Artist" component={ArtistScreen} options={{ title: 'Artist', headerShown: false }} />
+              <Stack.Screen name="Generators" component={GeneratorsScreen} options={{ title: 'Generator', headerShown: false }} />
               <Stack.Screen name="Scan" component={ScanScreen} options={{ title: 'Scan', headerShown: false }} />
             </Stack.Navigator>
           </NavigationContainer>

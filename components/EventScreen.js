@@ -57,8 +57,6 @@ const EventScreen = ({ route, navigation }) => {
       const dataArtist = await respArtist.json();
       if (dataArtist.data) {
         fetchedEvent.artist_item = dataArtist.data;
-
-        console.log(dataArtist.data);
       }
     }
 
