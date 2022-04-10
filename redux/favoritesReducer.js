@@ -27,12 +27,14 @@ export function reducer(state = initialState, action) {
         case 'REMOVE_FROM_LIKED_ARTISTS':
             return {
                 ...state,
-                likedArtists: state.likedArtists.filter(artist => artist.id !== action.payload.id)
+                likedArtists: state.likedArtists.filter(artist => artist !== action.payload)
             }
         case 'REMOVE_FROM_LIKED_EVENTS':
+            console.log(action.payload)
+            console.log(state.likedEvents)
             return {
                 ...state,
-                likedEvents: state.likedEvents.filter(event => event.id !== action.payload.id)
+                likedEvents: state.likedEvents.filter(event => event !== action.payload)
             }
         default:
             return state
