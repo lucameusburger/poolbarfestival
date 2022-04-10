@@ -26,17 +26,11 @@ const HomeScreen = ({ navigation }) => {
           <PoolbarLogo style={{ alignSelf: 'center', marginBottom: 'auto', marginTop: 'auto' }} width="80%" height="100%" fill="black" />
         </View>
         <View style={{ top: 0, marginTop: 0, marginBottom: 'auto', height: '40%' }}>
-          <TouchableOpacity style={StylesMain.buttonMain} onPress={() => navigation.navigate('Events')}>
-            <Text style={StylesMain.buttonMainText}>events</Text>
-          </TouchableOpacity>
+          <AppButton title="events" onPress={() => navigation.navigate('Events')} />
           <View style={{ height: 20 }}></View>
-          <TouchableOpacity style={StylesMain.buttonMain} onPress={() => navigation.navigate('Artists')}>
-            <Text style={StylesMain.buttonMainText}>artists</Text>
-          </TouchableOpacity>
+          <AppButton title="artists" onPress={() => navigation.navigate('Artists')} />
           <View style={{ height: 20 }}></View>
-          <TouchableOpacity style={StylesMain.buttonMain} onPress={() => navigation.navigate('Scan')}>
-            <Text style={StylesMain.buttonMainText}>scan</Text>
-          </TouchableOpacity>
+          <AppButton title="scan" onPress={() => navigation.navigate('Scan')} />
         </View>
       </FadeInView>
       <StatusBar style="auto" />

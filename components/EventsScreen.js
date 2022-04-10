@@ -49,17 +49,19 @@ const EventsScreen = ({ router, navigation }) => {
     // load local storage
     const localEvents = await getEvents();
     console.log(localEvents);
-    await Promise.all(
-      fetchedEvents.map(async (item) => {
-        if (localEvents.find((x) => x.id === item.id).liked) {
-          item.liked = true;
-        } else {
-          item.liked = false;
-        }
+    if (localEvents) {
+      await Promise.all(
+        fetchedEvents.map(async (item) => {
+          if (localEvents.find((x) => x.id === item.id).liked) {
+            item.liked = true;
+          } else {
+            item.liked = false;
+          }
 
-        return item;
-      })
-    );
+          return item;
+        })
+      );
+    }
 
     //console.log(events);
 
@@ -122,7 +124,7 @@ const EventsScreen = ({ router, navigation }) => {
                 style={{ alignSelf: 'flex-end', marginRight: 10, marginBottom: 10 }}
                 name={item.liked ? 'heart' : 'heart-o'}
                 size={32}
-                color="black"
+                color="#E35169"
                 onPress={() => {
                   likeItem(item.id);
                 }}
@@ -143,6 +145,7 @@ const EventsScreen = ({ router, navigation }) => {
   return (
     <View style={StylesMain.mainView}>
       <FadeInView style={{ flex: 1, width: '100%', height: '100%' }}>
+        <Text style={StylesMain.mainHeading}>events</Text>
         <View style={{ flex: 1, marginBottom: 'auto', marginTop: 'auto' }}>
           {loading && <Text style={{ flex: 1, color: '#fff', fontSize: 33, alignSelf: 'center', marginTop: 'auto', marginBottom: 'auto', backgroundColor: '#000' }}>loading</Text>}
           {events && <FlatList style={{ flex: 1 }} data={events} renderItem={RenderElement} keyExtractor={(item) => item.id} />}

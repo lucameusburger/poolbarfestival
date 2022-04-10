@@ -44,6 +44,7 @@ const ArtistsScreen = ({ navigation }) => {
   return (
     <View style={StylesMain.mainView}>
       <FadeInView style={{ flex: 1, width: '100%', height: '100%' }}>
+        <Text style={StylesMain.mainHeading}>artists</Text>
         <View style={{ flex: 1, marginBottom: 'auto', marginTop: 'auto' }}>
           {loading && <Text style={{ flex: 1, color: '#fff', fontSize: 33, alignSelf: 'center', marginTop: 'auto', marginBottom: 'auto', backgroundColor: '#000' }}>loading</Text>}
           {artists && <FlatList style={{ flex: 1 }} data={artists} renderItem={RenderElement} keyExtractor={(item) => item.id} />}

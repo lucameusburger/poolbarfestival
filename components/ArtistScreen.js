@@ -5,6 +5,7 @@ import { StyleSheet, Text, View, Button, Item, FlatList, ImageBackground, Image,
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import AppButton from '../modules/AppButton';
+import AppHeading from '../modules/AppHeading';
 import FadeInView from '../modules/FadeInView';
 import StylesMain from '../styles/StylesMain';
 
@@ -26,16 +27,10 @@ const ArtistScreen = ({ route, navigation }) => {
     console.log(img);
     return (
       <View style={{ flex: 1, width: '100%', height: '100%' }}>
-        <ImageBackground source={img} resizeMode="cover" style={{ flex: 1, width: '100%', height: '100%' }} blurRadius={30}>
-          <View style={{ alignSelf: 'center', marginTop: 'auto', marginBottom: 'auto' }}>
-            <Text style={StylesMain.labelMain}>{item.name}</Text>
-            {item.url_spotify && (
-              <TouchableOpacity style={{ marginTop: 0, marginBottom: 'auto' }} onPress={() => Linking.openURL(item.url_spotify)}>
-                <Text style={StylesMain.buttonSecond}>play on spotify</Text>
-              </TouchableOpacity>
-            )}
-          </View>
-        </ImageBackground>
+        <View style={{ alignSelf: 'center' }}>
+          <AppHeading title={item.name} />
+          {item.url_spotify && <AppButton title="play on spotify" onPress={() => Linking.openURL(item.url_spotify)} />}
+        </View>
       </View>
     );
   };
