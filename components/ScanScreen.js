@@ -4,6 +4,7 @@ import { StyleSheet, Text, View, Button, Item, FlatList, ImageBackground, Toucha
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import FadeInView from '../modules/FadeInView';
+import NavBar from '../modules/NavBar';
 import StylesMain from '../styles/StylesMain';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 
@@ -33,6 +34,7 @@ const ScanScreen = ({ navigation }) => {
   return (
     <View style={StylesMain.mainView}>
       <FadeInView style={{ flex: 1, width: '100%', height: '100%' }}>
+        <NavBar navigation={navigation} title="scan" />
         <View style={{ flex: 1, marginBottom: 'auto', marginTop: 'auto' }}>
           <BarCodeScanner onBarCodeScanned={scanned ? undefined : handleBarCodeScanned} style={StyleSheet.absoluteFillObject} />
           {scanned && <Button title={'Tap to Scan Again'} onPress={() => setScanned(false)} />}

@@ -4,6 +4,7 @@ import { StyleSheet, Text, View, Button, Item, FlatList, ImageBackground, Toucha
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import AppButton from '../modules/AppButton';
+import NavBar from '../modules/NavBar';
 import FadeInView from '../modules/FadeInView';
 import StylesMain from '../styles/StylesMain';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -63,8 +64,6 @@ const EventsScreen = ({ router, navigation }) => {
       );
     }
 
-    //console.log(events);
-
     setEvents(fetchedEvents);
     setLoading(false);
   };
@@ -112,7 +111,7 @@ const EventsScreen = ({ router, navigation }) => {
     return (
       <TouchableOpacity
         onPress={() =>
-          navigation.navigate('Artist', {
+          navigation.navigate('Event', {
             id: item.id,
           })
         }
@@ -145,9 +144,9 @@ const EventsScreen = ({ router, navigation }) => {
   return (
     <View style={StylesMain.mainView}>
       <FadeInView style={{ flex: 1, width: '100%', height: '100%' }}>
-        <Text style={StylesMain.mainHeading}>events</Text>
+        <NavBar title="events" navigation={navigation} />
         <View style={{ flex: 1, marginBottom: 'auto', marginTop: 'auto' }}>
-          {loading && <Text style={{ flex: 1, color: '#fff', fontSize: 33, alignSelf: 'center', marginTop: 'auto', marginBottom: 'auto', backgroundColor: '#000' }}>loading</Text>}
+          {loading && <Text style={{ flex: 1, color: '#fff', fontSize: 33, alignSelf: 'center', marginTop: 'auto', marginBottom: 'auto', backgroundColor: '#000' }}>laden</Text>}
           {events && <FlatList style={{ flex: 1 }} data={events} renderItem={RenderElement} keyExtractor={(item) => item.id} />}
         </View>
 
