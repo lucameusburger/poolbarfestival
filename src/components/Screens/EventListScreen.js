@@ -3,17 +3,17 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Button, Item, FlatList, ImageBackground, TouchableOpacity } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import AppButton from '../modules/AppButton';
-import LoadingText from '../modules/LoadingText';
-import NavBar from '../modules/NavBar';
-import FadeInView from '../modules/FadeInView';
-import StylesMain from '../styles/StylesMain';
+import AppButton from '../ui/AppButton';
+import LoadingText from '../ui/LoadingText';
+import NavBar from '../ui/NavBar';
+import FadeInView from '../ui/FadeInView';
+import StylesMain from '../../../styles/StylesMain';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { FontAwesome } from '@expo/vector-icons';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchEvents } from '../redux/eventsThunk';
+import { fetchEvents } from '../../redux/eventsThunk';
 
-const EventsScreen = ({ router, navigation }) => {
+const EventListScreen = ({ router, navigation }) => {
   const dispatch = useDispatch();
   const loading = !useSelector((state) => state.events.isLoaded);
   const events = useSelector((state) => state.events.data);
@@ -161,4 +161,4 @@ const EventsScreen = ({ router, navigation }) => {
   );
 };
 
-export default EventsScreen;
+export default EventListScreen;

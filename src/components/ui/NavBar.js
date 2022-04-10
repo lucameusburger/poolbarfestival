@@ -1,8 +1,8 @@
 import { AutoFocus } from 'expo-camera/build/Camera.types';
 import React, { useState, useEffect } from 'react';
 import { Dimensions, View, PixelRatio, Text, StyleSheet } from 'react-native';
-import AppHeading from '../modules/AppHeading';
-import NavBackButton from '../modules/NavBackButton';
+import AppHeading from './AppHeading';
+import NavBackButton from './NavBackButton';
 
 const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
 
