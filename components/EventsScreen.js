@@ -91,7 +91,6 @@ const EventsScreen = ({ router, navigation }) => {
 
   const RenderElement = ({ item }) => {
     const artist = artists.find((x) => x.id === item.artist);
-    console.log(item.artist, " : ", artist);
     const img = artist?.image ? { uri: 'https://admin.poolbar.at/assets/' + artist.image + '?fit=cover&width=500&height=200&quality=80' } : { uri: 'https://admin.poolbar.at/assets/9c6f223c-795a-4bf5-b8c0-0630a555e465?fit=cover&width=500&height=200&quality=80' };
 
     let dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
@@ -139,7 +138,6 @@ const EventsScreen = ({ router, navigation }) => {
     dispatch(fetchEvents());
   }, []);
 
-  console.log(events)
   return (
     <View style={StylesMain.mainView}>
       <FadeInView style={{ flex: 1, width: '100%', height: '100%' }}>
