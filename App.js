@@ -6,6 +6,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import AppButton from './modules/AppButton';
 import AppLoading from 'expo-app-loading';
 import FadeInView from './modules/FadeInView';
+import GeneratorsScreen from './components/GeneratorsScreen';
 import ArtistsScreen from './components/ArtistsScreen';
 import ArtistScreen from './components/ArtistScreen';
 import EventsScreen from './components/EventsScreen';
@@ -50,6 +51,8 @@ const HomeScreen = ({ navigation }) => {
           <AppButton title="artists" onPress={() => navigation.navigate('Artists')} />
           <View style={{ height: 20 }}></View>
           <AppButton title="scan" onPress={() => navigation.navigate('Scan')} />
+          <View style={{ height: 20 }}></View>
+          <AppButton title="generator" onPress={() => navigation.navigate('Generators')} />
         </View>
       </FadeInView>
       <StatusBar style="auto" />
@@ -82,6 +85,7 @@ const App = () => {
           <Stack.Screen name="Event" component={EventScreen} options={{ title: 'Event', headerShown: false }} />
           <Stack.Screen name="Artists" component={ArtistsScreen} options={{ title: 'Artists', headerShown: false }} />
           <Stack.Screen name="Artist" component={ArtistScreen} options={{ title: 'Artist', headerShown: false }} />
+          <Stack.Screen name="Generators" component={GeneratorsScreen} options={{ title: 'Generator', headerShown: false }} />
           <Stack.Screen name="Scan" component={ScanScreen} options={{ title: 'Scan', headerShown: false }} />
         </Stack.Navigator>
       </NavigationContainer>

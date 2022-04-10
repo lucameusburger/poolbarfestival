@@ -61,7 +61,6 @@ const StylesMain = StyleSheet.create({
     borderRadius: 12,
     overflow: 'hidden',
   },
-
   labelContainer: {
     fontFamily: 'Helviotopia',
     alignSelf: 'center',
