@@ -37,7 +37,20 @@ export function fetchEvents() {
                     // check for error response
                     if (response.ok) {
                         const data = await response.json();
-                        dispatch(setEvents(data.data));
+                        const fetchedEvents = data.data;
+                        await Promise.all(
+                            fetchedEvents.map(async (item) => {
+                                item.day_item = {};
+                                if (!item.day) return item;
+                                const resp = await fetch('https://www.admin.poolbar.at/items/days/' + item.day);
+                                const data = await resp.json();
+                                if (!data.data) return item;
+                                item.day_item = data.data;
+
+                                return item;
+                            })
+                        );
+                        dispatch(setEvents(fetchedEvents));
                     } else {
                         const error = (data && data.message) || response.status;
                         console.log("Fetching Events Error: ", error);
