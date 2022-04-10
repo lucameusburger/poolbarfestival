@@ -23,12 +23,12 @@ const GeneratorsScreen = ({ router, navigation }) => {
     // fetch lab
     await Promise.all(
       fetchedGenerators.map(async (item) => {
-        item.artist_item = {};
-        if (!item.artist) return item;
-        const resp = await fetch('https://www.admin.poolbar.at/items/generator_labs/' + item.artist);
+        item.lab_item = {};
+        if (!item.lab) return item;
+        const resp = await fetch('https://www.admin.poolbar.at/items/generator_labs/' + item.lab);
         const data = await resp.json();
         if (!data.data) return item;
-        item.artist_item = data.data;
+        item.lab_item = data.data;
 
         return item;
       })
@@ -39,35 +39,23 @@ const GeneratorsScreen = ({ router, navigation }) => {
   };
 
   const RenderElement = ({ item }) => {
-    const img = item.artist_item.image ? { uri: 'https://admin.poolbar.at/assets/' + item.artist_item.image + '?fit=cover&width=500&height=200&quality=80' } : { uri: 'https://admin.poolbar.at/assets/9c6f223c-795a-4bf5-b8c0-0630a555e465?fit=cover&width=500&height=200&quality=80' };
-
-    let dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-    let date = new Date(item.day_item.date_start);
-    const dateString = date.toLocaleDateString('de-DE', dateOptions);
+    const img = item.image ? { uri: 'https://admin.poolbar.at/assets/' + item.image + '?fit=cover&width=500&height=200&quality=80' } : { uri: 'https://admin.poolbar.at/assets/9c6f223c-795a-4bf5-b8c0-0630a555e465?fit=cover&width=500&height=200&quality=80' };
 
     return (
       <TouchableOpacity
         onPress={() =>
-          navigation.navigate('Event', {
+          navigation.navigate('Generator_Project', {
             id: item.id,
           })
         }
       >
         <View key={item.id} style={{ flex: 1, flexDirection: 'row', flexWrap: 'wrap' }}>
-          <View style={{ width: '100%', marginTop: 'auto' }}>
-            <FontAwesome
-              style={{ alignSelf: 'flex-end', marginRight: 10, marginBottom: 10 }}
-              name={item.liked ? 'heart' : 'heart-o'}
-              size={32}
-              color="#2ECDA7"
-              onPress={() => {
-                likeItem(item.id);
-              }}
-            />
-            <Text style={StylesMain.labelMain}>{item.name || item.artist_item.name}</Text>
-            <Text style={StylesMain.labelText}>{dateString}</Text>
+          <View style={{ width: '100%', marginTop: 'auto', backgroundColor: '#000' }}>
+            <Text style={StylesMain.labelMain}>{item.name || 'no name'}</Text>
+            <Text style={StylesMain.labelMain}>{(item.lab_item && item.lab_item.name) || 'no lab'}</Text>
           </View>
         </View>
+        <View style={{ height: 20 }}></View>
       </TouchableOpacity>
     );
   };
