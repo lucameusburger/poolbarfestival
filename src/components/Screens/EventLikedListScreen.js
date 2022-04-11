@@ -13,72 +13,12 @@ import { FontAwesome } from '@expo/vector-icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchEvents } from '../../redux/eventsThunk';
 
-const EventListScreen = ({ router, navigation }) => {
+const EventLikedListScreen = ({ router, navigation }) => {
   const dispatch = useDispatch();
   const loading = !useSelector((state) => state.events.isLoaded);
   const events = useSelector((state) => state.events.data);
   const likedEvents = useSelector((state) => state.favorites.likedEvents);
   const artists = useSelector((state) => state.artists.artists);
-
-  const fetchEvents1 = async () => {
-    const resp = await fetch('https://www.admin.poolbar.at/items/events');
-    const data = await resp.json();
-    let fetchedEvents = data.data;
-
-    // fetch day
-    await Promise.all(
-      fetchedEvents.map(async (item) => {
-        item.day_item = {};
-        if (!item.day) return item;
-        const resp = await fetch('https://www.admin.poolbar.at/items/days/' + item.day);
-        const data = await resp.json();
-        if (!data.data) return item;
-        item.day_item = data.data;
-
-        return item;
-      })
-    );
-
-    // fetch artist
-    await Promise.all(
-      fetchedEvents.map(async (item) => {
-        item.artist_item = {};
-        if (!item.artist) return item;
-        const resp = await fetch('https://www.admin.poolbar.at/items/artists/' + item.artist);
-        const data = await resp.json();
-        if (!data.data) return item;
-        item.artist_item = data.data;
-
-        return item;
-      })
-    );
-
-    // load local storage
-    const localEvents = await getEvents();
-    console.log(localEvents);
-    if (localEvents && 1 == 2) {
-      await Promise.all(
-        fetchedEvents.map(async (item) => {
-          if (localEvents.find((x) => x.id === item.id).liked) {
-            item.liked = true;
-          } else {
-            item.liked = false;
-          }
-
-          return item;
-        })
-      );
-    }
-
-    fetchedEvents.sort(function (a, b) {
-      // Turn your strings into dates, and then subtract them
-      // to get a value that is either negative, positive, or zero.
-      return new Date(b.day_item.date_start) - new Date(a.day_item.date_start);
-    });
-
-    setEvents(fetchedEvents);
-    setLoading(false);
-  };
 
   const likeEvent = (id) => {
     dispatch({
@@ -148,15 +88,7 @@ const EventListScreen = ({ router, navigation }) => {
   return (
     <View style={StylesMain.mainView}>
       <FadeInView style={{ flex: 1, width: '100%', height: '100%' }}>
-        <NavBar
-          title="events"
-          navigation={navigation}
-          next={() => {
-            console.log('clc');
-            navigation.navigate('LikedEvents');
-          }}
-          nextTitle="meine events"
-        />
+        <NavBar title="meine events" navigation={navigation} />
         <View style={{ flex: 1, margin: 20 }}>
           {loading && <LoadingText />}
           {events && <FlatList style={{ flex: 1 }} data={events} renderItem={RenderElement} keyExtractor={(item) => item.id} />}
@@ -168,4 +100,4 @@ const EventListScreen = ({ router, navigation }) => {
   );
 };
 
-export default EventListScreen;
+export default EventLikedListScreen;
