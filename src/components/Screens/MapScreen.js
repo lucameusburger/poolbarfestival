@@ -29,7 +29,14 @@ const MapScreen = ({ navigation }) => {
     <View style={StylesMain.mainView}>
       <FadeInView style={{ flex: 1, width: '100%', height: '100%' }}>
         <NavBar navigation={navigation} title="map" />
-        <MapView style={styles.map} provider = { MapView.PROVIDER_GOOGLE } customMapStyle = { generatedMapStyle }>
+        <MapView style={styles.map} provider = { MapView.PROVIDER_GOOGLE } customMapStyle = { generatedMapStyle }
+        initialRegion={{
+          latitude: loewensaal.latitude,
+          longitude: loewensaal.longitude,
+          latitudeDelta: 0.05,
+          longitudeDelta: 0.05,
+
+      }}>
           <Marker coordinate={loewensaal } pinColor="#2ECDA7" />
         </MapView>
       </FadeInView>
