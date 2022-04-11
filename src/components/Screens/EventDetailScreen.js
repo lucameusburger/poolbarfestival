@@ -112,17 +112,29 @@ const EventDetailScreen = ({ route, navigation }) => {
         </View>
 
         <View style={{ padding: 20 }}>
-          <AppButton style={{ marginRight: 'auto', marginLeft: 0, marginBottom: 10, alignSelf: 'left' }} title="hol dir tickets" onPress={() => Linking.openURL(event.url_ticket)} />
-          <AppButton
-            style={{ marginRight: 'auto', marginLeft: 0, marginBottom: 10, alignSelf: 'left' }}
-            title="artist ansehen"
-            onPress={() =>
-              navigation.navigate('Artist', {
-                id: item.artist,
-              })
-            }
-          />
-          <AppButton style={{ marginRight: 'auto', marginLeft: 0 }} title="zur venue" onPress={() => navigation.navigate('Events')} />
+          {item.url_ticket && <AppButton style={{ marginRight: 'auto', marginLeft: 0, marginBottom: 10, alignSelf: 'left' }} title="hol dir tickets" onPress={() => Linking.openURL(event.url_ticket)} />}
+          {item.artist && (
+            <AppButton
+              style={{ marginRight: 'auto', marginLeft: 0, marginBottom: 10, alignSelf: 'left' }}
+              title="artist ansehen"
+              onPress={() =>
+                navigation.navigate('Artist', {
+                  id: item.artist,
+                })
+              }
+            />
+          )}
+          {item.room && (
+            <AppButton
+              style={{ marginRight: 'auto', marginLeft: 0 }}
+              title="zur venue"
+              onPress={() =>
+                navigation.navigate('Room', {
+                  id: item.room,
+                })
+              }
+            />
+          )}
         </View>
       </View>
     );
