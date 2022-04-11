@@ -1,16 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import * as Linking from 'expo-linking';
-import { StyleSheet, Text, View, ScrollView, Item, FlatList, ImageBackground, Image, openURL, TouchableOpacity } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import AppButton from '../ui/AppButton';
-import AppHeading from '../ui/AppHeading';
 import NavBar from '../ui/NavBar';
 import LoadingText from '../ui/LoadingText';
 import FadeInView from '../ui/FadeInView';
 import StylesMain from '../../../styles/StylesMain';
-import { FontAwesome } from '@expo/vector-icons';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { fetchArtist } from '../../redux/artistsThunk';
@@ -63,7 +59,12 @@ const ArtistScreen = ({ route, navigation }) => {
     <View style={StylesMain.mainView}>
       <FadeInView style={{ flex: 1, width: '100%' }}>
         <NavBar navigation={navigation} title={'artist'} />
-        <ScrollView style={{ flex: 1 }}>{selectedArtist ? <ArtistDetailScreen artist={selectedArtist} /> : <LoadingText />}</ScrollView>
+        <ScrollView style={{ flex: 1 }}>
+          {selectedArtist ?
+            <ArtistDetailScreen artist={selectedArtist} /> :
+            <LoadingText />
+          }
+        </ScrollView>
         <StatusBar style="auto" />
       </FadeInView>
     </View>

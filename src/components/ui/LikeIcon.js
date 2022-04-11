@@ -6,7 +6,7 @@ import { addCallenderEvent, deleteCallenderEvent } from '../../redux/callenderTh
 
 TouchableOpacity.defaultProps = { activeOpacity: 0.8 };
 
-const LikeIcon = ({ eventId, color = "#2ECDA7" }) => {
+const LikeIcon = ({ eventId, color = "#2ECDA7", style }) => {
     const dispatch = useDispatch();
     const likeEvent = (id) => {
         dispatch({
@@ -31,8 +31,18 @@ const LikeIcon = ({ eventId, color = "#2ECDA7" }) => {
 
 
     return (
-        <TouchableOpacity
-            style={{ height: '100%' }}
+        <FontAwesome
+            style={[
+                {
+                    alignSelf: 'flex-end',
+                    marginBottom: 'auto',
+                    marginTop: 'auto'
+                },
+                style
+            ]}
+            name={isLiked ? 'heart' : 'heart-o'}
+            size={32}
+            color={color}
             onPress={() => {
                 if (isLiked) {
                     unLikeEvent(eventId);
@@ -40,18 +50,7 @@ const LikeIcon = ({ eventId, color = "#2ECDA7" }) => {
                     likeEvent(eventId);
                 }
             }}
-        >
-            <FontAwesome
-                style={{
-                    alignSelf: 'flex-end',
-                    marginBottom: 'auto',
-                    marginTop: 'auto'
-                }}
-                name={isLiked ? 'heart' : 'heart-o'}
-                size={32}
-                color={color}
-            />
-        </TouchableOpacity>
+        />
     );
 };
 
