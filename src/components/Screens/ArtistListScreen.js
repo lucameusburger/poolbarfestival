@@ -46,7 +46,7 @@ const ArtistsScreen = ({ navigation }) => {
   const dispatch = useDispatch();
 
   const artists = useSelector((state) => state.artists.artists);
-  const orderredArtists = artists.sort(function (b, a) {
+  const orderredArtists = artists.sort(function (a, b) {
     if (a.name.toLowerCase() < b.name.toLowerCase()) {
       return -1;
     }

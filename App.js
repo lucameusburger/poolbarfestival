@@ -19,6 +19,7 @@ import EventListScreen from './src/components/Screens/EventListScreen';
 import EventLikedListScreen from './src/components/Screens/EventLikedListScreen';
 import EventDetailScreen from './src/components/Screens/EventDetailScreen';
 import ScanScreen from './src/components/Screens/ScanScreen';
+import MapScreen from './src/components/Screens/MapScreen';
 
 import StylesMain from './styles/StylesMain';
 
@@ -69,9 +70,16 @@ const HomeScreen = ({ navigation }) => {
             <View style={{ height: 20 }}></View>
             <AppButton title="artists" onPress={() => navigation.navigate('Artists')} />
             <View style={{ height: 20 }}></View>
-            <AppButton title="scan" onPress={() => navigation.navigate('Scan')} />
-            <View style={{ height: 20 }}></View>
             <AppButton title="generator" onPress={() => navigation.navigate('Generators')} />
+          </View>
+
+          <View style={{ position: 'absolute', bottom: 0, right: 0, left: 0, flexDirection: 'row' }}>
+            <TouchableOpacity onPress={() => navigation.navigate('Map')} style={{ width: '50%' }}>
+              <FontAwesome style={{ bottom: 40, alignSelf: 'flex-start', marginLeft: 40 }} name={'map'} size={38} color="#2ECDA7" />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate('Scan')} style={{ width: '50%' }}>
+              <FontAwesome style={{ bottom: 40, alignSelf: 'flex-end', marginRight: 40 }} name={'camera'} size={38} color="#2ECDA7" />
+            </TouchableOpacity>
           </View>
         </ImageBackground>
       </FadeInView>
@@ -111,6 +119,7 @@ const App = () => {
               <Stack.Screen name="Artist" component={ArtistDetailScreen} options={{ title: 'Artist', headerShown: false }} />
               <Stack.Screen name="Generators" component={GeneratorListScreen} options={{ title: 'Generator', headerShown: false }} />
               <Stack.Screen name="Scan" component={ScanScreen} options={{ title: 'Scan', headerShown: false }} />
+              <Stack.Screen name="Map" component={MapScreen} options={{ title: 'Map', headerShown: false }} />
             </Stack.Navigator>
           </NavigationContainer>
         </PersistGate>
