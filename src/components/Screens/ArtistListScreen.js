@@ -27,7 +27,7 @@ const ArtistListScreen = ({ item }) => {
     >
       <View style={{ width: '100%', marginTop: 'auto', flexDirection: 'row' }}>
         <View style={{}}>
-          <Image source={img} resizeMode="cover" style={{ width: 100, height: 100, borderRadius: 300, alignItems: 'center' }} />
+          <Image source={img} resizeMode="cover" style={{ width: 100, height: 100, borderRadius: 300, border: 'black', alignItems: 'center' }} />
         </View>
         <View style={{}}>
           <View style={{ marginLeft: 20, marginTop: 'auto', marginBottom: 'auto', width: '100%' }}>
