@@ -132,7 +132,7 @@ const EventListScreen = ({ router, navigation }) => {
                   }
                 }}
               >
-                <FontAwesome style={{ alignSelf: 'flex-end', marginBottom: 'auto', marginTop: 'auto' }} name={isLiked ? 'heart' : 'heart-o'} size={32} color="#2ECDA7" />
+                <FontAwesome style={{ alignSelf: 'flex-end', marginBottom: 'auto', marginTop: 'auto' }} name={isLiked ? 'heart' : 'heart-o'} size={32} color="#c6c300" />
               </TouchableOpacity>
             </View>
           </View>
@@ -158,11 +158,11 @@ const EventListScreen = ({ router, navigation }) => {
           nextTitle="meine events"
         />
         <View style={{ flex: 1, margin: 0 }}>
-          {loading &&
+          {loading && (
             <View style={{ flex: 1, margin: 0 }}>
               <LoadingText />
             </View>
-          }
+          )}
           {events && <FlatList style={{ flex: 1, padding: 20 }} data={events} renderItem={RenderElement} keyExtractor={(item) => item.id} />}
         </View>
 

@@ -72,7 +72,7 @@ const EventLikedListScreen = ({ router, navigation }) => {
                   }
                 }}
               >
-                <FontAwesome style={{ alignSelf: 'flex-end', marginBottom: 'auto', marginTop: 'auto' }} name={isLiked ? 'heart' : 'heart-o'} size={32} color="#2ECDA7" />
+                <FontAwesome style={{ alignSelf: 'flex-end', marginBottom: 'auto', marginTop: 'auto' }} name={isLiked ? 'heart' : 'heart-o'} size={32} color="#c6c300" />
               </TouchableOpacity>
             </View>
           </View>
@@ -90,11 +90,11 @@ const EventLikedListScreen = ({ router, navigation }) => {
       <FadeInView style={{ flex: 1, width: '100%', height: '100%' }}>
         <NavBar title="meine events" navigation={navigation} />
         <View style={{ flex: 1, margin: 0 }}>
-          {loading &&
+          {loading && (
             <View style={{ flex: 1, margin: 0 }}>
               <LoadingText />
             </View>
-          }
+          )}
           {events && <FlatList style={{ flex: 1, padding: 20 }} data={events.filter((event) => likedEvents.includes(event.id))} renderItem={RenderElement} keyExtractor={(item) => item.id} />}
         </View>
 

@@ -11,7 +11,7 @@ const NavBar = ({ title, next, nextTitle, type, navigation }) => {
       <View style={{ marginTop: 'auto', left: 0, right: 0, width: '100%' }}>
         <AppHeading style={{ width: '100%' }} title={title} />
       </View>
-      <View style={{ flexDirection: 'row', width: '100%', backgroundColor: '#2ECDA7' }}>
+      <View style={{ flexDirection: 'row', width: '100%', backgroundColor: '#c6c300' }}>
         <TouchableOpacity
           style={{ width: nextTitle ? '50%' : '100%', paddingTop: 10, paddingBottom: 10 }}
           onPress={() => {
