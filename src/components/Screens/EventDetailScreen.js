@@ -91,10 +91,10 @@ const EventDetailScreen = ({ route, navigation }) => {
           <View>
             <Text style={styles.eventDateText}>{dateString}</Text>
             <Text style={styles.eventMainText}>{item.name}</Text>
-            <Text>{item.description_short}</Text>
+            <Text style={StylesMain.text}>{item.description_short}</Text>
             <View style={{ height: 20 }}></View>
-            <Text>{item.artist && item.artist_item.category ? item.artist_item.category : 'unknown'}</Text>
-            <Text>{item.room && item.room_item ? item.room_item.name : 'unknown'}</Text>
+            <Text style={StylesMain.text}>{item.artist && item.artist_item.category ? item.artist_item.category : ''}</Text>
+            <Text style={StylesMain.text}>{item.room && item.room_item ? item.room_item.name : ''}</Text>
             <FontAwesome
               style={{ alignSelf: 'flex-end', marginRight: 10, marginBottom: 10 }}
               name={isLiked ? 'heart' : 'heart-o'}
@@ -135,7 +135,7 @@ const EventDetailScreen = ({ route, navigation }) => {
   return (
     <View style={StylesMain.mainView}>
       <FadeInView style={{ flex: 1, width: '100%' }}>
-        <NavBar navigation={navigation} title={(event.artist_item && event.artist_item.name) || 'kein artist'} />
+        <NavBar navigation={navigation} title={'event'} />
         <ScrollView style={{ flex: 1 }}>
           {loading && <Text style={{ color: '#fff', fontSize: 33, alignSelf: 'center' }}>loading</Text>}
           {event && <RenderElement item={event} />}

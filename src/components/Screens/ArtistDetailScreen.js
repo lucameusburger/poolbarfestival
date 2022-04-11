@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import * as Linking from 'expo-linking';
-import { StyleSheet, Text, View, Button, Item, FlatList, ImageBackground, Image, openURL, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, Item, FlatList, ImageBackground, Image, openURL, TouchableOpacity } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import AppButton from '../ui/AppButton';
@@ -10,6 +10,7 @@ import NavBar from '../ui/NavBar';
 import LoadingText from '../ui/LoadingText';
 import FadeInView from '../ui/FadeInView';
 import StylesMain from '../../../styles/StylesMain';
+import { FontAwesome } from '@expo/vector-icons';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { fetchArtist } from '../../redux/artistsThunk';
@@ -21,19 +22,25 @@ const ArtistDetailScreen = ({ artist }) => {
 
   return (
     <View style={{ flex: 1, width: '100%', height: '100%' }}>
-      <View style={{ alignSelf: 'center' }}>
-        <AppHeading title={artist.name} />
-        {artist.url_spotify && <AppButton title="play on spotify" onPress={() => Linking.openURL(artist.url_spotify)} />}
-        <Image
-          source={img}
-          resizeMode="cover"
-          style={{
-            flex: 1,
-            width: '100%',
-            height: 300,
-          }}
-        />
+      <View style={{ backgroundColor: '#2ECDA7', padding: 20 }}>
+        <View>
+          <Text style={styles.eventDateText}>{artist.category}</Text>
+          <Text style={styles.eventMainText}>{artist.name}</Text>
+          <Text style={StylesMain.text}>{artist.description}</Text>
+          <View style={{ height: 20 }}></View>
+        </View>
       </View>
+      <Image
+        source={img}
+        resizeMode="cover"
+        style={{
+          flex: 1,
+          width: '100%',
+          height: 300,
+        }}
+      />
+
+      <View style={{ padding: 20 }}>{artist.url_spotify && <AppButton style={{ marginRight: 'auto', marginLeft: 0, marginBottom: 10, alignSelf: 'left' }} title="auf spotify spielen" onPress={() => Linking.openURL(artist.url_spotify)} />}</View>
     </View>
   );
 };
@@ -55,12 +62,34 @@ const ArtistScreen = ({ route, navigation }) => {
   return (
     <View style={StylesMain.mainView}>
       <FadeInView style={{ flex: 1, width: '100%' }}>
-        <NavBar navigation={navigation} title={selectedArtist?.name} />
-        <View style={{ marginBottom: 'auto', marginTop: 'auto', flex: 1 }}>{selectedArtist ? <ArtistDetailScreen artist={selectedArtist} /> : <LoadingText />}</View>
+        <NavBar navigation={navigation} title={'artist'} />
+        <ScrollView style={{ flex: 1 }}>{selectedArtist ? <ArtistDetailScreen artist={selectedArtist} /> : <LoadingText />}</ScrollView>
         <StatusBar style="auto" />
       </FadeInView>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  eventDateText: {
+    fontFamily: 'HelviotopiaBold',
+    color: '#000',
+    alignSelf: 'flex-start',
+    marginTop: 'auto',
+    fontSize: 24,
+    textAlign: 'left',
+    textTransform: 'uppercase',
+  },
+  eventMainText: {
+    fontFamily: 'Helviotopia',
+    fontWeight: '500',
+    color: '#000',
+    alignSelf: 'flex-start',
+    marginTop: 'auto',
+    fontSize: 32,
+    textAlign: 'left',
+    textTransform: 'uppercase',
+  },
+});
 
 export default ArtistScreen;
