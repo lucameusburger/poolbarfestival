@@ -10,6 +10,8 @@ import StylesMain from '../../../styles/StylesMain';
 import { fetchArtists } from '../../redux/artistsThunk';
 import { navigate } from '../../core/RootNavigation';
 
+import { FontAwesome } from '@expo/vector-icons';
+
 import MapView, {Marker} from 'react-native-maps';
 
 /*** 
@@ -37,7 +39,7 @@ const MapScreen = ({ navigation }) => {
           longitudeDelta: 0.05,
 
       }}>
-          <Marker coordinate={loewensaal } pinColor="#2ECDA7" />
+          <Marker coordinate={loewensaal} image={require('../../../assets/img/marker.png')}/>
         </MapView>
       </FadeInView>
     </View>
