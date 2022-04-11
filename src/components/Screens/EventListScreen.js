@@ -12,6 +12,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { FontAwesome } from '@expo/vector-icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchEvents } from '../../redux/eventsThunk';
+import { addCallenderEvent, deleteCallenderEvent } from '../../redux/callenderThunk';
 
 const EventListScreen = ({ router, navigation }) => {
   const dispatch = useDispatch();
@@ -85,6 +86,8 @@ const EventListScreen = ({ router, navigation }) => {
       type: 'ADD_TO_LIKED_EVENTS',
       payload: id,
     });
+    dispatch(addCallenderEvent(id));
+
   };
 
   const unLikeEvent = (id) => {
@@ -92,6 +95,8 @@ const EventListScreen = ({ router, navigation }) => {
       type: 'REMOVE_FROM_LIKED_EVENTS',
       payload: id,
     });
+    dispatch(deleteCallenderEvent(id));
+
   };
 
   const RenderElement = ({ item }) => {
@@ -132,7 +137,7 @@ const EventListScreen = ({ router, navigation }) => {
                   }
                 }}
               >
-                <FontAwesome style={{ alignSelf: 'flex-end', marginBottom: 'auto', marginTop: 'auto' }} name={isLiked ? 'heart' : 'heart-o'} size={32} color="#2ECDA7" />
+                <FontAwesome style={{ alignSelf: 'flex-end', marginBottom: 'auto', marginTop: 'auto' }} name={isLiked ? 'heart' : 'heart-o'} size={32} color="#c6c300" />
               </TouchableOpacity>
             </View>
           </View>
@@ -158,11 +163,11 @@ const EventListScreen = ({ router, navigation }) => {
           nextTitle="meine events"
         />
         <View style={{ flex: 1, margin: 0 }}>
-          {loading &&
+          {loading && (
             <View style={{ flex: 1, margin: 0 }}>
               <LoadingText />
             </View>
-          }
+          )}
           {events && <FlatList style={{ flex: 1, padding: 20 }} data={events} renderItem={RenderElement} keyExtractor={(item) => item.id} />}
         </View>
 

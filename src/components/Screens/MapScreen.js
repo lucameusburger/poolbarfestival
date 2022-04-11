@@ -14,19 +14,16 @@ import { FontAwesome } from '@expo/vector-icons';
 
 import MapView, {Marker} from 'react-native-maps';
 
-/*** 
+/***
 import MapboxGL from "@rnmapbox/maps";
 MapboxGL.setAccessToken("<YOUR_ACCESSTOKEN>");
 */
 
-import mapImage from '../../../assets/img/map.png'
+import mapImage from '../../../assets/img/map.png';
 
 const BASE_URL = 'https://www.admin.poolbar.at/';
 
-
 const MapScreen = ({ navigation }) => {
-
-
   return (
     <View style={StylesMain.mainView}>
       <FadeInView style={{ flex: 1, width: '100%', height: '100%' }}>
@@ -43,8 +40,6 @@ const MapScreen = ({ navigation }) => {
         </MapView>
       </FadeInView>
     </View>
-
-
   );
 };
 
@@ -63,142 +58,141 @@ const styles = StyleSheet.create({
 
 const generatedMapStyle = [
   {
-      "featureType": "water",
-      "elementType": "all",
-      "stylers": [
-          {color: "#2ECDA7"
-          },
-          {
-              "visibility": "on"
-          }
-      ]
+    featureType: 'water',
+    elementType: 'all',
+    stylers: [
+      { color: '#c6c300' },
+      {
+        visibility: 'on',
+      },
+    ],
   },
   {
-      "featureType": "landscape",
-      "elementType": "all",
-      "stylers": [
-          {
-              "hue": "#ffffff"
-          },
-          {
-              "saturation": -100
-          },
-          {
-              "lightness": 100
-          },
-          {
-              "visibility": "on"
-          }
-      ]
+    featureType: 'landscape',
+    elementType: 'all',
+    stylers: [
+      {
+        hue: '#ffffff',
+      },
+      {
+        saturation: -100,
+      },
+      {
+        lightness: 100,
+      },
+      {
+        visibility: 'on',
+      },
+    ],
   },
   {
-      "featureType": "road",
-      "elementType": "geometry",
-      "stylers": [
-          {
-              "hue": "#000000"
-          },
-          {
-              "saturation": -100
-          },
-          {
-              "lightness": -100
-          },
-          {
-              "visibility": "simplified"
-          }
-      ]
+    featureType: 'road',
+    elementType: 'geometry',
+    stylers: [
+      {
+        hue: '#000000',
+      },
+      {
+        saturation: -100,
+      },
+      {
+        lightness: -100,
+      },
+      {
+        visibility: 'simplified',
+      },
+    ],
   },
   {
-      "featureType": "road",
-      "elementType": "labels",
-      "stylers": [
-          {
-              "hue": "#ffffff"
-          },
-          {
-              "saturation": -100
-          },
-          {
-              "lightness": 100
-          },
-          {
-              "visibility": "off"
-          }
-      ]
+    featureType: 'road',
+    elementType: 'labels',
+    stylers: [
+      {
+        hue: '#ffffff',
+      },
+      {
+        saturation: -100,
+      },
+      {
+        lightness: 100,
+      },
+      {
+        visibility: 'off',
+      },
+    ],
   },
   {
-      "featureType": "poi",
-      "elementType": "all",
-      "stylers": [
-          {
-              "hue": "#ffffff"
-          },
-          {
-              "saturation": -100
-          },
-          {
-              "lightness": 100
-          },
-          {
-              "visibility": "off"
-          }
-      ]
+    featureType: 'poi',
+    elementType: 'all',
+    stylers: [
+      {
+        hue: '#ffffff',
+      },
+      {
+        saturation: -100,
+      },
+      {
+        lightness: 100,
+      },
+      {
+        visibility: 'off',
+      },
+    ],
   },
   {
-      "featureType": "administrative",
-      "elementType": "all",
-      "stylers": [
-          {
-              "hue": "#ffffff"
-          },
-          {
-              "saturation": 0
-          },
-          {
-              "lightness": 100
-          },
-          {
-              "visibility": "off"
-          }
-      ]
+    featureType: 'administrative',
+    elementType: 'all',
+    stylers: [
+      {
+        hue: '#ffffff',
+      },
+      {
+        saturation: 0,
+      },
+      {
+        lightness: 100,
+      },
+      {
+        visibility: 'off',
+      },
+    ],
   },
   {
-      "featureType": "transit",
-      "elementType": "geometry",
-      "stylers": [
-          {
-              "hue": "#000000"
-          },
-          {
-              "saturation": 0
-          },
-          {
-              "lightness": -100
-          },
-          {
-              "visibility": "on"
-          }
-      ]
+    featureType: 'transit',
+    elementType: 'geometry',
+    stylers: [
+      {
+        hue: '#000000',
+      },
+      {
+        saturation: 0,
+      },
+      {
+        lightness: -100,
+      },
+      {
+        visibility: 'on',
+      },
+    ],
   },
   {
-      "featureType": "transit",
-      "elementType": "labels",
-      "stylers": [
-          {
-              "hue": "#ffffff"
-          },
-          {
-              "saturation": 0
-          },
-          {
-              "lightness": 100
-          },
-          {
-              "visibility": "off"
-          }
-      ]
-  }
+    featureType: 'transit',
+    elementType: 'labels',
+    stylers: [
+      {
+        hue: '#ffffff',
+      },
+      {
+        saturation: 0,
+      },
+      {
+        lightness: 100,
+      },
+      {
+        visibility: 'off',
+      },
+    ],
+  },
 ];
 
 const loewensaal = {

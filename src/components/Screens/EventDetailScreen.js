@@ -87,7 +87,7 @@ const EventDetailScreen = ({ route, navigation }) => {
 
     return (
       <View style={{ flex: 1, width: '100%', height: '100%' }}>
-        <View style={{ backgroundColor: '#2ECDA7', padding: 20 }}>
+        <View style={{ backgroundColor: '#c6c300', padding: 20, marginTop: 10 }}>
           <View>
             <Text style={styles.eventDateText}>{dateString}</Text>
             <Text style={styles.eventMainText}>{item.name}</Text>
@@ -112,17 +112,29 @@ const EventDetailScreen = ({ route, navigation }) => {
         </View>
 
         <View style={{ padding: 20 }}>
-          <AppButton style={{ marginRight: 'auto', marginLeft: 0, marginBottom: 10, alignSelf: 'left' }} title="hol dir tickets" onPress={() => Linking.openURL(event.url_ticket)} />
-          <AppButton
-            style={{ marginRight: 'auto', marginLeft: 0, marginBottom: 10, alignSelf: 'left' }}
-            title="artist ansehen"
-            onPress={() =>
-              navigation.navigate('Artist', {
-                id: item.artist,
-              })
-            }
-          />
-          <AppButton style={{ marginRight: 'auto', marginLeft: 0 }} title="zur venue" onPress={() => navigation.navigate('Events')} />
+          {item.url_ticket && <AppButton style={{ marginRight: 'auto', marginLeft: 0, marginBottom: 10, alignSelf: 'left' }} title="hol dir tickets" onPress={() => Linking.openURL(event.url_ticket)} />}
+          {item.artist && (
+            <AppButton
+              style={{ marginRight: 'auto', marginLeft: 0, marginBottom: 10, alignSelf: 'left' }}
+              title="artist ansehen"
+              onPress={() =>
+                navigation.navigate('Artist', {
+                  id: item.artist,
+                })
+              }
+            />
+          )}
+          {item.room && (
+            <AppButton
+              style={{ marginRight: 'auto', marginLeft: 0 }}
+              title="zur venue"
+              onPress={() =>
+                navigation.navigate('Room', {
+                  id: item.room,
+                })
+              }
+            />
+          )}
         </View>
       </View>
     );
