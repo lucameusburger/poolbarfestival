@@ -12,6 +12,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { FontAwesome } from '@expo/vector-icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchEvents } from '../../redux/eventsThunk';
+import { addCallenderEvent, deleteCallenderEvent } from '../../redux/callenderThunk';
 
 const EventListScreen = ({ router, navigation }) => {
   const dispatch = useDispatch();
@@ -85,6 +86,8 @@ const EventListScreen = ({ router, navigation }) => {
       type: 'ADD_TO_LIKED_EVENTS',
       payload: id,
     });
+    dispatch(addCallenderEvent(id));
+
   };
 
   const unLikeEvent = (id) => {
@@ -92,6 +95,8 @@ const EventListScreen = ({ router, navigation }) => {
       type: 'REMOVE_FROM_LIKED_EVENTS',
       payload: id,
     });
+    dispatch(deleteCallenderEvent(id));
+
   };
 
   const RenderElement = ({ item }) => {

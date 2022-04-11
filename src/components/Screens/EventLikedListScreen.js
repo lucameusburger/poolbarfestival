@@ -12,6 +12,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { FontAwesome } from '@expo/vector-icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchEvents } from '../../redux/eventsThunk';
+import { addCallenderEvent, deleteCallenderEvent } from '../../redux/callenderThunk';
+
 
 const EventLikedListScreen = ({ router, navigation }) => {
   const dispatch = useDispatch();
@@ -20,18 +22,21 @@ const EventLikedListScreen = ({ router, navigation }) => {
   const likedEvents = useSelector((state) => state.favorites.likedEvents);
   const artists = useSelector((state) => state.artists.artists);
 
-  const likeEvent = (id) => {
+  const likeEvent = (event) => {
     dispatch({
       type: 'ADD_TO_LIKED_EVENTS',
-      payload: id,
+      payload: event.id,
     });
+    dispatch(addCallenderEvent(event.id));
+
   };
 
-  const unLikeEvent = (id) => {
+  const unLikeEvent = (event) => {
     dispatch({
       type: 'REMOVE_FROM_LIKED_EVENTS',
-      payload: id,
+      payload: event.id,
     });
+    dispatch(deleteCallenderEvent(event.id));
   };
 
   const RenderElement = ({ item }) => {
@@ -66,9 +71,9 @@ const EventLikedListScreen = ({ router, navigation }) => {
                 style={{ height: '100%' }}
                 onPress={() => {
                   if (isLiked) {
-                    unLikeEvent(item.id);
+                    unLikeEvent(item);
                   } else {
-                    likeEvent(item.id);
+                    likeEvent(item);
                   }
                 }}
               >
@@ -81,9 +86,15 @@ const EventLikedListScreen = ({ router, navigation }) => {
     );
   };
 
+
+
   useEffect(() => {
     dispatch(fetchEvents());
+    //getCallenders();
+    //createCalendar();
+    //createEvent(9)
   }, []);
+
 
   return (
     <View style={StylesMain.mainView}>
