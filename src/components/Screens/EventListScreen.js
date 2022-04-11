@@ -13,6 +13,7 @@ import { FontAwesome } from '@expo/vector-icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchEvents } from '../../redux/eventsThunk';
 import { addCallenderEvent, deleteCallenderEvent } from '../../redux/callenderThunk';
+import LikeIcon from '../ui/LikeIcon';
 
 const EventListScreen = ({ router, navigation }) => {
   const dispatch = useDispatch();
@@ -110,7 +111,6 @@ const EventListScreen = ({ router, navigation }) => {
       dateString = date.toLocaleDateString('en-US', dateOptions);
     }
 
-    const isLiked = likedEvents.includes(item.id);
 
     return (
       <TouchableOpacity
@@ -127,18 +127,7 @@ const EventListScreen = ({ router, navigation }) => {
               <Text style={StylesMain.eventMainText}>{item.name || item.artist_item.name}</Text>
             </View>
             <View style={{ width: '20%' }}>
-              <TouchableOpacity
-                style={{ height: '100%' }}
-                onPress={() => {
-                  if (isLiked) {
-                    unLikeEvent(item.id);
-                  } else {
-                    likeEvent(item.id);
-                  }
-                }}
-              >
-                <FontAwesome style={{ alignSelf: 'flex-end', marginBottom: 'auto', marginTop: 'auto' }} name={isLiked ? 'heart' : 'heart-o'} size={32} color="#2ECDA7" />
-              </TouchableOpacity>
+              <LikeIcon eventId={item.id} />
             </View>
           </View>
         </View>

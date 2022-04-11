@@ -10,6 +10,7 @@ import FadeInView from '../ui/FadeInView';
 import StylesMain from '../../../styles/StylesMain';
 import { FontAwesome } from '@expo/vector-icons';
 import { useDispatch, useSelector } from 'react-redux';
+import LikeIcon from '../ui/LikeIcon';
 
 const EventDetailScreen = ({ route, navigation }) => {
   const { id } = route.params;
@@ -17,20 +18,6 @@ const EventDetailScreen = ({ route, navigation }) => {
   const [loading, setLoading] = useState(true);
   const likedEvents = useSelector((state) => state.favorites.likedEvents);
   const dispatch = useDispatch();
-
-  const likeEvent = (id) => {
-    dispatch({
-      type: 'ADD_TO_LIKED_EVENTS',
-      payload: id,
-    });
-  };
-
-  const unLikeEvent = (id) => {
-    dispatch({
-      type: 'REMOVE_FROM_LIKED_EVENTS',
-      payload: id,
-    });
-  };
 
   const fetchEvent = async () => {
     const resp = await fetch('https://www.admin.poolbar.at/items/events/' + id);
@@ -75,7 +62,6 @@ const EventDetailScreen = ({ route, navigation }) => {
       dateString = date.toLocaleDateString('en-US', dateOptions);
     }
 
-    const isLiked = likedEvents.includes(item.id);
 
     return (
       <View style={{ flex: 1, width: '100%', height: '100%' }}>
@@ -85,19 +71,7 @@ const EventDetailScreen = ({ route, navigation }) => {
             <Text>{item.description_short}</Text>
             <View style={{ height: 20 }}></View>
             <Text>{item.artist && item.artist_item.category ? item.artist_item.category : 'unknown'}</Text>
-            <FontAwesome
-              style={{ alignSelf: 'flex-end', marginRight: 10, marginBottom: 10 }}
-              name={isLiked ? 'heart' : 'heart-o'}
-              size={32}
-              color="#2ECDA7"
-              onPress={() => {
-                if (isLiked) {
-                  unLikeEvent(item.id);
-                } else {
-                  likeEvent(item.id);
-                }
-              }}
-            />
+            <LikeIcon eventId={item.id} color="#000" />
           </View>
           <AppButton style={{ alignSelf: 'left' }} title="tickets" onPress={() => navigation.navigate('Events')} />
           <AppButton style={{ alignSelf: 'left' }} title="artist" onPress={() => navigation.navigate('Events')} />

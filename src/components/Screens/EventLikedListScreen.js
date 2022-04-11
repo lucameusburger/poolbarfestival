@@ -13,6 +13,7 @@ import { FontAwesome } from '@expo/vector-icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchEvents } from '../../redux/eventsThunk';
 import { addCallenderEvent, deleteCallenderEvent } from '../../redux/callenderThunk';
+import LikeIcon from '../ui/LikeIcon';
 
 
 const EventLikedListScreen = ({ router, navigation }) => {
@@ -21,23 +22,6 @@ const EventLikedListScreen = ({ router, navigation }) => {
   const events = useSelector((state) => state.events.data);
   const likedEvents = useSelector((state) => state.favorites.likedEvents);
   const artists = useSelector((state) => state.artists.artists);
-
-  const likeEvent = (event) => {
-    dispatch({
-      type: 'ADD_TO_LIKED_EVENTS',
-      payload: event.id,
-    });
-    dispatch(addCallenderEvent(event.id));
-
-  };
-
-  const unLikeEvent = (event) => {
-    dispatch({
-      type: 'REMOVE_FROM_LIKED_EVENTS',
-      payload: event.id,
-    });
-    dispatch(deleteCallenderEvent(event.id));
-  };
 
   const RenderElement = ({ item }) => {
     const artist = artists.find((x) => x.id === item.artist);
@@ -49,8 +33,6 @@ const EventLikedListScreen = ({ router, navigation }) => {
       let date = new Date(item.day_item.date_start);
       dateString = date.toLocaleDateString('en-US', dateOptions);
     }
-
-    const isLiked = likedEvents.includes(item.id);
 
     return (
       <TouchableOpacity
@@ -67,18 +49,7 @@ const EventLikedListScreen = ({ router, navigation }) => {
               <Text style={StylesMain.eventMainText}>{item.name || item.artist_item.name}</Text>
             </View>
             <View style={{ width: '20%' }}>
-              <TouchableOpacity
-                style={{ height: '100%' }}
-                onPress={() => {
-                  if (isLiked) {
-                    unLikeEvent(item);
-                  } else {
-                    likeEvent(item);
-                  }
-                }}
-              >
-                <FontAwesome style={{ alignSelf: 'flex-end', marginBottom: 'auto', marginTop: 'auto' }} name={isLiked ? 'heart' : 'heart-o'} size={32} color="#2ECDA7" />
-              </TouchableOpacity>
+              <LikeIcon eventId={item.id} />
             </View>
           </View>
         </View>
