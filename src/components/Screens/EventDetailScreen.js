@@ -4,15 +4,14 @@ import * as Linking from 'expo-linking';
 import { StyleSheet, Text, View, Button, Item, FlatList, ImageBackground, Image, openURL, TouchableOpacity } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import AppButton from '../modules/AppButton';
-import NavBar from '../modules/NavBar';
-import FadeInView from '../modules/FadeInView';
-import StylesMain from '../styles/StylesMain';
+import AppButton from '../ui/AppButton';
+import NavBar from '../ui/NavBar';
+import FadeInView from '../ui/FadeInView';
+import StylesMain from '../../../styles/StylesMain';
 import { FontAwesome } from '@expo/vector-icons';
 import { useDispatch, useSelector } from 'react-redux';
 
-
-const EventScreen = ({ route, navigation }) => {
+const EventDetailScreen = ({ route, navigation }) => {
   const { id } = route.params;
   const [event, setEvent] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -22,15 +21,15 @@ const EventScreen = ({ route, navigation }) => {
   const likeEvent = (id) => {
     dispatch({
       type: 'ADD_TO_LIKED_EVENTS',
-      payload: id
-    })
+      payload: id,
+    });
   };
 
   const unLikeEvent = (id) => {
     dispatch({
       type: 'REMOVE_FROM_LIKED_EVENTS',
-      payload: id
-    })
+      payload: id,
+    });
   };
 
   const fetchEvent = async () => {
@@ -78,7 +77,6 @@ const EventScreen = ({ route, navigation }) => {
 
     const isLiked = likedEvents.includes(item.id);
 
-
     return (
       <View style={{ flex: 1, width: '100%', height: '100%' }}>
         <View style={{ margin: 20 }}>
@@ -89,11 +87,7 @@ const EventScreen = ({ route, navigation }) => {
             <Text>{item.artist && item.artist_item.category ? item.artist_item.category : 'unknown'}</Text>
             <FontAwesome
               style={{ alignSelf: 'flex-end', marginRight: 10, marginBottom: 10 }}
-              name={
-                isLiked ?
-                  'heart' :
-                  'heart-o'
-              }
+              name={isLiked ? 'heart' : 'heart-o'}
               size={32}
               color="#2ECDA7"
               onPress={() => {
@@ -132,4 +126,4 @@ const EventScreen = ({ route, navigation }) => {
   );
 };
 
-export default EventScreen;
+export default EventDetailScreen;

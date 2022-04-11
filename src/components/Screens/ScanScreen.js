@@ -3,9 +3,9 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Button, Item, FlatList, ImageBackground, TouchableOpacity } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import FadeInView from '../modules/FadeInView';
-import NavBar from '../modules/NavBar';
-import StylesMain from '../styles/StylesMain';
+import FadeInView from '../ui/FadeInView';
+import NavBar from '../ui/NavBar';
+import StylesMain from '../../../styles/StylesMain';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 
 const ScanScreen = ({ navigation }) => {

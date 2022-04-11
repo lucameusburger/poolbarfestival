@@ -3,17 +3,23 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Button, Item, FlatList, TouchableOpacity } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import AppButton from './modules/AppButton';
 import AppLoading from 'expo-app-loading';
-import FadeInView from './modules/FadeInView';
-import GeneratorsScreen from './components/GeneratorsScreen';
-import ArtistsScreen from './components/ArtistsScreen';
-import ArtistScreen from './components/ArtistScreen';
-import EventsScreen from './components/EventsScreen';
-import EventScreen from './components/EventScreen';
-import ScanScreen from './components/ScanScreen';
+
+import { navigationRef } from './src/core/RootNavigation';
+
+import FadeInView from './src/components/ui/FadeInView';
+import PoolbarLogo from './src/components/ui/PoolbarLogo';
+
+import AppButton from './src/components/ui/AppButton';
+import GeneratorListScreen from './src/components/Screens/GeneratorListScreen';
+import ArtistListScreen from './src/components/Screens/ArtistListScreen';
+import ArtistDetailScreen from './src/components/Screens/ArtistDetailScreen';
+import EventListScreen from './src/components/Screens/EventListScreen';
+import EventDetailScreen from './src/components/Screens/EventDetailScreen';
+import ScanScreen from './src/components/Screens/ScanScreen';
+
 import StylesMain from './styles/StylesMain';
-import PoolbarLogo from './components/PoolbarLogo';
+
 import * as Linking from 'expo-linking';
 import TypeWriter from 'react-native-typewriter';
 import { FontAwesome } from '@expo/vector-icons';
@@ -21,9 +27,7 @@ import { FontAwesome } from '@expo/vector-icons';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 
-import { persistor, store } from './redux/store';
-
-import { navigationRef } from './core/RootNavigation';
+import { persistor, store } from './src/redux/store';
 
 const prefix = Linking.createURL('/');
 
@@ -107,11 +111,11 @@ const App = () => {
           <NavigationContainer linking={linking} fallback={<Text>Loading...</Text>} ref={navigationRef}>
             <Stack.Navigator>
               <Stack.Screen name="Home" component={HomeScreen} options={{ title: 'Welcome', headerShown: false }} />
-              <Stack.Screen name="Events" component={EventsScreen} options={{ title: 'Events', headerShown: false }} />
-              <Stack.Screen name="Event" component={EventScreen} options={{ title: 'Event', headerShown: false }} />
-              <Stack.Screen name="Artists" component={ArtistsScreen} options={{ title: 'Artists', headerShown: false }} />
-              <Stack.Screen name="Artist" component={ArtistScreen} options={{ title: 'Artist', headerShown: false }} />
-              <Stack.Screen name="Generators" component={GeneratorsScreen} options={{ title: 'Generator', headerShown: false }} />
+              <Stack.Screen name="Events" component={EventListScreen} options={{ title: 'Events', headerShown: false }} />
+              <Stack.Screen name="Event" component={EventDetailScreen} options={{ title: 'Event', headerShown: false }} />
+              <Stack.Screen name="Artists" component={ArtistListScreen} options={{ title: 'Artists', headerShown: false }} />
+              <Stack.Screen name="Artist" component={ArtistDetailScreen} options={{ title: 'Artist', headerShown: false }} />
+              <Stack.Screen name="Generators" component={GeneratorListScreen} options={{ title: 'Generator', headerShown: false }} />
               <Stack.Screen name="Scan" component={ScanScreen} options={{ title: 'Scan', headerShown: false }} />
             </Stack.Navigator>
           </NavigationContainer>
