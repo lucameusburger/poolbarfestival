@@ -2904,6 +2904,13 @@ expo-barcode-scanner@~11.2.0:
     "@expo/config-plugins" "^4.0.2"
     expo-image-loader "~3.1.0"
 
+expo-calendar@~10.1.0:
+  version "10.1.1"
+  resolved "https://registry.yarnpkg.com/expo-calendar/-/expo-calendar-10.1.1.tgz#dfc854929667afa3edc6684064abe89397b3c26c"
+  integrity sha512-i6yfnzxXI1Asta0EuFaWjN7u2NpuubukCkY4X9QuJKmI49yMCL2OkjbxvD6UOUIWEth5j7Vme1seSU83a3BzGA==
+  dependencies:
+    "@expo/config-plugins" "^4.0.2"
+
 expo-camera@~12.1.2:
   version "12.1.2"
   resolved "https://registry.npmjs.org/expo-camera/-/expo-camera-12.1.2.tgz"
