@@ -30,8 +30,6 @@ export function reducer(state = initialState, action) {
                 likedArtists: state.likedArtists.filter(artist => artist !== action.payload)
             }
         case 'REMOVE_FROM_LIKED_EVENTS':
-            console.log(action.payload)
-            console.log(state.likedEvents)
             return {
                 ...state,
                 likedEvents: state.likedEvents.filter(event => event !== action.payload)

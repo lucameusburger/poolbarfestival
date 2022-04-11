@@ -3,11 +3,12 @@ import { combineReducers } from 'redux'
 import { reducer as artistsReducers, initialState as artistsInitialState } from './artistsReducer';
 import { reducer as eventsReducers, initialState as eventsInitialState } from './eventsReducer';
 import { reducer as favoritesReducers, initialState as favoritesInitialState } from './favoritesReducer';
-
+import { reducer as callenderReducer, initialState as callenderInitialState } from './callenderReducer'
 export const initialState = {
     artists: artistsInitialState,
     events: eventsInitialState,
     favorites: favoritesInitialState,
+    callender: callenderInitialState,
 }
 
 export const rootReducer =
@@ -15,4 +16,5 @@ export const rootReducer =
         artists: artistsReducers,
         events: eventsReducers,
         favorites: favoritesReducers,
+        callender: callenderReducer,
     })
