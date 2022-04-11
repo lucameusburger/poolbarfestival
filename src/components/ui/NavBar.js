@@ -7,6 +7,7 @@ const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
 const NavBar = ({ title, next, nextTitle, type, navigation }) => {
   return (
     <View style={{ height: 180, width: '100%' }}>
+      <View style={{ height: 10 }}></View>
       <View style={{ marginTop: 'auto', left: 0, right: 0, width: '100%' }}>
         <AppHeading style={{ width: '100%' }} title={title} />
       </View>
@@ -25,7 +26,6 @@ const NavBar = ({ title, next, nextTitle, type, navigation }) => {
           </TouchableOpacity>
         )}
       </View>
-
       <View style={{ height: 10 }}></View>
     </View>
   );
