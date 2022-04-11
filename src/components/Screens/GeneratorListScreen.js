@@ -3,15 +3,15 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Button, Item, FlatList, ImageBackground, TouchableOpacity } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import AppButton from '../modules/AppButton';
-import LoadingText from '../modules/LoadingText';
-import NavBar from '../modules/NavBar';
-import FadeInView from '../modules/FadeInView';
-import StylesMain from '../styles/StylesMain';
+import AppButton from '../ui/AppButton';
+import LoadingText from '../ui/LoadingText';
+import NavBar from '../ui/NavBar';
+import FadeInView from '../ui/FadeInView';
+import StylesMain from '../../../styles/StylesMain';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { FontAwesome } from '@expo/vector-icons';
 
-const GeneratorsScreen = ({ router, navigation }) => {
+const GeneratorListScreen = ({ router, navigation }) => {
   const [generators, setGenerators] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -79,4 +79,4 @@ const GeneratorsScreen = ({ router, navigation }) => {
   );
 };
 
-export default GeneratorsScreen;
+export default GeneratorListScreen;

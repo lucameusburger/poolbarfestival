@@ -84,6 +84,35 @@ const StylesMain = StyleSheet.create({
     fontSize: 24,
     textAlign: 'center',
   },
+  eventDateText: {
+    fontFamily: 'HelviotopiaBold',
+    color: '#000',
+    alignSelf: 'flex-start',
+    marginTop: 'auto',
+    fontSize: 20,
+    textAlign: 'left',
+    textTransform: 'uppercase',
+  },
+  eventMainText: {
+    fontFamily: 'Helviotopia',
+    fontWeight: '500',
+    color: '#000',
+    alignSelf: 'flex-start',
+    marginTop: 'auto',
+    fontSize: 32,
+    textAlign: 'left',
+    textTransform: 'uppercase',
+  },
+  artistHistory: {
+    fontFamily: 'Helviotopia',
+    fontWeight: '500',
+    color: '#000',
+    alignSelf: 'flex-start',
+    marginTop: 'auto',
+    fontSize: 32,
+    textAlign: 'left',
+    textTransform: 'uppercase',
+  },
 });
 
 export default StylesMain;

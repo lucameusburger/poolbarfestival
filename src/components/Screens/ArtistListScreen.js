@@ -3,19 +3,17 @@ import { StatusBar } from 'expo-status-bar';
 import { Text, View, FlatList, ImageBackground, TouchableOpacity } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
-import NavBar from '../modules/NavBar';
-import LoadingText from '../modules/LoadingText';
-import FadeInView from '../modules/FadeInView';
-import StylesMain from '../styles/StylesMain';
-import { fetchArtists } from '../redux/artistsThunk';
-import { navigate } from '../core/RootNavigation';
+import NavBar from '../ui/NavBar';
+import LoadingText from '../ui/LoadingText';
+import FadeInView from '../ui/FadeInView';
+import StylesMain from '../../../styles/StylesMain';
+import { fetchArtists } from '../../redux/artistsThunk';
+import { navigate } from '../../core/RootNavigation';
 
 const BASE_URL = 'https://www.admin.poolbar.at/';
 
-const ArtistComponent = ({ item }) => {
-  const img = item.image ?
-    { uri: BASE_URL + 'assets/' + item.image + '?fit=cover&width=500&height=200&quality=80' } :
-    { uri: BASE_URL + 'assets/9c6f223c-795a-4bf5-b8c0-0630a555e465?fit=cover&width=500&height=200&quality=80' };
+const ArtistListScreen = ({ item }) => {
+  const img = item.image ? { uri: BASE_URL + 'assets/' + item.image + '?fit=cover&width=500&height=200&quality=80' } : { uri: BASE_URL + 'assets/9c6f223c-795a-4bf5-b8c0-0630a555e465?fit=cover&width=500&height=200&quality=80' };
 
   return (
     <TouchableOpacity
@@ -36,7 +34,7 @@ const ArtistComponent = ({ item }) => {
   );
 };
 
-const ArtistsList = ({ artists }) => <FlatList style={{ flex: 1 }} data={artists} renderItem={ArtistComponent} keyExtractor={(item) => item.id} />;
+const ArtistsList = ({ artists }) => <FlatList style={{ flex: 1 }} data={artists} renderItem={ArtistListScreen} keyExtractor={(item) => item.id} />;
 
 const ArtistsScreen = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -49,19 +47,19 @@ const ArtistsScreen = ({ navigation }) => {
   useEffect(() => {
     dispatch(fetchArtists());
   }, []);
+
   return (
     <View style={StylesMain.mainView}>
       <FadeInView style={{ flex: 1, width: '100%', height: '100%' }}>
-        <NavBar navigation={navigation} title="artists" />
-        <View style={{ flex: 1, marginBottom: 'auto', marginTop: 'auto' }}>
-          {
-            !isLoaded ?
-              <LoadingText /> :
-              artists ?
-                <ArtistsList artists={artists} /> :
-                <LoadingText />
-          }
-        </View>
+        <NavBar
+          navigation={navigation}
+          title="artists"
+          next={() => {
+            navigation.navigate('ArtistHistory');
+          }}
+          nextTitle={'history'}
+        />
+        <View style={{ flex: 1, marginBottom: 'auto', marginTop: 'auto' }}>{!isLoaded ? <LoadingText /> : artists ? <ArtistsList artists={artists} /> : <LoadingText />}</View>
         <StatusBar style="auto" />
       </FadeInView>
     </View>
