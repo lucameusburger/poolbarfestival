@@ -35,7 +35,19 @@ export function fetchArtists() {
 
           if (response.ok) {
             const data = await response.json();
-            dispatch(setArtists(data.data));
+            const fetchedArtists = data.data;
+
+            const sortedFetchedArtists = fetchedArtists.sort(function (a, b) {
+              if (a.name < b.name) {
+                return -1;
+              }
+              if (a.name > b.name) {
+                return 1;
+              }
+              return 0;
+            });
+
+            dispatch(setArtists(sortedFetchedArtists));
           } else {
             const error = (data && data.message) || response.status;
             console.log('Fetching Artist Error: ', error);

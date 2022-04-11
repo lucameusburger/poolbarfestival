@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { Text, View, FlatList, ImageBackground, TouchableOpacity } from 'react-native';
+import { Text, View, ScrollView, FlatList, ImageBackground, TouchableOpacity } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
 import NavBar from '../ui/NavBar';
@@ -12,29 +12,19 @@ import { navigate } from '../../core/RootNavigation';
 
 const BASE_URL = 'https://www.admin.poolbar.at/';
 
-const ArtistListScreen = ({ item }) => {
+const ArtistHistoryListScreen = ({ item }) => {
   const img = item.image ? { uri: BASE_URL + 'assets/' + item.image + '?fit=cover&width=500&height=200&quality=80' } : { uri: BASE_URL + 'assets/9c6f223c-795a-4bf5-b8c0-0630a555e465?fit=cover&width=500&height=200&quality=80' };
 
-  return (
-    <TouchableOpacity
-      onPress={() =>
-        navigate('Artist', {
-          id: item.id,
-        })
-      }
-    >
-      <View style={{ flex: 1, width: '100%' }}>
-        <ImageBackground source={img} resizeMode="cover" style={{ width: '100%', height: 300, alignItems: 'center' }}>
-          <View style={StylesMain.labelContainer}>
-            <Text style={StylesMain.labelText}>{item.name}</Text>
-          </View>
-        </ImageBackground>
-      </View>
-    </TouchableOpacity>
-  );
+  return <Text style={{ display: 'inline-block' }}>{item.name} // </Text>;
 };
 
-const ArtistsList = ({ artists }) => <FlatList style={{ flex: 1 }} data={artists} renderItem={ArtistListScreen} keyExtractor={(item) => item.id} />;
+const ArtistsList = ({ artists }) => {
+  let text = '';
+  artists.forEach((item) => {
+    text += item.name + ' //';
+  });
+  return <Text style={StylesMain.artistHistory}>{text}</Text>;
+};
 
 const ArtistsScreen = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -47,19 +37,11 @@ const ArtistsScreen = ({ navigation }) => {
   useEffect(() => {
     dispatch(fetchArtists());
   }, []);
-
   return (
     <View style={StylesMain.mainView}>
       <FadeInView style={{ flex: 1, width: '100%', height: '100%' }}>
-        <NavBar
-          navigation={navigation}
-          title="artists"
-          next={() => {
-            navigation.navigate('ArtistHistory');
-          }}
-          nextTitle={'history'}
-        />
-        <View style={{ flex: 1, marginBottom: 'auto', marginTop: 'auto' }}>{!isLoaded ? <LoadingText /> : artists ? <ArtistsList artists={artists} /> : <LoadingText />}</View>
+        <NavBar navigation={navigation} title="history" />
+        <ScrollView style={{ flex: 1, marginBottom: 'auto', marginTop: 'auto', marginRight: 10, marginLeft: 10 }}>{!isLoaded ? <LoadingText /> : artists ? <ArtistsList artists={artists} /> : <LoadingText />}</ScrollView>
         <StatusBar style="auto" />
       </FadeInView>
     </View>
