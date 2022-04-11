@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import * as Linking from 'expo-linking';
-import { StyleSheet, Text, View, Button, Item, FlatList, ImageBackground, Image, openURL, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, Button, Item, FlatList, ImageBackground, Image, openURL, TouchableOpacity } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import AppButton from '../ui/AppButton';
@@ -24,10 +24,19 @@ const EventDetailScreen = ({ route, navigation }) => {
     const data = await resp.json();
     let fetchedEvent = data.data;
 
+    // fetch room
+    fetchedEvent.room_item = {};
+    if (fetchedEvent.room) {
+      const respRoom = await fetch('https://www.admin.poolbar.at/items/rooms/' + fetchedEvent.room);
+      const dataRoom = await respRoom.json();
+      if (dataRoom.data) {
+        fetchedEvent.room_item = dataRoom.data;
+      }
+    }
+
     // fetch day for single event
     fetchedEvent.day_item = {};
     if (fetchedEvent.day) {
-      console.log('ja');
       const respDay = await fetch('https://www.admin.poolbar.at/items/days/' + fetchedEvent.day);
       const dataDay = await respDay.json();
       if (dataDay.data) {
@@ -38,7 +47,6 @@ const EventDetailScreen = ({ route, navigation }) => {
     // fetch artist for single event
     fetchedEvent.artist_item = {};
     if (fetchedEvent.artist) {
-      console.log('ARTISTITEM_____');
       const respArtist = await fetch('https://www.admin.poolbar.at/items/artists/' + fetchedEvent.artist);
       const dataArtist = await respArtist.json();
       if (dataArtist.data) {
@@ -59,24 +67,48 @@ const EventDetailScreen = ({ route, navigation }) => {
     if (item.day_item && item.day_item.date_start) {
       let dateOptions = { month: 'long', day: 'numeric' };
       let date = new Date(item.day_item.date_start);
-      dateString = date.toLocaleDateString('en-US', dateOptions);
+      dateString = date.toLocaleDateString('en-US', dateOptions).toUpperCase();
     }
 
 
     return (
       <View style={{ flex: 1, width: '100%', height: '100%' }}>
-        <View style={{ margin: 20 }}>
-          <View style={StylesMain.card}>
-            <Text style={{ fontSize: 60, fontFamily: 'Helviotopia' }}>{dateString}</Text>
-            <Text>{item.description_short}</Text>
+        <View style={{ backgroundColor: '#c6c300', padding: 20, marginTop: 10 }}>
+          <View>
+            <Text style={styles.eventDateText}>{dateString}</Text>
+            <Text style={styles.eventMainText}>{item.name}</Text>
+            <Text style={StylesMain.text}>{item.description_short}</Text>
             <View style={{ height: 20 }}></View>
-            <Text>{item.artist && item.artist_item.category ? item.artist_item.category : 'unknown'}</Text>
+            <Text style={StylesMain.text}>{item.artist && item.artist_item.category ? item.artist_item.category : ''}</Text>
+            <Text style={StylesMain.text}>{item.room && item.room_item ? item.room_item.name : ''}</Text>
             <LikeIcon eventId={item.id} color="#000" />
           </View>
-          <AppButton style={{ alignSelf: 'left' }} title="tickets" onPress={() => navigation.navigate('Events')} />
-          <AppButton style={{ alignSelf: 'left' }} title="artist" onPress={() => navigation.navigate('Events')} />
-          <AppButton style={{ alignSelf: 'left' }} title="venue" onPress={() => navigation.navigate('Events')} />
-          <Text>{(item.artist_item && item.artist_item.name) || 'kein artist'}</Text>
+        </View>
+
+        <View style={{ padding: 20 }}>
+          {item.url_ticket && <AppButton style={{ marginRight: 'auto', marginLeft: 0, marginBottom: 10, alignSelf: 'left' }} title="hol dir tickets" onPress={() => Linking.openURL(event.url_ticket)} />}
+          {item.artist && (
+            <AppButton
+              style={{ marginRight: 'auto', marginLeft: 0, marginBottom: 10, alignSelf: 'left' }}
+              title="artist ansehen"
+              onPress={() =>
+                navigation.navigate('Artist', {
+                  id: item.artist,
+                })
+              }
+            />
+          )}
+          {item.room && (
+            <AppButton
+              style={{ marginRight: 'auto', marginLeft: 0 }}
+              title="zur venue"
+              onPress={() =>
+                navigation.navigate('Room', {
+                  id: item.room,
+                })
+              }
+            />
+          )}
         </View>
       </View>
     );
@@ -89,15 +121,37 @@ const EventDetailScreen = ({ route, navigation }) => {
   return (
     <View style={StylesMain.mainView}>
       <FadeInView style={{ flex: 1, width: '100%' }}>
-        <NavBar navigation={navigation} title={event.name} />
-        <View style={{ marginBottom: 'auto', marginTop: 'auto', flex: 1 }}>
+        <NavBar navigation={navigation} title={'event'} />
+        <ScrollView style={{ flex: 1 }}>
           {loading && <Text style={{ color: '#fff', fontSize: 33, alignSelf: 'center' }}>loading</Text>}
           {event && <RenderElement item={event} />}
-        </View>
+        </ScrollView>
         <StatusBar style="auto" />
       </FadeInView>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  eventDateText: {
+    fontFamily: 'HelviotopiaBold',
+    color: '#000',
+    alignSelf: 'flex-start',
+    marginTop: 'auto',
+    fontSize: 24,
+    textAlign: 'left',
+    textTransform: 'uppercase',
+  },
+  eventMainText: {
+    fontFamily: 'Helviotopia',
+    fontWeight: '500',
+    color: '#000',
+    alignSelf: 'flex-start',
+    marginTop: 'auto',
+    fontSize: 32,
+    textAlign: 'left',
+    textTransform: 'uppercase',
+  },
+});
 
 export default EventDetailScreen;

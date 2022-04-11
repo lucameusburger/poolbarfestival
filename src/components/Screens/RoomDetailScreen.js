@@ -17,7 +17,7 @@ import { fetchArtist } from '../../redux/artistsThunk';
 
 const BASE_URL = 'https://www.admin.poolbar.at/';
 
-const ArtistDetailScreen = ({ artist }) => {
+const RoomDetailScreen = ({ artist }) => {
   const img = artist.image ? { uri: BASE_URL + 'assets/' + artist.image + '?fit=cover&width=500&height=200&quality=80' } : { uri: BASE_URL + 'assets/9c6f223c-795a-4bf5-b8c0-0630a555e465?fit=cover&width=500&height=200&quality=80' };
 
   return (
@@ -92,4 +92,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ArtistScreen;
+export default RoomDetailScreen;

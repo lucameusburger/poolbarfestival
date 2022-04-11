@@ -127,7 +127,7 @@ const EventListScreen = ({ router, navigation }) => {
               <Text style={StylesMain.eventMainText}>{item.name || item.artist_item.name}</Text>
             </View>
             <View style={{ width: '20%' }}>
-              <LikeIcon eventId={item.id} />
+              <LikeIcon eventId={item.id} color="#c6c300" />
             </View>
           </View>
         </View>
@@ -152,11 +152,11 @@ const EventListScreen = ({ router, navigation }) => {
           nextTitle="meine events"
         />
         <View style={{ flex: 1, margin: 0 }}>
-          {loading &&
+          {loading && (
             <View style={{ flex: 1, margin: 0 }}>
               <LoadingText />
             </View>
-          }
+          )}
           {events && <FlatList style={{ flex: 1, padding: 20 }} data={events} renderItem={RenderElement} keyExtractor={(item) => item.id} />}
         </View>
 

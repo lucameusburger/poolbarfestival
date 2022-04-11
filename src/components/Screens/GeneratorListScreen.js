@@ -49,13 +49,14 @@ const GeneratorListScreen = ({ router, navigation }) => {
           })
         }
       >
-        <View key={item.id} style={{ flex: 1, flexDirection: 'row', flexWrap: 'wrap' }}>
-          <View style={{ width: '100%', marginTop: 'auto', backgroundColor: '#000' }}>
-            <Text style={StylesMain.labelMain}>{item.name || 'no name'}</Text>
-            <Text style={StylesMain.labelMain}>{(item.lab_item && item.lab_item.name) || 'no lab'}</Text>
+        <View key={item.id} style={{ flex: 1, flexDirection: 'row', flexWrap: 'wrap', marginBottom: 30 }}>
+          <View style={{ width: '100%', marginTop: 'auto', flexDirection: 'row' }}>
+            <View style={{ width: '80%' }}>
+              <Text style={StylesMain.eventDateText}>{(item.lab_item && item.lab_item.name) || 'no lab'}</Text>
+              <Text style={StylesMain.eventMainText}>{item.name || 'no name'}</Text>
+            </View>
           </View>
         </View>
-        <View style={{ height: 20 }}></View>
       </TouchableOpacity>
     );
   };
@@ -70,7 +71,7 @@ const GeneratorListScreen = ({ router, navigation }) => {
         <NavBar title="generator" navigation={navigation} />
         <View style={{ flex: 1, marginBottom: 'auto', marginTop: 'auto' }}>
           {loading && <LoadingText />}
-          {generators && <FlatList style={{ flex: 1 }} data={generators} renderItem={RenderElement} keyExtractor={(item) => item.id} />}
+          {generators && <FlatList style={{ flex: 1, padding: 20 }} data={generators} renderItem={RenderElement} keyExtractor={(item) => item.id} />}
         </View>
 
         <StatusBar style="auto" />

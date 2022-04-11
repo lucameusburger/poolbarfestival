@@ -49,7 +49,7 @@ const EventLikedListScreen = ({ router, navigation }) => {
               <Text style={StylesMain.eventMainText}>{item.name || item.artist_item.name}</Text>
             </View>
             <View style={{ width: '20%' }}>
-              <LikeIcon eventId={item.id} />
+              <LikeIcon eventId={item.id} color="#c6c300" />
             </View>
           </View>
         </View>
@@ -72,11 +72,11 @@ const EventLikedListScreen = ({ router, navigation }) => {
       <FadeInView style={{ flex: 1, width: '100%', height: '100%' }}>
         <NavBar title="meine events" navigation={navigation} />
         <View style={{ flex: 1, margin: 0 }}>
-          {loading &&
+          {loading && (
             <View style={{ flex: 1, margin: 0 }}>
               <LoadingText />
             </View>
-          }
+          )}
           {events && <FlatList style={{ flex: 1, padding: 20 }} data={events.filter((event) => likedEvents.includes(event.id))} renderItem={RenderElement} keyExtractor={(item) => item.id} />}
         </View>
 
