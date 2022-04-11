@@ -8,7 +8,6 @@ import { initialState, rootReducer } from './reducers'
 const persistConfig = {
     key: 'root',
     storage: AsyncStorage,
-    whitelist: ["favorites"]
 }
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
