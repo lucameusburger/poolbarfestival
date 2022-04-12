@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { Text,Button, View, ScrollView, FlatList, ImageBackground, TouchableOpacity, StyleSheet } from 'react-native';
+
 import { useDispatch, useSelector } from 'react-redux';
+import { fetchVenues } from '../../redux/artistsThunk';
 
 import NavBar from '../ui/NavBar';
 import LoadingText from '../ui/LoadingText';
 import FadeInView from '../ui/FadeInView';
 import StylesMain from '../../../styles/StylesMain';
-import { fetchArtists } from '../../redux/artistsThunk';
 import { navigate } from '../../core/RootNavigation';
 
-<<<<<<< Updated upstream
-=======
 import {
     moveToRadius,
     getZoomLevel,
@@ -21,10 +20,10 @@ import {
 
 import { FontAwesome } from '@expo/vector-icons';
 
->>>>>>> Stashed changes
-import MapView, {Marker} from 'react-native-maps';
 
-/*** 
+import MapView, {Marker , Callout} from 'react-native-maps';
+import MyCalloutView from '../ui/MyCalloutView';
+/***
 import MapboxGL from "@rnmapbox/maps";
 MapboxGL.setAccessToken("<YOUR_ACCESSTOKEN>");
 */
@@ -37,17 +36,24 @@ const BASE_URL = 'https://www.admin.poolbar.at/';
 
 const MapScreen = ({ navigation }) => {
 
-<<<<<<< Updated upstream
 
-=======
-  const toneFink = React.useRef(null);
-  
->>>>>>> Stashed changes
+
+  const dispatch = useDispatch();
+
+  const artists = useSelector((state) => state.artists.artists);
+  const isLoaded = useSelector((state) => state.artists.isLoaded);
+  const isFetchingData = useSelector((state) => state.artists.isFetchingData);
+  const hasFetchingDataError = useSelector((state) => state.artists.hasFetchingDataError);
+
+    const markers = artists.map((artist) =>
+        <Text>{artist.name}</Text>
+    );
+
   return (
     <View style={StylesMain.mainView}>
       <FadeInView style={{ flex: 1, width: '100%', height: '100%' }}>
         <NavBar navigation={navigation} title="map" />
-        <MapView ref={toneFink} style={styles.map} provider = { MapView.PROVIDER_GOOGLE } customMapStyle = { generatedMapStyle }
+        <MapView style={styles.map} provider = { MapView.PROVIDER_GOOGLE } customMapStyle = { generatedMapStyle }
         initialRegion={{
           latitude: loewensaal.latitude,
           longitude: loewensaal.longitude,
@@ -55,12 +61,16 @@ const MapScreen = ({ navigation }) => {
           longitudeDelta: 0.05,
 
       }}>
-<<<<<<< Updated upstream
-          <Marker coordinate={loewensaal } pinColor="#2ECDA7" />
-=======
-          <Marker coordinate={loewensaal} image={require('../../../assets/img/marker.png')}/>
-          <Button title='navigator' onPress={moveToRadius(loewensaal, 500, toneFink)}></Button>
->>>>>>> Stashed changes
+          
+          <Marker coordinate={loewensaal} image={require('../../../assets/img/marker.png')}>
+            <Callout>
+                <MyCalloutView></MyCalloutView>
+                <Text>{artists[0].name}</Text>
+                
+            </Callout>
+        </Marker>
+ 
+
         </MapView>
       </FadeInView>
     </View>
@@ -68,6 +78,21 @@ const MapScreen = ({ navigation }) => {
 
   );
 };
+
+ function openGoogleMaps(location,name) {
+    const scheme = Platform.select({
+        ios: 'maps:0,0?q=',
+        android: 'geo:0,0?q='
+    });
+    const latLng = `${location.latitude},${location.longitude}`;
+    const label = 'Custom Label';
+    const url = Platform.select({
+        ios: `${scheme}${name}@${latLng}`,
+        android: `${scheme}${latLng}(${name})`
+    });
+
+    Linking.openURL(url);
+}
 
 const styles = StyleSheet.create({
   container: {
