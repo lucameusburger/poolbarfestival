@@ -2880,6 +2880,17 @@
   "integrity" "sha512-NLMnZA2aoPeCBaxJIOEFxbbHfQhZ25NViay1FFumbZOuQFLj1CwlGNyGSyyERbXpdqwQ4VKqYaCux/7UF+dwxA=="
   "resolved" "https://registry.npmjs.org/expo-barcode-scanner/-/expo-barcode-scanner-11.2.1.tgz"
   "version" "11.2.1"
+<<<<<<< Updated upstream
+=======
+  dependencies:
+    "@expo/config-plugins" "^4.0.2"
+    "expo-image-loader" "~3.1.0"
+
+"expo-calendar@~10.1.0":
+  "integrity" "sha512-i6yfnzxXI1Asta0EuFaWjN7u2NpuubukCkY4X9QuJKmI49yMCL2OkjbxvD6UOUIWEth5j7Vme1seSU83a3BzGA=="
+  "resolved" "https://registry.npmjs.org/expo-calendar/-/expo-calendar-10.1.1.tgz"
+  "version" "10.1.1"
+>>>>>>> Stashed changes
   dependencies:
     "@expo/config-plugins" "^4.0.2"
     "expo-image-loader" "~3.1.0"
@@ -3261,6 +3272,14 @@
   "resolved" "https://registry.npmjs.org/gensync/-/gensync-1.0.0-beta.2.tgz"
   "version" "1.0.0-beta.2"
 
+<<<<<<< Updated upstream
+=======
+"geofire-common@^5.2.0":
+  "integrity" "sha512-b3RCXxzdc/ZAoNag/F8n4myWYiBPI1eeQ/gtjLvBKKeILNnYb6Qw0GL/AVfYUKk3Z19Pw+xVBSlYcjqy5OHVzg=="
+  "resolved" "https://registry.npmjs.org/geofire-common/-/geofire-common-5.2.0.tgz"
+  "version" "5.2.0"
+
+>>>>>>> Stashed changes
 "geojson-rbush@3.x":
   "integrity" "sha512-oVltQTXolxvsz1sZnutlSuLDEcQAKYC/uXt9zDzJJ6bu0W+baTI8LZBaTup5afzibEH4N3jlq2p+a152wlBJ7w=="
   "resolved" "https://registry.npmjs.org/geojson-rbush/-/geojson-rbush-3.2.0.tgz"
