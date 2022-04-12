@@ -46,19 +46,13 @@ const App = () => {
         Map: 'map',
         Event: {
           path: '/event/:id',
-        }
-      }
+        },
+        Home: '*',
+      },
     }
-  };
+  }
 
-  React.useEffect(() => {
-    Linking.getInitialURL().then(url => {
-      console.log(url);
-      Linking.addEventListener("url", () => {
-        alert("hello woorld");
-      });
-    })
-  });
+
 
   if (!fontsLoaded) {
     return <AppLoading />;
