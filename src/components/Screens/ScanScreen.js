@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, Button, Item, FlatList, ImageBackground, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Button, Item, FlatList, ImageBackground, TouchableOpacity, Linking } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import FadeInView from '../ui/FadeInView';
@@ -18,9 +18,12 @@ const ScanScreen = ({ navigation }) => {
     })();
   }, []);
 
-  const handleBarCodeScanned = ({ type, data }) => {
+  const handleBarCodeScanned = async ({ type, data }) => {
     setScanned(true);
-    alert(`Bar code with type ${type} and data ${data} has been scanned!`);
+    const canOpen = await Linking.canOpenURL(data);
+    if (canOpen) {
+      Linking.openURL(data);
+    }
   };
 
   if (hasPermission === null) {
