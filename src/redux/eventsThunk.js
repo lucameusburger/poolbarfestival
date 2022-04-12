@@ -51,18 +51,6 @@ export function fetchEvents() {
               })
             );
 
-            await Promise.all(
-              fetchedEvents.map(async (item) => {
-                item.room_item = {};
-                if (!item.room) return item;
-                const resp = await fetch(BASE_URL + 'items/rooms/' + item.room);
-                const data = await resp.json();
-                if (!data.data) return item;
-                item.room_item = data.data;
-                return item;
-              })
-            );
-
             const filteredFetchedEvents = fetchedEvents.sort((b, a) => {
               return new Date(b.day_item.date_start) - new Date(a.day_item.date_start);
             });
