@@ -4,7 +4,7 @@ import FadeInView from '../ui/FadeInView';
 import PoolbarLogo from '../ui/PoolbarLogo';
 import AppButton from '../ui/AppButton';
 import StylesMain from '../../../styles/StylesMain';
-import mapImage from '../../../assets/map.png';
+import mapImage from '../../../assets/img/map.png';
 
 import TypeWriter from 'react-native-typewriter';
 import { FontAwesome } from '@expo/vector-icons';
