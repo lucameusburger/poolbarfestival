@@ -37,16 +37,12 @@ const ArtistDetailScreen = ({ artist }) => {
           height: 300,
         }}
       />
-      {filteredEvents &&
-        <FlatList
-          style={{ flex: 1, padding: 20 }}
-          data={filteredEvents}
-          renderItem={EventComponent}
-          keyExtractor={(item) => item.id}
-        />
-      }
-
-
+      <View style={{ flex: 1, padding: 20 }}>
+        {filteredEvents.map((event) =>
+          <EventComponent item={event} />
+        )
+        }
+      </View>
 
       <View style={{ padding: 20 }}>
         {artist.url_spotify &&
