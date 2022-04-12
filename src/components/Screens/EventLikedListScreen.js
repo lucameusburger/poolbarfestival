@@ -1,6 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Button, Item, FlatList, ImageBackground, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Button, Item, FlatList, ImageBackground, TouchableOpacity, PermissionsAndroid, Alert, Platform } from 'react-native';
+import * as Sharing from 'expo-sharing';
+import ViewShot from 'react-native-view-shot';
+import CameraRoll from '@react-native-community/cameraroll';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import AppButton from '../ui/AppButton';
@@ -13,7 +16,7 @@ import { FontAwesome } from '@expo/vector-icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchEvents } from '../../redux/eventsThunk';
 import { addCallenderEvent, deleteCallenderEvent } from '../../redux/callenderThunk';
-
+import LikeIcon from '../ui/LikeIcon';
 
 const EventLikedListScreen = ({ router, navigation }) => {
   const dispatch = useDispatch();
@@ -21,23 +24,9 @@ const EventLikedListScreen = ({ router, navigation }) => {
   const events = useSelector((state) => state.events.data);
   const likedEvents = useSelector((state) => state.favorites.likedEvents);
   const artists = useSelector((state) => state.artists.artists);
+  const viewShotRef = useRef();
 
-  const likeEvent = (event) => {
-    dispatch({
-      type: 'ADD_TO_LIKED_EVENTS',
-      payload: event.id,
-    });
-    dispatch(addCallenderEvent(event.id));
-
-  };
-
-  const unLikeEvent = (event) => {
-    dispatch({
-      type: 'REMOVE_FROM_LIKED_EVENTS',
-      payload: event.id,
-    });
-    dispatch(deleteCallenderEvent(event.id));
-  };
+  let [selectedImage, setSelectedImage] = React.useState(null);
 
   const RenderElement = ({ item }) => {
     const artist = artists.find((x) => x.id === item.artist);
@@ -49,8 +38,6 @@ const EventLikedListScreen = ({ router, navigation }) => {
       let date = new Date(item.day_item.date_start);
       dateString = date.toLocaleDateString('en-US', dateOptions);
     }
-
-    const isLiked = likedEvents.includes(item.id);
 
     return (
       <TouchableOpacity
@@ -67,26 +54,13 @@ const EventLikedListScreen = ({ router, navigation }) => {
               <Text style={StylesMain.eventMainText}>{item.name || item.artist_item.name}</Text>
             </View>
             <View style={{ width: '20%' }}>
-              <TouchableOpacity
-                style={{ height: '100%' }}
-                onPress={() => {
-                  if (isLiked) {
-                    unLikeEvent(item);
-                  } else {
-                    likeEvent(item);
-                  }
-                }}
-              >
-                <FontAwesome style={{ alignSelf: 'flex-end', marginBottom: 'auto', marginTop: 'auto' }} name={isLiked ? 'heart' : 'heart-o'} size={32} color="#c6c300" />
-              </TouchableOpacity>
+              <LikeIcon eventId={item.id} color="#c6c300" />
             </View>
           </View>
         </View>
       </TouchableOpacity>
     );
   };
-
-
 
   useEffect(() => {
     dispatch(fetchEvents());
@@ -95,21 +69,56 @@ const EventLikedListScreen = ({ router, navigation }) => {
     //createEvent(9)
   }, []);
 
+  //IMAGE
+  // get permission on android
+  const getPermissionAndroid = async () => {
+    try {
+      const granted = await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE, {
+        title: 'Image Download Permission',
+        message: 'Your permission is required to save images to your device',
+        buttonNegative: 'Cancel',
+        buttonPositive: 'OK',
+      });
+      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+        return true;
+      }
+      Alert.alert('', 'Your permission is required to save images to your device', [{ text: 'OK', onPress: () => {} }], { cancelable: false });
+    } catch (err) {
+      // handle error as you please
+      console.log('err', err);
+    }
+  };
+
+  let openShareDialogAsync = async () => {
+    //await setSelectedImage(exportComponentAsPNG(componentRef));dd
+    viewShotRef.current.capture({ format: 'jpg', quality: 80 }).then(async (uri) => {
+      console.log('do something with ', uri);
+      setSelectedImage(uri);
+      await Sharing.shareAsync('file://' + uri);
+    });
+  };
 
   return (
     <View style={StylesMain.mainView}>
       <FadeInView style={{ flex: 1, width: '100%', height: '100%' }}>
-        <NavBar title="meine events" navigation={navigation} />
-        <View style={{ flex: 1, margin: 0 }}>
-          {loading && (
-            <View style={{ flex: 1, margin: 0 }}>
-              <LoadingText />
-            </View>
-          )}
-          {events && <FlatList style={{ flex: 1, padding: 20 }} data={events.filter((event) => likedEvents.includes(event.id))} renderItem={RenderElement} keyExtractor={(item) => item.id} />}
-        </View>
-
-        <StatusBar style="auto" />
+        <NavBar
+          title="meine events"
+          navigation={navigation}
+          next={() => {
+            openShareDialogAsync();
+          }}
+          nextTitle="teilen"
+        />
+        <ViewShot ref={viewShotRef} style={{ height: '100%', width: '100%', backgroundColor: '#fff' }}>
+          <View style={{ flex: 1, margin: 0 }} ref={viewShotRef}>
+            {loading && (
+              <View style={{ flex: 1, margin: 0 }}>
+                <LoadingText />
+              </View>
+            )}
+            {events && <FlatList style={{ flex: 1, padding: 20 }} data={events.filter((event) => likedEvents.includes(event.id))} renderItem={RenderElement} keyExtractor={(item) => item.id} />}
+          </View>
+        </ViewShot>
       </FadeInView>
     </View>
   );

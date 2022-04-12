@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Button, Item, FlatList, ImageBackground, TouchableOpacity } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -13,6 +12,7 @@ import { FontAwesome } from '@expo/vector-icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchEvents } from '../../redux/eventsThunk';
 import { addCallenderEvent, deleteCallenderEvent } from '../../redux/callenderThunk';
+import LikeIcon from '../ui/LikeIcon';
 
 const EventListScreen = ({ router, navigation }) => {
   const dispatch = useDispatch();
@@ -110,7 +110,6 @@ const EventListScreen = ({ router, navigation }) => {
       dateString = date.toLocaleDateString('en-US', dateOptions);
     }
 
-    const isLiked = likedEvents.includes(item.id);
 
     return (
       <TouchableOpacity
@@ -127,18 +126,7 @@ const EventListScreen = ({ router, navigation }) => {
               <Text style={StylesMain.eventMainText}>{item.name || item.artist_item.name}</Text>
             </View>
             <View style={{ width: '20%' }}>
-              <TouchableOpacity
-                style={{ height: '100%' }}
-                onPress={() => {
-                  if (isLiked) {
-                    unLikeEvent(item.id);
-                  } else {
-                    likeEvent(item.id);
-                  }
-                }}
-              >
-                <FontAwesome style={{ alignSelf: 'flex-end', marginBottom: 'auto', marginTop: 'auto' }} name={isLiked ? 'heart' : 'heart-o'} size={32} color="#c6c300" />
-              </TouchableOpacity>
+              <LikeIcon eventId={item.id} color="#c6c300" />
             </View>
           </View>
         </View>
@@ -171,7 +159,6 @@ const EventListScreen = ({ router, navigation }) => {
           {events && <FlatList style={{ flex: 1, padding: 20 }} data={events} renderItem={RenderElement} keyExtractor={(item) => item.id} />}
         </View>
 
-        <StatusBar style="auto" />
       </FadeInView>
     </View>
   );

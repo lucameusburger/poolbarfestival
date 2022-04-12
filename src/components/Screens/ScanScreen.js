@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Button, Item, FlatList, ImageBackground, TouchableOpacity } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -40,7 +39,6 @@ const ScanScreen = ({ navigation }) => {
           {scanned && <Button title={'Tap to Scan Again'} onPress={() => setScanned(false)} />}
         </View>
 
-        <StatusBar style="auto" />
       </FadeInView>
     </View>
   );

@@ -6,22 +6,26 @@ const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
 
 const NavBar = ({ title, next, nextTitle, type, navigation }) => {
   return (
-    <View style={{ height: 160, width: '100%' }}>
-      <View style={{ height: 10 }}></View>
-      <View style={{ marginTop: 'auto', left: 0, right: 0, width: '100%' }}>
+    <View style={{ width: '100%', top: 0, marginTop: 50 }}>
+      <View style={{ marginTop: 0, left: 0, right: 0, width: '100%' }}>
         <AppHeading style={{ width: '100%' }} title={title} />
       </View>
-      <View style={{ flexDirection: 'row', width: '100%', backgroundColor: '#c6c300' }}>
+      <View style={{ flexDirection: 'row', width: '100%' }}>
         <TouchableOpacity
-          style={{ width: nextTitle ? '50%' : '100%', paddingTop: 10, paddingBottom: 10 }}
+          style={{ width: nextTitle ? '50%' : '100%', paddingTop: 10, paddingBottom: 10, backgroundColor: '#c6c300' }}
           onPress={() => {
-            navigation.goBack(null);
+            // handle the index we get
+            if (navigation.canGoBack()) {
+              navigation.goBack();
+            } else {
+              navigation.navigate('Home');
+            }
           }}
         >
           <Text style={styles.button}>zurück</Text>
         </TouchableOpacity>
         {nextTitle && (
-          <TouchableOpacity style={{ width: '50%', paddingTop: 10, paddingBottom: 10 }} onPress={next}>
+          <TouchableOpacity style={{ width: '50%', paddingTop: 10, paddingBottom: 10, backgroundColor: '#c6c300' }} onPress={next}>
             <Text style={styles.button}>{nextTitle}</Text>
           </TouchableOpacity>
         )}

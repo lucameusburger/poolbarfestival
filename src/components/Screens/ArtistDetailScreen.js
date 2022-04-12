@@ -1,16 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { StatusBar } from 'expo-status-bar';
 import * as Linking from 'expo-linking';
-import { StyleSheet, Text, View, ScrollView, Item, FlatList, ImageBackground, Image, openURL, TouchableOpacity } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { StyleSheet, Text, View, ScrollView, Image } from 'react-native';
 import AppButton from '../ui/AppButton';
-import AppHeading from '../ui/AppHeading';
 import NavBar from '../ui/NavBar';
 import LoadingText from '../ui/LoadingText';
 import FadeInView from '../ui/FadeInView';
 import StylesMain from '../../../styles/StylesMain';
-import { FontAwesome } from '@expo/vector-icons';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { fetchArtist } from '../../redux/artistsThunk';
@@ -18,7 +13,7 @@ import { fetchArtist } from '../../redux/artistsThunk';
 const BASE_URL = 'https://www.admin.poolbar.at/';
 
 const ArtistDetailScreen = ({ artist }) => {
-  const img = artist.image ? { uri: BASE_URL + 'assets/' + artist.image + '?fit=cover&width=500&height=200&quality=80' } : { uri: BASE_URL + 'assets/9c6f223c-795a-4bf5-b8c0-0630a555e465?fit=cover&width=500&height=200&quality=80' };
+  const img = artist.image ? { uri: BASE_URL + 'assets/' + artist.image + '?fit=cover&width=800&height=600&quality=80' } : { uri: BASE_URL + 'assets/9c6f223c-795a-4bf5-b8c0-0630a555e465?fit=cover&width=500&height=200&quality=80' };
 
   return (
     <View style={{ flex: 1, width: '100%', height: '100%' }}>
@@ -36,11 +31,23 @@ const ArtistDetailScreen = ({ artist }) => {
         style={{
           flex: 1,
           width: '100%',
-          height: 300,
+          height: 320,
         }}
       />
 
-      <View style={{ padding: 20 }}>{artist.url_spotify && <AppButton style={{ marginRight: 'auto', marginLeft: 0, marginBottom: 10, alignSelf: 'left' }} title="auf spotify spielen" onPress={() => Linking.openURL(artist.url_spotify)} />}</View>
+      <View style={{ padding: 20 }}>
+        {artist.url_spotify &&
+          <AppButton
+            style={{
+              marginRight: 'auto',
+              marginLeft: 0,
+              marginBottom: 10
+            }}
+            title="auf spotify spielen"
+            onPress={() => Linking.openURL(artist.url_spotify)}
+          />
+        }
+      </View>
     </View>
   );
 };
@@ -63,8 +70,12 @@ const ArtistScreen = ({ route, navigation }) => {
     <View style={StylesMain.mainView}>
       <FadeInView style={{ flex: 1, width: '100%' }}>
         <NavBar navigation={navigation} title={'artist'} />
-        <ScrollView style={{ flex: 1 }}>{selectedArtist ? <ArtistDetailScreen artist={selectedArtist} /> : <LoadingText />}</ScrollView>
-        <StatusBar style="auto" />
+        <ScrollView style={{ flex: 1 }}>
+          {selectedArtist ?
+            <ArtistDetailScreen artist={selectedArtist} /> :
+            <LoadingText />
+          }
+        </ScrollView>
       </FadeInView>
     </View>
   );
