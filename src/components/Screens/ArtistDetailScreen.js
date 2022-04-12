@@ -37,29 +37,20 @@ const ArtistDetailScreen = ({ artist }) => {
           height: 300,
         }}
       />
-      {filteredEvents &&
-        <FlatList
-          style={{ flex: 1, padding: 20 }}
-          data={filteredEvents}
-          renderItem={EventComponent}
-          keyExtractor={(item) => item.id}
-        />
-      }
-
-
+      {filteredEvents && <FlatList style={{ flex: 1, padding: 20 }} data={filteredEvents} renderItem={EventComponent} keyExtractor={(item) => item.id} />}
 
       <View style={{ padding: 20 }}>
-        {artist.url_spotify &&
+        {artist.url_spotify && (
           <AppButton
             style={{
               marginRight: 'auto',
               marginLeft: 0,
-              marginBottom: 10
+              marginBottom: 10,
             }}
             title="auf spotify spielen"
             onPress={() => Linking.openURL(artist.url_spotify)}
           />
-        }
+        )}
       </View>
     </View>
   );
@@ -83,12 +74,7 @@ const ArtistScreen = ({ route, navigation }) => {
     <View style={StylesMain.mainView}>
       <FadeInView style={{ flex: 1, width: '100%' }}>
         <NavBar navigation={navigation} title={'artist'} />
-        <ScrollView style={{ flex: 1 }}>
-          {selectedArtist ?
-            <ArtistDetailScreen artist={selectedArtist} /> :
-            <LoadingText />
-          }
-        </ScrollView>
+        <ScrollView style={{ flex: 1 }}>{selectedArtist ? <ArtistDetailScreen artist={selectedArtist} /> : <LoadingText />}</ScrollView>
         <StatusBar style="auto" />
       </FadeInView>
     </View>
