@@ -62,7 +62,7 @@ const ArtistDetailScreen = ({ artist }) => {
   );
 };
 
-const ArtistScreen = ({ route, navigation }) => {
+const ArtistScreen = ({ route }) => {
   const id = route.params.id.trim();
   const artists = useSelector((state) => state.artists.artists);
   const [selectedArtist, setSelectedArtist] = useState(null);
@@ -79,7 +79,7 @@ const ArtistScreen = ({ route, navigation }) => {
   return (
     <View style={StylesMain.mainView}>
       <FadeInView style={{ flex: 1, width: '100%' }}>
-        <NavBar navigation={navigation} title={'artist'} />
+        <NavBar title={'artist'} />
         <ScrollView style={{ flex: 1 }}>{selectedArtist ? <ArtistDetailScreen artist={selectedArtist} /> : <LoadingText />}</ScrollView>
         <StatusBar style="auto" />
       </FadeInView>

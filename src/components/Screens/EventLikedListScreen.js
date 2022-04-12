@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchEvents } from '../../redux/eventsThunk';
 import EventComponent from '../ui/EventComponent';
 
-const EventLikedListScreen = ({ router, navigation }) => {
+const EventLikedListScreen = ({ router }) => {
   const dispatch = useDispatch();
   const loading = !useSelector((state) => state.events.isLoaded);
   const events = useSelector((state) => state.events.data);
@@ -32,7 +32,6 @@ const EventLikedListScreen = ({ router, navigation }) => {
       <FadeInView style={{ flex: 1, width: '100%', height: '100%' }}>
         <NavBar
           title="meine events"
-          navigation={navigation}
           next={() => {
             openShareDialogAsync();
           }}
