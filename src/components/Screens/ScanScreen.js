@@ -13,8 +13,13 @@ const ScanScreen = ({ navigation }) => {
 
   useEffect(() => {
     (async () => {
-      const { status } = await BarCodeScanner.requestCameraPermissionsAsync();
-      setHasPermission(status === 'granted');
+      const { granted } = await BarCodeScanner.getPermissionsAsync();
+      if (!granted) {
+        const { status } = await BarCodeScanner.requestPermissionsAsync();
+        setHasPermission(status === 'granted');
+      } else {
+        setHasPermission(true);
+      }
     })();
   }, []);
 
@@ -25,13 +30,6 @@ const ScanScreen = ({ navigation }) => {
       Linking.openURL(data);
     }
   };
-
-  if (hasPermission === null) {
-    alert('Requesting for camera permission');
-  }
-  if (hasPermission === false) {
-    alert('No access to camera');
-  }
 
   return (
     <View style={StylesMain.mainView}>
