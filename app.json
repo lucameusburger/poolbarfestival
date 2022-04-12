@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "poolbarPeople",
-    "slug": "poolbarPeople",
+    "name": "poolbar Festival",
+    "slug": "poolbar Festival",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -13,9 +13,7 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
       "infoPlist": {
@@ -27,11 +25,7 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "permissions": [
-        "READ_CALENDAR",
-        "WRITE_CALENDAR",
-        "CAMERA"
-      ]
+      "permissions": ["READ_CALENDAR", "WRITE_CALENDAR", "CAMERA"]
     },
     "web": {
       "favicon": "./assets/favicon.png"

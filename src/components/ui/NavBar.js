@@ -16,7 +16,7 @@ const NavBar = ({ title, next, nextTitle, type, navigation }) => {
           onPress={() => {
             // handle the index we get
             if (navigation.canGoBack()) {
-              navigation.goBack(null);
+              navigation.goBack();
             } else {
               navigation.navigate('Home');
             }
