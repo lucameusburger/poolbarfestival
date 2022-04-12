@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import * as Linking from 'expo-linking';
-import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, Image } from 'react-native';
 import AppButton from '../ui/AppButton';
 import NavBar from '../ui/NavBar';
 import LoadingText from '../ui/LoadingText';
@@ -36,7 +36,19 @@ const ArtistDetailScreen = ({ artist }) => {
         }}
       />
 
-      <View style={{ padding: 20 }}>{artist.url_spotify && <AppButton style={{ marginRight: 'auto', marginLeft: 0, marginBottom: 10, alignSelf: 'left' }} title="auf spotify spielen" onPress={() => Linking.openURL(artist.url_spotify)} />}</View>
+      <View style={{ padding: 20 }}>
+        {artist.url_spotify &&
+          <AppButton
+            style={{
+              marginRight: 'auto',
+              marginLeft: 0,
+              marginBottom: 10
+            }}
+            title="auf spotify spielen"
+            onPress={() => Linking.openURL(artist.url_spotify)}
+          />
+        }
+      </View>
     </View>
   );
 };
