@@ -15,6 +15,7 @@ import GeneratorListScreen from './src/components/Screens/GeneratorListScreen';
 import ArtistListScreen from './src/components/Screens/ArtistListScreen';
 import ArtistHistoryListScreen from './src/components/Screens/ArtistHistoryListScreen';
 import ArtistDetailScreen from './src/components/Screens/ArtistDetailScreen';
+import RoomDetailScreen from './src/components/Screens/RoomDetailScreen';
 import EventListScreen from './src/components/Screens/EventListScreen';
 import EventLikedListScreen from './src/components/Screens/EventLikedListScreen';
 import EventDetailScreen from './src/components/Screens/EventDetailScreen';
@@ -33,6 +34,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { persistor, store } from './src/redux/store';
 
 const prefix = Linking.createURL('/');
+import background from './assets/img/map.png';
 
 import { useFonts } from '@expo-google-fonts/outfit';
 
@@ -42,7 +44,7 @@ const HomeScreen = ({ navigation }) => {
   return (
     <View style={StylesMain.mainView}>
       <FadeInView style={{ flex: 1, width: '100%', height: '100%' }}>
-        <ImageBackground resizeMode="cover" style={{ flex: 1, justifyContent: 'center' }} source={require('./assets/img/map.png')}>
+        <ImageBackground resizeMode="cover" style={{ flex: 1, justifyContent: 'center' }} source={background}>
           {/* <TypeWriter
           style={{ position: 'absolute', width: '200%', left: '-50%', top: '-5%', color: '#c6c300', textAlign: 'justify', opacity: 1, fontFamily: 'Helviotopia', letterSpacing: 10, lineHeight: 14, transform: [{ rotate: '12deg' }] }}
           typing={typing}
@@ -110,13 +112,14 @@ const App = () => {
         <PersistGate loading={null} persistor={persistor}>
           <NavigationContainer linking={linking} fallback={<Text>Loading...</Text>} ref={navigationRef}>
             <Stack.Navigator>
-              <Stack.Screen name="Home" component={HomeScreen} options={{ title: 'Welcome', headerShown: false }} />
+              <Stack.Screen name="Home" component={HomeScreen} options={{ title: 'Home', headerShown: false }} />
               <Stack.Screen name="Events" component={EventListScreen} options={{ title: 'Events', headerShown: false }} />
               <Stack.Screen name="LikedEvents" component={EventLikedListScreen} options={{ title: 'LikedEvents', headerShown: false }} />
               <Stack.Screen name="Event" component={EventDetailScreen} options={{ title: 'Event', headerShown: false }} />
               <Stack.Screen name="Artists" component={ArtistListScreen} options={{ title: 'Artists', headerShown: false }} />
               <Stack.Screen name="ArtistHistory" component={ArtistHistoryListScreen} options={{ title: 'ArtistHistory', headerShown: false }} />
               <Stack.Screen name="Artist" component={ArtistDetailScreen} options={{ title: 'Artist', headerShown: false }} />
+              <Stack.Screen name="Room" component={RoomDetailScreen} options={{ title: 'Room', headerShown: false }} />
               <Stack.Screen name="Generators" component={GeneratorListScreen} options={{ title: 'Generator', headerShown: false }} />
               <Stack.Screen name="Scan" component={ScanScreen} options={{ title: 'Scan', headerShown: false }} />
               <Stack.Screen name="Map" component={MapScreen} options={{ title: 'Map', headerShown: false }} />

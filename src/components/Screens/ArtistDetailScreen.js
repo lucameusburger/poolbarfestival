@@ -18,7 +18,7 @@ import { fetchArtist } from '../../redux/artistsThunk';
 const BASE_URL = 'https://www.admin.poolbar.at/';
 
 const ArtistDetailScreen = ({ artist }) => {
-  const img = artist.image ? { uri: BASE_URL + 'assets/' + artist.image + '?fit=cover&width=500&height=200&quality=80' } : { uri: BASE_URL + 'assets/9c6f223c-795a-4bf5-b8c0-0630a555e465?fit=cover&width=500&height=200&quality=80' };
+  const img = artist.image ? { uri: BASE_URL + 'assets/' + artist.image + '?fit=cover&width=800&height=600&quality=80' } : { uri: BASE_URL + 'assets/9c6f223c-795a-4bf5-b8c0-0630a555e465?fit=cover&width=500&height=200&quality=80' };
 
   return (
     <View style={{ flex: 1, width: '100%', height: '100%' }}>
@@ -36,7 +36,7 @@ const ArtistDetailScreen = ({ artist }) => {
         style={{
           flex: 1,
           width: '100%',
-          height: 300,
+          height: 320,
         }}
       />
 
