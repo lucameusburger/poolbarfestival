@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import * as Linking from 'expo-linking';
-import { StyleSheet, Text, View, ScrollView, Image } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, Image, FlatList } from 'react-native';
 import AppButton from '../ui/AppButton';
 import NavBar from '../ui/NavBar';
 import LoadingText from '../ui/LoadingText';
@@ -13,8 +13,11 @@ import { fetchArtist } from '../../redux/artistsThunk';
 import PoolbarImage from '../ui/PoolbarImage';
 
 import artistPlaceholder from '../../../assets/img/artistPlaceholder.jpg';
+import EventComponent from '../ui/EventComponent';
 
 const ArtistDetailScreen = ({ artist }) => {
+  const events = useSelector((state) => state.events.data);
+  const filteredEvents = events.filter((event) => event.artist === artist.id);
   return (
     <View style={{ flex: 1, width: '100%', height: '100%' }}>
       <View style={{ backgroundColor: '#c6c300', padding: 20, marginTop: 10 }}>
@@ -34,6 +37,16 @@ const ArtistDetailScreen = ({ artist }) => {
           height: 300,
         }}
       />
+      {filteredEvents &&
+        <FlatList
+          style={{ flex: 1, padding: 20 }}
+          data={filteredEvents}
+          renderItem={EventComponent}
+          keyExtractor={(item) => item.id}
+        />
+      }
+
+
 
       <View style={{ padding: 20 }}>
         {artist.url_spotify &&

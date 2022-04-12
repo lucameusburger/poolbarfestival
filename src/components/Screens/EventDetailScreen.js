@@ -13,7 +13,7 @@ import { fetchArtists } from '../../redux/artistsThunk';
 import { navigate } from '../../core/RootNavigation';
 import { fetchVenues } from '../../redux/venueThunk';
 
-const EventDetailScreen = ({ route, navigation }) => {
+const EventDetailScreen = ({ route }) => {
   const id = route.params.id.trim();
   const events = useSelector((state) => state.events.data);
   const [selectedEvent, setSelectedEvent] = useState(null);
@@ -120,7 +120,7 @@ const EventDetailScreen = ({ route, navigation }) => {
   return (
     <View style={StylesMain.mainView}>
       <FadeInView style={{ flex: 1, width: '100%' }}>
-        <NavBar navigation={navigation} title={'event'} />
+        <NavBar title={'event'} />
         <ScrollView style={{ flex: 1 }}>
           {(selectedEvent) ?
             <RenderElement
