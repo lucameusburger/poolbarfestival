@@ -58,13 +58,13 @@ async function createCalendar() {
 }
 
 
-async function createEvent(callenderId, title, id, startDate, endDate, location = "Poolbar") {
+async function createEvent(callenderId, title, id, startDate, endDate, location = "") {
     const newEventId = await Calendar.createEventAsync(callenderId, {
         title: title,
         id: id,
         startDate: startDate,
         endDate: endDate,
-        location: location,
+        location: "Poolbar " + location,
         timeZone: 'Europe/London',
         alarms: [{
             relativeOffset: -24 * 60,
@@ -157,7 +157,8 @@ export function addCallenderEvent(eventId) {
             event.name,
             event.id,
             startDate,
-            endDate
+            endDate,
+            event?.room_item?.name
         ).then((eventId) =>
             dispatch(addToCallenderEvents(
                 "Event",
