@@ -50,8 +50,18 @@ const EventDetailScreen = ({ route, navigation }) => {
         </View>
 
         <View style={{ padding: 20 }}>
-          {item.url_ticket && <AppButton style={{ marginRight: 'auto', marginLeft: 0, marginBottom: 10, alignSelf: 'left' }} title="hol dir tickets" onPress={() => Linking.openURL(item.url_ticket)} />}
-          {item.artist &&
+          {item.url_ticket &&
+            <AppButton
+              style={{
+                marginRight: 'auto',
+                marginLeft: 0,
+                marginBottom: 10
+              }}
+              title="hol dir tickets"
+              onPress={() => Linking.openURL(item.url_ticket)}
+            />
+          }
+          {artist &&
             <AppButton
               style={{ marginRight: 'auto', marginLeft: 0, marginBottom: 10 }}
               title="artist ansehen"
