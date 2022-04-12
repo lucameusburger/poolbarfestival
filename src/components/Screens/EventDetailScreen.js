@@ -93,14 +93,6 @@ const EventDetailScreen = ({ route, navigation }) => {
   }, []);
 
   useEffect(() => {
-    const targetText = "80a90e9a-ec1c-4354-b256-673d107b8c06"
-    console.log(id)
-    const idd = id.trim()
-    for (let index = 0; index < targetText.length; ++index) {
-      console.log("char " + index + ": " + targetText.charCodeAt(index));
-      console.log("char " + index + ": " + id.charCodeAt(index));
-    }
-
     const event = events.find((event) => event.id === id);
     const artist = artists.find((artist) => artist.id === event.artist);
     setSelectedArtist(artist);
