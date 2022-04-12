@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, FlatList } from 'react-native';
 import NavBar from '../ui/NavBar';
 import FadeInView from '../ui/FadeInView';
 import StylesMain from '../../../styles/StylesMain';
@@ -7,8 +7,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import PoolbarImage from '../ui/PoolbarImage';
 import { fetchVenue } from '../../redux/venueThunk';
 import LoadingText from '../ui/LoadingText';
+import EventComponent from '../ui/EventComponent';
+
 
 const RenderElement = ({ venue }) => {
+  const events = useSelector((state) => state.events.data);
+  const filteredEvents = events.filter((event) => event.room === venue.id);
   return (
     <View style={{ flex: 1, width: '100%', height: '100%' }}>
       <View style={{ backgroundColor: '#c6c300', padding: 20, marginTop: 10 }}>
@@ -26,6 +30,12 @@ const RenderElement = ({ venue }) => {
             height: 320,
           }}
         />
+      </View>
+      <View style={{ flex: 1, padding: 20 }}>
+        {filteredEvents.map((event) =>
+          <EventComponent item={event} />
+        )
+        }
       </View>
     </View>
   );
