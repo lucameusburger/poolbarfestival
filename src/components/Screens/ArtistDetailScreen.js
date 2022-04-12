@@ -34,16 +34,10 @@ const ArtistDetailScreen = ({ artist }) => {
         style={{
           flex: 1,
           width: '100%',
-          height: 300,
+          height: 320,
         }}
       />
-      <View style={{ flex: 1, padding: 20 }}>
-        {filteredEvents.map((event) => (
-          <EventComponent item={event} />
-        ))}
-      </View>
-
-      <View style={{ padding: 20 }}>
+      <View style={{ padding: 20, marginTop: -80 }}>
         {artist.url_spotify && (
           <AppButton
             style={{
@@ -55,6 +49,14 @@ const ArtistDetailScreen = ({ artist }) => {
             onPress={() => Linking.openURL(artist.url_spotify)}
           />
         )}
+      </View>
+      <View style={{ padding: 20 }}>
+        <Text style={[styles.eventDateText, { marginBottom: 20 }]}>kommende events</Text>
+        <View style={{ flex: 1 }}>
+          {filteredEvents.map((event) => (
+            <EventComponent item={event} />
+          ))}
+        </View>
       </View>
     </View>
   );
