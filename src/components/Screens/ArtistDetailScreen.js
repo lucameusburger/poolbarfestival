@@ -39,7 +39,7 @@ const ArtistDetailScreen = ({ artist }) => {
       />
       <View style={{ flex: 1, padding: 20 }}>
         {filteredEvents.map((event) =>
-          <EventComponent item={event} />
+          <EventComponent item={event} key={event.id} />
         )
         }
       </View>
