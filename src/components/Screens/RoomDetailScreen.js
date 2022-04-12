@@ -30,13 +30,10 @@ const RenderElement = ({ venue }) => {
           height: 320,
         }}
       />
-      <View style={{ padding: 20 }}>
-        <Text style={[styles.roomDateText, { marginBottom: 20 }]}>kommende events</Text>
-        <View style={{ flex: 1 }}>
-          {filteredEvents.map((event) => (
-            <EventComponent item={event} />
-          ))}
-        </View>
+      <View style={{ flex: 1, padding: 20 }}>
+        {filteredEvents.map((event) => (
+          <EventComponent item={event} key={event.id} />
+        ))}
       </View>
     </View>
   );

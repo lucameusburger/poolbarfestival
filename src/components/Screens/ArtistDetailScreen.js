@@ -37,8 +37,15 @@ const ArtistDetailScreen = ({ artist }) => {
           height: 320,
         }}
       />
-      <View style={{ padding: 20, marginTop: -80 }}>
-        {artist.url_spotify && (
+      <View style={{ flex: 1, padding: 20 }}>
+        {filteredEvents.map((event) =>
+          <EventComponent item={event} key={event.id} />
+        )
+        }
+      </View>
+
+      <View style={{ padding: 20 }}>
+        {artist.url_spotify &&
           <AppButton
             style={{
               marginRight: 'auto',
