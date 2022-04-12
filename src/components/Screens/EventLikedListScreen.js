@@ -12,6 +12,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { FontAwesome } from '@expo/vector-icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchEvents } from '../../redux/eventsThunk';
+import { addCallenderEvent, deleteCallenderEvent } from '../../redux/callenderThunk';
+
 
 const EventLikedListScreen = ({ router, navigation }) => {
   const dispatch = useDispatch();
@@ -20,18 +22,21 @@ const EventLikedListScreen = ({ router, navigation }) => {
   const likedEvents = useSelector((state) => state.favorites.likedEvents);
   const artists = useSelector((state) => state.artists.artists);
 
-  const likeEvent = (id) => {
+  const likeEvent = (event) => {
     dispatch({
       type: 'ADD_TO_LIKED_EVENTS',
-      payload: id,
+      payload: event.id,
     });
+    dispatch(addCallenderEvent(event.id));
+
   };
 
-  const unLikeEvent = (id) => {
+  const unLikeEvent = (event) => {
     dispatch({
       type: 'REMOVE_FROM_LIKED_EVENTS',
-      payload: id,
+      payload: event.id,
     });
+    dispatch(deleteCallenderEvent(event.id));
   };
 
   const RenderElement = ({ item }) => {
@@ -66,13 +71,13 @@ const EventLikedListScreen = ({ router, navigation }) => {
                 style={{ height: '100%' }}
                 onPress={() => {
                   if (isLiked) {
-                    unLikeEvent(item.id);
+                    unLikeEvent(item);
                   } else {
-                    likeEvent(item.id);
+                    likeEvent(item);
                   }
                 }}
               >
-                <FontAwesome style={{ alignSelf: 'flex-end', marginBottom: 'auto', marginTop: 'auto' }} name={isLiked ? 'heart' : 'heart-o'} size={32} color="#2ECDA7" />
+                <FontAwesome style={{ alignSelf: 'flex-end', marginBottom: 'auto', marginTop: 'auto' }} name={isLiked ? 'heart' : 'heart-o'} size={32} color="#c6c300" />
               </TouchableOpacity>
             </View>
           </View>
@@ -81,20 +86,26 @@ const EventLikedListScreen = ({ router, navigation }) => {
     );
   };
 
+
+
   useEffect(() => {
     dispatch(fetchEvents());
+    //getCallenders();
+    //createCalendar();
+    //createEvent(9)
   }, []);
+
 
   return (
     <View style={StylesMain.mainView}>
       <FadeInView style={{ flex: 1, width: '100%', height: '100%' }}>
         <NavBar title="meine events" navigation={navigation} />
         <View style={{ flex: 1, margin: 0 }}>
-          {loading &&
+          {loading && (
             <View style={{ flex: 1, margin: 0 }}>
               <LoadingText />
             </View>
-          }
+          )}
           {events && <FlatList style={{ flex: 1, padding: 20 }} data={events.filter((event) => likedEvents.includes(event.id))} renderItem={RenderElement} keyExtractor={(item) => item.id} />}
         </View>
 

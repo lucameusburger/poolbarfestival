@@ -87,14 +87,14 @@ const EventDetailScreen = ({ route, navigation }) => {
 
     return (
       <View style={{ flex: 1, width: '100%', height: '100%' }}>
-        <View style={{ backgroundColor: '#2ECDA7', padding: 20 }}>
+        <View style={{ backgroundColor: '#c6c300', padding: 20, marginTop: 10 }}>
           <View>
             <Text style={styles.eventDateText}>{dateString}</Text>
             <Text style={styles.eventMainText}>{item.name}</Text>
-            <Text>{item.description_short}</Text>
+            <Text style={StylesMain.text}>{item.description_short}</Text>
             <View style={{ height: 20 }}></View>
-            <Text>{item.artist && item.artist_item.category ? item.artist_item.category : 'unknown'}</Text>
-            <Text>{item.room && item.room_item ? item.room_item.name : 'unknown'}</Text>
+            <Text style={StylesMain.text}>{item.artist && item.artist_item.category ? item.artist_item.category : ''}</Text>
+            <Text style={StylesMain.text}>{item.room && item.room_item ? item.room_item.name : ''}</Text>
             <FontAwesome
               style={{ alignSelf: 'flex-end', marginRight: 10, marginBottom: 10 }}
               name={isLiked ? 'heart' : 'heart-o'}
@@ -112,17 +112,29 @@ const EventDetailScreen = ({ route, navigation }) => {
         </View>
 
         <View style={{ padding: 20 }}>
-          <AppButton style={{ marginRight: 'auto', marginLeft: 0, marginBottom: 10, alignSelf: 'left' }} title="hol dir tickets" onPress={() => Linking.openURL(event.url_ticket)} />
-          <AppButton
-            style={{ marginRight: 'auto', marginLeft: 0, marginBottom: 10, alignSelf: 'left' }}
-            title="artist ansehen"
-            onPress={() =>
-              navigation.navigate('Artist', {
-                id: item.artist,
-              })
-            }
-          />
-          <AppButton style={{ marginRight: 'auto', marginLeft: 0 }} title="zur venue" onPress={() => navigation.navigate('Events')} />
+          {item.url_ticket && <AppButton style={{ marginRight: 'auto', marginLeft: 0, marginBottom: 10, alignSelf: 'left' }} title="hol dir tickets" onPress={() => Linking.openURL(event.url_ticket)} />}
+          {item.artist && (
+            <AppButton
+              style={{ marginRight: 'auto', marginLeft: 0, marginBottom: 10, alignSelf: 'left' }}
+              title="artist ansehen"
+              onPress={() =>
+                navigation.navigate('Artist', {
+                  id: item.artist,
+                })
+              }
+            />
+          )}
+          {item.room && (
+            <AppButton
+              style={{ marginRight: 'auto', marginLeft: 0 }}
+              title="zur venue"
+              onPress={() =>
+                navigation.navigate('Room', {
+                  id: item.room,
+                })
+              }
+            />
+          )}
         </View>
       </View>
     );
@@ -135,7 +147,7 @@ const EventDetailScreen = ({ route, navigation }) => {
   return (
     <View style={StylesMain.mainView}>
       <FadeInView style={{ flex: 1, width: '100%' }}>
-        <NavBar navigation={navigation} title={(event.artist_item && event.artist_item.name) || 'kein artist'} />
+        <NavBar navigation={navigation} title={'event'} />
         <ScrollView style={{ flex: 1 }}>
           {loading && <Text style={{ color: '#fff', fontSize: 33, alignSelf: 'center' }}>loading</Text>}
           {event && <RenderElement item={event} />}

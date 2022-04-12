@@ -44,7 +44,7 @@ const HomeScreen = ({ navigation }) => {
       <FadeInView style={{ flex: 1, width: '100%', height: '100%' }}>
         <ImageBackground resizeMode="cover" style={{ flex: 1, justifyContent: 'center' }} source={require('./assets/img/map.png')}>
           {/* <TypeWriter
-          style={{ position: 'absolute', width: '200%', left: '-50%', top: '-5%', color: '#2ECDA7', textAlign: 'justify', opacity: 1, fontFamily: 'Helviotopia', letterSpacing: 10, lineHeight: 14, transform: [{ rotate: '12deg' }] }}
+          style={{ position: 'absolute', width: '200%', left: '-50%', top: '-5%', color: '#c6c300', textAlign: 'justify', opacity: 1, fontFamily: 'Helviotopia', letterSpacing: 10, lineHeight: 14, transform: [{ rotate: '12deg' }] }}
           typing={typing}
           minDelay={0.1}
           maxDelay={1}
@@ -75,10 +75,10 @@ const HomeScreen = ({ navigation }) => {
 
           <View style={{ position: 'absolute', bottom: 0, right: 0, left: 0, flexDirection: 'row' }}>
             <TouchableOpacity onPress={() => navigation.navigate('Map')} style={{ width: '50%' }}>
-              <FontAwesome style={{ bottom: 40, alignSelf: 'flex-start', marginLeft: 40 }} name={'map'} size={38} color="#2ECDA7" />
+              <FontAwesome style={{ bottom: 40, alignSelf: 'flex-start', marginLeft: 40 }} name={'map'} size={38} color="#c6c300" />
             </TouchableOpacity>
             <TouchableOpacity onPress={() => navigation.navigate('Scan')} style={{ width: '50%' }}>
-              <FontAwesome style={{ bottom: 40, alignSelf: 'flex-end', marginRight: 40 }} name={'camera'} size={38} color="#2ECDA7" />
+              <FontAwesome style={{ bottom: 40, alignSelf: 'flex-end', marginRight: 40 }} name={'camera'} size={38} color="#c6c300" />
             </TouchableOpacity>
           </View>
         </ImageBackground>

@@ -2,9 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, Button, Item, FlatList } from 'react-native';
 
 const StylesMain = StyleSheet.create({
+  text: {
+    fontFamily: 'Helviotopia',
+    fontSize: 17,
+  },
   mainHeader: {
     //fontFamily: 'Outfit_900Black',
-    color: '#0d1117',
+    color: '#000',
     alignSelf: 'center',
     marginTop: 'auto',
     marginBottom: 0,
@@ -18,7 +22,7 @@ const StylesMain = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#fff',
-    color: '#0d1117',
+    color: '#000',
     width: '100%',
     height: '100%',
   },
@@ -32,7 +36,7 @@ const StylesMain = StyleSheet.create({
     color: '#fff',
     marginBottom: 10,
     fontSize: 30,
-    backgroundColor: '#0d1117',
+    backgroundColor: '#000',
     textAlign: 'center',
   },
   container: {
@@ -44,7 +48,7 @@ const StylesMain = StyleSheet.create({
   card: {
     marginTop: 10,
     padding: 16,
-    backgroundColor: '#2ECDA7',
+    backgroundColor: '#c6c300',
     borderRadius: 26,
   },
   card_header: {
@@ -64,7 +68,7 @@ const StylesMain = StyleSheet.create({
   labelContainer: {
     fontFamily: 'Helviotopia',
     fontSize: 30,
-    backgroundColor: '#2ECDA7',
+    backgroundColor: '#c6c300',
     borderRadius: 30,
     minWidth: 140,
     textAlign: 'center',

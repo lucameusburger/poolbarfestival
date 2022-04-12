@@ -6,12 +6,12 @@ const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
 
 const NavBar = ({ title, next, nextTitle, type, navigation }) => {
   return (
-    <View style={{ height: 180, width: '100%' }}>
+    <View style={{ height: 160, width: '100%' }}>
       <View style={{ height: 10 }}></View>
       <View style={{ marginTop: 'auto', left: 0, right: 0, width: '100%' }}>
         <AppHeading style={{ width: '100%' }} title={title} />
       </View>
-      <View style={{ flexDirection: 'row', width: '100%', backgroundColor: '#2ECDA7' }}>
+      <View style={{ flexDirection: 'row', width: '100%', backgroundColor: '#c6c300' }}>
         <TouchableOpacity
           style={{ width: nextTitle ? '50%' : '100%', paddingTop: 10, paddingBottom: 10 }}
           onPress={() => {
@@ -26,7 +26,6 @@ const NavBar = ({ title, next, nextTitle, type, navigation }) => {
           </TouchableOpacity>
         )}
       </View>
-      <View style={{ height: 10 }}></View>
     </View>
   );
 };

@@ -17,7 +17,7 @@ const ArtistListScreen = ({ item }) => {
 
   return (
     <TouchableOpacity
-      style={{ marginBottom: 30, paddingLeft: 10, paddingRIght: 10 }}
+      style={{ marginBottom: 30, padding: 10 }}
       key={item.id}
       onPress={() =>
         navigate('Artist', {
