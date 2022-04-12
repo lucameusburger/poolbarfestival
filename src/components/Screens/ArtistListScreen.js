@@ -12,10 +12,9 @@ import PoolbarImage from '../ui/PoolbarImage';
 import artistPlaceholder from '../../../assets/img/artistPlaceholder.jpg';
 import { fetchEvents } from '../../redux/eventsThunk';
 const ArtistListScreen = ({ item }) => {
-
   return (
     <TouchableOpacity
-      style={{ marginBottom: 30, padding: 10 }}
+      style={{ marginBottom: 10, padding: 10 }}
       key={item.id}
       onPress={() =>
         navigate('Artist', {
@@ -31,15 +30,14 @@ const ArtistListScreen = ({ item }) => {
             width: 100,
             height: 100,
             borderRadius: 300,
-            alignItems: 'center'
+            alignItems: 'center',
           }}
         />
-        <View style={{}}>
-        </View>
+        <View style={{}}></View>
         <View style={{}}>
           <View style={{ marginLeft: 20, marginTop: 'auto', marginBottom: 'auto', width: '100%' }}>
-            <Text style={StylesMain.eventDateText}>{item.category}</Text>
-            <Text style={StylesMain.eventMainText}>{item.name}</Text>
+            <Text style={StylesMain.artistListDateText}>{item.category}</Text>
+            <Text style={StylesMain.artistListMainText}>{item.name}</Text>
           </View>
         </View>
       </View>
@@ -57,7 +55,6 @@ const ArtistsScreen = ({ navigation }) => {
   const [displayedArtists, setDisplayedArtists] = useState([]);
   const isLoaded = useSelector((state) => state.artists.isLoaded);
 
-
   function sortArtistsAlphabetically(artists) {
     if (!artists) return null;
     return artists.sort((a, b) => {
@@ -69,7 +66,7 @@ const ArtistsScreen = ({ navigation }) => {
       }
       return 0;
     });
-  };
+  }
 
   function filterPlaysInCurrentYear(artists) {
     if (!events) {
@@ -78,7 +75,7 @@ const ArtistsScreen = ({ navigation }) => {
     const now = new Date();
     const currentYearEvents = events.filter((event) => {
       const eventDate = new Date(event.day_item.date_start);
-      return (eventDate.getFullYear() === now.getFullYear())
+      return eventDate.getFullYear() === now.getFullYear();
     });
     const currentYearEventIds = currentYearEvents.map((event) => event.artist);
     return artists.filter((artist) => currentYearEventIds.includes(artist.id));
@@ -93,7 +90,6 @@ const ArtistsScreen = ({ navigation }) => {
     setDisplayedArtists(sortArtistsAlphabetically(filterPlaysInCurrentYear(artists)));
   }, [artists]);
 
-
   return (
     <View style={StylesMain.mainView}>
       <FadeInView style={{ flex: 1, width: '100%', height: '100%' }}>
@@ -105,16 +101,7 @@ const ArtistsScreen = ({ navigation }) => {
           }}
           nextTitle={'history'}
         />
-        <View style={{ flex: 1 }}>
-          {!isLoaded ?
-            <LoadingText /> :
-            displayedArtists ?
-              <ArtistsList
-                artists={displayedArtists}
-              /> :
-              <LoadingText />
-          }
-        </View>
+        <View style={{ flex: 1 }}>{!isLoaded ? <LoadingText /> : displayedArtists ? <ArtistsList artists={displayedArtists} /> : <LoadingText />}</View>
       </FadeInView>
     </View>
   );
