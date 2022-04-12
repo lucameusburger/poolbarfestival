@@ -10,7 +10,7 @@ import { fetchArtists } from '../../redux/artistsThunk';
 import { navigate } from '../../core/RootNavigation';
 import PoolbarImage from '../ui/PoolbarImage';
 import artistPlaceholder from '../../../assets/img/artistPlaceholder.jpg';
-
+import { fetchEvents } from '../../redux/eventsThunk';
 const ArtistListScreen = ({ item }) => {
 
   return (
@@ -53,22 +53,46 @@ const ArtistsScreen = ({ navigation }) => {
   const dispatch = useDispatch();
 
   const artists = useSelector((state) => state.artists.artists);
-  const orderredArtists = artists.sort(function (a, b) {
-    if (a.name.toLowerCase() < b.name.toLowerCase()) {
-      return -1;
-    }
-    if (a.name.toLowerCase() > b.name.toLowerCase()) {
-      return 1;
-    }
-    return 0;
-  });
+  const events = useSelector((state) => state.events.data);
+  const [displayedArtists, setDisplayedArtists] = useState([]);
   const isLoaded = useSelector((state) => state.artists.isLoaded);
-  const isFetchingData = useSelector((state) => state.artists.isFetchingData);
-  const hasFetchingDataError = useSelector((state) => state.artists.hasFetchingDataError);
+
+
+  function sortArtistsAlphabetically(artists) {
+    if (!artists) return null;
+    return artists.sort((a, b) => {
+      if (a.name < b.name) {
+        return -1;
+      }
+      if (a.name > b.name) {
+        return 1;
+      }
+      return 0;
+    });
+  };
+
+  function filterPlaysInCurrentYear(artists) {
+    if (!events) {
+      return null;
+    }
+    const now = new Date();
+    const currentYearEvents = events.filter((event) => {
+      const eventDate = new Date(event.day_item.date_start);
+      return (eventDate.getFullYear() === now.getFullYear())
+    });
+    const currentYearEventIds = currentYearEvents.map((event) => event.artist);
+    return artists.filter((artist) => currentYearEventIds.includes(artist.id));
+  }
 
   useEffect(() => {
     dispatch(fetchArtists());
+    dispatch(fetchEvents());
   }, []);
+
+  useEffect(() => {
+    setDisplayedArtists(sortArtistsAlphabetically(filterPlaysInCurrentYear(artists)));
+  }, [artists]);
+
 
   return (
     <View style={StylesMain.mainView}>
@@ -81,7 +105,16 @@ const ArtistsScreen = ({ navigation }) => {
           }}
           nextTitle={'history'}
         />
-        <View style={{ flex: 1 }}>{!isLoaded ? <LoadingText /> : artists ? <ArtistsList artists={orderredArtists} /> : <LoadingText />}</View>
+        <View style={{ flex: 1 }}>
+          {!isLoaded ?
+            <LoadingText /> :
+            displayedArtists ?
+              <ArtistsList
+                artists={displayedArtists}
+              /> :
+              <LoadingText />
+          }
+        </View>
       </FadeInView>
     </View>
   );
