@@ -18,86 +18,8 @@ const EventListScreen = ({ router, navigation }) => {
   const dispatch = useDispatch();
   const loading = !useSelector((state) => state.events.isLoaded);
   const events = useSelector((state) => state.events.data);
-  const likedEvents = useSelector((state) => state.favorites.likedEvents);
   const artists = useSelector((state) => state.artists.artists);
 
-  const fetchEvents1 = async () => {
-    const resp = await fetch('https://www.admin.poolbar.at/items/events');
-    const data = await resp.json();
-    let fetchedEvents = data.data;
-
-    // fetch day
-    await Promise.all(
-      fetchedEvents.map(async (item) => {
-        item.day_item = {};
-        if (!item.day) return item;
-        const resp = await fetch('https://www.admin.poolbar.at/items/days/' + item.day);
-        const data = await resp.json();
-        if (!data.data) return item;
-        item.day_item = data.data;
-
-        return item;
-      })
-    );
-
-    // fetch artist
-    await Promise.all(
-      fetchedEvents.map(async (item) => {
-        item.artist_item = {};
-        if (!item.artist) return item;
-        const resp = await fetch('https://www.admin.poolbar.at/items/artists/' + item.artist);
-        const data = await resp.json();
-        if (!data.data) return item;
-        item.artist_item = data.data;
-
-        return item;
-      })
-    );
-
-    // load local storage
-    const localEvents = await getEvents();
-    console.log(localEvents);
-    if (localEvents && 1 == 2) {
-      await Promise.all(
-        fetchedEvents.map(async (item) => {
-          if (localEvents.find((x) => x.id === item.id).liked) {
-            item.liked = true;
-          } else {
-            item.liked = false;
-          }
-
-          return item;
-        })
-      );
-    }
-
-    fetchedEvents.sort(function (a, b) {
-      // Turn your strings into dates, and then subtract them
-      // to get a value that is either negative, positive, or zero.
-      return new Date(b.day_item.date_start) - new Date(a.day_item.date_start);
-    });
-
-    setEvents(fetchedEvents);
-    setLoading(false);
-  };
-
-  const likeEvent = (id) => {
-    dispatch({
-      type: 'ADD_TO_LIKED_EVENTS',
-      payload: id,
-    });
-    dispatch(addCallenderEvent(id));
-
-  };
-
-  const unLikeEvent = (id) => {
-    dispatch({
-      type: 'REMOVE_FROM_LIKED_EVENTS',
-      payload: id,
-    });
-    dispatch(deleteCallenderEvent(id));
-
-  };
 
   const RenderElement = ({ item }) => {
     const artist = artists.find((x) => x.id === item.artist);
@@ -145,7 +67,6 @@ const EventListScreen = ({ router, navigation }) => {
           title="events"
           navigation={navigation}
           next={() => {
-            console.log('clc');
             navigation.navigate('LikedEvents');
           }}
           nextTitle="meine events"

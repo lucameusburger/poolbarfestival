@@ -8,11 +8,10 @@ import FadeInView from '../ui/FadeInView';
 import StylesMain from '../../../styles/StylesMain';
 import { fetchArtists } from '../../redux/artistsThunk';
 import { navigate } from '../../core/RootNavigation';
-
-const BASE_URL = 'https://www.admin.poolbar.at/';
+import PoolbarImage from '../ui/PoolbarImage';
+import artistPlaceholder from '../../../assets/img/artistPlaceholder.jpg';
 
 const ArtistListScreen = ({ item }) => {
-  const img = item.image ? { uri: BASE_URL + 'assets/' + item.image + '?fit=cover&width=500&height=200&quality=80' } : { uri: BASE_URL + 'assets/9c6f223c-795a-4bf5-b8c0-0630a555e465?fit=cover&width=500&height=200&quality=80' };
 
   return (
     <TouchableOpacity
@@ -25,8 +24,17 @@ const ArtistListScreen = ({ item }) => {
       }
     >
       <View style={{ width: '100%', marginTop: 'auto', flexDirection: 'row' }}>
+        <PoolbarImage
+          imageId={item.image}
+          fallback={artistPlaceholder}
+          style={{
+            width: 100,
+            height: 100,
+            borderRadius: 300,
+            alignItems: 'center'
+          }}
+        />
         <View style={{}}>
-          <Image source={img} resizeMode="cover" style={{ width: 100, height: 100, borderRadius: 300, alignItems: 'center' }} />
         </View>
         <View style={{}}>
           <View style={{ marginLeft: 20, marginTop: 'auto', marginBottom: 'auto', width: '100%' }}>

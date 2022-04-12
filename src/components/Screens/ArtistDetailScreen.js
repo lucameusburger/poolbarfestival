@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { StatusBar } from 'expo-status-bar';
 import * as Linking from 'expo-linking';
 import { StyleSheet, Text, View, ScrollView, Image } from 'react-native';
 import AppButton from '../ui/AppButton';
@@ -9,12 +10,11 @@ import StylesMain from '../../../styles/StylesMain';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { fetchArtist } from '../../redux/artistsThunk';
+import PoolbarImage from '../ui/PoolbarImage';
 
-const BASE_URL = 'https://www.admin.poolbar.at/';
+import artistPlaceholder from '../../../assets/img/artistPlaceholder.jpg';
 
 const ArtistDetailScreen = ({ artist }) => {
-  const img = artist.image ? { uri: BASE_URL + 'assets/' + artist.image + '?fit=cover&width=800&height=600&quality=80' } : { uri: BASE_URL + 'assets/9c6f223c-795a-4bf5-b8c0-0630a555e465?fit=cover&width=500&height=200&quality=80' };
-
   return (
     <View style={{ flex: 1, width: '100%', height: '100%' }}>
       <View style={{ backgroundColor: '#c6c300', padding: 20, marginTop: 10 }}>
@@ -25,13 +25,13 @@ const ArtistDetailScreen = ({ artist }) => {
           <View style={{ height: 20 }}></View>
         </View>
       </View>
-      <Image
-        source={img}
-        resizeMode="cover"
+      <PoolbarImage
+        imageId={artist.image}
+        fallback={artistPlaceholder}
         style={{
           flex: 1,
           width: '100%',
-          height: 320,
+          height: 300,
         }}
       />
 
@@ -53,7 +53,7 @@ const ArtistDetailScreen = ({ artist }) => {
 };
 
 const ArtistScreen = ({ route, navigation }) => {
-  const { id } = route.params;
+  const id = route.params.id.trim();
   const artists = useSelector((state) => state.artists.artists);
   const [selectedArtist, setSelectedArtist] = useState(null);
   const dispatch = useDispatch();
@@ -76,6 +76,7 @@ const ArtistScreen = ({ route, navigation }) => {
             <LoadingText />
           }
         </ScrollView>
+        <StatusBar style="auto" />
       </FadeInView>
     </View>
   );
