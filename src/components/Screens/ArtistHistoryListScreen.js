@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { StatusBar } from 'expo-status-bar';
 import { Text, View, ScrollView, FlatList, ImageBackground, TouchableOpacity } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -42,7 +41,6 @@ const ArtistsScreen = ({ navigation }) => {
       <FadeInView style={{ flex: 1, width: '100%', height: '100%' }}>
         <NavBar navigation={navigation} title="history" />
         <ScrollView style={{ flex: 1, marginBottom: 'auto', marginTop: 'auto', padding: 10 }}>{!isLoaded ? <LoadingText /> : artists ? <ArtistsList artists={artists} /> : <LoadingText />}</ScrollView>
-        <StatusBar style="auto" />
       </FadeInView>
     </View>
   );

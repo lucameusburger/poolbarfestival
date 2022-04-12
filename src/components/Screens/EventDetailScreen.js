@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { StatusBar } from 'expo-status-bar';
 import * as Linking from 'expo-linking';
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import AppButton from '../ui/AppButton';
@@ -117,7 +116,6 @@ const EventDetailScreen = ({ route, navigation }) => {
             <LoadingText />
           }
         </ScrollView>
-        <StatusBar style="auto" />
       </FadeInView>
     </View>
   );

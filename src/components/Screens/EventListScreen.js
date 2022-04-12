@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Button, Item, FlatList, ImageBackground, TouchableOpacity } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -160,7 +159,6 @@ const EventListScreen = ({ router, navigation }) => {
           {events && <FlatList style={{ flex: 1, padding: 20 }} data={events} renderItem={RenderElement} keyExtractor={(item) => item.id} />}
         </View>
 
-        <StatusBar style="auto" />
       </FadeInView>
     </View>
   );

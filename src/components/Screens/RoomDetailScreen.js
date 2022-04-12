@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { StatusBar } from 'expo-status-bar';
 import * as Linking from 'expo-linking';
 import { StyleSheet, Text, View, ScrollView, Item, FlatList, ImageBackground, Image, openURL, TouchableOpacity } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
@@ -64,7 +63,6 @@ const ArtistScreen = ({ route, navigation }) => {
       <FadeInView style={{ flex: 1, width: '100%' }}>
         <NavBar navigation={navigation} title={'artist'} />
         <ScrollView style={{ flex: 1 }}>{selectedArtist ? <ArtistDetailScreen artist={selectedArtist} /> : <LoadingText />}</ScrollView>
-        <StatusBar style="auto" />
       </FadeInView>
     </View>
   );

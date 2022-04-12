@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { StatusBar } from 'expo-status-bar';
 import { Text, View, ScrollView, FlatList, ImageBackground, TouchableOpacity, StyleSheet } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -12,7 +11,7 @@ import { navigate } from '../../core/RootNavigation';
 
 import { FontAwesome } from '@expo/vector-icons';
 
-import MapView, {Marker} from 'react-native-maps';
+import MapView, { Marker } from 'react-native-maps';
 
 /***
 import MapboxGL from "@rnmapbox/maps";
@@ -28,15 +27,15 @@ const MapScreen = ({ navigation }) => {
     <View style={StylesMain.mainView}>
       <FadeInView style={{ flex: 1, width: '100%', height: '100%' }}>
         <NavBar navigation={navigation} title="map" />
-        <MapView style={styles.map} provider = { MapView.PROVIDER_GOOGLE } customMapStyle = { generatedMapStyle }
-        initialRegion={{
-          latitude: loewensaal.latitude,
-          longitude: loewensaal.longitude,
-          latitudeDelta: 0.05,
-          longitudeDelta: 0.05,
+        <MapView style={styles.map} provider={MapView.PROVIDER_GOOGLE} customMapStyle={generatedMapStyle}
+          initialRegion={{
+            latitude: loewensaal.latitude,
+            longitude: loewensaal.longitude,
+            latitudeDelta: 0.05,
+            longitudeDelta: 0.05,
 
-      }}>
-          <Marker coordinate={loewensaal} image={require('../../../assets/img/marker.png')}/>
+          }}>
+          <Marker coordinate={loewensaal} image={require('../../../assets/img/marker.png')} />
         </MapView>
       </FadeInView>
     </View>
