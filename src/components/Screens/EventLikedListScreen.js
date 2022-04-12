@@ -10,14 +10,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchEvents } from '../../redux/eventsThunk';
 import EventComponent from '../ui/EventComponent';
 
-
 const EventLikedListScreen = ({ router }) => {
   const dispatch = useDispatch();
   const loading = !useSelector((state) => state.events.isLoaded);
   const events = useSelector((state) => state.events.data);
   const likedEvents = useSelector((state) => state.favorites.likedEvents);
   const viewShotRef = useRef();
-
 
   useEffect(() => {
     dispatch(fetchEvents());
@@ -46,14 +44,7 @@ const EventLikedListScreen = ({ router }) => {
                 <LoadingText />
               </View>
             )}
-            {events ?
-              <FlatList
-                style={{ flex: 1, padding: 20 }}
-                data={events.filter((event) => likedEvents.includes(event.id))}
-                renderItem={EventComponent}
-                keyExtractor={(item) => item.id} /> :
-              <LoadingText />
-            }
+            {events ? <FlatList style={{ flex: 1, padding: 20 }} data={events.filter((event) => likedEvents.includes(event.id))} renderItem={EventComponent} keyExtractor={(item) => item.id} /> : <LoadingText />}
           </View>
         </ViewShot>
       </FadeInView>

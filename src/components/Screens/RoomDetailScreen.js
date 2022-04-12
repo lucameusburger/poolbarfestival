@@ -9,7 +9,6 @@ import { fetchVenue } from '../../redux/venueThunk';
 import LoadingText from '../ui/LoadingText';
 import EventComponent from '../ui/EventComponent';
 
-
 const RenderElement = ({ venue }) => {
   const events = useSelector((state) => state.events.data);
   const filteredEvents = events.filter((event) => event.room === venue.id);
@@ -22,20 +21,19 @@ const RenderElement = ({ venue }) => {
           <Text style={StylesMain.text}>{venue.description}</Text>
           <View style={{ height: 20 }}></View>
         </View>
-        <PoolbarImage
-          imageId={venue.image}
-          style={{
-            flex: 1,
-            width: '100%',
-            height: 320,
-          }}
-        />
       </View>
+      <PoolbarImage
+        imageId={venue.image}
+        style={{
+          flex: 1,
+          width: '100%',
+          height: 320,
+        }}
+      />
       <View style={{ flex: 1, padding: 20 }}>
-        {filteredEvents.map((event) =>
+        {filteredEvents.map((event) => (
           <EventComponent item={event} key={event.id} />
-        )
-        }
+        ))}
       </View>
     </View>
   );
@@ -48,7 +46,7 @@ const RoomDetailScreen = ({ route, navigation }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchVenue())
+    dispatch(fetchVenue());
   }, []);
 
   useEffect(() => {
@@ -60,14 +58,7 @@ const RoomDetailScreen = ({ route, navigation }) => {
     <View style={StylesMain.mainView}>
       <FadeInView style={{ flex: 1, width: '100%' }}>
         <NavBar navigation={navigation} title={'artist'} />
-        <ScrollView style={{ flex: 1 }}>
-          {(selectedVenue) ?
-            <RenderElement
-              venue={selectedVenue}
-            /> :
-            <LoadingText />
-          }
-        </ScrollView>
+        <ScrollView style={{ flex: 1 }}>{selectedVenue ? <RenderElement venue={selectedVenue} /> : <LoadingText />}</ScrollView>
       </FadeInView>
     </View>
   );

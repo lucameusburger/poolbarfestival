@@ -34,28 +34,35 @@ const ArtistDetailScreen = ({ artist }) => {
         style={{
           flex: 1,
           width: '100%',
-          height: 300,
+          height: 320,
         }}
       />
-      <View style={{ flex: 1, padding: 20 }}>
-        {filteredEvents.map((event) =>
-          <EventComponent item={event} key={event.id} />
-        )
-        }
-      </View>
-
       <View style={{ padding: 20 }}>
-        {artist.url_spotify &&
+        {artist.url_spotify && (
           <AppButton
             style={{
               marginRight: 'auto',
               marginLeft: 0,
-              marginBottom: 10
+              marginBottom: 10,
             }}
             title="auf spotify spielen"
             onPress={() => Linking.openURL(artist.url_spotify)}
           />
-        }
+        )}
+      </View>
+      <View style={{ flex: 1, padding: 20 }}>
+        {filteredEvents.map((event) => (
+          <EventComponent item={event} key={event.id} />
+        ))}
+      </View>
+
+      <View style={{ padding: 20 }}>
+        <Text style={[styles.eventDateText, { marginBottom: 20 }]}>kommende events</Text>
+        <View style={{ flex: 1 }}>
+          {filteredEvents.map((event) => (
+            <EventComponent item={event} />
+          ))}
+        </View>
       </View>
     </View>
   );
@@ -79,12 +86,7 @@ const ArtistScreen = ({ route }) => {
     <View style={StylesMain.mainView}>
       <FadeInView style={{ flex: 1, width: '100%' }}>
         <NavBar title={'artist'} />
-        <ScrollView style={{ flex: 1 }}>
-          {selectedArtist ?
-            <ArtistDetailScreen artist={selectedArtist} /> :
-            <LoadingText />
-          }
-        </ScrollView>
+        <ScrollView style={{ flex: 1 }}>{selectedArtist ? <ArtistDetailScreen artist={selectedArtist} /> : <LoadingText />}</ScrollView>
         <StatusBar style="auto" />
       </FadeInView>
     </View>
