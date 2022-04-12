@@ -42,8 +42,25 @@ const App = () => {
   });
 
   const linking = {
-    prefixes: [prefix],
+    prefixes: [prefix, "poolbar://"],
+    config: {
+      screens: {
+        Map: 'map',
+        Event: {
+          path: '/event/:id',
+        }
+      }
+    }
   };
+
+  React.useEffect(() => {
+    Linking.getInitialURL().then(url => {
+      console.log(url);
+      Linking.addEventListener("url", () => {
+        alert("hello woorld");
+      });
+    })
+  });
 
   if (!fontsLoaded) {
     return <AppLoading />;

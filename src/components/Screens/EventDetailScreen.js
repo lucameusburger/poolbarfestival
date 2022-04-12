@@ -8,12 +8,12 @@ import StylesMain from '../../../styles/StylesMain';
 import { useDispatch, useSelector } from 'react-redux';
 import LikeIcon from '../ui/LikeIcon';
 import LoadingText from '../ui/LoadingText';
-import { fetchEvent } from '../../redux/eventsThunk';
+import { fetchEvent, fetchEvents } from '../../redux/eventsThunk';
 import { fetchArtists } from '../../redux/artistsThunk';
 import { navigate } from '../../core/RootNavigation';
 
 const EventDetailScreen = ({ route, navigation }) => {
-  const { id } = route.params;
+  const id = route.params.id.trim();
   const events = useSelector((state) => state.events.data);
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [selectedArtist, setSelectedArtist] = useState(null);
@@ -88,12 +88,22 @@ const EventDetailScreen = ({ route, navigation }) => {
   };
 
   useEffect(() => {
-    dispatch(fetchEvent(id));
+    dispatch(fetchEvents());
     dispatch(fetchArtists());
   }, []);
 
   useEffect(() => {
+    const targetText = "80a90e9a-ec1c-4354-b256-673d107b8c06"
+    console.log(id)
+    const idd = id.trim()
+    for (let index = 0; index < targetText.length; ++index) {
+      console.log("char " + index + ": " + targetText.charCodeAt(index));
+      console.log("char " + index + ": " + id.charCodeAt(index));
+    }
+
     const event = events.find((event) => event.id === id);
+    const artist = artists.find((artist) => artist.id === event.artist);
+    setSelectedArtist(artist);
     setSelectedEvent(event);
   }, [events]);
 
@@ -103,6 +113,8 @@ const EventDetailScreen = ({ route, navigation }) => {
       setSelectedArtist(artist);
     }
   }, [selectedEvent, artists]);
+
+
   return (
     <View style={StylesMain.mainView}>
       <FadeInView style={{ flex: 1, width: '100%' }}>
