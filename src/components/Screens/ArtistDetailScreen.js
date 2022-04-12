@@ -37,15 +37,8 @@ const ArtistDetailScreen = ({ artist }) => {
           height: 320,
         }}
       />
-      <View style={{ flex: 1, padding: 20 }}>
-        {filteredEvents.map((event) =>
-          <EventComponent item={event} key={event.id} />
-        )
-        }
-      </View>
-
       <View style={{ padding: 20 }}>
-        {artist.url_spotify &&
+        {artist.url_spotify && (
           <AppButton
             style={{
               marginRight: 'auto',
@@ -57,6 +50,12 @@ const ArtistDetailScreen = ({ artist }) => {
           />
         )}
       </View>
+      <View style={{ flex: 1, padding: 20 }}>
+        {filteredEvents.map((event) => (
+          <EventComponent item={event} key={event.id} />
+        ))}
+      </View>
+
       <View style={{ padding: 20 }}>
         <Text style={[styles.eventDateText, { marginBottom: 20 }]}>kommende events</Text>
         <View style={{ flex: 1 }}>
