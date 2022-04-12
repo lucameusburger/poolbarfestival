@@ -42,11 +42,23 @@ export function fetchEvents() {
               fetchedEvents.map(async (item) => {
                 item.day_item = {};
                 if (!item.day) return item;
-                const resp = await fetch('https://www.admin.poolbar.at/items/days/' + item.day);
+                const resp = await fetch(BASE_URL + 'items/days/' + item.day);
                 const data = await resp.json();
                 if (!data.data) return item;
                 item.day_item = data.data;
 
+                return item;
+              })
+            );
+
+            await Promise.all(
+              fetchedEvents.map(async (item) => {
+                item.room_item = {};
+                if (!item.room) return item;
+                const resp = await fetch(BASE_URL + 'items/rooms/' + item.room);
+                const data = await resp.json();
+                if (!data.data) return item;
+                item.room_item = data.data;
                 return item;
               })
             );
@@ -74,35 +86,6 @@ export function fetchEvents() {
   };
 }
 
-export function fetchArtist(artistId) {
-  return (dispatch, getState) => {
-    const isFetchingData = getState().artists.isFetchingData;
-    if (isFetchingData) {
-      return;
-    } else {
-      dispatch(setIsFetchingData(true));
-      fetch(BASE_URL + 'items/artists')
-        .then(async (response) => {
-          // check for error response
-          console.log(response.ok);
-
-          if (response.ok) {
-            const data = await response.json();
-            dispatch(setEvents(data.data));
-          } else {
-            const error = (data && data.message) || response.status;
-            console.log('Fetching Artist Error: ', error);
-            dispatch(setHasFetchingDataError(true));
-          }
-        })
-        .catch((error) => {
-          console.error('Error loading Artists: ', error);
-          dispatch(setHasFetchingDataError(true));
-        })
-        .finally(() => {
-          console.log('Finished loading Artists');
-          dispatch(setIsFetchingData(false));
-        });
-    }
-  };
+export function fetchEvent(eventId) {
+  return fetchEvents();
 }

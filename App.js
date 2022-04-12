@@ -1,16 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Button, Item, FlatList, TouchableOpacity, ImageBackground } from 'react-native';
+import { Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import AppLoading from 'expo-app-loading';
+import * as Linking from 'expo-linking';
 
 import { navigationRef } from './src/core/RootNavigation';
 
-import FadeInView from './src/components/ui/FadeInView';
-import PoolbarLogo from './src/components/ui/PoolbarLogo';
-
-import AppButton from './src/components/ui/AppButton';
 import GeneratorListScreen from './src/components/Screens/GeneratorListScreen';
 import ArtistListScreen from './src/components/Screens/ArtistListScreen';
 import ArtistHistoryListScreen from './src/components/Screens/ArtistHistoryListScreen';
@@ -22,12 +19,6 @@ import EventDetailScreen from './src/components/Screens/EventDetailScreen';
 import ScanScreen from './src/components/Screens/ScanScreen';
 import MapScreen from './src/components/Screens/MapScreen';
 
-import StylesMain from './styles/StylesMain';
-
-import * as Linking from 'expo-linking';
-import TypeWriter from 'react-native-typewriter';
-import { FontAwesome } from '@expo/vector-icons';
-
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 
@@ -37,6 +28,7 @@ const prefix = Linking.createURL('/');
 import background from './assets/img/map.png';
 
 import { useFonts } from '@expo-google-fonts/outfit';
+import HomeScreen from './src/components/Screens/HomeScreen';
 
 const HomeScreen = ({ navigation }) => {
   const [typing, setTyping] = useState(1);
@@ -125,6 +117,7 @@ const App = () => {
               <Stack.Screen name="Map" component={MapScreen} options={{ title: 'Map', headerShown: false }} />
             </Stack.Navigator>
           </NavigationContainer>
+          <StatusBar style="auto" />
         </PersistGate>
       </Provider>
     );

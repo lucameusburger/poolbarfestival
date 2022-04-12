@@ -16,6 +16,7 @@ import { FontAwesome } from '@expo/vector-icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchEvents } from '../../redux/eventsThunk';
 import { addCallenderEvent, deleteCallenderEvent } from '../../redux/callenderThunk';
+import LikeIcon from '../ui/LikeIcon';
 
 const EventLikedListScreen = ({ router, navigation }) => {
   const dispatch = useDispatch();
@@ -27,22 +28,6 @@ const EventLikedListScreen = ({ router, navigation }) => {
 
   let [selectedImage, setSelectedImage] = React.useState(null);
 
-  const likeEvent = (event) => {
-    dispatch({
-      type: 'ADD_TO_LIKED_EVENTS',
-      payload: event.id,
-    });
-    dispatch(addCallenderEvent(event.id));
-  };
-
-  const unLikeEvent = (event) => {
-    dispatch({
-      type: 'REMOVE_FROM_LIKED_EVENTS',
-      payload: event.id,
-    });
-    dispatch(deleteCallenderEvent(event.id));
-  };
-
   const RenderElement = ({ item }) => {
     const artist = artists.find((x) => x.id === item.artist);
     const img = artist?.image ? { uri: 'https://admin.poolbar.at/assets/' + artist.image + '?fit=cover&width=500&height=200&quality=80' } : { uri: 'https://admin.poolbar.at/assets/9c6f223c-795a-4bf5-b8c0-0630a555e465?fit=cover&width=500&height=200&quality=80' };
@@ -53,8 +38,6 @@ const EventLikedListScreen = ({ router, navigation }) => {
       let date = new Date(item.day_item.date_start);
       dateString = date.toLocaleDateString('en-US', dateOptions);
     }
-
-    const isLiked = likedEvents.includes(item.id);
 
     return (
       <TouchableOpacity
@@ -71,18 +54,7 @@ const EventLikedListScreen = ({ router, navigation }) => {
               <Text style={StylesMain.eventMainText}>{item.name || item.artist_item.name}</Text>
             </View>
             <View style={{ width: '20%' }}>
-              <TouchableOpacity
-                style={{ height: '100%' }}
-                onPress={() => {
-                  if (isLiked) {
-                    unLikeEvent(item);
-                  } else {
-                    likeEvent(item);
-                  }
-                }}
-              >
-                <FontAwesome style={{ alignSelf: 'flex-end', marginBottom: 'auto', marginTop: 'auto' }} name={isLiked ? 'heart' : 'heart-o'} size={32} color="#c6c300" />
-              </TouchableOpacity>
+              <LikeIcon eventId={item.id} color="#c6c300" />
             </View>
           </View>
         </View>
@@ -147,8 +119,6 @@ const EventLikedListScreen = ({ router, navigation }) => {
             {events && <FlatList style={{ flex: 1, padding: 20 }} data={events.filter((event) => likedEvents.includes(event.id))} renderItem={RenderElement} keyExtractor={(item) => item.id} />}
           </View>
         </ViewShot>
-
-        <StatusBar style="auto" />
       </FadeInView>
     </View>
   );

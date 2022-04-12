@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { StatusBar } from 'expo-status-bar';
 import * as Linking from 'expo-linking';
 import { StyleSheet, Text, View, ScrollView, Button, Item, FlatList, ImageBackground, Image, openURL, TouchableOpacity } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
@@ -63,12 +62,8 @@ const RoomDetailScreen = ({ route, navigation }) => {
   return (
     <View style={StylesMain.mainView}>
       <FadeInView style={{ flex: 1, width: '100%' }}>
-        <NavBar navigation={navigation} title={'room'} />
-        <ScrollView style={{ flex: 1 }}>
-          {loading && <Text style={{ color: '#fff', fontSize: 33, alignSelf: 'center' }}>loading</Text>}
-          {room && <RenderElement item={room} />}
-        </ScrollView>
-        <StatusBar style="auto" />
+        <NavBar navigation={navigation} title={'artist'} />
+        <ScrollView style={{ flex: 1 }}>{selectedArtist ? <ArtistDetailScreen artist={selectedArtist} /> : <LoadingText />}</ScrollView>
       </FadeInView>
     </View>
   );
