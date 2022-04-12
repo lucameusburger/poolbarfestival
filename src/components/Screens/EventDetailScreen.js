@@ -8,19 +8,22 @@ import StylesMain from '../../../styles/StylesMain';
 import { useDispatch, useSelector } from 'react-redux';
 import LikeIcon from '../ui/LikeIcon';
 import LoadingText from '../ui/LoadingText';
-import { fetchEvent, fetchEvents } from '../../redux/eventsThunk';
+import { fetchEvents } from '../../redux/eventsThunk';
 import { fetchArtists } from '../../redux/artistsThunk';
 import { navigate } from '../../core/RootNavigation';
+import { fetchVenues } from '../../redux/venueThunk';
 
 const EventDetailScreen = ({ route, navigation }) => {
   const id = route.params.id.trim();
   const events = useSelector((state) => state.events.data);
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [selectedArtist, setSelectedArtist] = useState(null);
+  const [selectedVenue, setSelectedVenue] = useState(null);
   const dispatch = useDispatch()
   const artists = useSelector((state) => state.artists.artists);
+  const venues = useSelector((state) => state.venues.data);
 
-  const RenderElement = ({ item, artist }) => {
+  const RenderElement = ({ item, artist, venue }) => {
     let dateString = 'tba';
 
     if (item.day_item && item.day_item.date_start) {
@@ -38,7 +41,7 @@ const EventDetailScreen = ({ route, navigation }) => {
             <Text style={StylesMain.text}>{item.description_short}</Text>
             <View style={{ height: 20 }}></View>
             <Text style={StylesMain.text}>{artist?.category}</Text>
-            <Text style={StylesMain.text}>{item?.room_item?.name}</Text>
+            <Text style={StylesMain.text}>{venue?.name}</Text>
             <LikeIcon
               eventId={item.id}
               color="#000"
@@ -90,29 +93,28 @@ const EventDetailScreen = ({ route, navigation }) => {
   useEffect(() => {
     dispatch(fetchEvents());
     dispatch(fetchArtists());
+    dispatch(fetchVenues())
   }, []);
 
   useEffect(() => {
-    const targetText = "80a90e9a-ec1c-4354-b256-673d107b8c06"
-    console.log(id)
-    const idd = id.trim()
-    for (let index = 0; index < targetText.length; ++index) {
-      console.log("char " + index + ": " + targetText.charCodeAt(index));
-      console.log("char " + index + ": " + id.charCodeAt(index));
-    }
-
     const event = events.find((event) => event.id === id);
     const artist = artists.find((artist) => artist.id === event.artist);
+    const venue = venues.find((venue) => venue.id === event.room);
+
     setSelectedArtist(artist);
     setSelectedEvent(event);
+    setSelectedVenue(venue);
   }, [events]);
 
   useEffect(() => {
     if (selectedEvent) {
       const artist = artists.find((artist) => artist.id === selectedEvent.artist);
+      const venue = venues.find((venue) => venue.id === selectedEvent.room);
+
       setSelectedArtist(artist);
+      setSelectedVenue(venue);
     }
-  }, [selectedEvent, artists]);
+  }, [selectedEvent, artists, venues]);
 
 
   return (
@@ -124,6 +126,7 @@ const EventDetailScreen = ({ route, navigation }) => {
             <RenderElement
               item={selectedEvent}
               artist={selectedArtist}
+              venue={selectedVenue}
             /> :
             <LoadingText />
           }

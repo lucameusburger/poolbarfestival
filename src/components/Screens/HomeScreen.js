@@ -10,13 +10,13 @@ import TypeWriter from 'react-native-typewriter';
 import { FontAwesome } from '@expo/vector-icons';
 
 const HomeScreen = ({ navigation }) => {
-  const [typing, setTyping] = useState(1);
+    const [typing, setTyping] = useState(1);
 
-  return (
-    <View style={StylesMain.mainView}>
-      <FadeInView style={{ flex: 1, width: '100%', height: '100%' }}>
-        <ImageBackground resizeMode="cover" style={{ flex: 1, justifyContent: 'center' }} blurRadius={30} source={mapImage}>
-          {/* <TypeWriter
+    return (
+        <View style={StylesMain.mainView}>
+            <FadeInView style={{ flex: 1, width: '100%', height: '100%' }}>
+                <ImageBackground resizeMode="cover" style={{ flex: 1, justifyContent: 'center' }} blurRadius={30} source={mapImage}>
+                    {/* <TypeWriter
             style={{ position: 'absolute', width: '200%', left: '-50%', top: '-5%', color: '#c6c300', textAlign: 'justify', opacity: 1, fontFamily: 'Helviotopia', letterSpacing: 10, lineHeight: 14, transform: [{ rotate: '12deg' }] }}
             typing={typing}
             minDelay={0.1}
@@ -35,29 +35,44 @@ const HomeScreen = ({ navigation }) => {
             WartenAuf die letzten Sommertage dieses JahresUnd mir war es Alles andere als fremd“- Tocotronic/Jenseits des Kanals Vielleicht muss man die Welt neu rändern !Wir sind eh alle SOOO digital, nur 2 Klicks weg vom nächsten Skandal... will eh niemand anecken, höchstens anranden,Hast du den Witz eh verstanden ? OMG LOL AMK Also auf gehts, Rand an Rand, jetzt packmas an, jeder und jeder tut was er / sie kann.Noch ein Stück Pizza zur Motivation,den Rand ess ich aber nicht... was bringt mir
             das schon. Nur Kalorien, die sprengen den Rahmen,lieber noch eine Hand voll nicer Samen. Die sähen wir dann und säumen den Rand mit bunten Flecken.Ich glaub eigentlich da gibts viel zu entdecken.
           </TypeWriter> */}
-          <View style={{ top: 0, flex: 1, height: '60%' }}>
-            <PoolbarLogo style={{ alignSelf: 'center', marginBottom: 'auto', marginTop: 'auto' }} width="80%" height="100%" fill="black" />
-          </View>
-          <View style={{ top: 0, marginTop: 0, marginBottom: 'auto', height: '40%' }}>
-            <AppButton title="events" onPress={() => navigation.navigate('Events')} />
-            <View style={{ height: 20 }}></View>
-            <AppButton title="artists" onPress={() => navigation.navigate('Artists')} />
-            <View style={{ height: 20 }}></View>
-            <AppButton title="generator" onPress={() => navigation.navigate('Generators')} />
-          </View>
+                    <View style={{ top: 0, flex: 1, height: '60%' }}>
+                        <PoolbarLogo style={{ alignSelf: 'center', marginBottom: 'auto', marginTop: 'auto' }} width="80%" height="100%" fill="black" />
+                    </View>
+                    <View style={{ top: 0, marginTop: 0, marginBottom: 'auto', height: '40%' }}>
+                        <AppButton
+                            title="events"
+                            onPress={() => navigation.navigate('Events')}
+                        />
+                        <View style={{ height: 20 }} />
+                        <AppButton
+                            title="artists"
+                            onPress={() => navigation.navigate('Artists')}
+                        />
+                        <View style={{ height: 20 }} />
+                        <AppButton
+                            title="generator"
+                            onPress={() => navigation.navigate('Generators')}
+                        />
+                    </View>
 
-          <View style={{ position: 'absolute', bottom: 0, right: 0, left: 0, flexDirection: 'row' }}>
-            <TouchableOpacity onPress={() => navigation.navigate('Map')} style={{ width: '50%' }}>
-              <FontAwesome style={{ bottom: 40, alignSelf: 'flex-start', marginLeft: 40 }} name={'map'} size={38} color="#c6c300" />
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.navigate('Scan')} style={{ width: '50%' }}>
-              <FontAwesome style={{ bottom: 40, alignSelf: 'flex-end', marginRight: 40 }} name={'camera'} size={38} color="#c6c300" />
-            </TouchableOpacity>
-          </View>
-        </ImageBackground>
-      </FadeInView>
-    </View>
-  );
+                    <FontAwesome
+                        style={{ position: 'absolute', bottom: 40, left: 40 }}
+                        name={'map'}
+                        size={38}
+                        color="#c6c300"
+                        onPress={() => navigation.navigate('Map')}
+                    />
+                    <FontAwesome
+                        style={{ position: 'absolute', bottom: 40, right: 40 }}
+                        name={'camera'}
+                        size={38}
+                        color="#c6c300"
+                        onPress={() => navigation.navigate('Scan')}
+                    />
+                </ImageBackground>
+            </FadeInView>
+        </View>
+    );
 };
 
 export default HomeScreen;
