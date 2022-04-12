@@ -7,6 +7,7 @@ import StylesMain from '../../../styles/StylesMain';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchEvents } from '../../redux/eventsThunk';
 import EventComponent from '../ui/EventComponent';
+import { navigate } from '../../core/RootNavigation';
 
 const EventListScreen = ({ router }) => {
   const dispatch = useDispatch();
@@ -22,7 +23,7 @@ const EventListScreen = ({ router }) => {
         <NavBar
           title="events"
           next={() => {
-            navigation.navigate('LikedEvents');
+            navigate('LikedEvents');
           }}
           nextTitle="meine events"
         />
