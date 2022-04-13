@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { Text,Button, View, ScrollView, FlatList, ImageBackground, TouchableOpacity, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet, Linking } from 'react-native';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchVenues } from '../../redux/artistsThunk';
+import { fetchVenues } from '../../redux/venueThunk';
 
 import NavBar from '../ui/NavBar';
 import LoadingText from '../ui/LoadingText';
@@ -11,11 +11,6 @@ import FadeInView from '../ui/FadeInView';
 import StylesMain from '../../../styles/StylesMain';
 import { navigate } from '../../core/RootNavigation';
 
-import {
-    moveToRadius,
-    getZoomLevel,
-    setBoundingAustria,
-} from '../../core/mapHelpers';
 
 
 import { FontAwesome } from '@expo/vector-icons';
@@ -32,54 +27,17 @@ import mapImage from '../../../assets/img/map.png'
 
 
 const BASE_URL = 'https://www.admin.poolbar.at/';
+const mapRef = {};
 
 
-const MapScreen = ({ navigation }) => {
+const getMarkers = (locations) => {
+    markers = [];
+    counter = 0;
+    locations.map((location) => markers[counter++] = <Text>{location.name}</Text>);
+    return markers;
+}
 
-
-
-  const dispatch = useDispatch();
-
-  const artists = useSelector((state) => state.artists.artists);
-  const isLoaded = useSelector((state) => state.artists.isLoaded);
-  const isFetchingData = useSelector((state) => state.artists.isFetchingData);
-  const hasFetchingDataError = useSelector((state) => state.artists.hasFetchingDataError);
-
-    const markers = artists.map((artist) =>
-        <Text>{artist.name}</Text>
-    );
-
-  return (
-    <View style={StylesMain.mainView}>
-      <FadeInView style={{ flex: 1, width: '100%', height: '100%' }}>
-        <NavBar navigation={navigation} title="map" />
-        <MapView style={styles.map} provider = { MapView.PROVIDER_GOOGLE } customMapStyle = { generatedMapStyle }
-        initialRegion={{
-          latitude: loewensaal.latitude,
-          longitude: loewensaal.longitude,
-          latitudeDelta: 0.05,
-          longitudeDelta: 0.05,
-
-      }}>
-          
-          <Marker coordinate={loewensaal} image={require('../../../assets/img/marker.png')}>
-            <Callout>
-                <MyCalloutView></MyCalloutView>
-                <Text>{artists[0].name}</Text>
-                
-            </Callout>
-        </Marker>
- 
-
-        </MapView>
-      </FadeInView>
-    </View>
-
-
-  );
-};
-
- function openGoogleMaps(location,name) {
+function openGoogleMaps(location, name) {
     const scheme = Platform.select({
         ios: 'maps:0,0?q=',
         android: 'geo:0,0?q='
@@ -93,6 +51,80 @@ const MapScreen = ({ navigation }) => {
 
     Linking.openURL(url);
 }
+ function setBoundingAustria() {
+    const bboxAustria = [
+        {
+            latitude: 45.922474,
+            longitude: 9.150603
+        },
+        {
+            latitude: 49.103046,
+            longitude: 17.518337
+        }
+    ]
+    setBoundingBox(bboxAustria)
+}
+
+// set the bounding box of the map to Austria
+ function setBoundingBox(bbox) {
+    mapRef.current.setMapBoundaries(bbox[0], bbox[1]);
+}
+
+const MapScreen = ({ navigation }) => {
+
+
+
+  const dispatch = useDispatch();
+
+  const locations = useSelector((state) => state.venues.venues);
+  const isLoaded = useSelector((state) => state.venues.isLoaded);
+  const isFetchingData = useSelector((state) => state.venues.isFetchingData);
+  const hasFetchingDataError = useSelector((state) => state.venues.hasFetchingDataError);
+
+  useEffect(() => {
+    dispatch(fetchVenues());
+  }, []);
+
+  //const venues = locations.map((location) => <Text>{location.name}</Text>);
+
+  return (
+    <View style={StylesMain.mainView}>
+      <FadeInView style={{ flex: 1, width: '100%', height: '100%' }}>
+        <NavBar navigation={navigation} title="map" />
+        <MapView
+            style={styles.map} provider = { MapView.PROVIDER_GOOGLE } customMapStyle = { generatedMapStyle }
+
+            onMapReady={setBoundingAustria}
+            ref={mapRef}
+            initialRegion={{
+            latitude: loewensaal.latitude,
+            longitude: loewensaal.longitude,
+            latitudeDelta: 0.05,
+            longitudeDelta: 0.05,
+
+      }}>
+
+          <Marker coordinate={loewensaal} image={require('../../../assets/img/marker.png')}>
+            <Callout onPress={
+                            () =>{
+                                openGoogleMaps(loewensaal,"what")
+                                console.log('bruh')
+                        }}>
+                <MyCalloutView location={loewensaal} name={'Platzhalter'}></MyCalloutView>
+                {isLoaded&&locations?getMarkers(locations):console.log('famile')}
+
+            </Callout>
+        </Marker>
+
+
+        </MapView>
+      </FadeInView>
+    </View>
+
+
+  );
+};
+
 
 const styles = StyleSheet.create({
   container: {
