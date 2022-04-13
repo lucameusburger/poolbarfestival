@@ -14,7 +14,7 @@ const RenderElement = ({ venue }) => {
   const filteredEvents = events.filter((event) => event.room === venue.id);
   return (
     <View style={{ flex: 1, width: '100%', height: '100%' }}>
-      <View style={{ backgroundColor: '#FFC23B', padding: 20, marginTop: 10 }}>
+      <View style={{ backgroundColor: '#c6c300', padding: 20, marginTop: 10 }}>
         <View>
           <Text style={styles.roomDateText}>poolbar</Text>
           <Text style={styles.roomMainText}>{venue.name}</Text>

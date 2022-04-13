@@ -5,6 +5,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import AppLoading from 'expo-app-loading';
 import * as Linking from 'expo-linking';
+import * as Application from 'expo-application';
 
 import { navigationRef } from './src/core/RootNavigation';
 
@@ -18,6 +19,7 @@ import EventLikedListScreen from './src/components/Screens/EventLikedListScreen'
 import EventDetailScreen from './src/components/Screens/EventDetailScreen';
 import ScanScreen from './src/components/Screens/ScanScreen';
 import MapScreen from './src/components/Screens/MapScreen';
+import FlowtextScreen from './src/components/Screens/FlowtextScreen';
 
 import { Provider, useDispatch } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
@@ -57,6 +59,7 @@ function Navigator() {
       <Stack.Screen name="Scan" component={ScanScreen} options={{ title: 'Scan', headerShown: false }} />
       <Stack.Screen name="Map" component={MapScreen} options={{ title: 'Map', headerShown: false }} />
       <Stack.Screen name="Generator" component={GeneratorDetailScreen} options={{ title: 'Generator', headerShown: false }} />
+      <Stack.Screen name="Flowtext" component={FlowtextScreen} options={{ title: 'Flowtext', headerShown: false }} />
     </Stack.Navigator>
   );
 }

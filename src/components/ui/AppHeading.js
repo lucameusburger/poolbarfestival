@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
   heading: {
     fontFamily: 'Helviotopia',
     fontSize: SCREEN_WIDTH / 6.66,
-    color: '#FFC23B',
+    color: '#000',
     alignSelf: 'center',
   },
 });

@@ -13,25 +13,23 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
+      "bundleIdentifier": "at.lume.poolbarfestival",
+      "buildNumber": "1.0.0",
       "supportsTablet": true,
       "infoPlist": {
-        "NSRemindersUsageDescription": "Erhalte immer Erinnerungen wenn deine gelikten Events stadtfinden."
+        "NSRemindersUsageDescription": "Erhalte Erinnerungen wenn deine gelikten Events stadtfinden."
       }
     },
     "android": {
+      "package": "at.lume.poolbarfestival",
+      "versionCode": 1,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "permissions": [
-        "READ_CALENDAR",
-        "WRITE_CALENDAR",
-        "CAMERA"
-      ]
+      "permissions": ["READ_CALENDAR", "WRITE_CALENDAR", "CAMERA"]
     },
     "web": {
       "favicon": "./assets/favicon.png"

@@ -49,7 +49,7 @@ const generatedMapStyle = [
     featureType: 'water',
     elementType: 'all',
     stylers: [
-      { color: '#FFC23B' },
+      { color: '#c6c300' },
       {
         visibility: 'on',
       },
