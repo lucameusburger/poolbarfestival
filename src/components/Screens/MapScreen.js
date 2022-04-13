@@ -18,10 +18,7 @@ import { FontAwesome } from '@expo/vector-icons';
 
 import MapView, {Marker , Callout} from 'react-native-maps';
 import MyCalloutView from '../ui/MyCalloutView';
-/***
-import MapboxGL from "@rnmapbox/maps";
-MapboxGL.setAccessToken("<YOUR_ACCESSTOKEN>");
-*/
+
 
 import mapImage from '../../../assets/img/map.png'
 
@@ -110,7 +107,7 @@ const MapScreen = ({ navigation }) => {
                                 openGoogleMaps(loewensaal,"what")
                                 console.log('bruh')
                         }}>
-                <MyCalloutView location={loewensaal} name={'Platzhalter'}></MyCalloutView>
+                <MyCalloutView location={loewensaal} name={'Click for Navigation (icon. maybe additional info here'}></MyCalloutView>
                 {isLoaded&&locations?getMarkers(locations):console.log('famile')}
 
             </Callout>
