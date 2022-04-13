@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Dimensions, View, PixelRatio, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { navigationRef } from '../../core/RootNavigation';
 import AppHeading from './AppHeading';
 
 const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
 
-const NavBar = ({ title, next, nextTitle, type, navigation }) => {
+const NavBar = ({ title, next, nextTitle, type }) => {
   return (
     <View style={{ width: '100%', top: 0, marginTop: 50 }}>
       <View style={{ marginTop: 0, left: 0, right: 0, width: '100%' }}>
@@ -15,10 +16,10 @@ const NavBar = ({ title, next, nextTitle, type, navigation }) => {
           style={{ width: nextTitle ? '50%' : '100%', paddingTop: 10, paddingBottom: 10, backgroundColor: '#c6c300' }}
           onPress={() => {
             // handle the index we get
-            if (navigation.canGoBack()) {
-              navigation.goBack();
+            if (navigationRef.canGoBack()) {
+              navigationRef.goBack();
             } else {
-              navigation.navigate('Home');
+              navigationRef.navigate('Home');
             }
           }}
         >

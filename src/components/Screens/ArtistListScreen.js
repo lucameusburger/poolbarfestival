@@ -8,15 +8,13 @@ import FadeInView from '../ui/FadeInView';
 import StylesMain from '../../../styles/StylesMain';
 import { fetchArtists } from '../../redux/artistsThunk';
 import { navigate } from '../../core/RootNavigation';
-
-const BASE_URL = 'https://www.admin.poolbar.at/';
-
+import PoolbarImage from '../ui/PoolbarImage';
+import artistPlaceholder from '../../../assets/img/artistPlaceholder.jpg';
+import { fetchEvents } from '../../redux/eventsThunk';
 const ArtistListScreen = ({ item }) => {
-  const img = item.image ? { uri: BASE_URL + 'assets/' + item.image + '?fit=cover&width=500&height=200&quality=80' } : { uri: BASE_URL + 'assets/9c6f223c-795a-4bf5-b8c0-0630a555e465?fit=cover&width=500&height=200&quality=80' };
-
   return (
     <TouchableOpacity
-      style={{ marginBottom: 30, padding: 10 }}
+      style={{ marginBottom: 10, padding: 10 }}
       key={item.id}
       onPress={() =>
         navigate('Artist', {
@@ -25,13 +23,21 @@ const ArtistListScreen = ({ item }) => {
       }
     >
       <View style={{ width: '100%', marginTop: 'auto', flexDirection: 'row' }}>
-        <View style={{}}>
-          <Image source={img} resizeMode="cover" style={{ width: 100, height: 100, borderRadius: 300, alignItems: 'center' }} />
-        </View>
+        <PoolbarImage
+          imageId={item.image}
+          fallback={artistPlaceholder}
+          style={{
+            width: 100,
+            height: 100,
+            borderRadius: 300,
+            alignItems: 'center',
+          }}
+        />
+        <View style={{}}></View>
         <View style={{}}>
           <View style={{ marginLeft: 20, marginTop: 'auto', marginBottom: 'auto', width: '100%' }}>
-            <Text style={StylesMain.eventDateText}>{item.category}</Text>
-            <Text style={StylesMain.eventMainText}>{item.name}</Text>
+            <Text style={StylesMain.artistListDateText}>{item.category}</Text>
+            <Text style={StylesMain.artistListMainText}>{item.name}</Text>
           </View>
         </View>
       </View>
@@ -45,22 +51,44 @@ const ArtistsScreen = ({ navigation }) => {
   const dispatch = useDispatch();
 
   const artists = useSelector((state) => state.artists.artists);
-  const orderredArtists = artists.sort(function (a, b) {
-    if (a.name.toLowerCase() < b.name.toLowerCase()) {
-      return -1;
-    }
-    if (a.name.toLowerCase() > b.name.toLowerCase()) {
-      return 1;
-    }
-    return 0;
-  });
+  const events = useSelector((state) => state.events.data);
+  const [displayedArtists, setDisplayedArtists] = useState([]);
   const isLoaded = useSelector((state) => state.artists.isLoaded);
-  const isFetchingData = useSelector((state) => state.artists.isFetchingData);
-  const hasFetchingDataError = useSelector((state) => state.artists.hasFetchingDataError);
+
+  function sortArtistsAlphabetically(artists) {
+    if (!artists) return null;
+    return artists.sort((a, b) => {
+      if (a.name < b.name) {
+        return -1;
+      }
+      if (a.name > b.name) {
+        return 1;
+      }
+      return 0;
+    });
+  }
+
+  function filterPlaysInCurrentYear(artists) {
+    if (!events) {
+      return null;
+    }
+    const now = new Date();
+    const currentYearEvents = events.filter((event) => {
+      const eventDate = new Date(event.day_item.date_start);
+      return eventDate.getFullYear() === now.getFullYear();
+    });
+    const currentYearEventIds = currentYearEvents.map((event) => event.artist);
+    return artists.filter((artist) => currentYearEventIds.includes(artist.id));
+  }
 
   useEffect(() => {
     dispatch(fetchArtists());
+    dispatch(fetchEvents());
   }, []);
+
+  useEffect(() => {
+    setDisplayedArtists(sortArtistsAlphabetically(filterPlaysInCurrentYear(artists)));
+  }, [artists]);
 
   return (
     <View style={StylesMain.mainView}>
@@ -73,7 +101,7 @@ const ArtistsScreen = ({ navigation }) => {
           }}
           nextTitle={'history'}
         />
-        <View style={{ flex: 1 }}>{!isLoaded ? <LoadingText /> : artists ? <ArtistsList artists={orderredArtists} /> : <LoadingText />}</View>
+        <View style={{ flex: 1 }}>{!isLoaded ? <LoadingText /> : displayedArtists ? <ArtistsList artists={displayedArtists} /> : <LoadingText />}</View>
       </FadeInView>
     </View>
   );

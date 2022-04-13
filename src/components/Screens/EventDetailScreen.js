@@ -13,13 +13,13 @@ import { fetchArtists } from '../../redux/artistsThunk';
 import { navigate } from '../../core/RootNavigation';
 import { fetchVenues } from '../../redux/venueThunk';
 
-const EventDetailScreen = ({ route, navigation }) => {
+const EventDetailScreen = ({ route }) => {
   const id = route.params.id.trim();
   const events = useSelector((state) => state.events.data);
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [selectedArtist, setSelectedArtist] = useState(null);
   const [selectedVenue, setSelectedVenue] = useState(null);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const artists = useSelector((state) => state.artists.artists);
   const venues = useSelector((state) => state.venues.data);
 
@@ -42,28 +42,23 @@ const EventDetailScreen = ({ route, navigation }) => {
             <View style={{ height: 20 }}></View>
             <Text style={StylesMain.text}>{artist?.category}</Text>
             <Text style={StylesMain.text}>{venue?.name}</Text>
-            <LikeIcon
-              eventId={item.id}
-              color="#000"
-              style={{ alignSelf: 'flex-end', marginRight: 10, marginBottom: 10 }}
-
-            />
+            <LikeIcon eventId={item.id} color="#000" style={{ alignSelf: 'flex-end', marginRight: 10, marginBottom: 10 }} />
           </View>
         </View>
 
         <View style={{ padding: 20 }}>
-          {item.url_ticket &&
+          {item.url_ticket && (
             <AppButton
               style={{
                 marginRight: 'auto',
                 marginLeft: 0,
-                marginBottom: 10
+                marginBottom: 10,
               }}
               title="hol dir tickets"
               onPress={() => Linking.openURL(item.url_ticket)}
             />
-          }
-          {artist &&
+          )}
+          {artist && (
             <AppButton
               style={{ marginRight: 'auto', marginLeft: 0, marginBottom: 10 }}
               title="artist ansehen"
@@ -73,7 +68,7 @@ const EventDetailScreen = ({ route, navigation }) => {
                 })
               }
             />
-          }
+          )}
           {item.room && (
             <AppButton
               style={{ marginRight: 'auto', marginLeft: 0 }}
@@ -93,7 +88,7 @@ const EventDetailScreen = ({ route, navigation }) => {
   useEffect(() => {
     dispatch(fetchEvents());
     dispatch(fetchArtists());
-    dispatch(fetchVenues())
+    dispatch(fetchVenues());
   }, []);
 
   useEffect(() => {
@@ -116,21 +111,11 @@ const EventDetailScreen = ({ route, navigation }) => {
     }
   }, [selectedEvent, artists, venues]);
 
-
   return (
     <View style={StylesMain.mainView}>
       <FadeInView style={{ flex: 1, width: '100%' }}>
-        <NavBar navigation={navigation} title={'event'} />
-        <ScrollView style={{ flex: 1 }}>
-          {(selectedEvent) ?
-            <RenderElement
-              item={selectedEvent}
-              artist={selectedArtist}
-              venue={selectedVenue}
-            /> :
-            <LoadingText />
-          }
-        </ScrollView>
+        <NavBar title={'event'} />
+        <ScrollView style={{ flex: 1 }}>{selectedEvent ? <RenderElement item={selectedEvent} artist={selectedArtist} venue={selectedVenue} /> : <LoadingText />}</ScrollView>
       </FadeInView>
     </View>
   );
@@ -142,17 +127,16 @@ const styles = StyleSheet.create({
     color: '#000',
     alignSelf: 'flex-start',
     marginTop: 'auto',
-    fontSize: 24,
+    fontSize: 20,
     textAlign: 'left',
     textTransform: 'uppercase',
   },
   eventMainText: {
     fontFamily: 'Helviotopia',
-    fontWeight: '500',
     color: '#000',
     alignSelf: 'flex-start',
     marginTop: 'auto',
-    fontSize: 32,
+    fontSize: 42,
     textAlign: 'left',
     textTransform: 'uppercase',
   },
