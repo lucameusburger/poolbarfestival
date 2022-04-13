@@ -22,8 +22,8 @@ const ArtistDetailScreen = ({ artist }) => {
     <View style={{ flex: 1, width: '100%', height: '100%' }}>
       <View style={{ backgroundColor: '#c6c300', padding: 20, marginTop: 10 }}>
         <View>
-          <Text style={styles.eventDateText}>{artist.category}</Text>
-          <Text style={styles.eventMainText}>{artist.name}</Text>
+          <Text style={StylesMain.artistDetailsDateText}>{artist.category}</Text>
+          <Text style={StylesMain.artistDetailsMainText}>{artist.name}</Text>
           <Text style={StylesMain.text}>{artist.description}</Text>
           <View style={{ height: 20 }}></View>
         </View>
@@ -37,7 +37,7 @@ const ArtistDetailScreen = ({ artist }) => {
           height: 320,
         }}
       />
-      <View style={{ padding: 20 }}>
+      <View style={{ padding: 20, marginTop: -80 }}>
         {artist.url_spotify && (
           <AppButton
             style={{
@@ -50,17 +50,12 @@ const ArtistDetailScreen = ({ artist }) => {
           />
         )}
       </View>
-      <View style={{ flex: 1, padding: 20 }}>
-        {filteredEvents.map((event) => (
-          <EventComponent item={event} key={event.id} />
-        ))}
-      </View>
 
       <View style={{ padding: 20 }}>
-        <Text style={[styles.eventDateText, { marginBottom: 20 }]}>kommende events</Text>
+        <Text style={[StylesMain.artistDetailsDateText, { marginBottom: 20 }]}>kommende events</Text>
         <View style={{ flex: 1 }}>
           {filteredEvents.map((event) => (
-            <EventComponent item={event} />
+            <EventComponent key={event.id} item={event} />
           ))}
         </View>
       </View>
@@ -92,27 +87,5 @@ const ArtistScreen = ({ route }) => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  eventDateText: {
-    fontFamily: 'HelviotopiaBold',
-    color: '#000',
-    alignSelf: 'flex-start',
-    marginTop: 'auto',
-    fontSize: 24,
-    textAlign: 'left',
-    textTransform: 'uppercase',
-  },
-  eventMainText: {
-    fontFamily: 'Helviotopia',
-    fontWeight: '500',
-    color: '#000',
-    alignSelf: 'flex-start',
-    marginTop: 'auto',
-    fontSize: 32,
-    textAlign: 'left',
-    textTransform: 'uppercase',
-  },
-});
 
 export default ArtistScreen;
