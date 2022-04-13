@@ -20,12 +20,8 @@ const RenderElement = ({ item }) => {
       <View key={item.id} style={{ flex: 1, flexDirection: 'row', flexWrap: 'wrap', marginBottom: 30 }}>
         <View style={{ width: '100%', marginTop: 'auto', flexDirection: 'row' }}>
           <View style={{ width: '80%' }}>
-            <Text style={StylesMain.eventDateText}>
-              {(item.lab_item && item.lab_item.name) || 'no lab'}
-            </Text>
-            <Text style={StylesMain.eventMainText}>
-              {item.name || 'no name'}
-            </Text>
+            <Text style={StylesMain.generatorListDateText}>{(item.lab_item && item.lab_item.name) || 'no lab'}</Text>
+            <Text style={StylesMain.generatorListMainText}>{item.name || 'no name'}</Text>
           </View>
         </View>
       </View>
@@ -45,18 +41,7 @@ const GeneratorListScreen = ({ router, navigation }) => {
     <View style={StylesMain.mainView}>
       <FadeInView style={{ flex: 1, width: '100%', height: '100%' }}>
         <NavBar title="generator" navigation={navigation} />
-        <View style={{ flex: 1, marginBottom: 'auto', marginTop: 'auto' }}>
-          {generators ?
-            <FlatList
-              style={{ flex: 1, padding: 20 }}
-              data={generators}
-              renderItem={RenderElement}
-              keyExtractor={(item) => item.id}
-            /> :
-            <LoadingText />
-          }
-        </View>
-
+        <View style={{ flex: 1, marginBottom: 'auto', marginTop: 'auto' }}>{generators ? <FlatList style={{ flex: 1, padding: 20 }} data={generators} renderItem={RenderElement} keyExtractor={(item) => item.id} /> : <LoadingText />}</View>
       </FadeInView>
     </View>
   );

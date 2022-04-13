@@ -37,91 +37,106 @@ const LikeIcon = ({ eventId, size = 32, style, colorOff = '#000', colorOn = '#c6
         });
         dispatch(addCallenderEvent(id));
 
-    };
+        const unLikeEvent = (id) => {
+            dispatch({
+                type: 'REMOVE_FROM_LIKED_EVENTS',
+                payload: id,
+            });
+            dispatch(deleteCallenderEvent(id));
+        };
 
-    const unLikeEvent = (id) => {
-        dispatch({
-            type: 'REMOVE_FROM_LIKED_EVENTS',
-            payload: id,
-        });
-        dispatch(deleteCallenderEvent(id));
-    };
+        const likedEvents = useSelector((state) => state.favorites.likedEvents);
 
-    const likedEvents = useSelector((state) => state.favorites.likedEvents);
+        const isLiked = likedEvents.includes(eventId);
 
-    const isLiked = likedEvents.includes(eventId);
+        const animationDuration = 1000;
+        useEffect(() => {
+            if (isLiked) {
+                Animated.timing(progress, {
+                    toValue: 1,
+                    duration: animationDuration,
+                    useNativeDriver: true,
+                }).start();
+            } else {
+                Animated.timing(progress, {
+                    toValue: 0,
+                    duration: animationDuration,
+                    useNativeDriver: true,
+                }).start();
+            }
+        }, [isLiked]);
 
-    const animationDuration = 1000;
-    useEffect(() => {
-        if (isLiked) {
-            Animated.timing(progress, {
-                toValue: 1,
-                duration: animationDuration,
-                useNativeDriver: true,
-            }).start();
-        } else {
-            Animated.timing(progress, {
-                toValue: 0,
-                duration: animationDuration,
-                useNativeDriver: true,
-            }).start();
-        }
-    }, [isLiked]);
+        const animationDuration = 1000;
+        useEffect(() => {
+            if (isLiked) {
+                Animated.timing(progress, {
+                    toValue: 1,
+                    duration: animationDuration,
+                    useNativeDriver: true,
+                }).start();
+            } else {
+                Animated.timing(progress, {
+                    toValue: 0,
+                    duration: animationDuration,
+                    useNativeDriver: true,
+                }).start();
+            }
+        }, [isLiked]);
 
 
-    return (
-        <>
-            <TouchableOpacity
-                onPress={() => {
-                    if (isLiked) {
-                        unLikeEvent(eventId);
-                    } else {
-                        likeEvent(eventId);
-                    }
-                }}
-
-                style={[
-                    {
-                        alignSelf: 'flex-end',
-                        marginBottom: 'auto',
-                        marginTop: 'auto'
-                    },
-                    style
-
-                ]}
-            >
-                <LottieView
-                    style={{
-                        height: size,
-                        width: size,
+        return (
+            <>
+                <TouchableOpacity
+                    onPress={() => {
+                        if (isLiked) {
+                            unLikeEvent(eventId);
+                        } else {
+                            likeEvent(eventId);
+                        }
                     }}
-                    progress={progress}
-                    source={heardfade}
+
+                    style={[
+                        {
+                            alignSelf: 'flex-end',
+                            marginBottom: 'auto',
+                            marginTop: 'auto'
+                        },
+                        style
+
+                    ]}
+                >
+                    <LottieView
+                        style={{
+                            height: size,
+                            width: size,
+                        }}
+                        progress={progress}
+                        source={heardfade}
+                    />
+                </TouchableOpacity>
+            </>
+        );
+    };
+    /**
+     * <FontAwesome
+                    style={[
+                        {
+                            alignSelf: 'flex-end',
+                            marginBottom: 'auto',
+                            marginTop: 'auto'
+                        },
+                        style
+                    ]}
+                    name={isLiked ? 'heart' : 'heart-o'}
+                    size={32}
+                    color={color}
+                    onPress={() => {
+                        if (isLiked) {
+                            unLikeEvent(eventId);
+                        } else {
+                            likeEvent(eventId);
+                        }
+                    }}
                 />
-            </TouchableOpacity>
-        </>
-    );
-};
-/**
- * <FontAwesome
-                style={[
-                    {
-                        alignSelf: 'flex-end',
-                        marginBottom: 'auto',
-                        marginTop: 'auto'
-                    },
-                    style
-                ]}
-                name={isLiked ? 'heart' : 'heart-o'}
-                size={32}
-                color={color}
-                onPress={() => {
-                    if (isLiked) {
-                        unLikeEvent(eventId);
-                    } else {
-                        likeEvent(eventId);
-                    }
-                }}
-            />
- */
-export default LikeIcon;
+     */
+    export default LikeIcon;

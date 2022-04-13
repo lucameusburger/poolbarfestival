@@ -36,11 +36,11 @@ import GeneratorDetailScreen from './src/components/Screens/GeneratorDetailScree
 const Stack = createNativeStackNavigator();
 
 function Navigator() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchEvents());
     dispatch(fetchArtists());
-    dispatch(fetchVenues())
+    dispatch(fetchVenues());
   }, []);
 
   return (
@@ -58,7 +58,7 @@ function Navigator() {
       <Stack.Screen name="Map" component={MapScreen} options={{ title: 'Map', headerShown: false }} />
       <Stack.Screen name="Generator" component={GeneratorDetailScreen} options={{ title: 'Generator', headerShown: false }} />
     </Stack.Navigator>
-  )
+  );
 }
 
 const App = () => {
@@ -70,7 +70,7 @@ const App = () => {
   });
 
   const linking = {
-    prefixes: [prefix, "poolbar://"],
+    prefixes: [prefix, 'poolbar://'],
     config: {
       screens: {
         Map: 'map',
@@ -79,10 +79,8 @@ const App = () => {
         },
         Home: '*',
       },
-    }
-  }
-
-
+    },
+  };
 
   if (!fontsLoaded) {
     return <AppLoading />;

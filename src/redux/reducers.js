@@ -1,9 +1,9 @@
-import { combineReducers } from 'redux'
+import { combineReducers } from 'redux';
 
 import { reducer as artistsReducers, initialState as artistsInitialState } from './artistsReducer';
 import { reducer as eventsReducers, initialState as eventsInitialState } from './eventsReducer';
 import { reducer as favoritesReducers, initialState as favoritesInitialState } from './favoritesReducer';
-import { reducer as callenderReducer, initialState as callenderInitialState } from './callenderReducer'
+import { reducer as callenderReducer, initialState as callenderInitialState } from './callenderReducer';
 import { reducer as venuesReducers, initialState as venuesInitialState } from './venueReducer';
 import { reducer as generatorsReducers, initialState as generatorsInitialState } from './generatorsReducer';
 import { reducer as locationReducers, initialState as locationInitialState } from './locationsReducer';

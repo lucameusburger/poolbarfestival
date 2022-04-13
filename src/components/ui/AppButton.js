@@ -20,51 +20,34 @@ const AppButton = ({ onPress, title, bevelLeft = false, style }) => {
       onPress={onPress}
       style={[styles.buttonContainer, style]}
     >
-      <Svg
-        xmlns="http://www.w3.org/2000/svg"
-        width={168.204}
-        height={49.23}
-      >
-        {!bevelLeft ?
-          <Path
-            data-name="Path 5"
-            d="M24.615 0a24.615 24.615 0 0 0 0 49.23h114.428a24.615 24.615 0 0 0 24.615-24.615Z"
-            fill="rgba(198,195,0,0.99)"
-          /> :
-          <Path
-            data-name="Path 6"
-            d="M143.589 0a24.615 24.615 0 0 1 0 49.23H24.615A24.615 24.615 0 0 1 0 24.615Z"
-            fill="rgba(198,195,0,0.99)"
-          />
-        }
+      <Svg xmlns="http://www.w3.org/2000/svg" width={168.204} height={49.23}>
+        {!bevelLeft ? <Path data-name="Path 5" d="M24.615 0a24.615 24.615 0 0 0 0 49.23h114.428a24.615 24.615 0 0 0 24.615-24.615Z" fill="rgba(198,195,0,0.99)" /> : <Path data-name="Path 6" d="M143.589 0a24.615 24.615 0 0 1 0 49.23H24.615A24.615 24.615 0 0 1 0 24.615Z" fill="rgba(198,195,0,0.99)" />}
 
         <View style={styles.textContainer}>
           <Animated.Text
             style={[
               styles.buttonText,
-              active ?
-                {
-                  transform: [
-                    {
-                      translateX: active ? 10 * (bevelLeft ? -1 : 1) : 0,
-                    },
-                    {
-                      translateY: active ? -25 : 0,
-                    },
-                    {
-                      rotate: active ? (bevelLeft ? '-' : '+') + '10deg' : '0deg',
-                    },
-
-                  ],
-                } :
-                null,
-            ]}>
+              active
+                ? {
+                    transform: [
+                      {
+                        translateX: active ? 10 * (bevelLeft ? -1 : 1) : 0,
+                      },
+                      {
+                        translateY: active ? -25 : 0,
+                      },
+                      {
+                        rotate: active ? (bevelLeft ? '-' : '+') + '10deg' : '0deg',
+                      },
+                    ],
+                  }
+                : null,
+            ]}
+          >
             {title}
           </Animated.Text>
         </View>
-
       </Svg>
-
     </TouchableOpacity>
   );
 };
@@ -93,7 +76,7 @@ const styles = StyleSheet.create({
     alignContent: 'center',
     justifyContent: 'center',
     alignItems: 'center',
-  }
+  },
 });
 
 export default AppButton;
