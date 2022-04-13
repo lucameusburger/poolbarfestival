@@ -1,24 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { Text, View, ScrollView, FlatList, ImageBackground, TouchableOpacity, StyleSheet } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
+import { View, StyleSheet } from 'react-native';
 
 import NavBar from '../ui/NavBar';
-import LoadingText from '../ui/LoadingText';
 import FadeInView from '../ui/FadeInView';
 import StylesMain from '../../../styles/StylesMain';
-import { fetchArtists } from '../../redux/artistsThunk';
-import { navigate } from '../../core/RootNavigation';
-
-import { FontAwesome } from '@expo/vector-icons';
 
 import MapView, { Marker } from 'react-native-maps';
-
-/***
-import MapboxGL from "@rnmapbox/maps";
-MapboxGL.setAccessToken("<YOUR_ACCESSTOKEN>");
-*/
-
-import mapImage from '../../../assets/img/map.png';
 
 const BASE_URL = 'https://www.admin.poolbar.at/';
 

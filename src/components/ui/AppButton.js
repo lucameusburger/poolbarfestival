@@ -6,57 +6,8 @@ import Svg, { Path } from 'react-native-svg';
 
 TouchableOpacity.defaultProps = { activeOpacity: 0.8 };
 
-const AppButton = ({ onPress, title, bevelLeft = false }) => {
-  const rotateButton = useRef(new Animated.Value(0)).current;
-  const translateXButton = useRef(new Animated.Value(0)).current;
-  const translateYButton = useRef(new Animated.Value(0)).current;
-
+const AppButton = ({ onPress, title, bevelLeft = false, style }) => {
   const [active, setActive] = useState(false);
-  const animationDuration = 300;
-  useEffect(() => {
-    if (active) {
-      Animated.parallel([
-        Animated.timing(rotateButton, {
-          toValue: 1,
-          duration: animationDuration,
-          useNativeDriver: true,
-        }),
-        Animated.timing(translateXButton, {
-          toValue: parseInt(10 * (bevelLeft ? -1 : 1)),
-          duration: animationDuration,
-          useNativeDriver: true,
-        }),
-        Animated.timing(translateYButton, {
-          toValue: -25,
-          duration: animationDuration,
-          useNativeDriver: true,
-        }),
-      ]).start();
-    } else {
-      Animated.parallel([
-        Animated.timing(rotateButton, {
-          toValue: 1,
-          duration: animationDuration,
-          useNativeDriver: true,
-        }),
-        Animated.timing(translateXButton, {
-          toValue: 0,
-          duration: animationDuration,
-          useNativeDriver: true,
-        }),
-        Animated.timing(translateYButton, {
-          toValue: 0,
-          duration: animationDuration,
-          useNativeDriver: true,
-        }),
-      ]).start();
-    }
-  }, [active]);
-
-  const spin = rotateButton.interpolate({
-    inputRange: [0, 1],
-    outputRange: ['0deg', (bevelLeft ? '-' : '+') + '10deg'],
-  });
 
   return (
     <TouchableOpacity
@@ -67,7 +18,7 @@ const AppButton = ({ onPress, title, bevelLeft = false }) => {
         setActive(false);
       }}
       onPress={onPress}
-      style={styles.buttonContainer}
+      style={[styles.buttonContainer, style]}
     >
       <Svg xmlns="http://www.w3.org/2000/svg" width={168.204} height={49.23}>
         {!bevelLeft ? <Path data-name="Path 5" d="M24.615 0a24.615 24.615 0 0 0 0 49.23h114.428a24.615 24.615 0 0 0 24.615-24.615Z" fill="rgba(198,195,0,0.99)" /> : <Path data-name="Path 6" d="M143.589 0a24.615 24.615 0 0 1 0 49.23H24.615A24.615 24.615 0 0 1 0 24.615Z" fill="rgba(198,195,0,0.99)" />}
@@ -80,13 +31,13 @@ const AppButton = ({ onPress, title, bevelLeft = false }) => {
                 ? {
                     transform: [
                       {
-                        translateX: translateXButton,
+                        translateX: active ? 10 * (bevelLeft ? -1 : 1) : 0,
                       },
                       {
-                        translateY: translateYButton,
+                        translateY: active ? -25 : 0,
                       },
                       {
-                        rotate: spin,
+                        rotate: active ? (bevelLeft ? '-' : '+') + '10deg' : '0deg',
                       },
                     ],
                   }
