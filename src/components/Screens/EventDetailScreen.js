@@ -42,7 +42,7 @@ const EventDetailScreen = ({ route }) => {
             <View style={{ height: 20 }}></View>
             <Text style={StylesMain.text}>{artist?.category}</Text>
             <Text style={StylesMain.text}>{venue?.name}</Text>
-            <LikeIcon eventId={item.id} colorOn="#000" style={{ alignSelf: 'flex-end', marginRight: 10, marginBottom: 10 }} />
+            <LikeIcon eventId={item.id} size={36} colorOn="#000" style={{ alignSelf: 'flex-end', marginRight: 10, marginBottom: 10 }} />
           </View>
         </View>
 
@@ -56,6 +56,8 @@ const EventDetailScreen = ({ route }) => {
               }}
               title="hol dir tickets"
               onPress={() => Linking.openURL(item.url_ticket)}
+              bevelLeft={true}
+
             />
           )}
           {artist && (
@@ -67,6 +69,7 @@ const EventDetailScreen = ({ route }) => {
                   id: item.artist,
                 })
               }
+
             />
           )}
           {item.room && (
@@ -78,6 +81,8 @@ const EventDetailScreen = ({ route }) => {
                   id: item.room,
                 })
               }
+              bevelLeft={true}
+
             />
           )}
         </View>

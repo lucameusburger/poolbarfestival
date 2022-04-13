@@ -6,6 +6,8 @@ import { reducer as favoritesReducers, initialState as favoritesInitialState } f
 import { reducer as callenderReducer, initialState as callenderInitialState } from './callenderReducer'
 import { reducer as venuesReducers, initialState as venuesInitialState } from './venueReducer';
 import { reducer as generatorsReducers, initialState as generatorsInitialState } from './generatorsReducer';
+import { reducer as locationReducers, initialState as locationInitialState } from './locationsReducer';
+
 export const initialState = {
     artists: artistsInitialState,
     events: eventsInitialState,
@@ -13,6 +15,7 @@ export const initialState = {
     callender: callenderInitialState,
     venues: venuesInitialState,
     generators: generatorsInitialState,
+    locations: locationInitialState,
 }
 
 export const rootReducer =
@@ -23,4 +26,5 @@ export const rootReducer =
         callender: callenderReducer,
         venues: venuesReducers,
         generators: generatorsReducers,
+        locations: locationReducers,
     })
