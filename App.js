@@ -35,11 +35,11 @@ import { fetchVenues } from './src/redux/venueThunk';
 const Stack = createNativeStackNavigator();
 
 function Navigator() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchEvents());
     dispatch(fetchArtists());
-    dispatch(fetchVenues())
+    dispatch(fetchVenues());
   }, []);
 
   return (
@@ -56,7 +56,7 @@ function Navigator() {
       <Stack.Screen name="Scan" component={ScanScreen} options={{ title: 'Scan', headerShown: false }} />
       <Stack.Screen name="Map" component={MapScreen} options={{ title: 'Map', headerShown: false }} />
     </Stack.Navigator>
-  )
+  );
 }
 
 const App = () => {
@@ -68,7 +68,7 @@ const App = () => {
   });
 
   const linking = {
-    prefixes: [prefix, "poolbar://"],
+    prefixes: [prefix, 'poolbar://'],
     config: {
       screens: {
         Map: 'map',
@@ -77,10 +77,8 @@ const App = () => {
         },
         Home: '*',
       },
-    }
-  }
-
-
+    },
+  };
 
   if (!fontsLoaded) {
     return <AppLoading />;

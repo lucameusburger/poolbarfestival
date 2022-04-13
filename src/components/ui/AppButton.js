@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { View, Button, StyleSheet, TouchableOpacity, Text } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
+import { useSelector } from 'react-redux';
 
 TouchableOpacity.defaultProps = { activeOpacity: 0.8 };
 
 const AppButton = ({ onPress, title, type, icon, style }) => {
   //active state
   const [active, setActive] = useState(false);
+
+  const CLR_PRIMARY = useSelector((state) => state.theme.CLR_PRIMARY);
 
   return (
     <TouchableOpacity
@@ -29,7 +32,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Helviotopia',
     alignSelf: 'center',
     fontSize: 30,
-    backgroundColor: '#c6c300',
+    backgroundColor: '#2ECDA7',
     borderRadius: 30,
     minWidth: 140,
     textAlign: 'center',

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, Button, Item, FlatList, ImageBackground, TouchableOpacity, Linking } from 'react-native';
+import { StyleSheet, Text, View, Button, Item, FlatList, ImageBackground, TouchableOpacity, Linking, Dimensions } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import FadeInView from '../ui/FadeInView';
@@ -7,6 +7,9 @@ import NavBar from '../ui/NavBar';
 import StylesMain from '../../../styles/StylesMain';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import { FontAwesome } from '@expo/vector-icons';
+import AppButton from '../ui/AppButton';
+
+const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
 
 const ScanScreen = ({ navigation }) => {
   const [hasPermission, setHasPermission] = useState(null);
@@ -28,7 +31,11 @@ const ScanScreen = ({ navigation }) => {
     setScanned(true);
     const canOpen = await Linking.canOpenURL(data);
     if (canOpen) {
-      Linking.openURL(data);
+      await Linking.openURL(data);
+      //timeout 3s
+      setTimeout(() => {
+        setScanned(false);
+      }, 1000);
     }
   };
 
@@ -38,10 +45,9 @@ const ScanScreen = ({ navigation }) => {
         <NavBar navigation={navigation} title="scan" />
         <View style={{ flex: 1, marginBottom: 'auto', marginTop: 'auto' }}>
           <View style={{ position: 'absolute', left: 0, right: 0, bottom: 0, right: 0, zIndex: 99, width: '100%', height: '100%', alignItems: 'center' }}>
-            <FontAwesome style={{ marginTop: 'auto', marginBottom: 'auto', zIndex: 99, opacity: 0.33 }} name={'qrcode'} size={700} color="#000" />
+            <FontAwesome style={{ marginTop: 'auto', marginBottom: 'auto', zIndex: 99, opacity: 0.33 }} name={'qrcode'} size={SCREEN_WIDTH} color="#fff" />
           </View>
-          <BarCodeScanner onBarCodeScanned={scanned ? undefined : handleBarCodeScanned} style={StyleSheet.absoluteFillObject} />
-          {scanned && <Button title={'Tap to Scan Again'} onPress={() => setScanned(false)} />}
+          {hasPermission && <BarCodeScanner onBarCodeScanned={scanned ? undefined : handleBarCodeScanned} style={StyleSheet.absoluteFillObject} />}
         </View>
       </FadeInView>
     </View>

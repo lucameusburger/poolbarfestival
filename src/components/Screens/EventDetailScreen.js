@@ -34,7 +34,7 @@ const EventDetailScreen = ({ route }) => {
 
     return (
       <View style={{ flex: 1, width: '100%', height: '100%' }}>
-        <View style={{ backgroundColor: '#c6c300', padding: 20, marginTop: 10 }}>
+        <View style={{ backgroundColor: '#2ECDA7', padding: 20, marginTop: 10 }}>
           <View>
             <Text style={styles.eventDateText}>{dateString}</Text>
             <Text style={styles.eventMainText}>{item.name}</Text>
