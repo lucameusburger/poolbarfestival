@@ -58,8 +58,6 @@ const AppButton = ({ onPress, title, bevelLeft = false }) => {
     outputRange: ['0deg', (bevelLeft ? '-' : '+') + '10deg'],
   });
 
-  const CLR_PRIMARY = useSelector((state) => state.theme.CLR_PRIMARY);
-
   return (
     <TouchableOpacity
       onPressIn={() => {
@@ -108,7 +106,6 @@ const styles = StyleSheet.create({
     fontFamily: 'Helviotopia',
     alignSelf: 'center',
     fontSize: 30,
-    backgroundColor: '#FFC23B',
     borderRadius: 30,
     textAlign: 'center',
   },
