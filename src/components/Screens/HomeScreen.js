@@ -38,21 +38,21 @@ const HomeScreen = ({ navigation }) => {
           <View style={{ top: 0, flex: 1, height: '60%' }}>
             <PoolbarLogo style={{ alignSelf: 'center', marginBottom: 'auto', marginTop: 'auto' }} width="80%" height="100%" fill="black" />
           </View>
-          <View style={{ top: 0, marginTop: 0, marginBottom: 'auto', height: '40%' }}>
+          <View style={{ top: 0, marginTop: 0, marginBottom: 'auto', height: '60%' }}>
             <AppButton title="events" onPress={() => navigation.navigate('Events')} bevelLeft={true} />
             <View style={{ height: 20 }} />
             <AppButton title="artists" onPress={() => navigation.navigate('Artists')} />
             <View style={{ height: 20 }} />
             <AppButton title="generator" onPress={() => navigation.navigate('Generators')} bevelLeft={true} />
             <View style={{ height: 20 }} />
-            <AppButton title="fließtext" onPress={() => navigation.navigate('Flowtext')} bevelLeft={true} />
+            <AppButton title="fließtext" onPress={() => navigation.navigate('Flowtext')} bevelLeft={false} />
           </View>
 
-          <TouchableOpacity style={{ position: 'absolute', bottom: 40, left: 40, width: 70, height: 70, backgroundColor: '#c6c300', borderRadius: 100 }} onPress={() => navigation.navigate('Map')}>
-            <FontAwesome style={{ marginTop: 'auto', marginBottom: 'auto', alignSelf: 'center' }} name={'map'} size={36} color="#000" />
+          <TouchableOpacity style={{ position: 'absolute', bottom: 40, left: 40, width: 70, height: 70, backgroundColor: 'transparent', borderRadius: 100 }} onPress={() => navigation.navigate('Map')}>
+            <FontAwesome style={{ marginTop: 'auto', marginBottom: 'auto', alignSelf: 'center', opacity: 0.6 }} name={'map'} size={36} color="#000" />
           </TouchableOpacity>
-          <TouchableOpacity style={{ position: 'absolute', bottom: 40, right: 40, width: 70, height: 70, backgroundColor: '#c6c300', borderRadius: 100 }} onPress={() => navigation.navigate('Scan')}>
-            <FontAwesome style={{ marginTop: 'auto', marginBottom: 'auto', alignSelf: 'center' }} name={'camera'} size={36} color="#000" />
+          <TouchableOpacity style={{ position: 'absolute', bottom: 40, right: 40, width: 70, height: 70, backgroundColor: 'transparent', borderRadius: 100 }} onPress={() => navigation.navigate('Scan')}>
+            <FontAwesome style={{ marginTop: 'auto', marginBottom: 'auto', alignSelf: 'center', opacity: 0.6 }} name={'camera'} size={36} color="#000" />
           </TouchableOpacity>
         </ImageBackground>
       </FadeInView>
