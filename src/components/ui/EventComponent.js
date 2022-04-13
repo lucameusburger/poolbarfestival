@@ -25,7 +25,7 @@ const EventComponent = ({ item }) => {
             <Text style={StylesMain.eventListMainText}>{item.name}</Text>
           </View>
           <View style={{ width: '20%' }}>
-            <LikeIcon eventId={item.id} color={'#2ECDA7'} />
+            <LikeIcon eventId={item.id} color={'#FFC23B'} />
           </View>
         </View>
       </View>

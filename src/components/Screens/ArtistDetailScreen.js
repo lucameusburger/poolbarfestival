@@ -20,7 +20,7 @@ const ArtistDetailScreen = ({ artist }) => {
   const filteredEvents = events.filter((event) => event.artist === artist.id);
   return (
     <View style={{ flex: 1, width: '100%', height: '100%' }}>
-      <View style={{ backgroundColor: '#2ECDA7', padding: 20, marginTop: 10 }}>
+      <View style={{ backgroundColor: '#FFC23B', padding: 20, marginTop: 10 }}>
         <View>
           <Text style={StylesMain.artistDetailsDateText}>{artist.category}</Text>
           <Text style={StylesMain.artistDetailsMainText}>{artist.name}</Text>

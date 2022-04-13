@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Helviotopia',
     alignSelf: 'center',
     fontSize: 30,
-    backgroundColor: '#2ECDA7',
+    backgroundColor: '#FFC23B',
     borderRadius: 30,
     minWidth: 140,
     textAlign: 'center',

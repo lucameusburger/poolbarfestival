@@ -48,7 +48,7 @@ const StylesMain = StyleSheet.create({
   card: {
     marginTop: 10,
     padding: 16,
-    backgroundColor: '#2ECDA7',
+    backgroundColor: '#FFC23B',
     borderRadius: 26,
   },
   card_header: {
@@ -61,14 +61,14 @@ const StylesMain = StyleSheet.create({
     color: '#fff',
     paddingVertical: 3,
     paddingHorizontal: 8,
-    backgroundColor: '#2ECDA7',
+    backgroundColor: '#FFC23B',
     borderRadius: 12,
     overflow: 'hidden',
   },
   labelContainer: {
     fontFamily: 'Helviotopia',
     fontSize: 30,
-    backgroundColor: '#2ECDA7',
+    backgroundColor: '#FFC23B',
     borderRadius: 30,
     minWidth: 140,
     textAlign: 'center',

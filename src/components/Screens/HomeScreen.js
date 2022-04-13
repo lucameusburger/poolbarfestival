@@ -17,7 +17,7 @@ const HomeScreen = ({ navigation }) => {
       <FadeInView style={{ flex: 1, width: '100%', height: '100%' }}>
         <ImageBackground resizeMode="cover" style={{ flex: 1, justifyContent: 'center' }} blurRadius={30} source={mapImage}>
           {/* <TypeWriter
-            style={{ position: 'absolute', width: '200%', left: '-50%', top: '-5%', color: '#2ECDA7', textAlign: 'justify', opacity: 1, fontFamily: 'Helviotopia', letterSpacing: 10, lineHeight: 14, transform: [{ rotate: '12deg' }] }}
+            style={{ position: 'absolute', width: '200%', left: '-50%', top: '-5%', color: '#FFC23B', textAlign: 'justify', opacity: 1, fontFamily: 'Helviotopia', letterSpacing: 10, lineHeight: 14, transform: [{ rotate: '12deg' }] }}
             typing={typing}
             minDelay={0.1}
             maxDelay={1}
@@ -46,10 +46,10 @@ const HomeScreen = ({ navigation }) => {
             <AppButton title="generator" onPress={() => navigation.navigate('Generators')} />
           </View>
 
-          <TouchableOpacity style={{ position: 'absolute', bottom: 40, left: 40, width: 70, height: 70, backgroundColor: '#2ECDA7', borderRadius: 100 }} onPress={() => navigation.navigate('Map')}>
+          <TouchableOpacity style={{ position: 'absolute', bottom: 40, left: 40, width: 70, height: 70, backgroundColor: '#FFC23B', borderRadius: 100 }} onPress={() => navigation.navigate('Map')}>
             <FontAwesome style={{ marginTop: 'auto', marginBottom: 'auto', alignSelf: 'center' }} name={'map'} size={36} color="#000" />
           </TouchableOpacity>
-          <TouchableOpacity style={{ position: 'absolute', bottom: 40, right: 40, width: 70, height: 70, backgroundColor: '#2ECDA7', borderRadius: 100 }} onPress={() => navigation.navigate('Scan')}>
+          <TouchableOpacity style={{ position: 'absolute', bottom: 40, right: 40, width: 70, height: 70, backgroundColor: '#FFC23B', borderRadius: 100 }} onPress={() => navigation.navigate('Scan')}>
             <FontAwesome style={{ marginTop: 'auto', marginBottom: 'auto', alignSelf: 'center' }} name={'camera'} size={36} color="#000" />
           </TouchableOpacity>
         </ImageBackground>
