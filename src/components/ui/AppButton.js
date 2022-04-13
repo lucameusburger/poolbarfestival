@@ -6,7 +6,7 @@ import Svg, { Path } from 'react-native-svg';
 
 TouchableOpacity.defaultProps = { activeOpacity: 0.8 };
 
-const AppButton = ({ onPress, title, bevelLeft = false }) => {
+const AppButton = ({ onPress, title, bevelLeft = false, style }) => {
   const [active, setActive] = useState(false);
 
   return (
@@ -18,7 +18,7 @@ const AppButton = ({ onPress, title, bevelLeft = false }) => {
         setActive(false);
       }}
       onPress={onPress}
-      style={styles.buttonContainer}
+      style={[styles.buttonContainer, style]}
     >
       <Svg
         xmlns="http://www.w3.org/2000/svg"
