@@ -42,7 +42,7 @@ const EventDetailScreen = ({ route }) => {
             <View style={{ height: 20 }}></View>
             <Text style={StylesMain.text}>{artist?.category}</Text>
             <Text style={StylesMain.text}>{venue?.name}</Text>
-            <LikeIcon eventId={item.id} color="#000" style={{ alignSelf: 'flex-end', marginRight: 10, marginBottom: 10 }} />
+            <LikeIcon eventId={item.id} colorOn="#000" style={{ alignSelf: 'flex-end', marginRight: 10, marginBottom: 10 }} />
           </View>
         </View>
 
