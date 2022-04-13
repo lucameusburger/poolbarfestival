@@ -17,7 +17,7 @@ const HomeScreen = ({ navigation }) => {
       <FadeInView style={{ flex: 1, width: '100%', height: '100%' }}>
         <ImageBackground resizeMode="cover" style={{ flex: 1, justifyContent: 'center' }} blurRadius={30} source={mapImage}>
           {/* <TypeWriter
-            style={{ position: 'absolute', width: '200%', left: '-50%', top: '-5%', color: '#c6c300', textAlign: 'justify', opacity: 1, fontFamily: 'Helviotopia', letterSpacing: 10, lineHeight: 14, transform: [{ rotate: '12deg' }] }}
+            style={{ position: 'absolute', width: '200%', left: '-50%', top: '-5%', color: '#FFC23B', textAlign: 'justify', opacity: 1, fontFamily: 'Helviotopia', letterSpacing: 10, lineHeight: 14, transform: [{ rotate: '12deg' }] }}
             typing={typing}
             minDelay={0.1}
             maxDelay={1}
@@ -39,11 +39,11 @@ const HomeScreen = ({ navigation }) => {
             <PoolbarLogo style={{ alignSelf: 'center', marginBottom: 'auto', marginTop: 'auto' }} width="80%" height="100%" fill="black" />
           </View>
           <View style={{ top: 0, marginTop: 0, marginBottom: 'auto', height: '40%' }}>
-            <AppButton title="events" onPress={() => navigation.navigate('Events')} />
+            <AppButton title="events" onPress={() => navigation.navigate('Events')} bevelLeft={true} />
             <View style={{ height: 20 }} />
             <AppButton title="artists" onPress={() => navigation.navigate('Artists')} />
             <View style={{ height: 20 }} />
-            <AppButton title="generator" onPress={() => navigation.navigate('Generators')} />
+            <AppButton title="generator" onPress={() => navigation.navigate('Generators')} bevelLeft={true} />
           </View>
 
           <TouchableOpacity style={{ position: 'absolute', bottom: 40, left: 40, width: 70, height: 70, backgroundColor: '#c6c300', borderRadius: 100 }} onPress={() => navigation.navigate('Map')}>

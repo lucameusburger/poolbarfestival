@@ -13,7 +13,7 @@ const NavBar = ({ title, next, nextTitle, type }) => {
       </View>
       <View style={{ flexDirection: 'row', width: '100%' }}>
         <TouchableOpacity
-          style={{ width: nextTitle ? '50%' : '100%', paddingTop: 10, paddingBottom: 10, backgroundColor: '#c6c300' }}
+          style={{ width: nextTitle ? '50%' : '100%', paddingTop: 10, paddingBottom: 10, backgroundColor: '#FFC23B' }}
           onPress={() => {
             // handle the index we get
             if (navigationRef.canGoBack()) {
@@ -26,7 +26,7 @@ const NavBar = ({ title, next, nextTitle, type }) => {
           <Text style={styles.button}>zurück</Text>
         </TouchableOpacity>
         {nextTitle && (
-          <TouchableOpacity style={{ width: '50%', paddingTop: 10, paddingBottom: 10, backgroundColor: '#c6c300' }} onPress={next}>
+          <TouchableOpacity style={{ width: '50%', paddingTop: 10, paddingBottom: 10, backgroundColor: '#FFC23B' }} onPress={next}>
             <Text style={styles.button}>{nextTitle}</Text>
           </TouchableOpacity>
         )}
