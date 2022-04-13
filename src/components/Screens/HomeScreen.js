@@ -42,6 +42,7 @@ const HomeScreen = ({ navigation }) => {
                         <AppButton
                             title="events"
                             onPress={() => navigation.navigate('Events')}
+                            bevelLeft={true}
                         />
                         <View style={{ height: 20 }} />
                         <AppButton
@@ -52,6 +53,7 @@ const HomeScreen = ({ navigation }) => {
                         <AppButton
                             title="generator"
                             onPress={() => navigation.navigate('Generators')}
+                            bevelLeft={true}
                         />
                     </View>
 
@@ -59,14 +61,16 @@ const HomeScreen = ({ navigation }) => {
                         style={{ position: 'absolute', bottom: 40, left: 40 }}
                         name={'map'}
                         size={38}
-                        color="#c6c300"
+                        color="#000"
+                        light={true}
                         onPress={() => navigation.navigate('Map')}
                     />
                     <FontAwesome
                         style={{ position: 'absolute', bottom: 40, right: 40 }}
                         name={'camera'}
                         size={38}
-                        color="#c6c300"
+                        color="#000"
+                        light={true}
                         onPress={() => navigation.navigate('Scan')}
                     />
                 </ImageBackground>
