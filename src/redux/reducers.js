@@ -5,6 +5,7 @@ import { reducer as eventsReducers, initialState as eventsInitialState } from '.
 import { reducer as favoritesReducers, initialState as favoritesInitialState } from './favoritesReducer';
 import { reducer as callenderReducer, initialState as callenderInitialState } from './callenderReducer';
 import { reducer as venuesReducers, initialState as venuesInitialState } from './venueReducer';
+import { reducer as spaceLocationsReducers, initialState as spaceLocationsInitialState } from './spaceLocationReducer';
 import { reducer as generatorsReducers, initialState as generatorsInitialState } from './generatorsReducer';
 export const initialState = {
   artists: artistsInitialState,
@@ -12,6 +13,7 @@ export const initialState = {
   favorites: favoritesInitialState,
   callender: callenderInitialState,
   venues: venuesInitialState,
+  spaceLocations: spaceLocationsInitialState,
   generators: generatorsInitialState,
 };
 
@@ -21,5 +23,6 @@ export const rootReducer = combineReducers({
   favorites: favoritesReducers,
   callender: callenderReducer,
   venues: venuesReducers,
+  spaceLocations: spaceLocationsReducers,
   generators: generatorsReducers,
 });

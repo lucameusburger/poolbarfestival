@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, memo } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { Text, View, StyleSheet, Linking } from 'react-native';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchVenues } from '../../redux/venueThunk';
 
 import NavBar from '../ui/NavBar';
 import LoadingText from '../ui/LoadingText';
@@ -12,25 +11,41 @@ import StylesMain from '../../../styles/StylesMain';
 import { navigate } from '../../core/RootNavigation';
 
 
+import austriaOutline from '../../../assets/austriaOutline.json';
+
 
 import { FontAwesome } from '@expo/vector-icons';
 
 
-import MapView, {Marker , Callout} from 'react-native-maps';
+import MapView, {Marker , Callout, Polygon} from 'react-native-maps';
 import MyCalloutView from '../ui/MyCalloutView';
 
 
 import mapImage from '../../../assets/img/map.png'
+import { fetchSpaceLocations } from '../../redux/spaceLocationThunk';
 
 
 const BASE_URL = 'https://www.admin.poolbar.at/';
-const mapRef = {};
-
+const mapRef = React.createRef();
 
 const getMarkers = (locations) => {
-    markers = [];
-    counter = 0;
-    locations.map((location) => markers[counter++] = <Text>{location.name}</Text>);
+    let markers = [];
+    let counter = 0;
+    locations.data.map((location) => markers[counter++] = <Marker key={location.id}
+    image={require('../../../assets/img/marker.png')}
+    onPress={console.log('clicked mate')}
+    coordinate={{'latitude':location.location.coordinates[0],'longitude':location.location.coordinates[1]}}
+    >
+        <Callout tooltip={true} style={{backgroundColor:'transparent'}} onPress={
+                            () =>{
+                                openGoogleMaps({'latitude':location.location.coordinates[0],'longitude':location.location.coordinates[1]},location.name)
+                                console.log('bruh')
+                        }}>
+                <MyCalloutView location={loewensaal} name={location.name}></MyCalloutView>
+
+
+            </Callout>
+    </Marker>);
     return markers;
 }
 
@@ -51,12 +66,12 @@ function openGoogleMaps(location, name) {
  function setBoundingAustria() {
     const bboxAustria = [
         {
-            latitude: 45.922474,
+            latitude: 48.356363,
             longitude: 9.150603
         },
         {
-            latitude: 49.103046,
-            longitude: 17.518337
+            latitude: 46.460683,
+            longitude: 12.109966,
         }
     ]
     setBoundingBox(bboxAustria)
@@ -64,6 +79,7 @@ function openGoogleMaps(location, name) {
 
 // set the bounding box of the map to Austria
  function setBoundingBox(bbox) {
+     console.log('setting box');
     mapRef.current.setMapBoundaries(bbox[0], bbox[1]);
 }
 
@@ -73,22 +89,24 @@ const MapScreen = ({ navigation }) => {
 
   const dispatch = useDispatch();
 
-  const locations = useSelector((state) => state.venues.venues);
-  const isLoaded = useSelector((state) => state.venues.isLoaded);
-  const isFetchingData = useSelector((state) => state.venues.isFetchingData);
-  const hasFetchingDataError = useSelector((state) => state.venues.hasFetchingDataError);
+  const locations = useSelector((state) => state.spaceLocations);
+  console.log(locations);
+  const isLoaded = useSelector((state) => state.spaceLocations.isLoaded);
+  const isFetchingData = useSelector((state) => state.spaceLocations.isFetchingData);
+  const hasFetchingDataError = useSelector((state) => state.spaceLocations.hasFetchingDataError);
 
   useEffect(() => {
-    dispatch(fetchVenues());
+    dispatch(fetchSpaceLocations());
   }, []);
 
-  //const venues = locations.map((location) => <Text>{location.name}</Text>);
 
   return (
     <View style={StylesMain.mainView}>
       <FadeInView style={{ flex: 1, width: '100%', height: '100%' }}>
         <NavBar navigation={navigation} title="map" />
         <MapView
+            minZoomLevel={7}
+            maxZoomLevel={15}
             style={styles.map} provider = { MapView.PROVIDER_GOOGLE } customMapStyle = { generatedMapStyle }
 
             onMapReady={setBoundingAustria}
@@ -100,18 +118,31 @@ const MapScreen = ({ navigation }) => {
             longitudeDelta: 0.05,
 
       }}>
+          <Polygon
+            coordinates={austriaOutline}
+            strokeWidth={3}
+            strokeColor={'#2ECDA7'}
+            fillColor="transparent"
+        />
 
-          <Marker coordinate={loewensaal} image={require('../../../assets/img/marker.png')}>
-            <Callout onPress={
+<Marker
+    image={require('../../../assets/img/marker.png')}
+    coordinate={loewensaal}
+    >
+        <Callout
+         tooltip={true} style={{backgroundColor:'transparent',width:200,height:200}}
+                        onPress={
                             () =>{
-                                openGoogleMaps(loewensaal,"what")
-                                console.log('bruh')
+                                openGoogleMaps(loewensaal,'Löwensaal');
+                                console.log('bruh');
                         }}>
-                <MyCalloutView location={loewensaal} name={'Click for Navigation (icon. maybe additional info here'}></MyCalloutView>
-                {isLoaded&&locations?getMarkers(locations):console.log('famile')}
+                <MyCalloutView  name={'Löwensaal'} description={'Der Saal in dem wir chillen'}></MyCalloutView>
+
 
             </Callout>
-        </Marker>
+    </Marker>
+
+        {isLoaded&&locations?getMarkers(locations):[]}
 
 
         </MapView>
@@ -141,7 +172,7 @@ const generatedMapStyle = [
       "featureType": "water",
       "elementType": "all",
       "stylers": [
-          {color: "#2ECDA7"
+          {color: "#666666"
           },
           {
               "visibility": "on"
