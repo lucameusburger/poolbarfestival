@@ -36,7 +36,6 @@ export function fetchVenues() {
 
                     if (response.ok) {
                         const data = await response.json();
-
                         dispatch(setVenues(data.data));
                     } else {
                         const error = (data && data.message) || response.status;

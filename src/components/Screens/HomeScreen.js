@@ -39,17 +39,17 @@ const HomeScreen = ({ navigation }) => {
             <PoolbarLogo style={{ alignSelf: 'center', marginBottom: 'auto', marginTop: 'auto' }} width="80%" height="100%" fill="black" />
           </View>
           <View style={{ top: 0, marginTop: 0, marginBottom: 'auto', height: '40%' }}>
-            <AppButton title="events" onPress={() => navigation.navigate('Events')} />
+            <AppButton title="events" onPress={() => navigation.navigate('Events')} bevelLeft={true} />
             <View style={{ height: 20 }} />
             <AppButton title="artists" onPress={() => navigation.navigate('Artists')} />
             <View style={{ height: 20 }} />
-            <AppButton title="generator" onPress={() => navigation.navigate('Generators')} />
+            <AppButton title="generator" onPress={() => navigation.navigate('Generators')} bevelLeft={true} />
           </View>
 
-          <TouchableOpacity style={{ position: 'absolute', bottom: 40, left: 40, width: 70, height: 70, backgroundColor: '#FFC23B', borderRadius: 100 }} onPress={() => navigation.navigate('Map')}>
+          <TouchableOpacity style={{ position: 'absolute', bottom: 40, left: 40, width: 70, height: 70, backgroundColor: '#c6c300', borderRadius: 100 }} onPress={() => navigation.navigate('Map')}>
             <FontAwesome style={{ marginTop: 'auto', marginBottom: 'auto', alignSelf: 'center' }} name={'map'} size={36} color="#000" />
           </TouchableOpacity>
-          <TouchableOpacity style={{ position: 'absolute', bottom: 40, right: 40, width: 70, height: 70, backgroundColor: '#FFC23B', borderRadius: 100 }} onPress={() => navigation.navigate('Scan')}>
+          <TouchableOpacity style={{ position: 'absolute', bottom: 40, right: 40, width: 70, height: 70, backgroundColor: '#c6c300', borderRadius: 100 }} onPress={() => navigation.navigate('Scan')}>
             <FontAwesome style={{ marginTop: 'auto', marginBottom: 'auto', alignSelf: 'center' }} name={'camera'} size={36} color="#000" />
           </TouchableOpacity>
         </ImageBackground>

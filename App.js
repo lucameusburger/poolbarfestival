@@ -31,6 +31,7 @@ import HomeScreen from './src/components/Screens/HomeScreen';
 import { fetchEvents } from './src/redux/eventsThunk';
 import { fetchArtists } from './src/redux/artistsThunk';
 import { fetchVenues } from './src/redux/venueThunk';
+import GeneratorDetailScreen from './src/components/Screens/GeneratorDetailScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -55,6 +56,7 @@ function Navigator() {
       <Stack.Screen name="Generators" component={GeneratorListScreen} options={{ title: 'Generator', headerShown: false }} />
       <Stack.Screen name="Scan" component={ScanScreen} options={{ title: 'Scan', headerShown: false }} />
       <Stack.Screen name="Map" component={MapScreen} options={{ title: 'Map', headerShown: false }} />
+      <Stack.Screen name="Generator" component={GeneratorDetailScreen} options={{ title: 'Generator', headerShown: false }} />
     </Stack.Navigator>
   );
 }
