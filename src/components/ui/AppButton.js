@@ -7,58 +7,7 @@ import Svg, { Path } from 'react-native-svg';
 TouchableOpacity.defaultProps = { activeOpacity: 0.8 };
 
 const AppButton = ({ onPress, title, bevelLeft = false }) => {
-  const rotateButton = useRef(new Animated.Value(0)).current;
-  const translateXButton = useRef(new Animated.Value(0)).current;
-  const translateYButton = useRef(new Animated.Value(0)).current;
-
   const [active, setActive] = useState(false);
-  const animationDuration = 300;
-  useEffect(() => {
-    if (active) {
-      Animated.parallel([
-        Animated.timing(rotateButton, {
-          toValue: 1,
-          duration: animationDuration,
-          useNativeDriver: true,
-        }),
-        Animated.timing(translateXButton, {
-          toValue: parseInt(10 * (bevelLeft ? -1 : 1)),
-          duration: animationDuration,
-          useNativeDriver: true,
-        }),
-        Animated.timing(translateYButton, {
-          toValue: -25,
-          duration: animationDuration,
-          useNativeDriver: true,
-        }),
-      ]).start();
-    } else {
-      Animated.parallel([
-        Animated.timing(rotateButton, {
-          toValue: 1,
-          duration: animationDuration,
-          useNativeDriver: true,
-        }),
-        Animated.timing(translateXButton, {
-          toValue: 0,
-          duration: animationDuration,
-          useNativeDriver: true,
-        }),
-        Animated.timing(translateYButton, {
-          toValue: 0,
-          duration: animationDuration,
-          useNativeDriver: true,
-        }),
-      ]).start();
-    }
-  }, [active]);
-
-  const spin = rotateButton.interpolate({
-    inputRange: [0, 1],
-    outputRange: ['0deg', (bevelLeft ? '-' : '+') + '10deg']
-  })
-
-
 
   return (
     <TouchableOpacity
@@ -97,13 +46,13 @@ const AppButton = ({ onPress, title, bevelLeft = false }) => {
                 {
                   transform: [
                     {
-                      translateX: translateXButton,
+                      translateX: active ? 10 * (bevelLeft ? -1 : 1) : 0,
                     },
                     {
-                      translateY: translateYButton,
+                      translateY: active ? -25 : 0,
                     },
                     {
-                      rotate: spin
+                      rotate: active ? (bevelLeft ? '-' : '+') + '10deg' : '0deg',
                     },
 
                   ],
