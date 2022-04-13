@@ -7,9 +7,9 @@ import Svg, { Path } from 'react-native-svg';
 TouchableOpacity.defaultProps = { activeOpacity: 0.8 };
 
 const AppButton = ({ onPress, title, bevelLeft = false }) => {
-  const rotateButton = useRef(new Animated.Value(0)).current; // Initial value for opacity: 0
-  const translateXButton = useRef(new Animated.Value(0)).current; // Initial value for opacity: 0
-  const translateYButton = useRef(new Animated.Value(0)).current; // Initial value for opacity: 0
+  const rotateButton = useRef(new Animated.Value(0)).current;
+  const translateXButton = useRef(new Animated.Value(0)).current;
+  const translateYButton = useRef(new Animated.Value(0)).current;
 
   const [active, setActive] = useState(false);
   const animationDuration = 300;
