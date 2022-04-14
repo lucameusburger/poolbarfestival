@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect, useRef } from 'react';
+import React, { Component, useState, useEffect, useRef, memo } from 'react';
 import { Animated, Dimensions, View, Platform, PixelRatio, StyleSheet, Text, ListView } from 'react-native';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
@@ -59,4 +59,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AppHeading;
+export default memo(AppHeading);

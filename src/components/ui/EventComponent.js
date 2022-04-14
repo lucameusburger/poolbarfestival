@@ -16,17 +16,19 @@ const EventComponent = ({ item }) => {
       }
       style={{ borderWidth: 2, borderColor: 'black', borderRadius: 10, margin: 5, padding: 10 }}
     >
-      <View key={item.id} style={{ flex: 1, flexDirection: 'row', flexWrap: 'wrap' }}>
-        <View style={{ width: '100%', marginTop: 'auto', flexDirection: 'row', height: '100%', alignItems: 'center', justifyContent: 'center' }}>
-          <View style={{ padding: 10 }}>
+      <View key={item.id} style={{ flex: 1, flexWrap: 'wrap' }}>
+        <View style={{ width: '100%', marginTop: 'auto', flexDirection: 'row', height: '100%' }}>
+          <View style={{ padding: 10, width: '100%' }}>
             <Text style={StylesMain.eventListDateText}>{dateString}</Text>
             <Text style={StylesMain.eventListMainText}>{item.name}</Text>
           </View>
           <View
             style={{
+              alignSelf: 'flex-end',
               width: '10%',
               height: '100%',
               justifyContent: 'flex-end',
+              marginLeft: 'auto',
             }}
           >
             <LikeIcon eventId={item.id} color={'#00ff00'} />
