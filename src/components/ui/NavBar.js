@@ -3,7 +3,6 @@ import { navigationRef } from '../../core/RootNavigation';
 import AppHeading from './AppHeading';
 import AppButton from './AppButton';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import InfiniteScroll from 'react-native-infinite-looping-scroll';
 import { useEffect } from 'react';
 import { useRef } from 'react';
 
@@ -20,16 +19,17 @@ const generateUniqueKey = () => `_${Math.random().toString(36).substr(2, 9)}`;
 
 const NavBar = ({ title, next, nextTitle }) => {
   const scrollX = useRef(new Animated.Value(0)).current;
-
-  useEffect(() => {
-    Animated.loop(
-      Animated.timing(scrollX, {
-        toValue: 1,
-        duration: 5000,
-        useNativeDriver: true,
-      })
-    ).start(() => scrollX.setValue(0));
-  }, [scrollX]);
+  /*
+    useEffect(() => {
+      Animated.loop(
+        Animated.timing(scrollX, {
+          toValue: 1,
+          duration: 50000,
+          useNativeDriver: true,
+        })
+      ).start(() => scrollX.setValue(0));
+    }, [scrollX]);
+    */
 
   return (
     <Wrapper style={{ backgroundColor: '#fff' }}>

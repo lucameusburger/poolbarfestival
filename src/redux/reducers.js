@@ -7,6 +7,7 @@ import { reducer as callenderReducer, initialState as callenderInitialState } fr
 import { reducer as venuesReducers, initialState as venuesInitialState } from './venueReducer';
 import { reducer as generatorsReducers, initialState as generatorsInitialState } from './generatorsReducer';
 import { reducer as locationReducers, initialState as locationInitialState } from './locationsReducer';
+import { reducer as flowTextReducer, initialState as flowTextInitialState } from './flowTextReducer'
 
 export const initialState = {
     artists: artistsInitialState,
@@ -16,6 +17,7 @@ export const initialState = {
     venues: venuesInitialState,
     generators: generatorsInitialState,
     locations: locationInitialState,
+    flowText: flowTextInitialState,
 }
 
 export const rootReducer =
@@ -27,4 +29,5 @@ export const rootReducer =
         venues: venuesReducers,
         generators: generatorsReducers,
         locations: locationReducers,
+        flowText: flowTextReducer,
     })

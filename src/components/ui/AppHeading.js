@@ -1,26 +1,26 @@
 import React, { Component, useState, useEffect, useRef } from 'react';
 import { Animated, Dimensions, View, Platform, PixelRatio, StyleSheet, Text, ListView } from 'react-native';
-import InfiniteScroll from 'react-native-infinite-scroll';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
 const AppHeading = ({ title }) => {
   const startValue = new Animated.Value(0);
   const endValue = -SCREEN_WIDTH;
-
-  useEffect(() => {
-    Animated.loop(
-      Animated.timing(startValue, {
-        toValue: endValue,
-        duration: 5000,
-        // linear
-        //easing: Easing.linear,
-        useNativeDriver: true,
-        duration: 100,
-      }),
-      { iterations: -1 }
-    ).start();
-  }, [startValue, endValue]);
+  /*
+    useEffect(() => {
+      Animated.loop(
+        Animated.timing(startValue, {
+          toValue: endValue,
+          duration: 5000,
+          // linear
+          //easing: Easing.linear,
+          useNativeDriver: true,
+          duration: 100,
+        }),
+        { iterations: -1 }
+      ).start();
+    }, [startValue, endValue]);
+    */
 
   return (
     <Animated.View style={{ display: 'flex', flexDirection: 'row', transform: [{ translateX: startValue }] }}>
