@@ -14,11 +14,11 @@ const EventComponent = ({ item }) => {
           id: item.id,
         })
       }
-      style={{ borderWidth: 2, borderColor: 'black', borderRadius: 10, margin: 5, padding: 8 }}
+      style={{ borderWidth: 2, borderColor: 'black', borderRadius: 10, margin: 5, padding: 10 }}
     >
       <View key={item.id} style={{ flex: 1, flexDirection: 'row', flexWrap: 'wrap' }}>
         <View style={{ width: '100%', marginTop: 'auto', flexDirection: 'row', height: '100%', alignItems: 'center', justifyContent: 'center' }}>
-          <View style={{ width: '85%' }}>
+          <View style={{ padding: 10 }}>
             <Text style={StylesMain.eventListDateText}>{dateString}</Text>
             <Text style={StylesMain.eventListMainText}>{item.name}</Text>
           </View>
