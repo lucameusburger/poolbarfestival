@@ -1,5 +1,5 @@
 export const initialState = {
-  CLR_PRIMARY: '#FFC23B',
+  CLR_PRIMARY: '#c6c300',
 };
 
 export function reducer(state = initialState, action) {

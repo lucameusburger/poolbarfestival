@@ -7,11 +7,27 @@ import LottieView from 'lottie-react-native';
 
 import heardfade from '../../../assets/animations/heartfade.json';
 
-TouchableOpacity.defaultProps = { activeOpacity: 0.8 };
+const hexToRgb = (hex) =>
+  hex
+    .replace(/^#?([a-f\d])([a-f\d])([a-f\d])$/i, (m, r, g, b) => '#' + r + r + g + g + b + b)
+    .substring(1)
+    .match(/.{2}/g)
+    .map((x) => parseInt(x, 16));
 
-const LikeIcon = ({ eventId, style }) => {
+const LikeIcon = ({ eventId, size = 32, style, colorOff = '#000', colorOn = '#c6c300' }) => {
   const dispatch = useDispatch();
   const progress = useRef(new Animated.Value(isLiked ? 1 : 0)).current;
+
+  const rgbOff = hexToRgb(colorOff);
+  const rgbOn = hexToRgb(colorOn);
+
+  heardfade.layers[0].shapes[0].it[1].c.k[1].s[0] = rgbOn[0] / 255;
+  heardfade.layers[0].shapes[0].it[1].c.k[1].s[1] = rgbOn[1] / 255;
+  heardfade.layers[0].shapes[0].it[1].c.k[1].s[2] = rgbOn[2] / 255;
+
+  heardfade.layers[0].shapes[0].it[1].c.k[0].s[0] = rgbOff[0] / 255;
+  heardfade.layers[0].shapes[0].it[1].c.k[0].s[1] = rgbOff[1] / 255;
+  heardfade.layers[0].shapes[0].it[1].c.k[0].s[2] = rgbOff[2] / 255;
 
   const likeEvent = (id) => {
     dispatch({
@@ -65,14 +81,15 @@ const LikeIcon = ({ eventId, style }) => {
             alignSelf: 'flex-end',
             marginBottom: 'auto',
             marginTop: 'auto',
+            width: size,
           },
           style,
         ]}
       >
         <LottieView
           style={{
-            height: 100,
-            width: 100,
+            height: size,
+            width: size,
           }}
           progress={progress}
           source={heardfade}

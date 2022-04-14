@@ -7,6 +7,8 @@ import { reducer as callenderReducer, initialState as callenderInitialState } fr
 import { reducer as venuesReducers, initialState as venuesInitialState } from './venueReducer';
 import { reducer as spaceLocationsReducers, initialState as spaceLocationsInitialState } from './spaceLocationReducer';
 import { reducer as generatorsReducers, initialState as generatorsInitialState } from './generatorsReducer';
+import { reducer as locationReducers, initialState as locationInitialState } from './locationsReducer';
+
 export const initialState = {
   artists: artistsInitialState,
   events: eventsInitialState,

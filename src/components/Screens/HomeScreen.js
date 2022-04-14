@@ -15,9 +15,9 @@ const HomeScreen = ({ navigation }) => {
   return (
     <View style={StylesMain.mainView}>
       <FadeInView style={{ flex: 1, width: '100%', height: '100%' }}>
-        <ImageBackground resizeMode="cover" style={{ flex: 1, justifyContent: 'center' }} blurRadius={30} source={mapImage}>
+        <View style={{ flex: 1, justifyContent: 'center' }}>
           {/* <TypeWriter
-            style={{ position: 'absolute', width: '200%', left: '-50%', top: '-5%', color: '#FFC23B', textAlign: 'justify', opacity: 1, fontFamily: 'Helviotopia', letterSpacing: 10, lineHeight: 14, transform: [{ rotate: '12deg' }] }}
+            style={{ position: 'absolute', width: '200%', left: '-50%', top: '-5%', color: '#c6c300', textAlign: 'justify', opacity: 1, fontFamily: 'Helviotopia', letterSpacing: 10, lineHeight: 14, transform: [{ rotate: '12deg' }] }}
             typing={typing}
             minDelay={0.1}
             maxDelay={1}
@@ -38,21 +38,23 @@ const HomeScreen = ({ navigation }) => {
           <View style={{ top: 0, flex: 1, height: '60%' }}>
             <PoolbarLogo style={{ alignSelf: 'center', marginBottom: 'auto', marginTop: 'auto' }} width="80%" height="100%" fill="black" />
           </View>
-          <View style={{ top: 0, marginTop: 0, marginBottom: 'auto', height: '40%' }}>
+          <View style={{ top: 0, marginTop: 0, marginBottom: 'auto', height: '60%' }}>
             <AppButton title="events" onPress={() => navigation.navigate('Events')} bevelLeft={true} />
             <View style={{ height: 20 }} />
             <AppButton title="artists" onPress={() => navigation.navigate('Artists')} />
             <View style={{ height: 20 }} />
             <AppButton title="generator" onPress={() => navigation.navigate('Generators')} bevelLeft={true} />
+            <View style={{ height: 20 }} />
+            <AppButton title="fließtext" onPress={() => navigation.navigate('Flowtext')} bevelLeft={false} />
           </View>
 
-          <TouchableOpacity style={{ position: 'absolute', bottom: 40, left: 40, width: 70, height: 70, backgroundColor: '#c6c300', borderRadius: 100 }} onPress={() => navigation.navigate('Map')}>
-            <FontAwesome style={{ marginTop: 'auto', marginBottom: 'auto', alignSelf: 'center' }} name={'map'} size={36} color="#000" />
+          <TouchableOpacity style={{ position: 'absolute', bottom: 40, left: 40, width: 70, height: 70, backgroundColor: 'transparent', borderRadius: 100 }} onPress={() => navigation.navigate('Map')}>
+            <FontAwesome style={{ marginTop: 'auto', marginBottom: 'auto', alignSelf: 'center', opacity: 0.6 }} name={'map'} size={36} color="#000" />
           </TouchableOpacity>
-          <TouchableOpacity style={{ position: 'absolute', bottom: 40, right: 40, width: 70, height: 70, backgroundColor: '#c6c300', borderRadius: 100 }} onPress={() => navigation.navigate('Scan')}>
-            <FontAwesome style={{ marginTop: 'auto', marginBottom: 'auto', alignSelf: 'center' }} name={'camera'} size={36} color="#000" />
+          <TouchableOpacity style={{ position: 'absolute', bottom: 40, right: 40, width: 70, height: 70, backgroundColor: 'transparent', borderRadius: 100 }} onPress={() => navigation.navigate('Scan')}>
+            <FontAwesome style={{ marginTop: 'auto', marginBottom: 'auto', alignSelf: 'center', opacity: 0.6 }} name={'camera'} size={36} color="#000" />
           </TouchableOpacity>
-        </ImageBackground>
+        </View>
       </FadeInView>
     </View>
   );

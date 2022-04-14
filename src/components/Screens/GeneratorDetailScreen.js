@@ -12,7 +12,7 @@ import { fetchGenerators } from '../../redux/generatorsThunk';
 const RenderElement = ({ generator }) => {
     return (
         <View style={{ flex: 1, width: '100%', height: '100%' }}>
-            <View style={{ backgroundColor: '#c6c300', padding: 20, marginTop: 10 }}>
+            <View style={{ padding: 20, marginTop: 10 }}>
                 <View>
                     <Text style={styles.roomDateText}>{generator.lab_item.name}</Text>
                     <Text style={styles.roomMainText}>{generator.name}</Text>
@@ -50,7 +50,7 @@ const GeneratorDetailScreen = ({ route, navigation }) => {
     return (
         <View style={StylesMain.mainView}>
             <FadeInView style={{ flex: 1, width: '100%' }}>
-                <NavBar navigation={navigation} title={selectedGenerator.lab_item?.name} />
+                <NavBar navigation={navigation} title={selectedGenerator?.lab_item?.name} />
                 <ScrollView style={{ flex: 1 }}>
                     {(selectedGenerator) ?
                         <RenderElement

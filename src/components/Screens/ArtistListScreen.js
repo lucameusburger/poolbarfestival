@@ -14,7 +14,12 @@ import { fetchEvents } from '../../redux/eventsThunk';
 const ArtistListScreen = ({ item }) => {
   return (
     <TouchableOpacity
-      style={{ marginBottom: 10, padding: 10 }}
+      style={{
+        marginBottom: 10,
+        padding: 10,
+        borderBottomWidth: 2,
+        borderBottomColor: '#000',
+      }}
       key={item.id}
       onPress={() =>
         navigate('Artist', {
@@ -101,7 +106,17 @@ const ArtistsScreen = ({ navigation }) => {
           }}
           nextTitle={'history'}
         />
-        <View style={{ flex: 1 }}>{!isLoaded ? <LoadingText /> : displayedArtists ? <ArtistsList artists={displayedArtists} /> : <LoadingText />}</View>
+        <View style={{ flex: 1 }}>
+          {!isLoaded ?
+            <LoadingText /> :
+            displayedArtists ?
+              <ArtistsList
+                artists={displayedArtists}
+
+              /> :
+              <LoadingText />
+          }
+        </View>
       </FadeInView>
     </View>
   );
