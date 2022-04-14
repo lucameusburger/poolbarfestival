@@ -20,6 +20,7 @@ import EventDetailScreen from './src/components/Screens/EventDetailScreen';
 import ScanScreen from './src/components/Screens/ScanScreen';
 import MapScreen from './src/components/Screens/MapScreen';
 import FlowtextScreen from './src/components/Screens/FlowtextScreen';
+import SplashScreen from './src/components/Screens/SplashScreen';
 
 import { Provider, useDispatch } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
@@ -60,6 +61,7 @@ function Navigator() {
       <Stack.Screen name="Map" component={MapScreen} options={{ title: 'Map', headerShown: false }} />
       <Stack.Screen name="Generator" component={GeneratorDetailScreen} options={{ title: 'Generator', headerShown: false }} />
       <Stack.Screen name="Flowtext" component={FlowtextScreen} options={{ title: 'Flowtext', headerShown: false }} />
+      <Stack.Screen name="SplashScreen" component={SplashScreen} options={{ title: 'SplashScreen', headerShown: false }} />
     </Stack.Navigator>
   );
 }

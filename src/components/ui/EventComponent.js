@@ -29,7 +29,7 @@ const EventComponent = ({ item }) => {
               justifyContent: 'flex-end',
             }}
           >
-            <LikeIcon eventId={item.id} color={'#FFC23B'} />
+            <LikeIcon eventId={item.id} color={'#00ff00'} />
           </View>
         </View>
       </View>
