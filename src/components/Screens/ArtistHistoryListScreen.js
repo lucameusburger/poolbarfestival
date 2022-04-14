@@ -40,7 +40,14 @@ const ArtistsScreen = ({ }) => {
     <View style={StylesMain.mainView}>
       <FadeInView style={{ flex: 1, width: '100%', height: '100%' }}>
         <NavBar title="history" />
-        <ScrollView style={{ flex: 1, marginBottom: 'auto', marginTop: 'auto', padding: 10 }}>{!isLoaded ? <LoadingText /> : artists ? <ArtistsList artists={artists} /> : <LoadingText />}</ScrollView>
+        <ScrollView style={{ flex: 1, marginTop: 'auto', padding: 10 }}>
+          {
+            !isLoaded ?
+              <LoadingText /> :
+              artists ?
+                <ArtistsList artists={artists} /> :
+                <LoadingText />
+          }</ScrollView>
       </FadeInView>
     </View>
   );
