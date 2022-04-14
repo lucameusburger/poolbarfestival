@@ -14,7 +14,7 @@ function getWord() {
   return wordlist[Math.floor(Math.random() * wordlist.length)];
 }
 
-const FlowtextElement = memo(({ text, y, key }) => {
+const FlowtextElement = memo(({ text, y, _key }) => {
   const dispatch = useDispatch();
   const phrase = useSelector(state => state.flowText.phrase);
 
@@ -27,7 +27,7 @@ const FlowtextElement = memo(({ text, y, key }) => {
   const removeElement = () => {
     dispatch({
       type: "REMOVE_ELEMENT",
-      payload: key
+      payload: _key
     })
   }
 
@@ -107,10 +107,13 @@ const FlowtextScreen = ({ navigation }) => {
   const add = () => {
     const word = getWord()
     const y = Math.floor(Math.random() * height)
+    const key = word + "-" + y
+
 
     const newElement = <FlowtextElement
       text={word}
-      key={word + "-" + y}
+      key={key}
+      _key={key}
       y={y}
     />;
     addElement(newElement);
@@ -150,8 +153,10 @@ const FlowtextScreen = ({ navigation }) => {
           </Text>}
         <View
           style={{
+            flex: 1,
             width: '100%',
             height: '100%',
+            marginBottom: 15,
           }}
           onLayout={(e) => {
             setHeight(e.nativeEvent.layout.height)
