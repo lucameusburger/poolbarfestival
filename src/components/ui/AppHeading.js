@@ -1,10 +1,10 @@
-import React, { Component, useState, useEffect, useRef } from 'react';
+import React, { Component, useState, useEffect, useRef, memo } from 'react';
 import { Animated, Dimensions, View, Platform, PixelRatio, StyleSheet, Text, ListView } from 'react-native';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
 const AppHeading = ({ title }) => {
-  const duration = 5000;
+  const duration = 10000;
   const startValue = new Animated.Value(SCREEN_WIDTH);
   const startValue0 = new Animated.Value(SCREEN_WIDTH);
   const endValue = -SCREEN_WIDTH;
@@ -59,4 +59,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AppHeading;
+export default memo(AppHeading);

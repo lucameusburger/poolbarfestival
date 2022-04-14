@@ -6,7 +6,7 @@ import Svg, { Path } from 'react-native-svg';
 
 TouchableOpacity.defaultProps = { activeOpacity: 0.8 };
 
-const AppButton = ({ onPress, title, color = '#FFC23B', style }) => {
+const AppButton = ({ onPress, title, color = '#00ff00', style }) => {
   const [active, setActive] = useState(false);
 
   return (

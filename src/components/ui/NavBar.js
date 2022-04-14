@@ -3,7 +3,7 @@ import { navigationRef } from '../../core/RootNavigation';
 import AppHeading from './AppHeading';
 import AppButton from './AppButton';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useEffect } from 'react';
+import { memo, useEffect } from 'react';
 import { useRef } from 'react';
 
 const estimatedStatusBarHeight = NativeModules.NativeUnimoduleProxy?.modulesConstants?.ExponentConstants?.statusBarHeight ?? 0;
@@ -66,4 +66,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default NavBar;
+export default memo(NavBar);
