@@ -36,10 +36,10 @@ const getMarkers = (locations) => {
     >
         <Callout tooltip={true} style={{backgroundColor:'transparent'}} onPress={
                             () =>{
-                                openGoogleMaps({'latitude':location.location.coordinates[0],'longitude':location.location.coordinates[1]},location.name)
+                                openGoogleMaps({'latitude':location.location.coordinates[1],'longitude':location.location.coordinates[0]},location.name)
                                 console.log('bruh')
                         }}>
-                <MyCalloutView location={{'latitude':location.location.coordinates[0],'longitude':location.location.coordinates[1]}} name={location.name}></MyCalloutView>
+                <MyCalloutView location={{'latitude':location.location.coordinates[1],'longitude':location.location.coordinates[0]}} name={location.name}></MyCalloutView>
 
 
             </Callout>
@@ -122,6 +122,23 @@ const MapScreen = ({ navigation }) => {
             strokeColor={'green'}
             fillColor="transparent"
         />
+
+<Marker
+    image={require('../../../assets/img/marker.png')}
+    coordinate={loewensaal}
+    >
+        <Callout
+         tooltip={true} style={{backgroundColor:'transparent',width:200,height:200}}
+                        onPress={
+                            () =>{
+                                openGoogleMaps(loewensaal,'Löwensaal');
+                                console.log('bruh');
+                        }}>
+                <MyCalloutView  name={'Löwensaal'} description={'Der Saal in dem wir chillen'}></MyCalloutView>
+
+
+            </Callout>
+    </Marker>
 
         {isLoaded&&locations?getMarkers(locations):[]}
 

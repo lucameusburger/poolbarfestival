@@ -8,6 +8,7 @@ import { reducer as venuesReducers, initialState as venuesInitialState } from '.
 import { reducer as spaceLocationsReducers, initialState as spaceLocationsInitialState } from './spaceLocationReducer';
 import { reducer as generatorsReducers, initialState as generatorsInitialState } from './generatorsReducer';
 import { reducer as locationReducers, initialState as locationInitialState } from './locationsReducer';
+
 import { reducer as flowTextReducer, initialState as flowTextInitialState } from './flowTextReducer';
 
 export const initialState = {
@@ -18,6 +19,7 @@ export const initialState = {
   venues: venuesInitialState,
   generators: generatorsInitialState,
   locations: locationInitialState,
+  spaceLocations: spaceLocationsInitialState,
   flowText: flowTextInitialState,
 };
 
@@ -29,5 +31,6 @@ export const rootReducer = combineReducers({
   venues: venuesReducers,
   generators: generatorsReducers,
   locations: locationReducers,
+  spaceLocations: spaceLocationsReducers,
   flowText: flowTextReducer,
 });
