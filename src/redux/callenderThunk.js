@@ -41,7 +41,7 @@ async function createCalendar() {
   const defaultCalendarSource = Platform.OS === 'ios' ? await getDefaultCalendarSource() : { isLocalAccount: true, name: 'Poolbar Events' };
   const newCalendarID = await Calendar.createCalendarAsync({
     title: 'Poolbar Events',
-    color: '#c6c300',
+    color: '#00ff00',
     entityType: Calendar.EntityTypes.EVENT,
     sourceId: defaultCalendarSource.id,
     source: defaultCalendarSource,

@@ -14,7 +14,7 @@ const hexToRgb = (hex) =>
     .match(/.{2}/g)
     .map((x) => parseInt(x, 16));
 
-const LikeIcon = ({ eventId, size = 32, style, colorOff = '#000', colorOn = '#c6c300' }) => {
+const LikeIcon = ({ eventId, size = 32, style, colorOff = '#000', colorOn = '#00ff00' }) => {
   const dispatch = useDispatch();
   const progress = useRef(new Animated.Value(isLiked ? 1 : 0)).current;
 

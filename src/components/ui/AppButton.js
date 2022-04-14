@@ -18,17 +18,9 @@ const AppButton = ({ onPress, title, color = '#FFC23B', style }) => {
         setActive(false);
       }}
       onPress={onPress}
-      style={[
-        styles.buttonContainer,
-        { backgroundColor: active ? color : 'white' },
-        style
-      ]}
+      style={[styles.buttonContainer, { backgroundColor: active ? color : 'white' }, style]}
     >
-      <Text
-        style={styles.buttonText}
-      >
-        {title}
-      </Text>
+      <Text style={styles.buttonText}>{title}</Text>
     </TouchableOpacity>
   );
 };
@@ -38,11 +30,11 @@ const styles = StyleSheet.create({
     fontFamily: 'Helviotopia',
     alignSelf: 'center',
     fontSize: 30,
-    borderRadius: 10,
+    borderRadius: 12,
     textAlign: 'center',
     borderWidth: 2,
     borderColor: 'black',
-    padding: 3,
+    padding: 10,
     width: '50%',
   },
   buttonText: {
