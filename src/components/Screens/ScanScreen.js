@@ -43,11 +43,16 @@ const ScanScreen = ({ navigation }) => {
     <View style={StylesMain.mainView}>
       <FadeInView style={{ flex: 1, width: '100%', height: '100%' }}>
         <NavBar navigation={navigation} title="scan" />
-        <View style={{ flex: 1, marginBottom: 'auto', marginTop: 'auto' }}>
+        <View style={{ flex: 1 }}>
           <View style={{ position: 'absolute', left: 0, right: 0, bottom: 0, right: 0, zIndex: 99, width: '100%', height: '100%', alignItems: 'center' }}>
             <FontAwesome style={{ marginTop: 'auto', marginBottom: 'auto', zIndex: 99, opacity: 0.33 }} name={'qrcode'} size={SCREEN_WIDTH} color="#fff" />
           </View>
-          {hasPermission && <BarCodeScanner onBarCodeScanned={scanned ? undefined : handleBarCodeScanned} style={StyleSheet.absoluteFillObject} />}
+          {hasPermission &&
+            <BarCodeScanner
+              onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
+              style={[StyleSheet.absoluteFillObject, { margin: -20 }]}
+            />
+          }
         </View>
       </FadeInView>
     </View>

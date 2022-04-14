@@ -1,37 +1,92 @@
-import React, { useState, useEffect } from 'react';
-import { Dimensions, View, PixelRatio, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, Platform, NativeModules, Animated } from 'react-native';
 import { navigationRef } from '../../core/RootNavigation';
 import AppHeading from './AppHeading';
+import AppButton from './AppButton';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import InfiniteScroll from 'react-native-infinite-looping-scroll';
+import { useEffect } from 'react';
+import { useRef } from 'react';
 
-const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
+const estimatedStatusBarHeight =
+  NativeModules.NativeUnimoduleProxy?.modulesConstants?.ExponentConstants
+    ?.statusBarHeight ?? 0;
 
-const NavBar = ({ title, next, nextTitle, type }) => {
+const APPROX_STATUSBAR_HEIGHT = Platform.select({
+  android: estimatedStatusBarHeight,
+  ios: Platform.Version < 11 ? estimatedStatusBarHeight : 0,
+});
+
+
+const Wrapper =
+  typeof APPROX_STATUSBAR_HEIGHT.statusBarHeight === 'number' ? View : SafeAreaView;
+
+
+const generateUniqueKey = () =>
+  `_${Math.random().toString(36).substr(2, 9)}`;
+
+
+const NavBar = ({ title, next, nextTitle }) => {
+  const scrollX = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    Animated.loop(
+      Animated.timing(scrollX, {
+        toValue: 1,
+        duration: 5000,
+        useNativeDriver: true,
+      }),
+    ).start(() => scrollX.setValue(0));
+  }, [scrollX]);
+
   return (
-    <View style={{ width: '100%', top: 0, marginTop: 50 }}>
-      <View style={{ marginTop: 0, left: 0, right: 0, width: '100%' }}>
-        <AppHeading style={{ width: '100%' }} title={title} />
-      </View>
-      <View style={{ flexDirection: 'row', width: '100%' }}>
-        <TouchableOpacity
-          style={{ width: nextTitle ? '50%' : '100%', paddingTop: 10, paddingBottom: 10, backgroundColor: '#FFC23B' }}
-          onPress={() => {
-            // handle the index we get
-            if (navigationRef.canGoBack()) {
-              navigationRef.goBack();
-            } else {
-              navigationRef.navigate('Home');
-            }
+    <Wrapper
+      style={{ backgroundColor: "#fff" }}
+    >
+      <View style={{
+        width: '100%',
+        top: 0,
+        borderBottomWidth: 2,
+        borderBottomColor: '#000',
+      }}>
+        <Animated.FlatList
+          data={[{ key: "a1" },
+          { key: "a2" }, { key: "a3" }, { key: "a4" },
+          { key: "a5" }, { key: "a6" }, { key: "a7" },]}
+          renderItem={({ item }) => <AppHeading style={{}} title={item.title} />}
+          showsHorizontalScrollIndicator={false}
+          style={{
+            transform: [{
+              translateX: scrollX
+            }],
           }}
-        >
-          <Text style={styles.button}>zurück</Text>
-        </TouchableOpacity>
-        {nextTitle && (
-          <TouchableOpacity style={{ width: '50%', paddingTop: 10, paddingBottom: 10, backgroundColor: '#FFC23B' }} onPress={next}>
-            <Text style={styles.button}>{nextTitle}</Text>
-          </TouchableOpacity>
-        )}
+        />
+        <View style={{
+          flexDirection: 'row', justifyContent: 'space-between', paddingBottom: 10,
+
+          marginHorizontal: '4%'
+        }}>
+          <AppButton
+            style={{ width: '48%' }}
+            title={'zurück'}
+            onPress={() => {
+              // handle the index we get
+              if (navigationRef.canGoBack()) {
+                navigationRef.goBack();
+              } else {
+                navigationRef.navigate('Home');
+              }
+            }}
+          />
+          {nextTitle &&
+            <AppButton
+              style={{ width: '48%' }}
+              title={nextTitle}
+              onPress={next}
+            />
+          }
+        </View>
       </View>
-    </View>
+    </Wrapper>
   );
 };
 

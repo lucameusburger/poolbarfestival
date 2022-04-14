@@ -12,6 +12,7 @@ import { fetchEvents } from '../../redux/eventsThunk';
 import { fetchArtists } from '../../redux/artistsThunk';
 import { navigate } from '../../core/RootNavigation';
 import { fetchVenues } from '../../redux/venueThunk';
+import { getDateString } from '../../core/helpers';
 
 const EventDetailScreen = ({ route }) => {
   const id = route.params.id.trim();
@@ -24,17 +25,22 @@ const EventDetailScreen = ({ route }) => {
   const venues = useSelector((state) => state.venues.data);
 
   const RenderElement = ({ item, artist, venue }) => {
-    let dateString = 'tba';
-
-    if (item.day_item && item.day_item.date_start) {
-      let dateOptions = { month: 'long', day: 'numeric' };
-      let date = new Date(item.day_item.date_start);
-      dateString = date.toLocaleDateString('en-US', dateOptions).toUpperCase();
-    }
+    const dateString = (item.day_item.date_start) ?
+      getDateString(new Date(item.day_item.date_start)) :
+      'tba';
 
     return (
       <View style={{ flex: 1, width: '100%', height: '100%' }}>
-        <View style={{ backgroundColor: '#FFC23B', padding: 20, marginTop: 10 }}>
+        <LikeIcon
+          eventId={item.id}
+          style={{
+            position: 'absolute',
+            top: 30,
+            right: 20,
+          }}
+        />
+
+        <View style={{ padding: 20, marginTop: 10 }}>
           <View>
             <Text style={styles.eventDateText}>{dateString}</Text>
             <Text style={styles.eventMainText}>{item.name}</Text>
@@ -42,7 +48,6 @@ const EventDetailScreen = ({ route }) => {
             <View style={{ height: 20 }}></View>
             <Text style={StylesMain.text}>{artist?.category}</Text>
             <Text style={StylesMain.text}>{venue?.name}</Text>
-            <LikeIcon eventId={item.id} size={36} colorOn="#000" style={{ alignSelf: 'flex-end', marginRight: 10, marginBottom: 10 }} />
           </View>
         </View>
 

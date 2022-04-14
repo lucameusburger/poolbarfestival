@@ -5,6 +5,7 @@ const StylesMain = StyleSheet.create({
   text: {
     fontFamily: 'Helviotopia',
     fontSize: 17,
+    lineHeight: 20.5,
   },
   mainHeader: {
     //fontFamily: 'Outfit_900Black',
@@ -93,7 +94,7 @@ const StylesMain = StyleSheet.create({
     color: '#000',
     alignSelf: 'flex-start',
     marginTop: 'auto',
-    fontSize: 18,
+    fontSize: 13,
     textAlign: 'left',
     textTransform: 'uppercase',
   },
@@ -102,7 +103,7 @@ const StylesMain = StyleSheet.create({
     color: '#000',
     alignSelf: 'flex-start',
     marginTop: 'auto',
-    fontSize: 32,
+    fontSize: 22,
     textAlign: 'left',
     textTransform: 'uppercase',
   },
@@ -138,7 +139,7 @@ const StylesMain = StyleSheet.create({
     color: '#000',
     alignSelf: 'flex-start',
     marginTop: 'auto',
-    fontSize: 32,
+    fontSize: 22,
     textAlign: 'left',
     textTransform: 'uppercase',
   },
@@ -166,9 +167,10 @@ const StylesMain = StyleSheet.create({
     color: '#000',
     alignSelf: 'flex-start',
     marginTop: 'auto',
-    fontSize: 32,
+    fontSize: 22,
     textAlign: 'left',
     textTransform: 'uppercase',
+    marginBottom: 20,
   },
 });
 
