@@ -1,1 +1,1 @@
-export const CLR_PRIMARY = '#c6c300';
+export const CLR_PRIMARY = '#00ff00';
