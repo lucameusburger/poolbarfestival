@@ -170,6 +170,26 @@ const StylesMain = StyleSheet.create({
     textAlign: 'left',
     textTransform: 'uppercase',
   },
+  flowTextElement: {
+    fontFamily: 'Helviotopia',
+    fontWeight: '500',
+    color: '#000',
+    alignSelf: 'flex-start',
+    marginTop: 'auto',
+    fontSize: 32,
+    textAlign: 'left',
+    textTransform: 'lowercase',
+  },
+  flowTextPhrase: {
+    fontFamily: 'Helviotopia',
+    fontWeight: '500',
+    color: '#000',
+    alignSelf: 'flex-start',
+    marginTop: 'auto',
+    fontSize: 32,
+    textAlign: 'left',
+    textTransform: 'lowercase',
+  },
 });
 
 export default StylesMain;

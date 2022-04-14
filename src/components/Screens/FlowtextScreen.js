@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Text, View, FlatList, ImageBackground, Image, TouchableOpacity } from 'react-native';
+import React, { useState, useEffect, useRef } from 'react';
+import { Text, View, FlatList, ImageBackground, Image, TouchableOpacity, Button, Dimensions, Animated } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
 import NavBar from '../ui/NavBar';
@@ -12,36 +12,67 @@ import PoolbarImage from '../ui/PoolbarImage';
 import artistPlaceholder from '../../../assets/img/artistPlaceholder.jpg';
 import { fetchEvents } from '../../redux/eventsThunk';
 
-const FlowtextGame = ({ item }) => {
-  return <View style={{ width: '100%', height: '100%' }}>{flowtextElements}</View>;
+const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
+
+const FlowtextGame = ({ elements, addToPhrase }) => {
+  return (
+    <View style={{ width: '100%', height: '100%', display: 'block', position: 'absolute', margin: 0 }}>
+      {elements.map((element, index) => {
+        return <FlowtextElement addToPhrase={addToPhrase} key={index} text={element} />;
+      })}
+    </View>
+  );
 };
 
-const FlowtextElement = ({ text }) => {
+const FlowtextElement = ({ index, text, addToPhrase }) => {
+  // make random y position between 0 and SCREEN_HEIGHT
+  const [y, setY] = useState(Math.floor(Math.random() * SCREEN_HEIGHT));
+
+  const fadeAnim = useRef(new Animated.Value(6)).current;
+
+  useEffect(() => {
+    Animated.timing(fadeAnim, {
+      toValue: -SCREEN_WIDTH,
+      duration: 10000,
+      useNativeDriver: true,
+    }).start();
+  }, [fadeAnim]);
+
   return (
-    <TouchableOpacity
-      onPress={() => {
-        const newPhrase = phrase + text;
-        setPhrase(newPhrase);
-        console.log(phrase);
-      }}
-    >
-      {text}
-    </TouchableOpacity>
+    <Animated.View style={{ position: 'absolute', top: y, right: 0, transform: [{ translateX: fadeAnim }] }}>
+      <TouchableOpacity
+        key={index}
+        onPress={() => {
+          addToPhrase(text);
+        }}
+        style={{ borderColor: '#000', borderWidth: 2, padding: 10, borderRadius: 50, fontFamily: 'HelviotopiaBold' }}
+      >
+        <Text style={StylesMain.flowTextElement}>{text}</Text>
+      </TouchableOpacity>
+    </Animated.View>
   );
 };
 
 const FlowtextScreen = ({ navigation }) => {
   const [isLoaded, setIsLoaded] = useState(true);
-  const [flowtexts, setFlowtexts] = useState(['Hallo', 'Hund', 'Dachs', 'ist', 'ein', 'Wolf', 'Lukas', 'ist', 'ein']);
+  const [flowtexts, setFlowtexts] = useState(['Rand', 'ist', 'cool']);
   const [flowtextElements, setFlowtextElements] = useState([]);
   const [phrase, setPhrase] = useState('');
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      console.log('asd');
+    setTimeout(() => {
+      const newFlowtextElements = [...flowtextElements];
+      const text = flowtexts[Math.floor(Math.random() * flowtexts.length)];
+      newFlowtextElements.push(text);
+      console.log(newFlowtextElements);
+      setFlowtextElements(newFlowtextElements);
     }, 1000);
-    return () => clearInterval(interval);
-  }, []);
+  }, [flowtextElements]);
+
+  const addToPhrase = (text) => {
+    setPhrase(phrase + ' ' + text);
+    // setFlowtextElements(flowtextElements.filter((e) => e !== text));
+  };
 
   return (
     <View style={StylesMain.mainView}>
@@ -54,8 +85,25 @@ const FlowtextScreen = ({ navigation }) => {
           }}
           nextTitle={'teilen'}
         />
-        <Text>{phrase}</Text>
-        <View style={{ flex: 1 }}>{!isLoaded ? <LoadingText /> : flowtexts ? <FlowtextGame artists={flowtexts} /> : <LoadingText />}</View>
+        <Button
+          title="clear"
+          onPress={() => {
+            setPhrase('');
+            setFlowtextElements([]);
+          }}
+        />
+        <Button
+          title="add"
+          onPress={() => {
+            // add FlowTextElement to flowtextElements
+            const newFlowtextElements = [...flowtextElements];
+            const text = flowtexts[Math.floor(Math.random() * flowtexts.length)];
+            newFlowtextElements.push(text);
+            setFlowtextElements(newFlowtextElements);
+          }}
+        />
+        <Text style={StylesMain.flowTextPhrase}>{phrase}</Text>
+        <View style={{ flex: 1 }}>{!isLoaded ? <LoadingText /> : flowtexts ? <FlowtextGame addToPhrase={addToPhrase} elements={flowtextElements} /> : <LoadingText />}</View>
       </FadeInView>
     </View>
   );
