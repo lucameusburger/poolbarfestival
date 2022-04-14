@@ -1,6 +1,6 @@
 import React, { useState, useEffect, memo } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { Text, View, StyleSheet, Linking } from 'react-native';
+import { Text, View, StyleSheet, Linking, TouchableOpacity } from 'react-native';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -87,8 +87,16 @@ const MapScreen = ({ navigation }) => {
 
   const dispatch = useDispatch();
 
+  const currentLocation = useSelector(state => state.currentLocation);
+
+    const setMode = (CURRENTLOCATION) => {
+        dispatch({
+            type: "SET_CURRENTLOCATION",
+            payload: currentLocation
+        })
+    }
+
   const locations = useSelector((state) => state.spaceLocations);
-  console.log(locations);
   const isLoaded = useSelector((state) => state.spaceLocations.isLoaded);
   const isFetchingData = useSelector((state) => state.spaceLocations.isFetchingData);
   const hasFetchingDataError = useSelector((state) => state.spaceLocations.hasFetchingDataError);
@@ -109,41 +117,27 @@ const MapScreen = ({ navigation }) => {
 
             onMapReady={setBoundingAustria}
             ref={mapRef}
-            initialRegion={{
-            latitude: loewensaal.latitude,
-            longitude: loewensaal.longitude,
-            latitudeDelta: 0.05,
-            longitudeDelta: 0.05,
-
-      }}>
+            initialRegion={initial}>
           <Polygon
             coordinates={geodata}
-            strokeWidth={3}
-            strokeColor={'green'}
-            fillColor="transparent"
+            strokeWidth={5}
+            strokeColor='black'
+            fillColor='#00000022'
         />
 
-<Marker
-    image={require('../../../assets/img/marker.png')}
-    coordinate={loewensaal}
-    >
-        <Callout
-         tooltip={true} style={{backgroundColor:'transparent',width:200,height:200}}
-                        onPress={
-                            () =>{
-                                openGoogleMaps(loewensaal,'Löwensaal');
-                                console.log('bruh');
-                        }}>
-                <MyCalloutView  name={'Löwensaal'} description={'Der Saal in dem wir chillen'}></MyCalloutView>
-
-
-            </Callout>
-    </Marker>
 
         {isLoaded&&locations?getMarkers(locations):[]}
 
 
         </MapView>
+        <View style={{position: 'absolute',bottom:0,backgroundColor: 'white', width:'100%',height:'10%', zIndex:10
+            ,display:'flex',flexDirection:'row'}}>
+            <Text>Titel</Text>
+            <Text>Beschreibung</Text>
+            <TouchableOpacity style={{ }} onPress={() => navigation.navigate('Map')}>
+            <FontAwesome style={{ marginTop: 'auto', marginBottom: 'auto', alignSelf: 'center', opacity: 0.6 }} name={'map'} size={36} color="#000" />
+          </TouchableOpacity>
+        </View>
       </FadeInView>
     </View>
 
@@ -191,7 +185,7 @@ const generatedMapStyle = [
               "lightness": 100
           },
           {
-              "visibility": "on"
+              "visibility": "off"
           }
       ]
   },
@@ -305,7 +299,7 @@ const generatedMapStyle = [
   }
 ];
 
-const loewensaal = {
+const initial = {
   latitude: 47.36321774000127,
   longitude: 9.689607548263336,
   latitudeDelta: 0.01,
