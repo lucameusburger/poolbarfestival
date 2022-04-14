@@ -1,4 +1,4 @@
-import { View, StyleSheet, Platform, NativeModules, Animated } from 'react-native';
+import { View, StyleSheet, Platform, NativeModules } from 'react-native';
 import { navigationRef } from '../../core/RootNavigation';
 import AppHeading from './AppHeading';
 import AppButton from './AppButton';
@@ -19,26 +19,15 @@ const Wrapper = typeof APPROX_STATUSBAR_HEIGHT.statusBarHeight === 'number' ? Vi
 const generateUniqueKey = () => `_${Math.random().toString(36).substr(2, 9)}`;
 
 const NavBar = ({ title, next, nextTitle }) => {
-  const scrollX = useRef(new Animated.Value(0)).current;
-
-  useEffect(() => {
-    Animated.loop(
-      Animated.timing(scrollX, {
-        toValue: 1,
-        duration: 5000,
-        useNativeDriver: true,
-      })
-    ).start(() => scrollX.setValue(0));
-  }, [scrollX]);
-
   return (
-    <Wrapper style={{ backgroundColor: '#fff' }}>
+    <Wrapper style={{ backgroundColor: '#fff', marginBottom: 0 }}>
       <View
         style={{
           width: '100%',
           top: 0,
           borderBottomWidth: 2,
           borderBottomColor: '#000',
+          marginBottom: 0,
         }}
       >
         <AppHeading title={title} />

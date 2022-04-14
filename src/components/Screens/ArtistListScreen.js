@@ -50,7 +50,7 @@ const ArtistListScreen = ({ item }) => {
   );
 };
 
-const ArtistsList = ({ artists }) => <FlatList style={{ flex: 1 }} data={artists} renderItem={ArtistListScreen} keyExtractor={(item) => item.id} />;
+const ArtistsList = ({ artists }) => <FlatList style={{ flex: 1, height: '100%' }} data={artists} renderItem={ArtistListScreen} keyExtractor={(item) => item.id} />;
 
 const ArtistsScreen = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -106,17 +106,7 @@ const ArtistsScreen = ({ navigation }) => {
           }}
           nextTitle={'history'}
         />
-        <View style={{ flex: 1 }}>
-          {!isLoaded ?
-            <LoadingText /> :
-            displayedArtists ?
-              <ArtistsList
-                artists={displayedArtists}
-
-              /> :
-              <LoadingText />
-          }
-        </View>
+        <View style={{ flex: 1 }}>{!isLoaded ? <LoadingText /> : displayedArtists ? <ArtistsList artists={displayedArtists} /> : <LoadingText />}</View>
       </FadeInView>
     </View>
   );
