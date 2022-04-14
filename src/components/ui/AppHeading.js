@@ -1,6 +1,5 @@
 import React, { Component, useState, useEffect, useRef } from 'react';
 import { Animated, Dimensions, View, Platform, PixelRatio, StyleSheet, Text, ListView } from 'react-native';
-import InfiniteScroll from 'react-native-infinite-scroll';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 

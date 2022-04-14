@@ -11,8 +11,7 @@ import StylesMain from '../../../styles/StylesMain';
 import { navigate } from '../../core/RootNavigation';
 
 
-import austriaOutline from '../../../assets/austriaOutline.json';
-
+import geodata from '../../../assets/geodata.json';
 
 import { FontAwesome } from '@expo/vector-icons';
 
@@ -33,15 +32,14 @@ const getMarkers = (locations) => {
     let counter = 0;
     locations.data.map((location) => markers[counter++] = <Marker key={location.id}
     image={require('../../../assets/img/marker.png')}
-    onPress={console.log('clicked mate')}
-    coordinate={{'latitude':location.location.coordinates[0],'longitude':location.location.coordinates[1]}}
+    coordinate={{'longitude':location.location.coordinates[0],'latitude':location.location.coordinates[1]}}
     >
         <Callout tooltip={true} style={{backgroundColor:'transparent'}} onPress={
                             () =>{
                                 openGoogleMaps({'latitude':location.location.coordinates[0],'longitude':location.location.coordinates[1]},location.name)
                                 console.log('bruh')
                         }}>
-                <MyCalloutView location={loewensaal} name={location.name}></MyCalloutView>
+                <MyCalloutView location={{'latitude':location.location.coordinates[0],'longitude':location.location.coordinates[1]}} name={location.name}></MyCalloutView>
 
 
             </Callout>
@@ -119,28 +117,11 @@ const MapScreen = ({ navigation }) => {
 
       }}>
           <Polygon
-            coordinates={austriaOutline}
+            coordinates={geodata}
             strokeWidth={3}
-            strokeColor={'#2ECDA7'}
+            strokeColor={'green'}
             fillColor="transparent"
         />
-
-<Marker
-    image={require('../../../assets/img/marker.png')}
-    coordinate={loewensaal}
-    >
-        <Callout
-         tooltip={true} style={{backgroundColor:'transparent',width:200,height:200}}
-                        onPress={
-                            () =>{
-                                openGoogleMaps(loewensaal,'Löwensaal');
-                                console.log('bruh');
-                        }}>
-                <MyCalloutView  name={'Löwensaal'} description={'Der Saal in dem wir chillen'}></MyCalloutView>
-
-
-            </Callout>
-    </Marker>
 
         {isLoaded&&locations?getMarkers(locations):[]}
 

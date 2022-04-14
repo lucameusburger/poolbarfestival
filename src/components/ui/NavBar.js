@@ -3,7 +3,6 @@ import { navigationRef } from '../../core/RootNavigation';
 import AppHeading from './AppHeading';
 import AppButton from './AppButton';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import InfiniteScroll from 'react-native-infinite-looping-scroll';
 import { useEffect } from 'react';
 import { useRef } from 'react';
 
