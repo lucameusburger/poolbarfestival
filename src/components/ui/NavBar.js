@@ -41,18 +41,7 @@ const NavBar = ({ title, next, nextTitle }) => {
           borderBottomColor: '#000',
         }}
       >
-        <Animated.FlatList
-          data={[{ key: 'a1' }, { key: 'a2' }, { key: 'a3' }, { key: 'a4' }, { key: 'a5' }, { key: 'a6' }, { key: 'a7' }]}
-          renderItem={({ item }) => <AppHeading style={{}} title={item.title} />}
-          showsHorizontalScrollIndicator={false}
-          style={{
-            transform: [
-              {
-                translateX: scrollX,
-              },
-            ],
-          }}
-        />
+        <AppHeading title={title} />
         <View
           style={{
             flexDirection: 'row',
