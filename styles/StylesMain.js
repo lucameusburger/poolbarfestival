@@ -178,7 +178,7 @@ const StylesMain = StyleSheet.create({
     color: '#000',
     alignSelf: 'flex-start',
     marginTop: 'auto',
-    fontSize: 32,
+    fontSize: 18,
     textAlign: 'left',
     textTransform: 'lowercase',
   },
@@ -186,11 +186,15 @@ const StylesMain = StyleSheet.create({
     fontFamily: 'Helviotopia',
     fontWeight: '500',
     color: '#000',
-    alignSelf: 'flex-start',
-    marginTop: 'auto',
-    fontSize: 32,
-    textAlign: 'left',
+    fontSize: 18,
+    textAlign: 'center',
     textTransform: 'lowercase',
+    borderWidth: 2,
+    borderColor: '#000',
+    borderRadius: 10,
+    margin: 10,
+    padding: 10,
+
   },
 });
 
