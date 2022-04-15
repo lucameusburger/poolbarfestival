@@ -21,7 +21,6 @@ const NavBar = ({ title, next, nextTitle }) => {
         style={{
           width: '100%',
           backgroundColor: 'white',
-          top: 0,
           borderBottomWidth: 2,
           borderBottomColor: 'black',
           marginBottom: 0,
