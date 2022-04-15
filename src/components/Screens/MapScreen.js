@@ -19,6 +19,7 @@ import MyCalloutView from '../ui/MyCalloutView';
 import { fetchSpaceLocations } from '../../redux/spaceLocationThunk';
 import markerImage from '../../../assets/img/marker.png';
 import selectedMarkerImage from '../../../assets/img/selectedMarker.png';
+import { FontAwesome } from '@expo/vector-icons';
 
 const BASE_URL = 'https://www.admin.poolbar.at/';
 const mapRef = React.createRef();
