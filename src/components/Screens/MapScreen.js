@@ -28,9 +28,10 @@ import selectedMarkerImage from '../../../assets/img/selectedMarker.png';
 const BASE_URL = 'https://www.admin.poolbar.at/';
 const mapRef = React.createRef();
 
-let infoBarVisible = false;
 
-function CustomMarker({ location, setCurrentLocation, currentLocation }) {
+
+
+function CustomMarker({ location, setCurrentLocation, currentLocation, infoBarVisible, setInfoBarVisible }) {
     return (
         <Marker
             key={location.id}
@@ -38,7 +39,8 @@ function CustomMarker({ location, setCurrentLocation, currentLocation }) {
             coordinate={{ 'longitude': location.location.coordinates[0], 'latitude': location.location.coordinates[1] }}
             tracksViewChanges={true}
             onPress={() => {
-                infoBarVisible = true;
+                setInfoBarVisible(true)
+                console.log('infobar visible is now ', infoBarVisible)
                 setCurrentLocation(location);
             }
             }
@@ -59,7 +61,7 @@ const InfoBar = () => {
     }
 }
 
-const RenderMarkers = ({ locations }) => {
+const RenderMarkers = ({ locations, setInfoBarVisible, infoBarVisible }) => {
 
     const dispatch = useDispatch();
 
@@ -76,6 +78,8 @@ const RenderMarkers = ({ locations }) => {
         <CustomMarker
             location={location}
             setCurrentLocation={setCurrentLocation}
+            setInfoBarVisible={setInfoBarVisible}
+            infoBarVisible={infoBarVisible}
             currentLocation={currentLocation}
             key={'marker_' + location.id}
         />
@@ -117,7 +121,7 @@ function setBoundingBox(bbox) {
 
 const MapScreen = ({ navigation }) => {
 
-
+    const [infoBarVisible, setInfoBarVisible] = useState(false);
 
     const dispatch = useDispatch();
 
@@ -157,7 +161,7 @@ const MapScreen = ({ navigation }) => {
                             return
 
                         }
-                        infoBarVisible = false
+                        setInfoBarVisible(false)
                         console.log('kein marker')
                         console.log(infoBarVisible)
 
@@ -179,11 +183,13 @@ const MapScreen = ({ navigation }) => {
                                 locations.data :
                                 []
                         }
+                        infoBarVisible={infoBarVisible}
+                        setInfoBarVisible={setInfoBarVisible}
                     />
                 </MapView>
 
 
-                {infoBarVisible && currentLocation &&
+                {infoBarVisible &&
                     <View
                         style={{
                             position: 'absolute', bottom: 0, backgroundColor: 'white', width: '100%', height: '15%', zIndex: 10
@@ -191,7 +197,7 @@ const MapScreen = ({ navigation }) => {
                         }}>
 
                         <View>
-                            <Text style={{ fontSize: 18, marginBottom: 10 }}>{currentLocation.name}</Text>
+                            <Text style={{ fontSize: 18, marginBottom: 10, marginTop: 10 }}>{currentLocation.name}</Text>
                             <Text>{currentLocation.description}</Text>
 
                         </View>
