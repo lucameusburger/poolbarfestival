@@ -1,6 +1,5 @@
-import { useEffect, useRef, useState } from 'react';
-import { Text, StyleSheet, Pressable, View } from 'react-native';
-import Svg, { Path } from 'react-native-svg';
+import { useState } from 'react';
+import { Text, StyleSheet, Pressable } from 'react-native';
 
 const AppButton = ({ onPress, title, color = '#00ff00', style }) => {
   const [active, setActive] = useState(false);
@@ -14,7 +13,11 @@ const AppButton = ({ onPress, title, color = '#00ff00', style }) => {
         setActive(false);
       }}
       onPress={onPress}
-      style={[styles.buttonContainer, { backgroundColor: active ? color : 'white' }, style]}
+      style={[
+        styles.buttonContainer,
+        { backgroundColor: active ? color : 'white' },
+        style
+      ]}
     >
       <Text style={styles.buttonText}>{title}</Text>
     </Pressable>
@@ -23,9 +26,7 @@ const AppButton = ({ onPress, title, color = '#00ff00', style }) => {
 
 const styles = StyleSheet.create({
   buttonContainer: {
-    fontFamily: 'Helviotopia',
     alignSelf: 'center',
-    fontSize: 30,
     borderRadius: 12,
     textAlign: 'center',
     borderWidth: 2,
@@ -34,8 +35,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontFamily: 'Helviotopia',
-    fontWeight: '500',
-    color: '#000',
+    color: 'black',
     alignSelf: 'center',
     marginTop: 'auto',
     marginBottom: 'auto',

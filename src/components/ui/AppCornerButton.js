@@ -1,6 +1,5 @@
-import { useEffect, useRef, useState } from 'react';
-import { Text, StyleSheet, Pressable, View } from 'react-native';
-import Svg, { Path } from 'react-native-svg';
+import { useState } from 'react';
+import { StyleSheet, Pressable } from 'react-native';
 
 import { FontAwesome } from '@expo/vector-icons';
 
@@ -26,7 +25,7 @@ const AppCornerButton = ({ onPress, icon, color = '#00ff00', style, position = '
       ]}
       onPress={onPress}
     >
-      <FontAwesome style={styles.buttonIcon} name={icon} size={36} color="#000" />
+      <FontAwesome style={styles.buttonIcon} name={icon} size={36} color="black" />
     </Pressable>
   );
 };
@@ -38,9 +37,9 @@ const styles = StyleSheet.create({
     left: 40,
     width: 70,
     height: 70,
-    backgroundColor: '#fff',
+    backgroundColor: 'white',
     borderRadius: 100,
-    borderColor: '#000',
+    borderColor: 'black',
     borderWidth: 2,
   },
   buttonIcon: {

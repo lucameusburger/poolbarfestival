@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, ScrollView, FlatList } from 'react-native';
+import { useState, useEffect } from 'react';
+import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import NavBar from '../ui/NavBar';
 import FadeInView from '../ui/FadeInView';
 import StylesMain from '../../../styles/StylesMain';
@@ -71,7 +71,7 @@ const RoomDetailScreen = ({ route, navigation }) => {
 const styles = StyleSheet.create({
   roomDateText: {
     fontFamily: 'HelviotopiaBold',
-    color: '#000',
+    color: 'black',
     alignSelf: 'flex-start',
     marginTop: 'auto',
     fontSize: 24,
@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
   roomMainText: {
     fontFamily: 'Helviotopia',
     fontWeight: '500',
-    color: '#000',
+    color: 'black',
     alignSelf: 'flex-start',
     marginTop: 'auto',
     fontSize: 32,

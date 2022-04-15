@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { View, FlatList, PermissionsAndroid, Alert } from 'react-native';
+import { View, FlatList } from 'react-native';
 import * as Sharing from 'expo-sharing';
 import ViewShot from 'react-native-view-shot';
 import LoadingText from '../ui/LoadingText';
@@ -37,7 +37,7 @@ const EventLikedListScreen = ({ router }) => {
           }}
           nextTitle="teilen"
         />
-        <ViewShot ref={viewShotRef} style={{ height: '100%', width: '100%', backgroundColor: '#fff' }}>
+        <ViewShot ref={viewShotRef} style={{ height: '100%', width: '100%', backgroundColor: 'white' }}>
           <View style={{ flex: 1, margin: 0 }}>
             {loading && (
               <View style={{ flex: 1, margin: 0 }}>

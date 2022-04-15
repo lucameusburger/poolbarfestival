@@ -7,12 +7,14 @@
     "icon": "./assets/icon/appstore.png",
     "splash": {
       "image": "./assets/splash.png",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "white"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "bundleIdentifier": "at.lume.poolbarfestival",
       "buildNumber": "1.0.2",
@@ -26,9 +28,13 @@
       "versionCode": 1,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
+        "backgroundColor": "white"
       },
-      "permissions": ["READ_CALENDAR", "WRITE_CALENDAR", "CAMERA"]
+      "permissions": [
+        "READ_CALENDAR",
+        "WRITE_CALENDAR",
+        "CAMERA"
+      ]
     },
     "web": {
       "favicon": "./assets/favicon.png"

@@ -5,22 +5,17 @@ import { Text, View, StyleSheet, Linking, TouchableOpacity } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux';
 
 import NavBar from '../ui/NavBar';
-import LoadingText from '../ui/LoadingText';
 import FadeInView from '../ui/FadeInView';
 import StylesMain from '../../../styles/StylesMain';
-import { navigate } from '../../core/RootNavigation';
 
 
 import geodata from '../../../assets/geodata.json';
-
-import { FontAwesome } from '@expo/vector-icons';
 
 
 import MapView, { Marker, Callout, Polygon } from 'react-native-maps';
 import MyCalloutView from '../ui/MyCalloutView';
 
 
-import mapImage from '../../../assets/img/map.png'
 import { fetchSpaceLocations } from '../../redux/spaceLocationThunk';
 import markerImage from '../../../assets/img/marker.png';
 import selectedMarkerImage from '../../../assets/img/selectedMarker.png';
@@ -209,7 +204,7 @@ const MapScreen = ({ navigation }) => {
                                     style={{ marginTop: 'auto', marginBottom: 'auto', alignSelf: 'center', opacity: 0.6 }}
                                     name={'info'}
                                     size={36}
-                                    color="#000"
+                                    color="black"
                                 />
                             </TouchableOpacity>
                             <TouchableOpacity onPress={() => {
@@ -225,7 +220,7 @@ const MapScreen = ({ navigation }) => {
                                     style={{ marginTop: 'auto', marginBottom: 'auto', alignSelf: 'center', opacity: 0.6 }}
                                     name={'location-arrow'}
                                     size={36}
-                                    color="#000"
+                                    color="black"
                                 />
                             </TouchableOpacity>
                         </View>
@@ -247,7 +242,7 @@ const MapScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: 'white',
         alignItems: 'center',
         justifyContent: 'center',
     },
@@ -275,7 +270,7 @@ const generatedMapStyle = [
         "elementType": "all",
         "stylers": [
             {
-                "hue": "#ffffff"
+                "hue": "white"
             },
             {
                 "saturation": -100
@@ -293,7 +288,7 @@ const generatedMapStyle = [
         "elementType": "geometry",
         "stylers": [
             {
-                "hue": "#000000"
+                "hue": "black"
             },
             {
                 "saturation": -100
@@ -311,7 +306,7 @@ const generatedMapStyle = [
         "elementType": "labels",
         "stylers": [
             {
-                "hue": "#ffffff"
+                "hue": "white"
             },
             {
                 "saturation": -100
@@ -329,7 +324,7 @@ const generatedMapStyle = [
         "elementType": "all",
         "stylers": [
             {
-                "hue": "#ffffff"
+                "hue": "white"
             },
             {
                 "saturation": -100
@@ -347,7 +342,7 @@ const generatedMapStyle = [
         "elementType": "all",
         "stylers": [
             {
-                "hue": "#ffffff"
+                "hue": "white"
             },
             {
                 "saturation": 0
@@ -365,7 +360,7 @@ const generatedMapStyle = [
         "elementType": "geometry",
         "stylers": [
             {
-                "hue": "#000000"
+                "hue": "black"
             },
             {
                 "saturation": 0
@@ -383,7 +378,7 @@ const generatedMapStyle = [
         "elementType": "labels",
         "stylers": [
             {
-                "hue": "#ffffff"
+                "hue": "white"
             },
             {
                 "saturation": 0

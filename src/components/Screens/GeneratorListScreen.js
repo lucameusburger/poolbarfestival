@@ -20,7 +20,7 @@ const RenderElement = ({ item }) => {
         marginBottom: 0,
         padding: 20,
         borderBottomWidth: 2,
-        borderBottomColor: '#000',
+        borderBottomColor: 'black',
       }}
     >
       <View key={item.id} style={{ width: '100%', marginTop: 'auto', flexDirection: 'row' }}>

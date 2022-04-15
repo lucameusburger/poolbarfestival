@@ -1,13 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { View, Pressable, ImageBackground, Text, Dimensions } from 'react-native';
+import { View, ImageBackground, Text, Dimensions } from 'react-native';
 import FadeInView from '../ui/FadeInView';
 import PoolbarLogo from '../ui/PoolbarLogo';
 import AppButton from '../ui/AppButton';
 import AppCornerButton from '../ui/AppCornerButton';
 import StylesMain from '../../../styles/StylesMain';
 import gridImage from '../../../assets/img/grid.png';
-
-import { FontAwesome } from '@expo/vector-icons';
 
 const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
 

@@ -12,7 +12,7 @@ const EventComponent = ({ item }) => {
       style={{
         padding: 20,
         borderBottomWidth: 2,
-        borderBottomColor: '#000',
+        borderBottomColor: 'black',
         width: '100%',
       }}
       key={item.id}

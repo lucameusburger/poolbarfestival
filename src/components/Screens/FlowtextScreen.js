@@ -1,10 +1,9 @@
 import { useState, useEffect, useRef, memo } from 'react';
-import { Text, View, TouchableOpacity, Button, Dimensions, Animated, ScrollView } from 'react-native';
-import { useMemoOne, useCallbackOne } from 'use-memo-one';
+import { Text, View, TouchableOpacity, Dimensions, Animated, ScrollView } from 'react-native';
+import { useMemoOne } from 'use-memo-one';
 import NavBar from '../ui/NavBar';
 import * as Sharing from 'expo-sharing';
 import ViewShot from 'react-native-view-shot';
-import LoadingText from '../ui/LoadingText';
 import FadeInView from '../ui/FadeInView';
 import StylesMain from '../../../styles/StylesMain';
 import wordlist from '../../../assets/data/wordlist';
@@ -65,8 +64,8 @@ const FlowtextElement = memo(({ text, y, _key }) => {
           removeElement();
         }}
         style={{
-          borderColor: '#000',
-          backgroundColor: '#fff',
+          borderColor: 'black',
+          backgroundColor: 'white',
           borderWidth: 2,
           padding: 10,
           borderRadius: 50,

@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Text, View, FlatList, ImageBackground, Image, TouchableOpacity } from 'react-native';
+import { useState, useEffect } from 'react';
+import { Text, View, FlatList, TouchableOpacity } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
 import NavBar from '../ui/NavBar';
@@ -17,7 +17,7 @@ const ArtistListScreen = ({ item }) => {
       style={{
         padding: 20,
         borderBottomWidth: 2,
-        borderBottomColor: '#000',
+        borderBottomColor: 'black',
       }}
       key={item.id}
       onPress={() =>

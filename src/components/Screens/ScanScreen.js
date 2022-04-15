@@ -1,15 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, Button, Item, FlatList, ImageBackground, TouchableOpacity, Linking, Dimensions } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { useState, useEffect } from 'react';
+import { StyleSheet, View, Linking, Dimensions } from 'react-native';
 import FadeInView from '../ui/FadeInView';
 import NavBar from '../ui/NavBar';
 import StylesMain from '../../../styles/StylesMain';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import { FontAwesome } from '@expo/vector-icons';
-import AppButton from '../ui/AppButton';
 
-const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
+const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
 const ScanScreen = ({ navigation }) => {
   const [hasPermission, setHasPermission] = useState(null);
@@ -44,8 +41,30 @@ const ScanScreen = ({ navigation }) => {
       <FadeInView style={{ flex: 1, width: '100%', height: '100%' }}>
         <NavBar navigation={navigation} title="scan" />
         <View style={{ flex: 1 }}>
-          <View style={{ position: 'absolute', left: 0, right: 0, bottom: 0, right: 0, zIndex: 99, width: '100%', height: '100%', alignItems: 'center' }}>
-            <FontAwesome style={{ marginTop: 'auto', marginBottom: 'auto', zIndex: 99, opacity: 0.33 }} name={'qrcode'} size={SCREEN_WIDTH} color="#fff" />
+          <View
+            style={{
+              position: 'absolute',
+              left: 0,
+              right: 0,
+              bottom: 0,
+              right: 0,
+              zIndex: 99,
+              width: '100%',
+              height: '100%',
+              alignItems: 'center'
+            }}
+          >
+            <FontAwesome
+              style={{
+                marginTop: 'auto',
+                marginBottom: 'auto',
+                zIndex: 99,
+                opacity: 0.33
+              }}
+              name={'qrcode'}
+              size={SCREEN_WIDTH}
+              color="white"
+            />
           </View>
           {hasPermission &&
             <BarCodeScanner
