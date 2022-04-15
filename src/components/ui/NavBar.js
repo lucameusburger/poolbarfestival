@@ -17,11 +17,11 @@ const Wrapper = typeof APPROX_STATUSBAR_HEIGHT.statusBarHeight === 'number' ? Vi
 
 const NavBar = ({ title, next, nextTitle }) => {
   return (
-    <Wrapper style={{ margin: 0, height: 220, backgroundColor: '#fff', zIndex: 999 }}>
+    <Wrapper style={{ margin: 0, backgroundColor: 'transparent', zIndex: 999 }}>
       <View
         style={{
           width: '100%',
-          backgroundColor: '#fff',
+          backgroundColor: 'transparent',
           top: 0,
           borderBottomWidth: 2,
           borderBottomColor: '#000',
@@ -41,7 +41,6 @@ const NavBar = ({ title, next, nextTitle }) => {
             style={{ flex: 1 }}
             title={'zurück'}
             onPress={() => {
-              // handle the index we get
               if (navigationRef.canGoBack()) {
                 navigationRef.goBack();
               } else {
