@@ -19,6 +19,7 @@ import MyCalloutView from '../ui/MyCalloutView';
 import { fetchSpaceLocations } from '../../redux/spaceLocationThunk';
 import markerImage from '../../../assets/img/marker.png';
 import selectedMarkerImage from '../../../assets/img/selectedMarker.png';
+import { FontAwesome } from '@expo/vector-icons';
 
 const BASE_URL = 'https://www.admin.poolbar.at/';
 const mapRef = React.createRef();
@@ -170,7 +171,7 @@ const MapScreen = ({ navigation }) => {
                         coordinates={geodata}
                         strokeWidth={5}
                         strokeColor='black'
-                        fillColor='#00000022'
+                        fillColor='rgba(0,0,0,0.135)'
                     />
                     <RenderMarkers
                         locations={
