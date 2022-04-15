@@ -195,6 +195,7 @@ const StylesMain = StyleSheet.create({
     borderColor: '#000',
     borderRadius: 10,
     padding: 10,
+    overflow: 'hidden',
   },
 });
 
