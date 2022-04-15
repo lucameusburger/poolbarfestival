@@ -44,7 +44,7 @@ const EventLikedListScreen = ({ router }) => {
                 <LoadingText />
               </View>
             )}
-            {events ? <FlatList style={{ flex: 1, padding: 20 }} data={events.filter((event) => likedEvents.includes(event.id))} renderItem={EventComponent} keyExtractor={(item) => item.id} /> : <LoadingText />}
+            {events ? <FlatList style={{ flex: 1 }} data={events.filter((event) => likedEvents.includes(event.id))} renderItem={EventComponent} keyExtractor={(item) => item.id} /> : <LoadingText />}
           </View>
         </ViewShot>
       </FadeInView>
