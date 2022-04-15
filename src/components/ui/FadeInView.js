@@ -1,5 +1,5 @@
-import React, { useRef, useEffect } from 'react';
-import { Animated } from 'react-native';
+import React, { useRef, useEffect } from "react";
+import { Animated } from "react-native";
 
 const FadeInView = ({ children, style, duration = 1000 }) => {
   const fadeAnim = useRef(new Animated.Value(0)).current; // Initial value for opacity: 0

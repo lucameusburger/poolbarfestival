@@ -1,36 +1,40 @@
-import { View, Platform, NativeModules } from 'react-native';
-import { navigationRef } from '../../core/RootNavigation';
-import AppHeading from './AppHeading';
-import AppButton from './AppButton';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { memo } from 'react';
+import { View, Platform, NativeModules } from "react-native";
+import { navigationRef } from "../../core/RootNavigation";
+import AppHeading from "./AppHeading";
+import AppButton from "./AppButton";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { memo } from "react";
 
-const estimatedStatusBarHeight = NativeModules.NativeUnimoduleProxy?.modulesConstants?.ExponentConstants?.statusBarHeight ?? 0;
+const estimatedStatusBarHeight =
+  NativeModules.NativeUnimoduleProxy?.modulesConstants?.ExponentConstants
+    ?.statusBarHeight ?? 0;
 
 const APPROX_STATUSBAR_HEIGHT = Platform.select({
   android: estimatedStatusBarHeight,
   ios: Platform.Version < 11 ? estimatedStatusBarHeight : 0,
 });
 
-const Wrapper = typeof APPROX_STATUSBAR_HEIGHT.statusBarHeight === 'number' ? View : SafeAreaView;
+const Wrapper =
+  typeof APPROX_STATUSBAR_HEIGHT.statusBarHeight === "number"
+    ? View
+    : SafeAreaView;
 
 const NavBar = ({ title, next, nextTitle }) => {
   return (
-    <Wrapper style={{ margin: 0, backgroundColor: 'white', zIndex: 999 }}>
+    <Wrapper style={{ margin: 0, backgroundColor: "white", zIndex: 999 }}>
       <View
         style={{
-          width: '100%',
-          backgroundColor: 'white',
-          top: 0,
+          width: "100%",
+          backgroundColor: "white",
           borderBottomWidth: 2,
-          borderBottomColor: 'black',
+          borderBottomColor: "black",
           marginBottom: 0,
         }}
       >
         <AppHeading title={title} />
         <View
           style={{
-            flexDirection: 'row',
+            flexDirection: "row",
             paddingBottom: 10,
             marginLeft: 20,
             marginRight: 20,
@@ -38,12 +42,12 @@ const NavBar = ({ title, next, nextTitle }) => {
         >
           <AppButton
             style={{ flex: 1 }}
-            title={'zurück'}
+            title={"zurück"}
             onPress={() => {
               if (navigationRef.canGoBack()) {
                 navigationRef.goBack();
               } else {
-                navigationRef.navigate('Home');
+                navigationRef.navigate("Home");
               }
             }}
           />

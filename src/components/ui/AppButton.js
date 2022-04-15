@@ -1,7 +1,8 @@
-import { useState } from 'react';
-import { Text, StyleSheet, Pressable } from 'react-native';
+import { useState } from "react";
+import { Text, StyleSheet, Pressable } from "react-native";
+import { CLR_PRIMARY } from "../../core/Theme";
 
-const AppButton = ({ onPress, title, color = '#00ff00', style }) => {
+const AppButton = ({ onPress, title, color = CLR_PRIMARY, style }) => {
   const [active, setActive] = useState(false);
 
   return (
@@ -15,8 +16,8 @@ const AppButton = ({ onPress, title, color = '#00ff00', style }) => {
       onPress={onPress}
       style={[
         styles.buttonContainer,
-        { backgroundColor: active ? color : 'white' },
-        style
+        { backgroundColor: active ? color : "white" },
+        style,
       ]}
     >
       <Text style={styles.buttonText}>{title}</Text>
@@ -26,22 +27,22 @@ const AppButton = ({ onPress, title, color = '#00ff00', style }) => {
 
 const styles = StyleSheet.create({
   buttonContainer: {
-    alignSelf: 'center',
+    alignSelf: "center",
     borderRadius: 12,
-    textAlign: 'center',
+    textAlign: "center",
     borderWidth: 2,
-    borderColor: 'black',
+    borderColor: "black",
     padding: 10,
   },
   buttonText: {
-    fontFamily: 'Helviotopia',
-    color: 'black',
-    alignSelf: 'center',
-    marginTop: 'auto',
-    marginBottom: 'auto',
+    fontFamily: "Helviotopia",
+    color: "black",
+    alignSelf: "center",
+    marginTop: "auto",
+    marginBottom: "auto",
     fontSize: 18,
-    textAlign: 'center',
-    alignSelf: 'center',
+    textAlign: "center",
+    alignSelf: "center",
   },
 });
 

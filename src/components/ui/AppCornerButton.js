@@ -1,9 +1,17 @@
-import { useState } from 'react';
-import { StyleSheet, Pressable } from 'react-native';
+import { useState } from "react";
+import { StyleSheet, Pressable } from "react-native";
 
-import { FontAwesome } from '@expo/vector-icons';
+import { FontAwesome } from "@expo/vector-icons";
 
-const AppCornerButton = ({ onPress, icon, color = '#00ff00', style, position = 'lb' }) => {
+import { CLR_PRIMARY } from "../../core/Theme";
+
+const AppCornerButton = ({
+  onPress,
+  icon,
+  color = CLR_PRIMARY,
+  style,
+  position = "lb",
+}) => {
   const [active, setActive] = useState(false);
 
   return (
@@ -17,35 +25,40 @@ const AppCornerButton = ({ onPress, icon, color = '#00ff00', style, position = '
       style={[
         styles.buttonContainer,
         {
-          backgroundColor: active ? color : 'white',
-          left: position == 'lb' ? 40 : 'auto',
-          right: position == 'rb' ? 40 : 'auto'
+          backgroundColor: active ? color : "white",
+          left: position == "lb" ? 40 : "auto",
+          right: position == "rb" ? 40 : "auto",
         },
-        style
+        style,
       ]}
       onPress={onPress}
     >
-      <FontAwesome style={styles.buttonIcon} name={icon} size={36} color="black" />
+      <FontAwesome
+        style={styles.buttonIcon}
+        name={icon}
+        size={36}
+        color="black"
+      />
     </Pressable>
   );
 };
 
 const styles = StyleSheet.create({
   buttonContainer: {
-    position: 'absolute',
+    position: "absolute",
     bottom: 40,
     left: 40,
     width: 70,
     height: 70,
-    backgroundColor: 'white',
+    backgroundColor: "white",
     borderRadius: 100,
-    borderColor: 'black',
+    borderColor: "black",
     borderWidth: 2,
   },
   buttonIcon: {
-    marginTop: 'auto',
-    marginBottom: 'auto',
-    alignSelf: 'center',
+    marginTop: "auto",
+    marginBottom: "auto",
+    alignSelf: "center",
     opacity: 1,
   },
 });

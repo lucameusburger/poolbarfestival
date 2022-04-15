@@ -1,5 +1,5 @@
-import { View, TouchableOpacity, Text } from 'react-native';
-import StylesMain from '../../../styles/StylesMain';
+import { View, TouchableOpacity, Text } from "react-native";
+import StylesMain from "../../../styles/StylesMain";
 
 TouchableOpacity.defaultProps = { activeOpacity: 0.8 };
 
