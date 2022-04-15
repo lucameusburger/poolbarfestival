@@ -15,7 +15,7 @@ const AppCornerButton = ({ onPress, icon, color = '#00ff00', style, position = '
       onPressOut={() => {
         setActive(false);
       }}
-      style={[styles.buttonContainer, { backgroundColor: active ? color : 'white', left: position == 'lb' ? 40 : '', right: position == 'rb' ? 40 : '' }, style]}
+      style={[styles.buttonContainer, { backgroundColor: active ? color : 'white', left: position == 'lb' ? 40 : 'auto', right: position == 'rb' ? 40 : 'auto' }, style]}
       onPress={onPress}
     >
       <FontAwesome style={styles.buttonIcon} name={icon} size={36} color="#000" />
