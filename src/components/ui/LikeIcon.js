@@ -1,20 +1,33 @@
-import { Animated, TouchableOpacity } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
-import { addCallenderEvent, deleteCallenderEvent } from '../../redux/callenderThunk';
-import { useEffect, useRef } from 'react';
+import { Animated, TouchableOpacity } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addCallenderEvent,
+  deleteCallenderEvent,
+} from "../../redux/callenderThunk";
+import { useEffect, useRef } from "react";
 
-import LottieView from 'lottie-react-native';
+import LottieView from "lottie-react-native";
 
-import heardfade from '../../../assets/animations/heartfade.json';
+import heardfade from "../../../assets/animations/heartfade.json";
+import { CLR_PRIMARY } from "../../core/Theme";
 
 const hexToRgb = (hex) =>
   hex
-    .replace(/^#?([a-f\d])([a-f\d])([a-f\d])$/i, (m, r, g, b) => '#' + r + r + g + g + b + b)
+    .replace(
+      /^#?([a-f\d])([a-f\d])([a-f\d])$/i,
+      (m, r, g, b) => "#" + r + r + g + g + b + b
+    )
     .substring(1)
     .match(/.{2}/g)
     .map((x) => parseInt(x, 16));
 
-const LikeIcon = ({ eventId, size = 32, style, colorOff = '#000', colorOn = '#00ff00' }) => {
+const LikeIcon = ({
+  eventId,
+  size = 32,
+  style,
+  colorOff = "#000",
+  colorOn = CLR_PRIMARY,
+}) => {
   const dispatch = useDispatch();
   const progress = useRef(new Animated.Value(isLiked ? 1 : 0)).current;
 
@@ -31,7 +44,7 @@ const LikeIcon = ({ eventId, size = 32, style, colorOff = '#000', colorOn = '#00
 
   const likeEvent = (id) => {
     dispatch({
-      type: 'ADD_TO_LIKED_EVENTS',
+      type: "ADD_TO_LIKED_EVENTS",
       payload: id,
     });
     dispatch(addCallenderEvent(id));
@@ -39,7 +52,7 @@ const LikeIcon = ({ eventId, size = 32, style, colorOff = '#000', colorOn = '#00
 
   const unLikeEvent = (id) => {
     dispatch({
-      type: 'REMOVE_FROM_LIKED_EVENTS',
+      type: "REMOVE_FROM_LIKED_EVENTS",
       payload: id,
     });
     dispatch(deleteCallenderEvent(id));
@@ -78,9 +91,9 @@ const LikeIcon = ({ eventId, size = 32, style, colorOff = '#000', colorOn = '#00
         }}
         style={[
           {
-            alignSelf: 'flex-end',
-            marginBottom: 'auto',
-            marginTop: 'auto',
+            alignSelf: "flex-end",
+            marginBottom: "auto",
+            marginTop: "auto",
             width: size,
           },
           style,
