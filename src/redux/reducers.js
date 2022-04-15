@@ -6,8 +6,8 @@ import { reducer as favoritesReducers, initialState as favoritesInitialState } f
 import { reducer as callenderReducer, initialState as callenderInitialState } from './callenderReducer';
 import { reducer as venuesReducers, initialState as venuesInitialState } from './venueReducer';
 import { reducer as spaceLocationsReducers, initialState as spaceLocationsInitialState } from './spaceLocationReducer';
+import { reducer as currentLocactionReducers, initialState as currentLocationInitialState } from './currentLocationReducer';
 import { reducer as generatorsReducers, initialState as generatorsInitialState } from './generatorsReducer';
-import { reducer as locationReducers, initialState as locationInitialState } from './locationsReducer';
 
 import { reducer as flowTextReducer, initialState as flowTextInitialState } from './flowTextReducer';
 
@@ -18,8 +18,8 @@ export const initialState = {
   callender: callenderInitialState,
   venues: venuesInitialState,
   generators: generatorsInitialState,
-  locations: locationInitialState,
   spaceLocations: spaceLocationsInitialState,
+  currentLocation: currentLocationInitialState,
   flowText: flowTextInitialState,
 };
 
@@ -30,7 +30,7 @@ export const rootReducer = combineReducers({
   callender: callenderReducer,
   venues: venuesReducers,
   generators: generatorsReducers,
-  locations: locationReducers,
   spaceLocations: spaceLocationsReducers,
   flowText: flowTextReducer,
+  currentLocation: currentLocactionReducers,
 });

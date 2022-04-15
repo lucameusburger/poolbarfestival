@@ -1,5 +1,6 @@
-import React, { useEffect } from 'react';
-import { View, StyleSheet, Linking } from 'react-native';
+import React, { useState, useEffect, memo } from 'react';
+import { StatusBar } from 'expo-status-bar';
+import { Text, View, StyleSheet, Linking, TouchableOpacity } from 'react-native';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -16,29 +17,64 @@ import MyCalloutView from '../ui/MyCalloutView';
 
 
 import { fetchSpaceLocations } from '../../redux/spaceLocationThunk';
-
+import markerImage from '../../../assets/img/marker.png';
+import selectedMarkerImage from '../../../assets/img/selectedMarker.png';
 
 const BASE_URL = 'https://www.admin.poolbar.at/';
 const mapRef = React.createRef();
 
-const getMarkers = (locations) => {
-    let markers = [];
-    let counter = 0;
-    locations.data.map((location) => markers[counter++] = <Marker key={location.id}
-        image={require('../../../assets/img/marker.png')}
-        coordinate={{ 'longitude': location.location.coordinates[0], 'latitude': location.location.coordinates[1] }}
-    >
-        <Callout tooltip={true} style={{ backgroundColor: 'transparent' }} onPress={
-            () => {
-                openGoogleMaps({ 'latitude': location.location.coordinates[1], 'longitude': location.location.coordinates[0] }, location.name)
-                console.log('bruh')
-            }}>
-            <MyCalloutView location={{ 'latitude': location.location.coordinates[1], 'longitude': location.location.coordinates[0] }} name={location.name}></MyCalloutView>
+let infoBarVisible = false;
+
+function CustomMarker({ location, setCurrentLocation, currentLocation }) {
+    return (
+        <Marker
+            key={location.id}
+            image={(currentLocation?.id === location.id && infoBarVisible) ? selectedMarkerImage : markerImage}
+            coordinate={{ 'longitude': location.location.coordinates[0], 'latitude': location.location.coordinates[1] }}
+            tracksViewChanges={true}
+            onPress={() => {
+                infoBarVisible = true;
+                setCurrentLocation(location);
+            }
+            }
+        >
+
+        </Marker>
+    )
+}
 
 
-        </Callout>
-    </Marker>);
-    return markers;
+const InfoBar = () => {
+    const dispatch = useDispatch();
+
+    const currentLocation = useSelector(state => state.currentLocation.data);
+
+    if (currentLocation) {
+        return <Text style={{ height: 200, width: 200 }}>yow</Text>
+    }
+}
+
+const RenderMarkers = ({ locations }) => {
+
+    const dispatch = useDispatch();
+
+    const currentLocation = useSelector(state => state.currentLocation.data);
+
+    const setCurrentLocation = (newLocation) => {
+        dispatch({
+            type: "SET_CURRENTLOCATION",
+            payload: newLocation
+        })
+    }
+    //console.log('lm: ', locations)
+    return locations.map((location) =>
+        <CustomMarker
+            location={location}
+            setCurrentLocation={setCurrentLocation}
+            currentLocation={currentLocation}
+            key={'marker_' + location.id}
+        />
+    );
 }
 
 function openGoogleMaps(location, name) {
@@ -69,7 +105,6 @@ function setBoundingAustria() {
     setBoundingBox(bboxAustria)
 }
 
-// set the bounding box of the map to Austria
 function setBoundingBox(bbox) {
     console.log('setting box');
     mapRef.current.setMapBoundaries(bbox[0], bbox[1]);
@@ -81,8 +116,17 @@ const MapScreen = ({ navigation }) => {
 
     const dispatch = useDispatch();
 
+    const currentLocation = useSelector(state => state.currentLocation.data);
+
+
+    const setCurrentLocation = (newLocation) => {
+        dispatch({
+            type: "SET_CURRENTLOCATION",
+            payload: newLocation
+        })
+    }
+
     const locations = useSelector((state) => state.spaceLocations);
-    console.log(locations);
     const isLoaded = useSelector((state) => state.spaceLocations.isLoaded);
     const isFetchingData = useSelector((state) => state.spaceLocations.isFetchingData);
     const hasFetchingDataError = useSelector((state) => state.spaceLocations.hasFetchingDataError);
@@ -91,6 +135,7 @@ const MapScreen = ({ navigation }) => {
         dispatch(fetchSpaceLocations());
     }, []);
 
+    console.log('cl: ', currentLocation)
 
     return (
         <View style={StylesMain.mainView}>
@@ -99,45 +144,87 @@ const MapScreen = ({ navigation }) => {
                 <MapView
                     minZoomLevel={7}
                     maxZoomLevel={15}
-                    style={styles.map} provider={MapView.PROVIDER_GOOGLE} customMapStyle={generatedMapStyle}
+                    style={styles.map}
+                    provider={MapView.PROVIDER_GOOGLE}
+                    customMapStyle={generatedMapStyle}
+                    onPress={(event) => {
+                        if (event.nativeEvent.action === 'marker-press') {
+                            return
 
+                        }
+                        infoBarVisible = false
+                        console.log('kein marker')
+                        console.log(infoBarVisible)
+
+
+
+                    }}
                     onMapReady={setBoundingAustria}
                     ref={mapRef}
-                    initialRegion={{
-                        latitude: loewensaal.latitude,
-                        longitude: loewensaal.longitude,
-                        latitudeDelta: 0.05,
-                        longitudeDelta: 0.05,
-
-                    }}>
+                    initialRegion={initial}>
                     <Polygon
                         coordinates={geodata}
-                        strokeWidth={3}
-                        strokeColor={'green'}
-                        fillColor="transparent"
+                        strokeWidth={5}
+                        strokeColor='black'
+                        fillColor='#00000022'
                     />
-
-                    <Marker
-                        image={require('../../../assets/img/marker.png')}
-                        coordinate={loewensaal}
-                    >
-                        <Callout
-                            tooltip={true} style={{ backgroundColor: 'transparent', width: 200, height: 200 }}
-                            onPress={
-                                () => {
-                                    openGoogleMaps(loewensaal, 'Löwensaal');
-                                    console.log('bruh');
-                                }}>
-                            <MyCalloutView name={'Löwensaal'} description={'Der Saal in dem wir chillen'}></MyCalloutView>
-
-
-                        </Callout>
-                    </Marker>
-
-                    {isLoaded && locations ? getMarkers(locations) : []}
-
-
+                    <RenderMarkers
+                        locations={
+                            (isLoaded && locations) ?
+                                locations.data :
+                                []
+                        }
+                    />
                 </MapView>
+
+
+                {infoBarVisible && currentLocation &&
+                    <View
+                        style={{
+                            position: 'absolute', bottom: 0, backgroundColor: 'white', width: '100%', height: '15%', zIndex: 10
+                            , display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'top', borderWidth: '2px'
+                        }}>
+
+                        <View>
+                            <Text style={{ fontSize: 18, marginBottom: 10 }}>{currentLocation.name}</Text>
+                            <Text>{currentLocation.description}</Text>
+
+                        </View>
+                        <View>
+                            <TouchableOpacity onPress={() => {
+                                console.log("go to detail screen location")
+                            }}>
+                                <FontAwesome
+                                    style={{ marginTop: 'auto', marginBottom: 'auto', alignSelf: 'center', opacity: 0.6 }}
+                                    name={'info'}
+                                    size={36}
+                                    color="black"
+                                />
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={() => {
+                                console.log("cl: ", currentLocation)
+                                openGoogleMaps({
+                                    'latitude': currentLocation.location.coordinates[1],
+                                    'longitude': currentLocation.location.coordinates[0]
+                                },
+                                    currentLocation.name
+                                )
+                            }}>
+                                <FontAwesome
+                                    style={{ marginTop: 'auto', marginBottom: 'auto', alignSelf: 'center', opacity: 0.6 }}
+                                    name={'location-arrow'}
+                                    size={36}
+                                    color="black"
+                                />
+                            </TouchableOpacity>
+                        </View>
+
+
+                    </View>
+                }
+
+
+
             </FadeInView>
         </View>
 
@@ -186,7 +273,7 @@ const generatedMapStyle = [
                 "lightness": 100
             },
             {
-                "visibility": "on"
+                "visibility": "off"
             }
         ]
     },
@@ -300,11 +387,11 @@ const generatedMapStyle = [
     }
 ];
 
-const loewensaal = {
+const initial = {
     latitude: 47.36321774000127,
     longitude: 9.689607548263336,
-    latitudeDelta: 0.01,
-    longitudeDelta: 0.01,
+    latitudeDelta: 1,
+    longitudeDelta: 1,
 };
 
 export default MapScreen;
