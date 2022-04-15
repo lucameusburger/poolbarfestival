@@ -35,6 +35,7 @@ const EventDetailScreen = ({ route }) => {
             position: 'absolute',
             top: 20,
             right: 20,
+            zIndex: 1000,
           }}
         />
 

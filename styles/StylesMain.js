@@ -201,8 +201,9 @@ const StylesMain = StyleSheet.create({
     borderWidth: 2,
     borderColor: '#000',
     borderRadius: 10,
-    padding: 20,
+    padding: 10,
     maxHeight: 200,
+    overflow: 'hidden',
   },
 });
 
