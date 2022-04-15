@@ -201,12 +201,13 @@ const MapScreen = ({ navigation }) => {
                             <TouchableOpacity onPress={() => {
                                 console.log("go to detail screen location")
                             }}>
-                                <FontAwesome
+
+                                {/* <FontAwesome
                                     style={{ marginTop: 'auto', marginBottom: 'auto', alignSelf: 'center', opacity: 0.6 }}
                                     name={'info'}
                                     size={36}
                                     color="black"
-                                />
+                                /> */}
                             </TouchableOpacity>
                             <TouchableOpacity onPress={() => {
                                 console.log("cl: ", currentLocation)
