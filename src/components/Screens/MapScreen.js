@@ -23,46 +23,43 @@ import MyCalloutView from '../ui/MyCalloutView';
 import mapImage from '../../../assets/img/map.png'
 import { fetchSpaceLocations } from '../../redux/spaceLocationThunk';
 import markerImage from '../../../assets/img/marker.png';
+import selectedMarkerImage from '../../../assets/img/selectedMarker.png';
 
 const BASE_URL = 'https://www.admin.poolbar.at/';
 const mapRef = React.createRef();
 
-function CustomMarker({ location, setCurrentLocation }) {
+function CustomMarker({ location, setCurrentLocation, currentLocation }) {
     return (
         <Marker
             key={location.id}
-            image={markerImage}
+            image={currentLocation?.id === location.id ? selectedMarkerImage : markerImage}
             coordinate={{ 'longitude': location.location.coordinates[0], 'latitude': location.location.coordinates[1] }}
+            tracksViewChanges={true}
             onPress={() =>
-                setCurrentLocation({ 'longitude': location.location.coordinates[0], 'latitude': location.location.coordinates[1] })
+                setCurrentLocation(location)
             }
         >
-            <Callout
-                tooltip={true}
-                style={{ backgroundColor: 'transparent' }}
-                onPress={
-                    () => {
-                        openGoogleMaps({
-                            'latitude': location.location.coordinates[1],
-                            'longitude': location.location.coordinates[0]
-                        },
-                            location.name
-                        )
-                        console.log('bruh')
-                    }}>
-                <MyCalloutView location={{ 'latitude': location.location.coordinates[1], 'longitude': location.location.coordinates[0] }} name={location.name}></MyCalloutView>
 
-
-            </Callout>
         </Marker>
     )
 }
 
-const getMarkers = (locations) => {
+
+const InfoBar = () => {
+    const dispatch = useDispatch();
+
+    const currentLocation = useSelector(state => state.currentLocation.data);
+
+    if (currentLocation) {
+        return <Text style={{ height: 200, width: 200 }}>yow</Text>
+    }
+}
+
+const RenderMarkers = ({ locations }) => {
 
     const dispatch = useDispatch();
 
-    const currentLocation = useSelector(state => state.currentLocation);
+    const currentLocation = useSelector(state => state.currentLocation.data);
 
     const setCurrentLocation = (newLocation) => {
         dispatch({
@@ -70,11 +67,13 @@ const getMarkers = (locations) => {
             payload: newLocation
         })
     }
-
-    return locations.data.map((location) =>
+    //console.log('lm: ', locations)
+    return locations.map((location) =>
         <CustomMarker
             location={location}
             setCurrentLocation={setCurrentLocation}
+            currentLocation={currentLocation}
+            key={'marker_' + location.id}
         />
     );
 }
@@ -118,7 +117,7 @@ const MapScreen = ({ navigation }) => {
 
     const dispatch = useDispatch();
 
-    const currentLocation = useSelector(state => state.currentLocation);
+    const currentLocation = useSelector(state => state.currentLocation.data);
 
 
     const locations = useSelector((state) => state.spaceLocations);
@@ -130,6 +129,7 @@ const MapScreen = ({ navigation }) => {
         dispatch(fetchSpaceLocations());
     }, []);
 
+    console.log('cl: ', currentLocation)
 
     return (
         <View style={StylesMain.mainView}>
@@ -151,21 +151,63 @@ const MapScreen = ({ navigation }) => {
                         strokeColor='black'
                         fillColor='#00000022'
                     />
-                    {(isLoaded && locations) ?
-                        getMarkers(locations) :
-                        null
-                    }
+                    <RenderMarkers
+                        locations={
+                            (isLoaded && locations) ?
+                                locations.data :
+                                []
+                        }
+                    />
                 </MapView>
-                <View style={{
-                    position: 'absolute', bottom: 0, backgroundColor: 'white', width: '100%', height: '10%', zIndex: 10
-                    , display: 'flex', flexDirection: 'row'
-                }}>
-                    <Text>Titel</Text>
-                    <Text>Beschreibung</Text>
-                    <TouchableOpacity style={{}} onPress={() => openGoogleMaps(currentLocation)}>
-                        <FontAwesome style={{ marginTop: 'auto', marginBottom: 'auto', alignSelf: 'center', opacity: 0.6 }} name={'map'} size={36} color="#000" />
-                    </TouchableOpacity>
-                </View>
+
+
+                {currentLocation &&
+                    <View
+                        style={{
+                            position: 'absolute', bottom: 0, backgroundColor: 'white', width: '100%', height: '15%', zIndex: 10
+                            , display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'top', borderWidth: '2px'
+                        }}>
+
+                        <View>
+                            <Text style={{ fontSize: 18, marginBottom: 10 }}>{currentLocation.name}</Text>
+                            <Text>{currentLocation.description}</Text>
+
+                        </View>
+                        <View>
+                            <TouchableOpacity onPress={() => {
+                                console.log("go to detail screen location")
+                            }}>
+                                <FontAwesome
+                                    style={{ marginTop: 'auto', marginBottom: 'auto', alignSelf: 'center', opacity: 0.6 }}
+                                    name={'info'}
+                                    size={36}
+                                    color="#000"
+                                />
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={() => {
+                                console.log("cl: ", currentLocation)
+                                openGoogleMaps({
+                                    'latitude': currentLocation.location.coordinates[1],
+                                    'longitude': currentLocation.location.coordinates[0]
+                                },
+                                    currentLocation.name
+                                )
+                            }}>
+                                <FontAwesome
+                                    style={{ marginTop: 'auto', marginBottom: 'auto', alignSelf: 'center', opacity: 0.6 }}
+                                    name={'location-arrow'}
+                                    size={36}
+                                    color="#000"
+                                />
+                            </TouchableOpacity>
+                        </View>
+
+
+                    </View>
+                }
+
+
+
             </FadeInView>
         </View>
 

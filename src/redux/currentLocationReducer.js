@@ -1,5 +1,5 @@
 export const initialState = {
-    data: [],
+    data: null,
     isLoaded: false,
     isFetchingData: false,
     hasFetchingDataError: false,
@@ -9,6 +9,7 @@ export const initialState = {
 export function reducer(state = initialState, action) {
     switch (action.type) {
         case 'SET_CURRENTLOCATION':
+            console.log(action.payload)
             return {
                 ...state,
                 data: action.payload,
