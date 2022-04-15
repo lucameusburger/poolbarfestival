@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import * as Linking from 'expo-linking';
-import { StyleSheet, Text, View, ScrollView, Image, FlatList } from 'react-native';
+import { Text, View, ScrollView } from 'react-native';
 import AppButton from '../ui/AppButton';
 import NavBar from '../ui/NavBar';
 import LoadingText from '../ui/LoadingText';

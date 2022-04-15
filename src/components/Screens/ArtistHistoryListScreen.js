@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Text, View, ScrollView, FlatList, ImageBackground, TouchableOpacity } from 'react-native';
+import { useEffect } from 'react';
+import { Text, View, ScrollView } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
 import NavBar from '../ui/NavBar';
@@ -7,7 +7,6 @@ import LoadingText from '../ui/LoadingText';
 import FadeInView from '../ui/FadeInView';
 import StylesMain from '../../../styles/StylesMain';
 import { fetchArtists } from '../../redux/artistsThunk';
-import { navigate } from '../../core/RootNavigation';
 
 const BASE_URL = 'https://www.admin.poolbar.at/';
 

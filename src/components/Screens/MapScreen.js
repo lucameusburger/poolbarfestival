@@ -1,26 +1,20 @@
-import React, { useState, useEffect, memo } from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { Text, View, StyleSheet, Linking } from 'react-native';
+import React, { useEffect } from 'react';
+import { View, StyleSheet, Linking } from 'react-native';
 
 import { useDispatch, useSelector } from 'react-redux';
 
 import NavBar from '../ui/NavBar';
-import LoadingText from '../ui/LoadingText';
 import FadeInView from '../ui/FadeInView';
 import StylesMain from '../../../styles/StylesMain';
-import { navigate } from '../../core/RootNavigation';
 
 
 import geodata from '../../../assets/geodata.json';
-
-import { FontAwesome } from '@expo/vector-icons';
 
 
 import MapView, { Marker, Callout, Polygon } from 'react-native-maps';
 import MyCalloutView from '../ui/MyCalloutView';
 
 
-import mapImage from '../../../assets/img/map.png'
 import { fetchSpaceLocations } from '../../redux/spaceLocationThunk';
 
 
