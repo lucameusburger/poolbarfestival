@@ -82,6 +82,9 @@ const App = () => {
         Event: {
           path: '/event/:id',
         },
+        Generator: {
+          path: '/generator/:id',
+        },
         Home: '*',
       },
     },
