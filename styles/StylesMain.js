@@ -195,6 +195,15 @@ const StylesMain = StyleSheet.create({
     overflow: "hidden",
     marginBottom: 50,
   },
+  tag: {
+    fontFamily: "Helviotopia",
+    fontWeight: "500",
+    color: "black",
+    fontSize: 18,
+    textAlign: "left",
+    textTransform: "lowercase",
+    color: "#828282",
+  },
   flowTextContainer: {
     color: "black",
     backgroundColor: "white",

@@ -9,13 +9,12 @@ import {
 } from "react-native";
 import { useMemoOne } from "use-memo-one";
 import NavBar from "../ui/NavBar";
-import * as Sharing from "expo-sharing";
-import ViewShot from "react-native-view-shot";
 import FadeInView from "../ui/FadeInView";
 import StylesMain from "../../../styles/StylesMain";
 import wordlist from "../../../assets/data/wordlist";
 import { useDispatch, useSelector } from "react-redux";
 import AppButton from "../ui/AppButton";
+import { navigate } from "../../core/RootNavigation";
 
 const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get("window");
 
@@ -90,7 +89,6 @@ const FlowtextScreen = ({ navigation }) => {
   const elements = useSelector((state) => state.flowText.elements);
   const phrase = useSelector((state) => state.flowText.phrase);
   const [height, setHeight] = useState(0);
-  const viewShotRef = useRef();
   const scrollViewRef = useRef();
 
   const addElement = (element) => {
@@ -138,11 +136,29 @@ const FlowtextScreen = ({ navigation }) => {
   }, [height]);
 
   let openShareDialogAsync = async () => {
-    viewShotRef.current
-      .capture({ format: "jpg", quality: 80 })
-      .then(async (uri) => {
-        await Sharing.shareAsync("file://" + uri);
+    if (phrase.length > 0) {
+      navigate("Capture", {
+        children: (
+          <View
+            style={{
+              padding: 5,
+              borderWidth: 2,
+              borderColor: "black",
+              borderRadius: 10,
+              overflow: "hidden",
+              backgroundColor: "white",
+            }}
+          >
+            <View style={[StylesMain.flowTextContainer, { maxHeight: null }]}>
+              <Text style={[StylesMain.flowTextPhrase, { marginBottom: 0 }]}>
+                {phrase}
+              </Text>
+              <Text style={StylesMain.tag}>#PBFließtext2022</Text>
+            </View>
+          </View>
+        ),
       });
+    }
   };
 
   return (
@@ -187,14 +203,14 @@ const FlowtextScreen = ({ navigation }) => {
               bevelLeft={false}
             />
           </View>
-          <ViewShot
-            ref={viewShotRef}
+          <View
             style={{
-              backgroundColor: "transparent",
               padding: 5,
               borderWidth: 2,
               borderColor: "black",
               borderRadius: 10,
+              overflow: "hidden",
+              backgroundColor: "white",
             }}
           >
             <ScrollView
@@ -207,7 +223,7 @@ const FlowtextScreen = ({ navigation }) => {
             >
               <Text style={StylesMain.flowTextPhrase}>{phrase}</Text>
             </ScrollView>
-          </ViewShot>
+          </View>
         </View>
       </FadeInView>
     </View>

@@ -34,6 +34,7 @@ import { fetchArtists } from "./src/redux/artistsThunk";
 import { fetchVenues } from "./src/redux/venueThunk";
 import GeneratorDetailScreen from "./src/components/Screens/GeneratorDetailScreen";
 import { fetchGenerators } from "./src/redux/generatorsThunk";
+import CaptureScreen from "./src/components/Screens/CaptureScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -112,6 +113,11 @@ function Navigator() {
         name="Flowtext"
         component={FlowtextScreen}
         options={{ title: "Flowtext", headerShown: false }}
+      />
+      <Stack.Screen
+        name="Capture"
+        component={CaptureScreen}
+        options={{ title: "Capture", headerShown: false }}
       />
     </Stack.Navigator>
   );
