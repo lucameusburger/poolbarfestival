@@ -15,7 +15,6 @@ const ArtistListScreen = ({ item }) => {
   return (
     <TouchableOpacity
       style={{
-        marginBottom: 10,
         padding: 10,
         borderBottomWidth: 2,
         borderBottomColor: '#000',
@@ -27,7 +26,7 @@ const ArtistListScreen = ({ item }) => {
         })
       }
     >
-      <View style={{ width: '100%', marginTop: 'auto', flexDirection: 'row' }}>
+      <View style={{ width: '100%', marginTop: 'auto', marginBottom: 'auto', flexDirection: 'row' }}>
         <PoolbarImage
           imageId={item.image}
           fallback={artistPlaceholder}
