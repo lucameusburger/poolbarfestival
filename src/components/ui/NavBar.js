@@ -17,7 +17,7 @@ const Wrapper = typeof APPROX_STATUSBAR_HEIGHT.statusBarHeight === 'number' ? Vi
 
 const NavBar = ({ title, next, nextTitle }) => {
   return (
-    <Wrapper style={{ marginBottom: 0 }}>
+    <Wrapper style={{ margin: 0, height: 220, backgroundColor: '#fff', zIndex: 999 }}>
       <View
         style={{
           width: '100%',
@@ -32,13 +32,13 @@ const NavBar = ({ title, next, nextTitle }) => {
         <View
           style={{
             flexDirection: 'row',
-            justifyContent: 'space-between',
             paddingBottom: 10,
-            marginHorizontal: '4%',
+            marginLeft: 20,
+            marginRight: 20,
           }}
         >
           <AppButton
-            style={{ width: '48%' }}
+            style={{ flex: 1 }}
             title={'zurück'}
             onPress={() => {
               // handle the index we get
@@ -49,7 +49,13 @@ const NavBar = ({ title, next, nextTitle }) => {
               }
             }}
           />
-          {nextTitle && <AppButton style={{ width: '48%' }} title={nextTitle} onPress={next} />}
+
+          {nextTitle && (
+            <>
+              <View style={{ width: 20 }}></View>
+              <AppButton style={{ flex: 1 }} title={nextTitle} onPress={next} />
+            </>
+          )}
         </View>
       </View>
     </Wrapper>

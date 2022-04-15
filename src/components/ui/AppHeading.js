@@ -35,7 +35,7 @@ const AppHeading = ({ title }) => {
   }, [startValue, endValue]);
 
   return (
-    <View style={{ flexDirection: 'row', height: 150 }}>
+    <View style={{ flexDirection: 'row', height: 120 }}>
       <Animated.View style={{ position: 'absolute', display: 'flex', flexDirection: 'row', transform: [{ translateX: startValue }] }}>
         <Text numberOfLines={1} style={styles.heading}>
           {title}

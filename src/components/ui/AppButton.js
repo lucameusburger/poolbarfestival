@@ -31,7 +31,6 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: 'black',
     padding: 10,
-    width: '50%',
   },
   buttonText: {
     fontFamily: 'Helviotopia',

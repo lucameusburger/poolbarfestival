@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Text, View, FlatList, TouchableOpacity } from 'react-native';
+import { Text, View, FlatList, Pressable } from 'react-native';
 import LoadingText from '../ui/LoadingText';
 import NavBar from '../ui/NavBar';
 import FadeInView from '../ui/FadeInView';
@@ -10,15 +10,15 @@ import { navigate } from '../../core/RootNavigation';
 
 const RenderElement = ({ item }) => {
   return (
-    <TouchableOpacity
+    <Pressable
       onPress={() =>
         navigate('Generator', {
           id: item.id,
         })
       }
       style={{
-        marginBottom: 10,
-        padding: 10,
+        marginBottom: 0,
+        padding: 20,
         borderBottomWidth: 2,
         borderBottomColor: '#000',
       }}
@@ -31,7 +31,7 @@ const RenderElement = ({ item }) => {
           </View>
         </View>
       </View>
-    </TouchableOpacity>
+    </Pressable>
   );
 };
 
