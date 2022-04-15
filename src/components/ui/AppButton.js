@@ -1,16 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
-import { Text, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { Text, StyleSheet, Pressable, View } from 'react-native';
 import Svg, { Path } from 'react-native-svg';
-
-// from assets/svg/
-
-TouchableOpacity.defaultProps = { activeOpacity: 0.8 };
 
 const AppButton = ({ onPress, title, color = '#00ff00', style }) => {
   const [active, setActive] = useState(false);
 
   return (
-    <TouchableOpacity
+    <Pressable
       onPressIn={() => {
         setActive(true);
       }}
@@ -21,7 +17,7 @@ const AppButton = ({ onPress, title, color = '#00ff00', style }) => {
       style={[styles.buttonContainer, { backgroundColor: active ? color : 'white' }, style]}
     >
       <Text style={styles.buttonText}>{title}</Text>
-    </TouchableOpacity>
+    </Pressable>
   );
 };
 

@@ -7,83 +7,77 @@ import { useDispatch, useSelector } from 'react-redux';
 import PoolbarImage from '../ui/PoolbarImage';
 import LoadingText from '../ui/LoadingText';
 import { fetchGenerators } from '../../redux/generatorsThunk';
-
+import artistPlaceholder from '../../../assets/img/generatorProjectPlaceholder.jpg';
 
 const RenderElement = ({ generator }) => {
-    return (
-        <View style={{ flex: 1, width: '100%', height: '100%' }}>
-            <View style={{ padding: 20, marginTop: 10 }}>
-                <View>
-                    <Text style={styles.roomDateText}>{generator.lab_item.name}</Text>
-                    <Text style={styles.roomMainText}>{generator.name}</Text>
-                    <Text style={StylesMain.text}>{generator.description_full || generator.description_short}</Text>
-                    <View style={{ height: 20 }}></View>
-                </View>
-                <PoolbarImage
-                    imageId={generator.image}
-                    style={{
-                        flex: 1,
-                        width: '100%',
-                        height: 320,
-                    }}
-                />
-            </View>
+  return (
+    <View style={{ flex: 1, width: '100%', height: '100%' }}>
+      <View style={{ padding: 20, marginTop: 10 }}>
+        <View>
+          <Text style={styles.roomDateText}>{generator.lab_item.name}</Text>
+          <Text style={styles.roomMainText}>{generator.name}</Text>
+          <Text style={StylesMain.text}>{generator.description_full || generator.description_short}</Text>
+          <View style={{ height: 20 }}></View>
         </View>
-    );
+      </View>
+      <PoolbarImage
+        imageId={generator.image}
+        fallback={artistPlaceholder}
+        style={{
+          flex: 1,
+          width: '100%',
+          height: 320,
+        }}
+      />
+    </View>
+  );
 };
 
 const GeneratorDetailScreen = ({ route, navigation }) => {
-    const id = route.params.id.trim();
-    const generators = useSelector((state) => state.generators.data);
-    const [selectedGenerator, setSelectedGenerator] = useState(null);
-    const dispatch = useDispatch();
+  const id = route.params.id.trim();
+  const generators = useSelector((state) => state.generators.data);
+  const [selectedGenerator, setSelectedGenerator] = useState(null);
+  const dispatch = useDispatch();
 
-    useEffect(() => {
-        dispatch(fetchGenerators())
-    }, []);
+  useEffect(() => {
+    dispatch(fetchGenerators());
+  }, []);
 
-    useEffect(() => {
-        const generator = generators.find((generator) => generator.id === id);
-        setSelectedGenerator(generator);
-    }, [generators]);
+  useEffect(() => {
+    const generator = generators.find((generator) => generator.id === id);
+    setSelectedGenerator(generator);
+  }, [generators]);
 
-    return (
-        <View style={StylesMain.mainView}>
-            <FadeInView style={{ flex: 1, width: '100%' }}>
-                <NavBar navigation={navigation} title={selectedGenerator?.lab_item?.name} />
-                <ScrollView style={{ flex: 1 }}>
-                    {(selectedGenerator) ?
-                        <RenderElement
-                            generator={selectedGenerator}
-                        /> :
-                        <LoadingText />
-                    }
-                </ScrollView>
-            </FadeInView>
-        </View>
-    );
+  return (
+    <View style={StylesMain.mainView}>
+      <FadeInView style={{ flex: 1, width: '100%' }}>
+        <NavBar navigation={navigation} title={'projekt'} />
+        <ScrollView style={{ flex: 1 }}>{selectedGenerator ? <RenderElement generator={selectedGenerator} /> : <LoadingText />}</ScrollView>
+      </FadeInView>
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({
-    roomDateText: {
-        fontFamily: 'HelviotopiaBold',
-        color: '#000',
-        alignSelf: 'flex-start',
-        marginTop: 'auto',
-        fontSize: 24,
-        textAlign: 'left',
-        textTransform: 'uppercase',
-    },
-    roomMainText: {
-        fontFamily: 'Helviotopia',
-        fontWeight: '500',
-        color: '#000',
-        alignSelf: 'flex-start',
-        marginTop: 'auto',
-        fontSize: 32,
-        textAlign: 'left',
-        textTransform: 'uppercase',
-    },
+  roomDateText: {
+    fontFamily: 'HelviotopiaBold',
+    color: '#000',
+    alignSelf: 'flex-start',
+    marginTop: 'auto',
+    fontSize: 24,
+    textAlign: 'left',
+    textTransform: 'uppercase',
+  },
+  roomMainText: {
+    fontFamily: 'Helviotopia',
+    fontWeight: '500',
+    color: '#000',
+    alignSelf: 'flex-start',
+    marginTop: 'auto',
+    fontSize: 32,
+    textAlign: 'left',
+    textTransform: 'uppercase',
+  },
 });
 
 export default GeneratorDetailScreen;

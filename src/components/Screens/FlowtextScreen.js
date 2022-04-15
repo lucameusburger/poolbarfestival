@@ -41,7 +41,7 @@ const FlowtextElement = memo(({ text, y, _key }) => {
 
   useEffect(() => {
     Animated.timing(scrollX, {
-      toValue: -SCREEN_WIDTH,
+      toValue: -SCREEN_WIDTH - 300,
       duration: 10000,
       useNativeDriver: true,
     }).start(removeElement);
@@ -52,7 +52,7 @@ const FlowtextElement = memo(({ text, y, _key }) => {
       style={{
         position: 'absolute',
         top: y,
-        right: 0,
+        right: -300,
         zIndex: 1000,
         transform: [{ translateX: scrollX }],
       }}
@@ -64,6 +64,7 @@ const FlowtextElement = memo(({ text, y, _key }) => {
         }}
         style={{
           borderColor: '#000',
+          backgroundColor: '#fff',
           borderWidth: 2,
           padding: 10,
           borderRadius: 50,
@@ -129,7 +130,7 @@ const FlowtextScreen = ({ navigation }) => {
       <FadeInView style={{ flex: 1, width: '100%', height: '100%' }}>
         <NavBar
           navigation={navigation}
-          title="Fließtext"
+          title="fließtext"
           next={() => {
             console.log('teilen');
           }}

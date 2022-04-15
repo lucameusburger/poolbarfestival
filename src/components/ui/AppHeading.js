@@ -4,7 +4,7 @@ import { Animated, Dimensions, View, Platform, PixelRatio, StyleSheet, Text, Lis
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
 const AppHeading = ({ title }) => {
-  const duration = 10000;
+  const duration = 5000;
   const startValue = new Animated.Value(SCREEN_WIDTH);
   const startValue0 = new Animated.Value(SCREEN_WIDTH);
   const endValue = -SCREEN_WIDTH;
