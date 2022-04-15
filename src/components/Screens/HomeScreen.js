@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Pressable, ImageBackground } from 'react-native';
+import { View, Pressable, ImageBackground, Text } from 'react-native';
 import FadeInView from '../ui/FadeInView';
 import PoolbarLogo from '../ui/PoolbarLogo';
 import AppButton from '../ui/AppButton';
@@ -16,7 +16,10 @@ const HomeScreen = ({ navigation }) => {
         <ImageBackground source={gridImage} width="100%" height="100%" style={{ flex: 1, width: '100%', height: '100%' }}>
           <View style={{ flex: 1, justifyContent: 'center' }}>
             <View>
-              <View style={{ marginBottom: 40, width: '80%', height: '33%', alignSelf: 'center' }}>
+              <View style={{ width: '100%', height: 50, backgroundColor: '#00ff00', marginBottom: 20 }}>
+                <Text style={{ fontFamily: 'Helviotopia', alignSelf: 'center', marginTop: 'auto', marginBottom: 'auto', fontSize: 28 }}>07 Juli bis 28 August 2022</Text>
+              </View>
+              <View style={{ marginBottom: 20, width: '80%', height: '33%', alignSelf: 'center' }}>
                 <PoolbarLogo style={{ alignSelf: 'center' }} width="100%" height="100%" fill="black" />
               </View>
               <View style={{ top: 0, marginTop: 0 }}>
