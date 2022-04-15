@@ -1,10 +1,9 @@
-import { View, StyleSheet, Platform, NativeModules } from 'react-native';
+import { View, Platform, NativeModules } from 'react-native';
 import { navigationRef } from '../../core/RootNavigation';
 import AppHeading from './AppHeading';
 import AppButton from './AppButton';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { memo, useEffect } from 'react';
-import { useRef } from 'react';
+import { memo } from 'react';
 
 const estimatedStatusBarHeight = NativeModules.NativeUnimoduleProxy?.modulesConstants?.ExponentConstants?.statusBarHeight ?? 0;
 
@@ -17,14 +16,14 @@ const Wrapper = typeof APPROX_STATUSBAR_HEIGHT.statusBarHeight === 'number' ? Vi
 
 const NavBar = ({ title, next, nextTitle }) => {
   return (
-    <Wrapper style={{ margin: 0, backgroundColor: 'transparent', zIndex: 999 }}>
+    <Wrapper style={{ margin: 0, backgroundColor: 'white', zIndex: 999 }}>
       <View
         style={{
           width: '100%',
-          backgroundColor: 'transparent',
+          backgroundColor: 'white',
           top: 0,
           borderBottomWidth: 2,
-          borderBottomColor: '#000',
+          borderBottomColor: 'black',
           marginBottom: 0,
         }}
       >

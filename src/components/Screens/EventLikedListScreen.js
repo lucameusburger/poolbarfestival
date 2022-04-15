@@ -37,7 +37,7 @@ const EventLikedListScreen = ({ router }) => {
           }}
           nextTitle="teilen"
         />
-        <ViewShot ref={viewShotRef} style={{ height: '100%', width: '100%', backgroundColor: '#fff' }}>
+        <ViewShot ref={viewShotRef} style={{ height: '100%', width: '100%', backgroundColor: 'white' }}>
           <View style={{ flex: 1, margin: 0 }}>
             {loading && (
               <View style={{ flex: 1, margin: 0 }}>

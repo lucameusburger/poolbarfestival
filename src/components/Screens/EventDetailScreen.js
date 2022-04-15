@@ -130,7 +130,7 @@ const EventDetailScreen = ({ route }) => {
 const styles = StyleSheet.create({
   eventDateText: {
     fontFamily: 'HelviotopiaBold',
-    color: '#000',
+    color: 'black',
     alignSelf: 'flex-start',
     marginTop: 'auto',
     fontSize: 20,
@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
   },
   eventMainText: {
     fontFamily: 'Helviotopia',
-    color: '#000',
+    color: 'black',
     alignSelf: 'flex-start',
     marginTop: 'auto',
     fontSize: 42,

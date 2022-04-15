@@ -65,8 +65,8 @@ const FlowtextElement = memo(({ text, y, _key }) => {
           removeElement();
         }}
         style={{
-          borderColor: '#000',
-          backgroundColor: '#fff',
+          borderColor: 'black',
+          backgroundColor: 'white',
           borderWidth: 2,
           padding: 10,
           borderRadius: 50,

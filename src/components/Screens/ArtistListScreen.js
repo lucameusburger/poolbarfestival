@@ -17,7 +17,7 @@ const ArtistListScreen = ({ item }) => {
       style={{
         padding: 20,
         borderBottomWidth: 2,
-        borderBottomColor: '#000',
+        borderBottomColor: 'black',
       }}
       key={item.id}
       onPress={() =>

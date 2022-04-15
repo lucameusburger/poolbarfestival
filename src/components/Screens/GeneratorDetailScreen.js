@@ -15,7 +15,7 @@ const RenderMember = ({ member }) => {
       style={{
         padding: 10,
         borderBottomWidth: 2,
-        borderBottomColor: '#000',
+        borderBottomColor: 'black',
       }}
     >
       <View style={{ width: '100%', marginTop: 'auto', marginBottom: 'auto', flexDirection: 'row' }}>
@@ -112,7 +112,7 @@ const GeneratorDetailScreen = ({ route, navigation }) => {
 const styles = StyleSheet.create({
   roomDateText: {
     fontFamily: 'HelviotopiaBold',
-    color: '#000',
+    color: 'black',
     alignSelf: 'flex-start',
     marginTop: 'auto',
     fontSize: 24,
@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
   roomMainText: {
     fontFamily: 'Helviotopia',
     fontWeight: '500',
-    color: '#000',
+    color: 'black',
     alignSelf: 'flex-start',
     marginTop: 'auto',
     fontSize: 32,
