@@ -1,47 +1,32 @@
-import React, { useState, useEffect, memo } from "react";
-import { StatusBar } from "expo-status-bar";
-import {
-  Text,
-  View,
-  StyleSheet,
-  Linking,
-  TouchableOpacity,
-} from "react-native";
+import React, { useState, useEffect, memo } from 'react';
+import { StatusBar } from 'expo-status-bar';
+import { Text, View, StyleSheet, Linking, TouchableOpacity } from 'react-native';
 
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from 'react-redux';
 
-import NavBar from "../ui/NavBar";
-import FadeInView from "../ui/FadeInView";
-import StylesMain from "../../../styles/StylesMain";
+import NavBar from '../ui/NavBar';
+import FadeInView from '../ui/FadeInView';
+import StylesMain from '../../../styles/StylesMain';
+import AppButton from '../ui/AppButton';
 
-import geodata from "../../../assets/geodata.json";
+import geodata from '../../../assets/geodata.json';
 
-import MapView, { Marker, Callout, Polygon } from "react-native-maps";
-import MyCalloutView from "../ui/MyCalloutView";
+import MapView, { Marker, Callout, Polygon } from 'react-native-maps';
+import MyCalloutView from '../ui/MyCalloutView';
 
-import { fetchSpaceLocations } from "../../redux/spaceLocationThunk";
-import markerImage from "../../../assets/img/marker.png";
-import selectedMarkerImage from "../../../assets/img/selectedMarker.png";
-import { FontAwesome } from "@expo/vector-icons";
+import { fetchSpaceLocations } from '../../redux/spaceLocationThunk';
+import markerImage from '../../../assets/img/marker.png';
+import selectedMarkerImage from '../../../assets/img/selectedMarker.png';
+import { FontAwesome } from '@expo/vector-icons';
 
-const BASE_URL = "https://www.admin.poolbar.at/";
+const BASE_URL = 'https://www.admin.poolbar.at/';
 const mapRef = React.createRef();
 
-function CustomMarker({
-  location,
-  setCurrentLocation,
-  currentLocation,
-  infoBarVisible,
-  setInfoBarVisible,
-}) {
+function CustomMarker({ location, setCurrentLocation, currentLocation, infoBarVisible, setInfoBarVisible }) {
   return (
     <Marker
       key={location.id}
-      image={
-        currentLocation?.id === location.id && infoBarVisible
-          ? selectedMarkerImage
-          : markerImage
-      }
+      image={currentLocation?.id === location.id && infoBarVisible ? selectedMarkerImage : markerImage}
       coordinate={{
         longitude: location.location.coordinates[0],
         latitude: location.location.coordinates[1],
@@ -49,7 +34,7 @@ function CustomMarker({
       tracksViewChanges={true}
       onPress={() => {
         setInfoBarVisible(true);
-        console.log("infobar visible is now ", infoBarVisible);
+        console.log('infobar visible is now ', infoBarVisible);
         setCurrentLocation(location);
       }}
     ></Marker>
@@ -73,30 +58,21 @@ const RenderMarkers = ({ locations, setInfoBarVisible, infoBarVisible }) => {
 
   const setCurrentLocation = (newLocation) => {
     dispatch({
-      type: "SET_CURRENTLOCATION",
+      type: 'SET_CURRENTLOCATION',
       payload: newLocation,
     });
   };
   //console.log('lm: ', locations)
-  return locations.map((location) => (
-    <CustomMarker
-      location={location}
-      setCurrentLocation={setCurrentLocation}
-      setInfoBarVisible={setInfoBarVisible}
-      infoBarVisible={infoBarVisible}
-      currentLocation={currentLocation}
-      key={"marker_" + location.id}
-    />
-  ));
+  return locations.map((location) => <CustomMarker location={location} setCurrentLocation={setCurrentLocation} setInfoBarVisible={setInfoBarVisible} infoBarVisible={infoBarVisible} currentLocation={currentLocation} key={'marker_' + location.id} />);
 };
 
 function openGoogleMaps(location, name) {
   const scheme = Platform.select({
-    ios: "maps:0,0?q=",
-    android: "geo:0,0?q=",
+    ios: 'maps:0,0?q=',
+    android: 'geo:0,0?q=',
   });
   const latLng = `${location.latitude},${location.longitude}`;
-  const label = "Custom Label";
+  const label = 'Custom Label';
   const url = Platform.select({
     ios: `${scheme}${name}@${latLng}`,
     android: `${scheme}${latLng}(${name})`,
@@ -119,7 +95,7 @@ function setBoundingAustria() {
 }
 
 function setBoundingBox(bbox) {
-  console.log("setting box");
+  console.log('setting box');
   mapRef.current.setMapBoundaries(bbox[0], bbox[1]);
 }
 
@@ -132,29 +108,25 @@ const MapScreen = ({ navigation }) => {
 
   const setCurrentLocation = (newLocation) => {
     dispatch({
-      type: "SET_CURRENTLOCATION",
+      type: 'SET_CURRENTLOCATION',
       payload: newLocation,
     });
   };
 
   const locations = useSelector((state) => state.spaceLocations);
   const isLoaded = useSelector((state) => state.spaceLocations.isLoaded);
-  const isFetchingData = useSelector(
-    (state) => state.spaceLocations.isFetchingData
-  );
-  const hasFetchingDataError = useSelector(
-    (state) => state.spaceLocations.hasFetchingDataError
-  );
+  const isFetchingData = useSelector((state) => state.spaceLocations.isFetchingData);
+  const hasFetchingDataError = useSelector((state) => state.spaceLocations.hasFetchingDataError);
 
   useEffect(() => {
     dispatch(fetchSpaceLocations());
   }, []);
 
-  console.log("cl: ", currentLocation);
+  console.log('cl: ', currentLocation);
 
   return (
     <View style={StylesMain.mainView}>
-      <FadeInView style={{ flex: 1, width: "100%", height: "100%" }}>
+      <FadeInView style={{ flex: 1, width: '100%', height: '100%' }}>
         <NavBar navigation={navigation} title="map" />
         <MapView
           minZoomLevel={7}
@@ -163,73 +135,67 @@ const MapScreen = ({ navigation }) => {
           provider={MapView.PROVIDER_GOOGLE}
           customMapStyle={generatedMapStyle}
           onPress={(event) => {
-            if (event.nativeEvent.action === "marker-press") {
+            if (event.nativeEvent.action === 'marker-press') {
               return;
             }
             setInfoBarVisible(false);
-            console.log("kein marker");
+            console.log('kein marker');
             console.log(infoBarVisible);
           }}
           onMapReady={setBoundingAustria}
           ref={mapRef}
           initialRegion={initial}
         >
-          <Polygon
-            coordinates={geodata}
-            strokeWidth={5}
-            strokeColor="black"
-            fillColor="rgba(0,0,0,0.135)"
-          />
-          <RenderMarkers
-            locations={isLoaded && locations ? locations.data : []}
-            infoBarVisible={infoBarVisible}
-            setInfoBarVisible={setInfoBarVisible}
-          />
+          <Polygon coordinates={geodata} strokeWidth={5} strokeColor="black" fillColor="rgba(0,0,0,0.135)" />
+          <RenderMarkers locations={isLoaded && locations ? locations.data : []} infoBarVisible={infoBarVisible} setInfoBarVisible={setInfoBarVisible} />
         </MapView>
 
         {infoBarVisible && (
           <View
             style={{
-              position: "absolute",
+              fontFamily: 'Helviotopia',
+              position: 'absolute',
               bottom: 0,
-              backgroundColor: "white",
-              width: "100%",
-              height: "15%",
+              backgroundColor: 'white',
+              width: '100%',
+              height: '15%',
               zIndex: 10,
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-between",
-              alignItems: "top",
-              borderWidth: "2px",
+              display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              alignItems: 'top',
+              borderWidth: '2px',
+              padding: 20,
+              paddingBottom: 30,
             }}
           >
-            <View>
-              <Text style={{ fontSize: 18, marginBottom: 10, marginTop: 10 }}>
-                {currentLocation.name}
-              </Text>
-              <Text>{currentLocation.description}</Text>
+            <View style={{ marginTop: 'auto', marginBottom: 'auto', width: '70%' }}>
+              <Text style={{ fontSize: 18, marginBottom: 10, marginTop: 10, fontFamily: 'Helviotopia' }}>{currentLocation.name}</Text>
+              <Text style={{ fontFamily: 'Helviotopia' }}>{currentLocation.description}</Text>
             </View>
-            <View>
-              <TouchableOpacity
+            <View style={{ marginTop: 'auto', marginBottom: 'auto', width: '30%' }}>
+              {/* <TouchableOpacity
                 onPress={() => {
-                  console.log("go to detail screen location");
+                  console.log('go to detail screen location');
                 }}
               >
                 <FontAwesome
                   style={{
-                    marginTop: "auto",
-                    marginBottom: "auto",
-                    alignSelf: "center",
-                    opacity: 0.6,
+                    marginTop: 'auto',
+                    marginBottom: 'auto',
+                    alignSelf: 'center',
+                    opacity: 1,
                   }}
-                  name={"info"}
+                  name={'info'}
                   size={36}
                   color="black"
                 />
-              </TouchableOpacity>
-              <TouchableOpacity
+              </TouchableOpacity> */}
+              <AppButton
+                title="navigieren"
+                style={{ marginTop: 'auto', marginBottom: 'auto' }}
                 onPress={() => {
-                  console.log("cl: ", currentLocation);
+                  console.log('cl: ', currentLocation);
                   openGoogleMaps(
                     {
                       latitude: currentLocation.location.coordinates[1],
@@ -238,19 +204,7 @@ const MapScreen = ({ navigation }) => {
                     currentLocation.name
                   );
                 }}
-              >
-                <FontAwesome
-                  style={{
-                    marginTop: "auto",
-                    marginBottom: "auto",
-                    alignSelf: "center",
-                    opacity: 0.6,
-                  }}
-                  name={"location-arrow"}
-                  size={36}
-                  color="black"
-                />
-              </TouchableOpacity>
+              />
             </View>
           </View>
         )}
@@ -262,35 +216,35 @@ const MapScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "white",
-    alignItems: "center",
-    justifyContent: "center",
+    backgroundColor: 'white',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   map: {
-    width: "100%",
-    height: "82%",
+    width: '100%',
+    height: '82%',
   },
 });
 
 const generatedMapStyle = [
   {
-    featureType: "water",
-    elementType: "all",
+    featureType: 'water',
+    elementType: 'all',
     stylers: [
       {
-        color: "#666666",
+        color: '#666666',
       },
       {
-        visibility: "on",
+        visibility: 'on',
       },
     ],
   },
   {
-    featureType: "landscape",
-    elementType: "all",
+    featureType: 'landscape',
+    elementType: 'all',
     stylers: [
       {
-        hue: "white",
+        hue: 'white',
       },
       {
         saturation: -100,
@@ -299,16 +253,16 @@ const generatedMapStyle = [
         lightness: 100,
       },
       {
-        visibility: "off",
+        visibility: 'off',
       },
     ],
   },
   {
-    featureType: "road",
-    elementType: "geometry",
+    featureType: 'road',
+    elementType: 'geometry',
     stylers: [
       {
-        hue: "black",
+        hue: 'black',
       },
       {
         saturation: -100,
@@ -317,16 +271,16 @@ const generatedMapStyle = [
         lightness: -100,
       },
       {
-        visibility: "simplified",
+        visibility: 'simplified',
       },
     ],
   },
   {
-    featureType: "road",
-    elementType: "labels",
+    featureType: 'road',
+    elementType: 'labels',
     stylers: [
       {
-        hue: "white",
+        hue: 'white',
       },
       {
         saturation: -100,
@@ -335,16 +289,16 @@ const generatedMapStyle = [
         lightness: 100,
       },
       {
-        visibility: "off",
+        visibility: 'off',
       },
     ],
   },
   {
-    featureType: "poi",
-    elementType: "all",
+    featureType: 'poi',
+    elementType: 'all',
     stylers: [
       {
-        hue: "white",
+        hue: 'white',
       },
       {
         saturation: -100,
@@ -353,16 +307,16 @@ const generatedMapStyle = [
         lightness: 100,
       },
       {
-        visibility: "off",
+        visibility: 'off',
       },
     ],
   },
   {
-    featureType: "administrative",
-    elementType: "all",
+    featureType: 'administrative',
+    elementType: 'all',
     stylers: [
       {
-        hue: "white",
+        hue: 'white',
       },
       {
         saturation: 0,
@@ -371,16 +325,16 @@ const generatedMapStyle = [
         lightness: 100,
       },
       {
-        visibility: "off",
+        visibility: 'off',
       },
     ],
   },
   {
-    featureType: "transit",
-    elementType: "geometry",
+    featureType: 'transit',
+    elementType: 'geometry',
     stylers: [
       {
-        hue: "black",
+        hue: 'black',
       },
       {
         saturation: 0,
@@ -389,16 +343,16 @@ const generatedMapStyle = [
         lightness: -100,
       },
       {
-        visibility: "on",
+        visibility: 'on',
       },
     ],
   },
   {
-    featureType: "transit",
-    elementType: "labels",
+    featureType: 'transit',
+    elementType: 'labels',
     stylers: [
       {
-        hue: "white",
+        hue: 'white',
       },
       {
         saturation: 0,
@@ -407,7 +361,7 @@ const generatedMapStyle = [
         lightness: 100,
       },
       {
-        visibility: "off",
+        visibility: 'off',
       },
     ],
   },
