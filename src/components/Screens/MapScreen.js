@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import NavBar from '../ui/NavBar';
 import FadeInView from '../ui/FadeInView';
 import StylesMain from '../../../styles/StylesMain';
+import AppButton from '../ui/AppButton';
 
 import geodata from '../../../assets/geodata.json';
 
@@ -152,6 +153,7 @@ const MapScreen = ({ navigation }) => {
         {infoBarVisible && (
           <View
             style={{
+              fontFamily: 'Helviotopia',
               position: 'absolute',
               bottom: 0,
               backgroundColor: 'white',
@@ -163,14 +165,16 @@ const MapScreen = ({ navigation }) => {
               justifyContent: 'space-between',
               alignItems: 'top',
               borderWidth: '2px',
+              padding: 20,
+              paddingBottom: 30,
             }}
           >
-            <View>
-              <Text style={{ fontSize: 18, marginBottom: 10, marginTop: 10 }}>{currentLocation.name}</Text>
-              <Text>{currentLocation.description}</Text>
+            <View style={{ marginTop: 'auto', marginBottom: 'auto', width: '70%' }}>
+              <Text style={{ fontSize: 18, marginBottom: 10, marginTop: 10, fontFamily: 'Helviotopia' }}>{currentLocation.name}</Text>
+              <Text style={{ fontFamily: 'Helviotopia' }}>{currentLocation.description}</Text>
             </View>
-            <View>
-              <TouchableOpacity
+            <View style={{ marginTop: 'auto', marginBottom: 'auto', width: '30%' }}>
+              {/* <TouchableOpacity
                 onPress={() => {
                   console.log('go to detail screen location');
                 }}
@@ -180,14 +184,16 @@ const MapScreen = ({ navigation }) => {
                     marginTop: 'auto',
                     marginBottom: 'auto',
                     alignSelf: 'center',
-                    opacity: 0.6,
+                    opacity: 1,
                   }}
                   name={'info'}
                   size={36}
                   color="black"
                 />
-              </TouchableOpacity>
-              <TouchableOpacity
+              </TouchableOpacity> */}
+              <AppButton
+                title="navigieren"
+                style={{ marginTop: 'auto', marginBottom: 'auto' }}
                 onPress={() => {
                   console.log('cl: ', currentLocation);
                   openGoogleMaps(
@@ -198,19 +204,7 @@ const MapScreen = ({ navigation }) => {
                     currentLocation.name
                   );
                 }}
-              >
-                <FontAwesome
-                  style={{
-                    marginTop: 'auto',
-                    marginBottom: 'auto',
-                    alignSelf: 'center',
-                    opacity: 0.6,
-                  }}
-                  name={'location-arrow'}
-                  size={36}
-                  color="black"
-                />
-              </TouchableOpacity>
+              />
             </View>
           </View>
         )}
