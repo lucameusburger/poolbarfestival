@@ -16,7 +16,7 @@ const HomeScreen = ({ navigation }) => {
         <ImageBackground source={gridImage} width="100%" height="100%" style={{ flex: 1, width: '100%', height: '100%' }}>
           <View style={{ flex: 1, justifyContent: 'center' }}>
             <View>
-              <View style={{ marginBottom: 90, width: '90%', height: '33%', alignSelf: 'center' }}>
+              <View style={{ marginBottom: 40, width: '90%', height: '33%', alignSelf: 'center' }}>
                 <PoolbarLogo style={{ alignSelf: 'center' }} width="100%" height="100%" fill="black" />
               </View>
               <View style={{ top: 0, marginTop: 0 }}>
@@ -27,8 +27,6 @@ const HomeScreen = ({ navigation }) => {
                 <AppButton title="generator" onPress={() => navigation.navigate('Generators')} bevelLeft={true} />
                 <View style={{ height: 20 }} />
                 <AppButton title="fließtext" onPress={() => navigation.navigate('Flowtext')} bevelLeft={false} />
-                <View style={{ height: 20 }} />
-                <AppButton title="splash" onPress={() => navigation.navigate('SplashScreen')} bevelLeft={false} />
               </View>
             </View>
 

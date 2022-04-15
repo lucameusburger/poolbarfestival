@@ -4,7 +4,6 @@ import LikeIcon from '../ui/LikeIcon';
 import { navigate } from '../../core/RootNavigation';
 import { getDateString } from '../../core/helpers';
 
-
 const EventComponent = ({ item }) => {
   let dateString = item.day_item.date_start ? getDateString(new Date(item.day_item.date_start)) : 'tba';
 
@@ -15,7 +14,6 @@ const EventComponent = ({ item }) => {
         borderBottomWidth: 2,
         borderBottomColor: '#000',
         width: '100%',
-
       }}
       key={item.id}
       onPress={() =>
@@ -24,27 +22,28 @@ const EventComponent = ({ item }) => {
         })
       }
     >
-      <View style={{
-        width: '100%',
-        flexDirection: 'row',
-      }}>
-        <View style={{
-
-          flex: 8
-        }}>
-          <Text style={StylesMain.eventListDateText}>{dateString}</Text>
-          <Text style={StylesMain.eventListMainText}>{item.name}</Text>
-        </View>
-        <View style={{
-          flex: 1,
-          justifyContent: 'center',
-          alignItems: 'center',
+      <View
+        style={{
+          width: '100%',
+          flexDirection: 'row',
         }}
+      >
+        <View
+          style={{
+            flex: 8,
+          }}
         >
-          <LikeIcon
-            eventId={item.id}
-
-          />
+          <Text style={StylesMain.artistListDateText}>{dateString}</Text>
+          <Text style={StylesMain.artistListMainText}>{item.name}</Text>
+        </View>
+        <View
+          style={{
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          <LikeIcon eventId={item.id} />
         </View>
       </View>
     </TouchableOpacity>

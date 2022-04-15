@@ -15,13 +15,13 @@ const APPROX_STATUSBAR_HEIGHT = Platform.select({
 
 const Wrapper = typeof APPROX_STATUSBAR_HEIGHT.statusBarHeight === 'number' ? View : SafeAreaView;
 
-
 const NavBar = ({ title, next, nextTitle }) => {
   return (
-    <Wrapper style={{ backgroundColor: '#fff', marginBottom: 0 }}>
+    <Wrapper style={{ marginBottom: 0 }}>
       <View
         style={{
           width: '100%',
+          backgroundColor: '#fff',
           top: 0,
           borderBottomWidth: 2,
           borderBottomColor: '#000',
@@ -34,7 +34,6 @@ const NavBar = ({ title, next, nextTitle }) => {
             flexDirection: 'row',
             justifyContent: 'space-between',
             paddingBottom: 10,
-
             marginHorizontal: '4%',
           }}
         >
@@ -56,13 +55,5 @@ const NavBar = ({ title, next, nextTitle }) => {
     </Wrapper>
   );
 };
-
-const styles = StyleSheet.create({
-  button: {
-    fontFamily: 'Helviotopia',
-    fontSize: 20,
-    alignSelf: 'center',
-  },
-});
 
 export default memo(NavBar);
