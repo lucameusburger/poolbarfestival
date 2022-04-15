@@ -29,7 +29,6 @@ const RenderMember = ({ member }) => {
             alignItems: 'center',
           }}
         />
-        <View style={{}}></View>
         <View style={{}}>
           <View style={{ marginLeft: 20, marginTop: 'auto', marginBottom: 'auto', width: '100%' }}>
             <Text style={StylesMain.artistListDateText}>{member.year}</Text>
@@ -59,6 +58,7 @@ const RenderElement = ({ generator }) => {
           flex: 1,
           width: '100%',
           height: 320,
+          marginBottom: 30,
         }}
       />
       {generator.members.length > 0 && (
@@ -68,13 +68,15 @@ const RenderElement = ({ generator }) => {
               flex: 1,
               width: '100%',
               height: '100%',
-              borderTopColor: '#000',
-              borderTopWidth: 2,
             }}
           >
-            {generator.members.map((member) => (
-              <RenderMember key={member.id} member={member} />
-            ))}
+            <View style={{ flex: 1 }}>
+              <Text style={[StylesMain.artistDetailsDateText, { marginBottom: 20, marginHorizontal: 20 }]}>mitwirkende</Text>
+              <View style={{ flex: 1, borderTopWidth: 2 }}></View>
+              {generator.members.map((member) => (
+                <RenderMember key={member.id} member={member} />
+              ))}
+            </View>
           </View>
         </View>
       )}
