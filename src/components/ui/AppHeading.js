@@ -35,8 +35,8 @@ const AppHeading = ({ title }) => {
   }, [startValue, endValue]);
 
   return (
-    <View style={{ flexDirection: 'row', height: 120 }}>
-      <Animated.View style={{ position: 'absolute', display: 'flex', flexDirection: 'row', transform: [{ translateX: startValue }] }}>
+    <View style={{ flexDirection: 'row', marginBottom: 0 }}>
+      <Animated.View style={{ display: 'flex', flexDirection: 'row', transform: [{ translateX: startValue }] }}>
         <Text numberOfLines={1} style={styles.heading}>
           {title}
         </Text>
@@ -53,7 +53,7 @@ const AppHeading = ({ title }) => {
 const styles = StyleSheet.create({
   heading: {
     fontFamily: 'Helviotopia',
-    fontSize: SCREEN_WIDTH / 3.5,
+    fontSize: SCREEN_WIDTH / 4.5,
     color: '#000',
     alignSelf: 'center',
   },
