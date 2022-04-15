@@ -46,6 +46,8 @@ const GeneratorListScreen = ({ router, navigation }) => {
     dispatch(fetchGenerators());
   }, []);
 
+  console.log(generators);
+
   return (
     <View style={StylesMain.mainView}>
       <FadeInView style={{ flex: 1, width: '100%', height: '100%' }}>

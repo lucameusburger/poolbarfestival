@@ -2,10 +2,11 @@ import { fetchArtists } from './artistsThunk';
 
 const BASE_URL = 'https://www.admin.poolbar.at/';
 
-function setGenerators(venues) {
+function setData(generators) {
     return {
         type: 'SET_GENERATORS',
-        payload: venues,
+        payload: generators,
+
     };
 }
 
@@ -23,12 +24,20 @@ function setHasFetchingDataError(hasError) {
     };
 }
 export function fetchGenerators() {
-    return (dispatch, getState) => {
-        const isFetchingData = getState().venues.isFetchingData;
+    return async (dispatch, getState) => {
+        const isFetchingData = getState().generators.isFetchingData;
         if (isFetchingData) {
             return;
         } else {
             dispatch(setIsFetchingData(true));
+            const memberGeneratorResponse = await fetch(BASE_URL + 'items/generator_projects_generator_members')
+            const memberGeneratorD = await memberGeneratorResponse.json();
+            const memberGeneratorData = memberGeneratorD.data;
+
+            const memberResponse = await fetch(BASE_URL + 'items/generator_members')
+            const memberD = await memberResponse.json();
+            const memberData = memberD.data;
+            console.log(memberGeneratorData);
             fetch(BASE_URL + 'items/generator_projects')
                 .then(async (response) => {
                     // check for error response
@@ -52,7 +61,16 @@ export function fetchGenerators() {
                             })
                         );
 
-                        dispatch(setGenerators(fetchedGenerators));
+                        // add member ids to each generator
+                        fetchedGenerators = fetchedGenerators.map((item) => {
+                            const memberIds = memberGeneratorData
+                                .filter((member) => member.generator_projects_id === item.id)
+                                .map((member) => member.generator_members_id);
+                            item.members = memberData.filter((member) => memberIds.includes(member.id));
+                            return item;
+                        });
+
+                        dispatch(setData(fetchedGenerators));
                     } else {
                         const error = (data && data.message) || response.status;
                         console.log('Fetching Generators Error: ', error);

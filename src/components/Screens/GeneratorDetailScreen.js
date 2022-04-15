@@ -9,6 +9,39 @@ import LoadingText from '../ui/LoadingText';
 import { fetchGenerators } from '../../redux/generatorsThunk';
 import artistPlaceholder from '../../../assets/img/generatorProjectPlaceholder.jpg';
 
+const RenderMember = ({ member }) => {
+  return (
+    <View
+      style={{
+        padding: 10,
+        borderBottomWidth: 2,
+        borderBottomColor: '#000',
+      }}
+
+    >
+      <View style={{ width: '100%', marginTop: 'auto', marginBottom: 'auto', flexDirection: 'row' }}>
+        <PoolbarImage
+          imageId={member.image}
+          fallback={artistPlaceholder}
+          style={{
+            width: 100,
+            height: 100,
+            borderRadius: 300,
+            alignItems: 'center',
+          }}
+        />
+        <View style={{}}></View>
+        <View style={{}}>
+          <View style={{ marginLeft: 20, marginTop: 'auto', marginBottom: 'auto', width: '100%' }}>
+            <Text style={StylesMain.artistListDateText}>{member.name}</Text>
+            <Text style={StylesMain.artistListMainText}>{member.status}</Text>
+          </View>
+        </View>
+      </View>
+    </View>
+  );
+};
+
 const RenderElement = ({ generator }) => {
   return (
     <View style={{ flex: 1, width: '100%', height: '100%' }}>
@@ -29,6 +62,23 @@ const RenderElement = ({ generator }) => {
           height: 320,
         }}
       />
+      {generator.members.length > 0 &&
+        <>
+          <Text style={styles.roomMainText}>Members</Text>
+          <View style={{
+            flex: 1,
+            width: '100%',
+            height: '100%',
+            borderTopColor: '#000',
+            borderTopWidth: 2,
+          }}>
+            {generator.members.map((member) => (
+              <RenderMember key={member.id} member={member} />
+            ))}
+
+          </View>
+        </>
+      }
     </View>
   );
 };
