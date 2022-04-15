@@ -28,15 +28,19 @@ import selectedMarkerImage from '../../../assets/img/selectedMarker.png';
 const BASE_URL = 'https://www.admin.poolbar.at/';
 const mapRef = React.createRef();
 
+let infoBarVisible = false;
+
 function CustomMarker({ location, setCurrentLocation, currentLocation }) {
     return (
         <Marker
             key={location.id}
-            image={currentLocation?.id === location.id ? selectedMarkerImage : markerImage}
+            image={(currentLocation?.id === location.id && infoBarVisible) ? selectedMarkerImage : markerImage}
             coordinate={{ 'longitude': location.location.coordinates[0], 'latitude': location.location.coordinates[1] }}
             tracksViewChanges={true}
-            onPress={() =>
-                setCurrentLocation(location)
+            onPress={() => {
+                infoBarVisible = true;
+                setCurrentLocation(location);
+            }
             }
         >
 
@@ -120,6 +124,13 @@ const MapScreen = ({ navigation }) => {
     const currentLocation = useSelector(state => state.currentLocation.data);
 
 
+    const setCurrentLocation = (newLocation) => {
+        dispatch({
+            type: "SET_CURRENTLOCATION",
+            payload: newLocation
+        })
+    }
+
     const locations = useSelector((state) => state.spaceLocations);
     const isLoaded = useSelector((state) => state.spaceLocations.isLoaded);
     const isFetchingData = useSelector((state) => state.spaceLocations.isFetchingData);
@@ -141,7 +152,18 @@ const MapScreen = ({ navigation }) => {
                     style={styles.map}
                     provider={MapView.PROVIDER_GOOGLE}
                     customMapStyle={generatedMapStyle}
+                    onPress={(event) => {
+                        if (event.nativeEvent.action === 'marker-press') {
+                            return
 
+                        }
+                        infoBarVisible = false
+                        console.log('kein marker')
+                        console.log(infoBarVisible)
+
+
+
+                    }}
                     onMapReady={setBoundingAustria}
                     ref={mapRef}
                     initialRegion={initial}>
@@ -161,7 +183,7 @@ const MapScreen = ({ navigation }) => {
                 </MapView>
 
 
-                {currentLocation &&
+                {infoBarVisible && currentLocation &&
                     <View
                         style={{
                             position: 'absolute', bottom: 0, backgroundColor: 'white', width: '100%', height: '15%', zIndex: 10
