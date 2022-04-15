@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, memo } from 'react';
-import { Text, View, TouchableOpacity, Button, Dimensions, Animated } from 'react-native';
+import { Text, View, TouchableOpacity, Button, Dimensions, Animated, ScrollView } from 'react-native';
 import { useMemoOne, useCallbackOne } from 'use-memo-one';
 import NavBar from '../ui/NavBar';
 import * as Sharing from 'expo-sharing';
@@ -85,6 +85,7 @@ const FlowtextScreen = ({ navigation }) => {
   const phrase = useSelector((state) => state.flowText.phrase);
   const [height, setHeight] = useState(0);
   const viewShotRef = useRef();
+  const scrollViewRef = useRef();
 
   const addElement = (element) => {
     dispatch({
@@ -165,7 +166,9 @@ const FlowtextScreen = ({ navigation }) => {
             <AppButton style={{ flex: 1 }} title="umbruch" onPress={() => addToPhrase('\n')} bevelLeft={false} />
           </View>
           <ViewShot ref={viewShotRef} style={{ backgroundColor: 'transparent' }}>
-            <Text style={StylesMain.flowTextPhrase}>{phrase}</Text>
+            <ScrollView ref={scrollViewRef} onContentSizeChange={() => scrollViewRef.current.scrollToEnd({ animated: true })} style={StylesMain.flowTextContainer}>
+              <Text style={StylesMain.flowTextPhrase}>{phrase}</Text>
+            </ScrollView>
           </ViewShot>
         </View>
       </FadeInView>
