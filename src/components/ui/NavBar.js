@@ -15,7 +15,6 @@ const APPROX_STATUSBAR_HEIGHT = Platform.select({
 
 const Wrapper = typeof APPROX_STATUSBAR_HEIGHT.statusBarHeight === 'number' ? View : SafeAreaView;
 
-const generateUniqueKey = () => `_${Math.random().toString(36).substr(2, 9)}`;
 
 const NavBar = ({ title, next, nextTitle }) => {
   return (

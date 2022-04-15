@@ -30,7 +30,7 @@ const EventListScreen = ({ router }) => {
         <View style={{ flex: 1, margin: 0 }}>
           {events ?
             <FlatList
-              style={{ flex: 1, padding: 20 }}
+              style={{ flex: 1, padding: 0 }}
               data={events}
               renderItem={EventComponent}
               keyExtractor={(item) => item.id}

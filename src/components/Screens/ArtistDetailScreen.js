@@ -62,9 +62,9 @@ const ArtistDetailScreen = ({ artist }) => {
         )}
       </View>
 
-      <View style={{ padding: 20 }}>
-        <Text style={[StylesMain.artistDetailsDateText, { marginBottom: 20 }]}>kommende events</Text>
-        <View style={{ flex: 1 }}>
+      <View style={{ padding: 0 }}>
+        <Text style={[StylesMain.artistDetailsDateText, { marginBottom: 20, marginHorizontal: 20 }]}>kommende events</Text>
+        <View style={{ flex: 1, borderTopWidth: 2 }}>
           {filteredEvents.map((event) => (
             <EventComponent key={event.id} item={event} />
           ))}
