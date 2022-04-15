@@ -18,7 +18,7 @@ const HomeScreen = ({ navigation }) => {
               <View style={{ width: '150%', alignSelf: 'center', height: 50, transform: [{ rotate: '-6deg' }], backgroundColor: '#00ff00', marginBottom: 10 + SCREEN_HEIGHT / 30 }}>
                 <Text style={{ fontFamily: 'Helviotopia', alignSelf: 'center', marginTop: 'auto', marginBottom: 'auto', fontSize: 28 }}>07 Juli bis 28 August 2022</Text>
               </View>
-              <View style={{ marginBottom: 24 + SCREEN_HEIGHT / 40, width: '80%', height: '33%', alignSelf: 'center' }}>
+              <View style={{ marginBottom: 10 + SCREEN_HEIGHT / 40, width: '80%', height: '33%', alignSelf: 'center' }}>
                 <PoolbarLogo style={{ alignSelf: 'center' }} width="100%" height="100%" fill="black" />
               </View>
               <View style={{ top: 0, marginTop: 0 }}>
