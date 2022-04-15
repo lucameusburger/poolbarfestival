@@ -33,7 +33,7 @@ const EventDetailScreen = ({ route }) => {
           eventId={item.id}
           style={{
             position: 'absolute',
-            top: 30,
+            top: 20,
             right: 20,
           }}
         />
