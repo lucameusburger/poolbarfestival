@@ -189,13 +189,20 @@ const FlowtextScreen = ({ navigation }) => {
           </View>
           <ViewShot
             ref={viewShotRef}
-            style={{ backgroundColor: "transparent" }}
+            style={{
+              backgroundColor: "transparent",
+              padding: 5,
+              borderWidth: 2,
+              borderColor: "black",
+              borderRadius: 10,
+            }}
           >
             <ScrollView
               ref={scrollViewRef}
-              onContentSizeChange={() =>
-                scrollViewRef.current.scrollToEnd({ animated: true })
-              }
+              onContentSizeChange={() => {
+                console.log("scrollView onContentSizeChange");
+                scrollViewRef.current.scrollToEnd({ animated: true });
+              }}
               style={StylesMain.flowTextContainer}
             >
               <Text style={StylesMain.flowTextPhrase}>{phrase}</Text>

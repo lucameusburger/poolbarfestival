@@ -192,6 +192,8 @@ const StylesMain = StyleSheet.create({
     textAlign: "center",
     textTransform: "lowercase",
     marginBottom: 0,
+    overflow: "hidden",
+    marginBottom: 50,
   },
   flowTextContainer: {
     color: "black",
@@ -199,12 +201,9 @@ const StylesMain = StyleSheet.create({
     fontSize: 33,
     textAlign: "center",
     textTransform: "lowercase",
-    borderWidth: 2,
-    borderColor: "black",
     borderRadius: 10,
     padding: 10,
     maxHeight: 200,
-    overflow: "hidden",
   },
 });
 
