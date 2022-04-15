@@ -16,19 +16,17 @@ const HomeScreen = ({ navigation }) => {
         <ImageBackground source={gridImage} width="100%" height="100%" style={{ flex: 1, width: '100%', height: '100%' }}>
           <View style={{ flex: 1, justifyContent: 'center' }}>
             <View>
-              <View style={{ marginBottom: 90, width: '90%', height: '33%', alignSelf: 'center' }}>
+              <View style={{ marginBottom: 40, width: '80%', height: '33%', alignSelf: 'center' }}>
                 <PoolbarLogo style={{ alignSelf: 'center' }} width="100%" height="100%" fill="black" />
               </View>
               <View style={{ top: 0, marginTop: 0 }}>
-                <AppButton title="events" onPress={() => navigation.navigate('Events')} bevelLeft={true} />
+                <AppButton style={{ width: '50%' }} title="events" onPress={() => navigation.navigate('Events')} bevelLeft={true} />
                 <View style={{ height: 20 }} />
-                <AppButton title="artists" onPress={() => navigation.navigate('Artists')} />
+                <AppButton style={{ width: '50%' }} title="artists" onPress={() => navigation.navigate('Artists')} />
                 <View style={{ height: 20 }} />
-                <AppButton title="generator" onPress={() => navigation.navigate('Generators')} bevelLeft={true} />
+                <AppButton style={{ width: '50%' }} title="generator" onPress={() => navigation.navigate('Generators')} bevelLeft={true} />
                 <View style={{ height: 20 }} />
-                <AppButton title="fließtext" onPress={() => navigation.navigate('Flowtext')} bevelLeft={false} />
-                <View style={{ height: 20 }} />
-                <AppButton title="splash" onPress={() => navigation.navigate('SplashScreen')} bevelLeft={false} />
+                <AppButton style={{ width: '50%' }} title="fließtext" onPress={() => navigation.navigate('Flowtext')} bevelLeft={false} />
               </View>
             </View>
 

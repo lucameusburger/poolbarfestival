@@ -30,7 +30,7 @@ const RenderElement = ({ venue }) => {
           height: 320,
         }}
       />
-      <View style={{ flex: 1, padding: 20 }}>
+      <View style={{ flex: 1 }}>
         {filteredEvents.map((event) => (
           <EventComponent item={event} key={event.id} />
         ))}

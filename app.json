@@ -7,7 +7,6 @@
     "icon": "./assets/icon/appstore.png",
     "splash": {
       "image": "./assets/splash.png",
-      "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
     "updates": {

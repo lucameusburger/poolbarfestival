@@ -187,6 +187,13 @@ const StylesMain = StyleSheet.create({
     fontFamily: 'Helviotopia',
     fontWeight: '500',
     color: '#000',
+    fontSize: 33,
+    textAlign: 'center',
+    textTransform: 'lowercase',
+    marginBottom: 0,
+  },
+  flowTextContainer: {
+    color: '#000',
     backgroundColor: '#ffffff',
     fontSize: 33,
     textAlign: 'center',
@@ -195,6 +202,8 @@ const StylesMain = StyleSheet.create({
     borderColor: '#000',
     borderRadius: 10,
     padding: 10,
+    maxHeight: 200,
+    overflow: 'hidden',
   },
 });
 

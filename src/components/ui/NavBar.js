@@ -15,13 +15,13 @@ const APPROX_STATUSBAR_HEIGHT = Platform.select({
 
 const Wrapper = typeof APPROX_STATUSBAR_HEIGHT.statusBarHeight === 'number' ? View : SafeAreaView;
 
-
 const NavBar = ({ title, next, nextTitle }) => {
   return (
-    <Wrapper style={{ backgroundColor: '#fff', marginBottom: 0 }}>
+    <Wrapper style={{ margin: 0, height: 220, backgroundColor: '#fff', zIndex: 999 }}>
       <View
         style={{
           width: '100%',
+          backgroundColor: '#fff',
           top: 0,
           borderBottomWidth: 2,
           borderBottomColor: '#000',
@@ -32,14 +32,13 @@ const NavBar = ({ title, next, nextTitle }) => {
         <View
           style={{
             flexDirection: 'row',
-            justifyContent: 'space-between',
             paddingBottom: 10,
-
-            marginHorizontal: '4%',
+            marginLeft: 20,
+            marginRight: 20,
           }}
         >
           <AppButton
-            style={{ width: '48%' }}
+            style={{ flex: 1 }}
             title={'zurück'}
             onPress={() => {
               // handle the index we get
@@ -50,19 +49,17 @@ const NavBar = ({ title, next, nextTitle }) => {
               }
             }}
           />
-          {nextTitle && <AppButton style={{ width: '48%' }} title={nextTitle} onPress={next} />}
+
+          {nextTitle && (
+            <>
+              <View style={{ width: 20 }}></View>
+              <AppButton style={{ flex: 1 }} title={nextTitle} onPress={next} />
+            </>
+          )}
         </View>
       </View>
     </Wrapper>
   );
 };
-
-const styles = StyleSheet.create({
-  button: {
-    fontFamily: 'Helviotopia',
-    fontSize: 20,
-    alignSelf: 'center',
-  },
-});
 
 export default memo(NavBar);

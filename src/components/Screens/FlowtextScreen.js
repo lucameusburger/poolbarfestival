@@ -1,7 +1,9 @@
-import { useState, useEffect, memo } from 'react';
-import { Text, View, TouchableOpacity, Button, Dimensions, Animated } from 'react-native';
+import { useState, useEffect, useRef, memo } from 'react';
+import { Text, View, TouchableOpacity, Button, Dimensions, Animated, ScrollView } from 'react-native';
 import { useMemoOne, useCallbackOne } from 'use-memo-one';
 import NavBar from '../ui/NavBar';
+import * as Sharing from 'expo-sharing';
+import ViewShot from 'react-native-view-shot';
 import LoadingText from '../ui/LoadingText';
 import FadeInView from '../ui/FadeInView';
 import StylesMain from '../../../styles/StylesMain';
@@ -82,6 +84,8 @@ const FlowtextScreen = ({ navigation }) => {
   const elements = useSelector((state) => state.flowText.elements);
   const phrase = useSelector((state) => state.flowText.phrase);
   const [height, setHeight] = useState(0);
+  const viewShotRef = useRef();
+  const scrollViewRef = useRef();
 
   const addElement = (element) => {
     dispatch({
@@ -125,6 +129,12 @@ const FlowtextScreen = ({ navigation }) => {
     }
   }, [height]);
 
+  let openShareDialogAsync = async () => {
+    viewShotRef.current.capture({ format: 'jpg', quality: 80 }).then(async (uri) => {
+      await Sharing.shareAsync('file://' + uri);
+    });
+  };
+
   return (
     <View style={StylesMain.mainView}>
       <FadeInView style={{ flex: 1, width: '100%', height: '100%' }}>
@@ -132,7 +142,7 @@ const FlowtextScreen = ({ navigation }) => {
           navigation={navigation}
           title="fließtext"
           next={() => {
-            console.log('teilen');
+            openShareDialogAsync();
           }}
           nextTitle={'teilen'}
         />
@@ -151,10 +161,15 @@ const FlowtextScreen = ({ navigation }) => {
         </View>
         <View style={{ margin: 20 }}>
           <View style={{ flexDirection: 'row', marginBottom: 10, width: '100%' }}>
-            <AppButton title="neu anfangen" onPress={clear} bevelLeft={false} />
-            <AppButton title="umbruch" onPress={() => addToPhrase('\n')} bevelLeft={false} />
+            <AppButton style={{ flex: 1 }} title="neu anfangen" onPress={clear} bevelLeft={false} />
+            <View style={{ width: 20 }}></View>
+            <AppButton style={{ flex: 1 }} title="umbruch" onPress={() => addToPhrase('\n')} bevelLeft={false} />
           </View>
-          <Text style={StylesMain.flowTextPhrase}>{phrase}</Text>
+          <ViewShot ref={viewShotRef} style={{ backgroundColor: 'transparent' }}>
+            <ScrollView ref={scrollViewRef} onContentSizeChange={() => scrollViewRef.current.scrollToEnd({ animated: true })} style={StylesMain.flowTextContainer}>
+              <Text style={StylesMain.flowTextPhrase}>{phrase}</Text>
+            </ScrollView>
+          </ViewShot>
         </View>
       </FadeInView>
     </View>
