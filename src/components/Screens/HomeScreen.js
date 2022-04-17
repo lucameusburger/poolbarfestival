@@ -15,7 +15,7 @@ const HomeScreen = ({ navigation }) => {
           width: '150%',
           alignSelf: 'center',
           height: 100,
-          transform: [{ rotate: '0deg' }],
+          transform: [{ rotate: '-2deg' }],
           backgroundColor: CLR_PRIMARY,
           marginTop: '-5%',
         }}
