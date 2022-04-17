@@ -1,18 +1,18 @@
-import React, { useState, useEffect } from "react";
-import * as Linking from "expo-linking";
-import { StyleSheet, Text, View, ScrollView } from "react-native";
-import AppButton from "../ui/AppButton";
-import NavBar from "../ui/NavBar";
-import FadeInView from "../ui/FadeInView";
-import StylesMain from "../../../styles/StylesMain";
-import { useDispatch, useSelector } from "react-redux";
-import LikeIcon from "../ui/LikeIcon";
-import LoadingText from "../ui/LoadingText";
-import { fetchEvents } from "../../redux/eventsThunk";
-import { fetchArtists } from "../../redux/artistsThunk";
-import { navigate } from "../../core/RootNavigation";
-import { fetchVenues } from "../../redux/venueThunk";
-import { getDateString } from "../../core/helpers";
+import React, { useState, useEffect } from 'react';
+import * as Linking from 'expo-linking';
+import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import AppButton from '../ui/AppButton';
+import NavBar from '../ui/NavBar';
+import FadeInView from '../ui/FadeInView';
+import StylesMain from '../../../styles/StylesMain';
+import { useDispatch, useSelector } from 'react-redux';
+import LikeIcon from '../ui/LikeIcon';
+import LoadingText from '../ui/LoadingText';
+import { fetchEvents } from '../../redux/eventsThunk';
+import { fetchArtists } from '../../redux/artistsThunk';
+import { navigate } from '../../core/RootNavigation';
+import { fetchVenues } from '../../redux/venueThunk';
+import { getDateString } from '../../core/helpers';
 
 const EventDetailScreen = ({ route }) => {
   const id = route.params.id.trim();
@@ -25,16 +25,14 @@ const EventDetailScreen = ({ route }) => {
   const venues = useSelector((state) => state.venues.data);
 
   const RenderElement = ({ item, artist, venue }) => {
-    const dateString = item.day_item.date_start
-      ? getDateString(new Date(item.day_item.date_start))
-      : "tba";
+    const dateString = item.day_item.date_start ? getDateString(new Date(item.day_item.date_start)) : 'tba';
 
     return (
-      <View style={{ flex: 1, width: "100%", height: "100%" }}>
+      <View style={{ flex: 1, width: '100%', height: '100%' }}>
         <LikeIcon
           eventId={item.id}
           style={{
-            position: "absolute",
+            position: 'absolute',
             top: 20,
             right: 20,
             zIndex: 1000,
@@ -56,7 +54,7 @@ const EventDetailScreen = ({ route }) => {
           {item.url_ticket && (
             <AppButton
               style={{
-                marginRight: "auto",
+                marginRight: 'auto',
                 marginLeft: 0,
                 marginBottom: 10,
               }}
@@ -67,10 +65,10 @@ const EventDetailScreen = ({ route }) => {
           )}
           {artist && (
             <AppButton
-              style={{ marginRight: "auto", marginLeft: 0, marginBottom: 10 }}
+              style={{ marginRight: 'auto', marginLeft: 0, marginBottom: 10 }}
               title="artist ansehen"
               onPress={() =>
-                navigate("Artist", {
+                navigate('Artist', {
                   id: item.artist,
                 })
               }
@@ -78,10 +76,10 @@ const EventDetailScreen = ({ route }) => {
           )}
           {item.room && (
             <AppButton
-              style={{ marginRight: "auto", marginLeft: 0 }}
+              style={{ marginRight: 'auto', marginLeft: 0 }}
               title="zur venue"
               onPress={() =>
-                navigate("Room", {
+                navigate('Room', {
                   id: item.room,
                 })
               }
@@ -111,9 +109,7 @@ const EventDetailScreen = ({ route }) => {
 
   useEffect(() => {
     if (selectedEvent) {
-      const artist = artists.find(
-        (artist) => artist.id === selectedEvent.artist
-      );
+      const artist = artists.find((artist) => artist.id === selectedEvent.artist);
       const venue = venues.find((venue) => venue.id === selectedEvent.room);
 
       setSelectedArtist(artist);
@@ -123,19 +119,9 @@ const EventDetailScreen = ({ route }) => {
 
   return (
     <View style={StylesMain.mainView}>
-      <FadeInView style={{ flex: 1, width: "100%" }}>
-        <NavBar title={"event"} />
-        <ScrollView style={{ flex: 1 }}>
-          {selectedEvent ? (
-            <RenderElement
-              item={selectedEvent}
-              artist={selectedArtist}
-              venue={selectedVenue}
-            />
-          ) : (
-            <LoadingText />
-          )}
-        </ScrollView>
+      <FadeInView style={{ flex: 1, width: '100%' }}>
+        <NavBar title={'event'} />
+        <ScrollView style={{ flex: 1 }}>{selectedEvent ? <RenderElement item={selectedEvent} artist={selectedArtist} venue={selectedVenue} /> : <LoadingText />}</ScrollView>
       </FadeInView>
     </View>
   );
@@ -143,22 +129,22 @@ const EventDetailScreen = ({ route }) => {
 
 const styles = StyleSheet.create({
   eventDateText: {
-    fontFamily: "HelviotopiaBold",
-    color: "black",
-    alignSelf: "flex-start",
-    marginTop: "auto",
+    fontFamily: 'HelviotopiaBold',
+    color: 'black',
+    alignSelf: 'flex-start',
+    marginTop: 'auto',
     fontSize: 20,
-    textAlign: "left",
-    textTransform: "uppercase",
+    textAlign: 'left',
+    textTransform: 'uppercase',
   },
   eventMainText: {
-    fontFamily: "Helviotopia",
-    color: "black",
-    alignSelf: "flex-start",
-    marginTop: "auto",
+    fontFamily: 'Helviotopia',
+    color: 'black',
+    alignSelf: 'flex-start',
+    marginTop: 'auto',
     fontSize: 42,
-    textAlign: "left",
-    textTransform: "uppercase",
+    textAlign: 'left',
+    textTransform: 'uppercase',
   },
 });
 

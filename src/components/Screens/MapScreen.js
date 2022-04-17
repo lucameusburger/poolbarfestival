@@ -193,7 +193,7 @@ const MapScreen = ({ navigation }) => {
               </TouchableOpacity> */}
               <AppButton
                 title="navigieren"
-                style={{ marginTop: 'auto', marginBottom: 'auto' }}
+                style={{ marginTop: 'auto', marginBottom: 'auto', marginLeft: 'auto' }}
                 onPress={() => {
                   console.log('cl: ', currentLocation);
                   openGoogleMaps(

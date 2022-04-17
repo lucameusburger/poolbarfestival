@@ -1,16 +1,7 @@
-import React, { Component, useState, useEffect, useRef, memo } from "react";
-import {
-  Animated,
-  Dimensions,
-  View,
-  Platform,
-  PixelRatio,
-  StyleSheet,
-  Text,
-  ListView,
-} from "react-native";
+import React, { Component, useState, useEffect, useRef, memo } from 'react';
+import { Animated, Dimensions, View, Platform, PixelRatio, StyleSheet, Text, ListView } from 'react-native';
 
-const { width: SCREEN_WIDTH } = Dimensions.get("window");
+const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
 
 const AppHeading = ({ title }) => {
   const duration = 5000;
@@ -44,11 +35,11 @@ const AppHeading = ({ title }) => {
   }, [startValue, endValue]);
 
   return (
-    <View style={{ flexDirection: "row", marginBottom: 0 }}>
+    <View style={{ flexDirection: 'row', marginBottom: 0 }}>
       <Animated.View
         style={{
-          display: "flex",
-          flexDirection: "row",
+          display: 'flex',
+          flexDirection: 'row',
           transform: [{ translateX: startValue }],
         }}
       >
@@ -58,9 +49,9 @@ const AppHeading = ({ title }) => {
       </Animated.View>
       <Animated.View
         style={{
-          position: "absolute",
-          display: "flex",
-          flexDirection: "row",
+          position: 'absolute',
+          display: 'flex',
+          flexDirection: 'row',
           transform: [{ translateX: startValue0 }],
         }}
       >
@@ -74,10 +65,10 @@ const AppHeading = ({ title }) => {
 
 const styles = StyleSheet.create({
   heading: {
-    fontFamily: "Helviotopia",
-    fontSize: SCREEN_WIDTH / 4.5,
-    color: "black",
-    alignSelf: "center",
+    fontFamily: 'Helviotopia',
+    fontSize: SCREEN_HEIGHT / 10,
+    color: 'black',
+    alignSelf: 'center',
   },
 });
 
