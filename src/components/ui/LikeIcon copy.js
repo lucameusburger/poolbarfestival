@@ -1,20 +1,33 @@
-import { Animated, Pressable } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
-import { addCallenderEvent, deleteCallenderEvent } from '../../redux/callenderThunk';
-import { useEffect, useRef } from 'react';
-import { FontAwesome } from '@expo/vector-icons';
+import { Animated, TouchableOpacity } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addCallenderEvent,
+  deleteCallenderEvent,
+} from "../../redux/callenderThunk";
+import { useEffect, useRef } from "react";
 
-import heardfade from '../../../assets/animations/heartfade.json';
-import { CLR_PRIMARY } from '../../core/Theme';
+import LottieView from "lottie-react-native";
+
+import heardfade from "../../../assets/animations/heartfade.json";
+import { CLR_PRIMARY } from "../../core/Theme";
 
 const hexToRgb = (hex) =>
   hex
-    .replace(/^#?([a-f\d])([a-f\d])([a-f\d])$/i, (m, r, g, b) => '#' + r + r + g + g + b + b)
+    .replace(
+      /^#?([a-f\d])([a-f\d])([a-f\d])$/i,
+      (m, r, g, b) => "#" + r + r + g + g + b + b
+    )
     .substring(1)
     .match(/.{2}/g)
     .map((x) => parseInt(x, 16));
 
-const LikeIcon = ({ eventId, size = 32, style, colorOff = '#000', colorOn = CLR_PRIMARY }) => {
+const LikeIcon = ({
+  eventId,
+  size = 32,
+  style,
+  colorOff = "#000",
+  colorOn = CLR_PRIMARY,
+}) => {
   const dispatch = useDispatch();
   const progress = useRef(new Animated.Value(isLiked ? 1 : 0)).current;
 
@@ -31,7 +44,7 @@ const LikeIcon = ({ eventId, size = 32, style, colorOff = '#000', colorOn = CLR_
 
   const likeEvent = (id) => {
     dispatch({
-      type: 'ADD_TO_LIKED_EVENTS',
+      type: "ADD_TO_LIKED_EVENTS",
       payload: id,
     });
     dispatch(addCallenderEvent(id));
@@ -39,7 +52,7 @@ const LikeIcon = ({ eventId, size = 32, style, colorOff = '#000', colorOn = CLR_
 
   const unLikeEvent = (id) => {
     dispatch({
-      type: 'REMOVE_FROM_LIKED_EVENTS',
+      type: "REMOVE_FROM_LIKED_EVENTS",
       payload: id,
     });
     dispatch(deleteCallenderEvent(id));
@@ -68,7 +81,7 @@ const LikeIcon = ({ eventId, size = 32, style, colorOff = '#000', colorOn = CLR_
 
   return (
     <>
-      <Pressable
+      <TouchableOpacity
         onPress={() => {
           if (isLiked) {
             unLikeEvent(eventId);
@@ -78,37 +91,46 @@ const LikeIcon = ({ eventId, size = 32, style, colorOff = '#000', colorOn = CLR_
         }}
         style={[
           {
-            alignSelf: 'flex-end',
-            marginBottom: 'auto',
-            marginTop: 'auto',
+            alignSelf: "flex-end",
+            marginBottom: "auto",
+            marginTop: "auto",
             width: size,
           },
           style,
         ]}
       >
-        <FontAwesome
-          style={[
-            {
-              alignSelf: 'flex-end',
-              marginBottom: 'auto',
-              marginTop: 'auto',
-            },
-            style,
-          ]}
-          name={isLiked ? 'heart' : 'heart-o'}
-          size={32}
-          color={isLiked ? colorOn : colorOff}
-          onPress={() => {
-            if (isLiked) {
-              unLikeEvent(eventId);
-            } else {
-              likeEvent(eventId);
-            }
+        <LottieView
+          style={{
+            height: size,
+            width: size,
           }}
+          progress={progress}
+          source={heardfade}
         />
-      </Pressable>
+      </TouchableOpacity>
     </>
   );
 };
-
+/**
+ * <FontAwesome
+                style={[
+                    {
+                        alignSelf: 'flex-end',
+                        marginBottom: 'auto',
+                        marginTop: 'auto'
+                    },
+                    style
+                ]}
+                name={isLiked ? 'heart' : 'heart-o'}
+                size={32}
+                color={color}
+                onPress={() => {
+                    if (isLiked) {
+                        unLikeEvent(eventId);
+                    } else {
+                        likeEvent(eventId);
+                    }
+                }}
+            />
+ */
 export default LikeIcon;
