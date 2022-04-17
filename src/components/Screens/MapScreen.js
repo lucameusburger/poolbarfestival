@@ -183,7 +183,7 @@ const MapScreen = ({ navigation }) => {
                   style={{
                     marginTop: 'auto',
                     marginBottom: 'auto',
-                    alignSelf: 'center',
+                    alignSelf: 'center',r
                     opacity: 1,
                   }}
                   name={'info'}
