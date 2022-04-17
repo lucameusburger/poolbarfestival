@@ -2,7 +2,7 @@
   "expo": {
     "name": "poolbar Festival",
     "slug": "poolbarfestival",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "orientation": "portrait",
     "icon": "./assets/icon/appstore.png",
     "splash": {
@@ -15,11 +15,12 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "bundleIdentifier": "at.lume.poolbarfestival",
-      "buildNumber": "1.0.3",
+      "buildNumber": "1.0.4",
       "supportsTablet": true,
       "infoPlist": {
         "NSRemindersUsageDescription": "Erhalte Erinnerungen wenn deine gelikten Events stadtfinden.",
-        "NSCameraUsageDescription": "Diese App benutzt die Kamera um QR-Codes zu scannen."
+        "NSCameraUsageDescription": "Diese App benutzt die Kamera um QR-Codes zu scannen.",
+        "NSLocationWhenInUseUsageDescription": "Diese App benutzt deinen Standort um Events und mit dem Festival zusammenhängende Orte zu finden."
       }
     },
     "android": {

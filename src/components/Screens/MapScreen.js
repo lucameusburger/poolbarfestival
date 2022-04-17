@@ -1,5 +1,4 @@
 import React, { useState, useEffect, memo } from 'react';
-import { StatusBar } from 'expo-status-bar';
 import { Text, View, StyleSheet, Linking, TouchableOpacity } from 'react-native';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -12,12 +11,10 @@ import AppButton from '../ui/AppButton';
 import geodata from '../../../assets/geodata.json';
 
 import MapView, { Marker, Callout, Polygon } from 'react-native-maps';
-import MyCalloutView from '../ui/MyCalloutView';
 
 import { fetchSpaceLocations } from '../../redux/spaceLocationThunk';
 import markerImage from '../../../assets/img/marker.png';
 import selectedMarkerImage from '../../../assets/img/selectedMarker.png';
-import { FontAwesome } from '@expo/vector-icons';
 
 const BASE_URL = 'https://www.admin.poolbar.at/';
 const mapRef = React.createRef();

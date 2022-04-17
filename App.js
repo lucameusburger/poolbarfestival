@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { Text } from 'react-native';
-import { NavigationContainer, View } from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import AppLoading from 'expo-app-loading';
 import * as Linking from 'expo-linking';

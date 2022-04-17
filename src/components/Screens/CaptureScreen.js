@@ -1,12 +1,6 @@
-import { useState, useEffect } from 'react';
-import { StyleSheet, View, Linking, Dimensions, ImageBackground } from 'react-native';
-import FadeInView from '../ui/FadeInView';
-import NavBar from '../ui/NavBar';
-import StylesMain from '../../../styles/StylesMain';
-import { BarCodeScanner } from 'expo-barcode-scanner';
-import { FontAwesome } from '@expo/vector-icons';
+import { useEffect } from 'react';
+import { View, ImageBackground } from 'react-native';
 import { useRef } from 'react';
-import { TabRouter } from '@react-navigation/native';
 import ViewShot from 'react-native-view-shot';
 import * as Sharing from 'expo-sharing';
 import gridImage from '../../../assets/img/grid.png';

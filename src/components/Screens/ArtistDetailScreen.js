@@ -1,49 +1,38 @@
-import { useState, useEffect } from "react";
-import { StatusBar } from "expo-status-bar";
-import * as Linking from "expo-linking";
-import { Text, View, ScrollView } from "react-native";
-import AppButton from "../ui/AppButton";
-import NavBar from "../ui/NavBar";
-import LoadingText from "../ui/LoadingText";
-import FadeInView from "../ui/FadeInView";
-import StylesMain from "../../../styles/StylesMain";
-import { useDispatch, useSelector } from "react-redux";
+import { useState, useEffect } from 'react';
+import { StatusBar } from 'expo-status-bar';
+import * as Linking from 'expo-linking';
+import { Text, View, ScrollView } from 'react-native';
+import AppButton from '../ui/AppButton';
+import NavBar from '../ui/NavBar';
+import LoadingText from '../ui/LoadingText';
+import FadeInView from '../ui/FadeInView';
+import StylesMain from '../../../styles/StylesMain';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { fetchArtist } from "../../redux/artistsThunk";
-import PoolbarImage from "../ui/PoolbarImage";
+import { fetchArtist } from '../../redux/artistsThunk';
+import PoolbarImage from '../ui/PoolbarImage';
 
-import artistPlaceholder from "../../../assets/img/artistPlaceholder.jpg";
-import EventComponent from "../ui/EventComponent";
+import artistPlaceholder from '../../../assets/img/artistPlaceholder.jpg';
+import EventComponent from '../ui/EventComponent';
 
 const ArtistDetailScreen = ({ artist }) => {
   const events = useSelector((state) => state.events.data);
   const filteredEvents = events.filter((event) => event.artist === artist.id);
   return (
-    <View style={{ flex: 1, width: "100%", height: "100%" }}>
-      <View style={{ padding: 20, marginTop: 10 }}>
+    <View style={{ flex: 1, width: '100%', height: '100%' }}>
+      <View style={{ paddingLeft: 20, paddingRight: 20, paddingTop: 20, marginTop: 10 }}>
         <View>
-          <Text style={StylesMain.artistDetailsDateText}>
-            {artist.category}
-          </Text>
+          <Text style={StylesMain.artistDetailsDateText}>{artist.category}</Text>
           <Text style={StylesMain.artistDetailsMainText}>{artist.name}</Text>
           <Text style={StylesMain.text}>{artist.description}</Text>
           <View style={{ height: 20 }}></View>
         </View>
       </View>
-      <PoolbarImage
-        imageId={artist.image}
-        fallback={artistPlaceholder}
-        style={{
-          flex: 1,
-          width: "100%",
-          height: 320,
-        }}
-      />
-      <View style={{ padding: 20, marginTop: 0 }}>
+      <View style={{ paddingLeft: 20, paddingRight: 20 }}>
         {artist.url_spotify && (
           <AppButton
             style={{
-              marginRight: "auto",
+              marginRight: 'auto',
               marginLeft: 0,
               marginBottom: 10,
             }}
@@ -54,7 +43,7 @@ const ArtistDetailScreen = ({ artist }) => {
         {artist.website && (
           <AppButton
             style={{
-              marginRight: "auto",
+              marginRight: 'auto',
               marginLeft: 0,
               marginBottom: 10,
             }}
@@ -63,16 +52,18 @@ const ArtistDetailScreen = ({ artist }) => {
           />
         )}
       </View>
+      <PoolbarImage
+        imageId={artist.image}
+        fallback={artistPlaceholder}
+        style={{
+          flex: 1,
+          width: '100%',
+          height: 320,
+        }}
+      />
 
       <View style={{ padding: 0 }}>
-        <Text
-          style={[
-            StylesMain.artistDetailsDateText,
-            { marginBottom: 20, marginHorizontal: 20 },
-          ]}
-        >
-          kommende events
-        </Text>
+        <Text style={[StylesMain.artistDetailsDateText, { padding: 20 }]}>kommende events</Text>
         <View style={{ flex: 1, borderTopWidth: 2 }}>
           {filteredEvents.map((event) => (
             <EventComponent key={event.id} item={event} />
@@ -99,15 +90,9 @@ const ArtistScreen = ({ route }) => {
 
   return (
     <View style={StylesMain.mainView}>
-      <FadeInView style={{ flex: 1, width: "100%" }}>
-        <NavBar title={"artist"} />
-        <ScrollView style={{ flex: 1 }}>
-          {selectedArtist ? (
-            <ArtistDetailScreen artist={selectedArtist} />
-          ) : (
-            <LoadingText />
-          )}
-        </ScrollView>
+      <FadeInView style={{ flex: 1, width: '100%' }}>
+        <NavBar title={'artist'} />
+        <ScrollView style={{ flex: 1 }}>{selectedArtist ? <ArtistDetailScreen artist={selectedArtist} /> : <LoadingText />}</ScrollView>
         <StatusBar style="auto" />
       </FadeInView>
     </View>

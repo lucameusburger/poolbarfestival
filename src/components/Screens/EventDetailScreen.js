@@ -29,24 +29,30 @@ const EventDetailScreen = ({ route }) => {
 
     return (
       <View style={{ flex: 1, width: '100%', height: '100%' }}>
-        <LikeIcon
-          eventId={item.id}
-          style={{
-            position: 'absolute',
-            top: 20,
-            right: 20,
-            zIndex: 1000,
-          }}
-        />
-
-        <View style={{ padding: 20, marginTop: 10 }}>
-          <View>
+        <View style={{ paddingLeft: 20, paddingRight: 20, paddingTop: 20, marginTop: 10, flexDirection: 'row' }}>
+          <View style={{ flex: 1 }}>
             <Text style={styles.eventDateText}>{dateString}</Text>
             <Text style={styles.eventMainText}>{item.name}</Text>
+          </View>
+          <View style={{ width: 32 }}>
+            <LikeIcon
+              eventId={item.id}
+              style={{
+                marginTop: 'auto',
+                marginBottom: 'auto',
+                right: 0,
+                zIndex: 1000,
+              }}
+            />
+          </View>
+        </View>
+
+        <View style={{ padding: 20, marginTop: 0 }}>
+          <View>
             <Text style={StylesMain.text}>{item.description_short}</Text>
             <View style={{ height: 20 }}></View>
-            <Text style={StylesMain.text}>{artist?.category}</Text>
-            <Text style={StylesMain.text}>{venue?.name}</Text>
+            <Text style={[StylesMain.text, { fontFamily: 'HelviotopiaBold' }]}>{artist?.category ? '#' + artist.category : '#tba'}</Text>
+            <Text style={[StylesMain.text, { fontFamily: 'HelviotopiaBold' }]}>{venue?.name ? '#' + venue.name : '#tba'}</Text>
           </View>
         </View>
 
@@ -77,7 +83,7 @@ const EventDetailScreen = ({ route }) => {
           {item.room && (
             <AppButton
               style={{ marginRight: 'auto', marginLeft: 0 }}
-              title="zur venue"
+              title="venue ansehen"
               onPress={() =>
                 navigate('Room', {
                   id: item.room,

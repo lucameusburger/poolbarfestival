@@ -1,4 +1,4 @@
-import { View, ImageBackground, Text, Dimensions } from 'react-native';
+import { View, ImageBackground, Text } from 'react-native';
 import FadeInView from '../ui/FadeInView';
 import PoolbarLogo from '../ui/PoolbarLogo';
 import AppButton from '../ui/AppButton';
