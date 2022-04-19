@@ -18,6 +18,7 @@ import EventLikedListScreen from './src/components/Screens/EventLikedListScreen'
 import EventDetailScreen from './src/components/Screens/EventDetailScreen';
 import ScanScreen from './src/components/Screens/ScanScreen';
 import MapScreen from './src/components/Screens/MapScreen';
+import CreditsScreen from './src/components/Screens/CreditsScreen';
 import FlowtextScreen from './src/components/Screens/FlowtextScreen';
 
 import { Provider, useDispatch } from 'react-redux';
@@ -63,6 +64,7 @@ function Navigator() {
       <Stack.Screen name="Generator" component={GeneratorDetailScreen} options={{ title: 'Generator', headerShown: false }} />
       <Stack.Screen name="Flowtext" component={FlowtextScreen} options={{ title: 'Flowtext', headerShown: false }} />
       <Stack.Screen name="Capture" component={CaptureScreen} options={{ title: 'Capture', headerShown: false }} />
+      <Stack.Screen name="Credits" component={CreditsScreen} options={{ title: 'Credits', headerShown: false }} />
     </Stack.Navigator>
   );
 }

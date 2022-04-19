@@ -1,4 +1,4 @@
-import { View, ImageBackground, Text } from 'react-native';
+import { View, ImageBackground, Text, Pressable } from 'react-native';
 import FadeInView from '../ui/FadeInView';
 import PoolbarLogo from '../ui/PoolbarLogo';
 import AppButton from '../ui/AppButton';
@@ -10,30 +10,30 @@ import { CLR_PRIMARY } from '../../core/Theme';
 const HomeScreen = ({ navigation }) => {
   return (
     <View style={StylesMain.mainView}>
-      <View
-        style={{
-          width: '150%',
-          alignSelf: 'center',
-          height: 100,
-          transform: [{ rotate: '-2deg' }],
-          backgroundColor: CLR_PRIMARY,
-          marginTop: '-5%',
-        }}
-      >
-        <Text
-          style={{
-            fontFamily: 'Helviotopia',
-            alignSelf: 'center',
-            marginTop: 'auto',
-            marginBottom: 5,
-            fontSize: 28,
-          }}
-        >
-          07 Juli bis 28 August 2022
-        </Text>
-      </View>
       <FadeInView style={{ flex: 1, width: '100%', height: '100%' }}>
         <ImageBackground source={gridImage} width="100%" height="100%" style={{ flex: 1, width: '100%', height: '100%' }}>
+          <View
+            style={{
+              width: '150%',
+              alignSelf: 'center',
+              height: 100,
+              transform: [{ rotate: '-2deg' }],
+              backgroundColor: CLR_PRIMARY,
+              marginTop: '-5%',
+            }}
+          >
+            <Text
+              style={{
+                fontFamily: 'Helviotopia',
+                alignSelf: 'center',
+                marginTop: 'auto',
+                marginBottom: 5,
+                fontSize: 28,
+              }}
+            >
+              07. Juli bis 14. August 2022
+            </Text>
+          </View>
           <View style={{ flex: 1, justifyContent: 'center' }}>
             <View>
               <View
@@ -44,7 +44,9 @@ const HomeScreen = ({ navigation }) => {
                   alignSelf: 'center',
                 }}
               >
-                <PoolbarLogo style={{ alignSelf: 'center' }} width="100%" height="100%" fill="black" />
+                <Pressable onPress={() => navigation.navigate('Credits')}>
+                  <PoolbarLogo style={{ alignSelf: 'center' }} width="100%" height="100%" fill="black" />
+                </Pressable>
               </View>
               <View style={{ top: 0, marginTop: 0 }}>
                 <AppButton style={{ width: '50%' }} title="events" onPress={() => navigation.navigate('Events')} bevelLeft={true} />
