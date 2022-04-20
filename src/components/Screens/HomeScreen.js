@@ -1,6 +1,6 @@
 import { View, ImageBackground, Text, Pressable } from 'react-native';
 import FadeInView from '../ui/FadeInView';
-import PoolbarLogo from '../ui/PoolbarLogo';
+import PoolbarLogoAnimated from '../ui/PoolbarLogoAnimated';
 import AppButton from '../ui/AppButton';
 import AppCornerButton from '../ui/AppCornerButton';
 import StylesMain from '../../../styles/StylesMain';
@@ -45,7 +45,7 @@ const HomeScreen = ({ navigation }) => {
                 }}
               >
                 <Pressable onPress={() => navigation.navigate('Credits')}>
-                  <PoolbarLogo style={{ alignSelf: 'center' }} width="100%" height="100%" fill="black" />
+                  <PoolbarLogoAnimated style={{ alignSelf: 'center' }} width="100%" height="100%" fill="black" />
                 </Pressable>
               </View>
               <View style={{ top: 0, marginTop: 0 }}>
