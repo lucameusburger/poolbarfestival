@@ -36,7 +36,8 @@
       "favicon": "./assets/favicon.png"
     },
     "scheme": "poolbar",
-    "sdkVersion": "44.0.0"
+    "sdkVersion": "44.0.0",
+    "plugins": ["react-native-email-link"]
   },
   "name": "poolbarfestival"
 }

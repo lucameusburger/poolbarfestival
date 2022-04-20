@@ -6,7 +6,11 @@ const StylesMain = StyleSheet.create({
   text: {
     fontFamily: 'Helviotopia',
     fontSize: 17,
-    lineHeight: 20.5,
+    lineHeight: 22,
+  },
+  textBold: {
+    fontFamily: 'HelviotopiaBold',
+    fontSize: 17,
   },
   mainHeader: {
     //fontFamily: 'Outfit_900Black',

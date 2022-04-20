@@ -5606,6 +5606,11 @@ react-native-codegen@^0.0.6:
     jscodeshift "^0.11.0"
     nullthrows "^1.1.1"
 
+react-native-email-link@^1.13.1:
+  version "1.13.1"
+  resolved "https://registry.yarnpkg.com/react-native-email-link/-/react-native-email-link-1.13.1.tgz#7c393d47bf2d82476a45c790d67e2400ded5eb37"
+  integrity sha512-x40P9DjooTJ/bYKjCZAOrWs0prDNPrg/tcjyr29W1roCYG8BqHhbYcaq0wS/SKkkUc3+/xrbmzm4NeANgvD7iA==
+
 react-native-infinite-looping-scroll@^0.0.4:
   version "0.0.4"
   resolved "https://registry.npmjs.org/react-native-infinite-looping-scroll/-/react-native-infinite-looping-scroll-0.0.4.tgz"
