@@ -31,7 +31,6 @@ export function fetchArtists() {
       fetch(BASE_URL + 'items/artists')
         .then(async (response) => {
           // check for error response
-          console.log(response.ok);
 
           if (response.ok) {
             const data = await response.json();

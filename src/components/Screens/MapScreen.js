@@ -31,7 +31,6 @@ function CustomMarker({ location, setCurrentLocation, currentLocation, infoBarVi
       tracksViewChanges={true}
       onPress={() => {
         setInfoBarVisible(true);
-        console.log('infobar visible is now ', infoBarVisible);
         setCurrentLocation(location);
       }}
     ></Marker>
@@ -59,7 +58,6 @@ const RenderMarkers = ({ locations, setInfoBarVisible, infoBarVisible }) => {
       payload: newLocation,
     });
   };
-  //console.log('lm: ', locations)
   return locations.map((location) => <CustomMarker location={location} setCurrentLocation={setCurrentLocation} setInfoBarVisible={setInfoBarVisible} infoBarVisible={infoBarVisible} currentLocation={currentLocation} key={'marker_' + location.id} />);
 };
 
@@ -92,7 +90,6 @@ function setBoundingAustria() {
 }
 
 function setBoundingBox(bbox) {
-  console.log('setting box');
   mapRef.current.setMapBoundaries(bbox[0], bbox[1]);
 }
 
@@ -119,8 +116,6 @@ const MapScreen = ({ navigation }) => {
     dispatch(fetchSpaceLocations());
   }, []);
 
-  console.log('cl: ', currentLocation);
-
   return (
     <View style={StylesMain.mainView}>
       <FadeInView style={{ flex: 1, width: '100%', height: '100%' }}>
@@ -136,8 +131,6 @@ const MapScreen = ({ navigation }) => {
               return;
             }
             setInfoBarVisible(false);
-            console.log('kein marker');
-            console.log(infoBarVisible);
           }}
           onMapReady={setBoundingAustria}
           ref={mapRef}
@@ -192,7 +185,6 @@ const MapScreen = ({ navigation }) => {
                 title="navigieren"
                 style={{ marginTop: 'auto', marginBottom: 'auto', marginLeft: 'auto' }}
                 onPress={() => {
-                  console.log('cl: ', currentLocation);
                   openGoogleMaps(
                     {
                       latitude: currentLocation.location.coordinates[1],

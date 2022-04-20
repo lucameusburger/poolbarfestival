@@ -195,7 +195,6 @@ const FlowtextScreen = ({ navigation }) => {
             <ScrollView
               ref={scrollViewRef}
               onContentSizeChange={() => {
-                console.log('scrollView onContentSizeChange');
                 scrollViewRef.current.scrollToEnd({ animated: true });
               }}
               style={StylesMain.flowTextContainer}
