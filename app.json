@@ -25,7 +25,7 @@
     },
     "android": {
       "package": "at.lume.poolbarfestival",
-      "versionCode": 1,
+      "versionCode": 107,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
