@@ -21,7 +21,7 @@ const PoolbarLogo = (props) => {
         }),
       ])
     ).start();
-  }, []);
+  }, [startValue]);
 
   return (
     <Animated.View

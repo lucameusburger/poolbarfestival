@@ -1,37 +1,37 @@
-import { useState, useEffect } from "react";
-import { Text, View, FlatList, TouchableOpacity } from "react-native";
-import { useDispatch, useSelector } from "react-redux";
+import { useState, useEffect } from 'react';
+import { Text, View, FlatList, TouchableOpacity } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 
-import NavBar from "../ui/NavBar";
-import LoadingText from "../ui/LoadingText";
-import FadeInView from "../ui/FadeInView";
-import StylesMain from "../../../styles/StylesMain";
-import { fetchArtists } from "../../redux/artistsThunk";
-import { navigate } from "../../core/RootNavigation";
-import PoolbarImage from "../ui/PoolbarImage";
-import artistPlaceholder from "../../../assets/img/artistPlaceholder.jpg";
-import { fetchEvents } from "../../redux/eventsThunk";
+import NavBar from '../ui/NavBar';
+import LoadingText from '../ui/LoadingText';
+import FadeInView from '../ui/FadeInView';
+import StylesMain from '../../../styles/StylesMain';
+import { fetchArtists } from '../../redux/artistsThunk';
+import { navigate } from '../../core/RootNavigation';
+import PoolbarImage from '../ui/PoolbarImage';
+import artistPlaceholder from '../../../assets/img/artistPlaceholder.jpg';
+import { fetchEvents } from '../../redux/eventsThunk';
 const ArtistListScreen = ({ item }) => {
   return (
     <TouchableOpacity
       style={{
         padding: 20,
         borderBottomWidth: 2,
-        borderBottomColor: "black",
+        borderBottomColor: 'black',
       }}
       key={item.id}
       onPress={() =>
-        navigate("Artist", {
+        navigate('Artist', {
           id: item.id,
         })
       }
     >
       <View
         style={{
-          width: "100%",
-          marginTop: "auto",
-          marginBottom: "auto",
-          flexDirection: "row",
+          width: '100%',
+          marginTop: 'auto',
+          marginBottom: 'auto',
+          flexDirection: 'row',
         }}
       >
         <PoolbarImage
@@ -41,7 +41,7 @@ const ArtistListScreen = ({ item }) => {
             width: 100,
             height: 100,
             borderRadius: 300,
-            alignItems: "center",
+            alignItems: 'center',
           }}
         />
         <View style={{}}></View>
@@ -49,9 +49,9 @@ const ArtistListScreen = ({ item }) => {
           <View
             style={{
               marginLeft: 20,
-              marginTop: "auto",
-              marginBottom: "auto",
-              width: "100%",
+              marginTop: 'auto',
+              marginBottom: 'auto',
+              width: '100%',
             }}
           >
             <Text style={StylesMain.artistListDateText}>{item.category}</Text>
@@ -63,14 +63,7 @@ const ArtistListScreen = ({ item }) => {
   );
 };
 
-const ArtistsList = ({ artists }) => (
-  <FlatList
-    style={{ flex: 1, height: "100%" }}
-    data={artists}
-    renderItem={ArtistListScreen}
-    keyExtractor={(item) => item.id}
-  />
-);
+const ArtistsList = ({ artists }) => <FlatList style={{ flex: 1, height: '100%' }} data={artists} renderItem={ArtistListScreen} keyExtractor={(item) => item.id} />;
 
 const ArtistsScreen = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -112,31 +105,21 @@ const ArtistsScreen = ({ navigation }) => {
   }, []);
 
   useEffect(() => {
-    setDisplayedArtists(
-      sortArtistsAlphabetically(filterPlaysInCurrentYear(artists))
-    );
+    setDisplayedArtists(sortArtistsAlphabetically(filterPlaysInCurrentYear(artists)));
   }, [artists]);
 
   return (
     <View style={StylesMain.mainView}>
-      <FadeInView style={{ flex: 1, width: "100%", height: "100%" }}>
+      <FadeInView style={{ flex: 1, width: '100%', height: '100%' }}>
         <NavBar
           navigation={navigation}
           title="artists"
           next={() => {
-            navigation.navigate("ArtistHistory");
+            navigation.navigate('ArtistHistory');
           }}
-          nextTitle={"history"}
+          nextTitle={'history'}
         />
-        <View style={{ flex: 1 }}>
-          {!isLoaded ? (
-            <LoadingText />
-          ) : displayedArtists ? (
-            <ArtistsList artists={displayedArtists} />
-          ) : (
-            <LoadingText />
-          )}
-        </View>
+        <View style={{ flex: 1 }}>{!isLoaded ? <LoadingText /> : displayedArtists ? <ArtistsList artists={displayedArtists} /> : <LoadingText />}</View>
       </FadeInView>
     </View>
   );

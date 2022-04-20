@@ -1,4 +1,4 @@
-import { View, ImageBackground, Text, Pressable } from 'react-native';
+import { View, ImageBackground, Text, Pressable, SafeAreaView, NativeModules, Platform } from 'react-native';
 import FadeInView from '../ui/FadeInView';
 import PoolbarLogoAnimated from '../ui/PoolbarLogoAnimated';
 import AppButton from '../ui/AppButton';
@@ -7,19 +7,26 @@ import StylesMain from '../../../styles/StylesMain';
 import gridImage from '../../../assets/img/grid.png';
 import { CLR_PRIMARY } from '../../core/Theme';
 
+const estimatedStatusBarHeight = NativeModules.NativeUnimoduleProxy?.modulesConstants?.ExponentConstants?.statusBarHeight ?? 0;
+
+const APPROX_STATUSBAR_HEIGHT = Platform.select({
+  android: estimatedStatusBarHeight,
+  ios: Platform.Version < 11 ? estimatedStatusBarHeight : 0,
+});
+
+const Wrapper = typeof APPROX_STATUSBAR_HEIGHT.statusBarHeight === 'number' ? View : SafeAreaView;
+
 const HomeScreen = ({ navigation }) => {
   return (
     <View style={StylesMain.mainView}>
       <FadeInView style={{ flex: 1, width: '100%', height: '100%' }}>
-        <ImageBackground source={gridImage} width="100%" height="100%" style={{ flex: 1, width: '100%', height: '100%' }}>
+        <Wrapper style={{ margin: 0, backgroundColor: '#00ff00', zIndex: 999, position: 'absolute', left: 0, right: 0, top: 0 }}>
           <View
             style={{
               width: '150%',
               alignSelf: 'center',
-              height: 100,
-              transform: [{ rotate: '-2deg' }],
+              transform: [{ rotate: '0deg' }],
               backgroundColor: CLR_PRIMARY,
-              marginTop: '-5%',
             }}
           >
             <Text
@@ -34,6 +41,8 @@ const HomeScreen = ({ navigation }) => {
               07. Juli bis 14. August 2022
             </Text>
           </View>
+        </Wrapper>
+        <ImageBackground source={gridImage} width="100%" height="100%" style={{ flex: 1, width: '100%', height: '100%' }}>
           <View style={{ flex: 1, justifyContent: 'center' }}>
             <View>
               <View
