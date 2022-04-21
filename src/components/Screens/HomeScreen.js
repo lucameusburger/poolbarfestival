@@ -25,20 +25,21 @@ const HomeScreen = ({ navigation }) => {
             style={{
               width: '150%',
               alignSelf: 'center',
-              transform: [{ rotate: '0deg' }],
+              transform: [{ rotate: '-2deg' }],
               backgroundColor: CLR_PRIMARY,
+              paddingTop: 16,
             }}
           >
             <Text
               style={{
-                fontFamily: 'Helviotopia',
+                fontFamily: 'HelviotopiaMedium',
                 alignSelf: 'center',
                 marginTop: 'auto',
                 marginBottom: 5,
                 fontSize: 28,
               }}
             >
-              07. Juli bis 14. August 2022
+              07. Jul - 14. Aug 2022
             </Text>
           </View>
         </Wrapper>

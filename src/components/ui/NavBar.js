@@ -3,6 +3,7 @@ import { navigationRef } from '../../core/RootNavigation';
 import AppHeading from './AppHeading';
 import AppButton from './AppButton';
 import { memo } from 'react';
+import { CLR_PRIMARY } from '../../core/Theme';
 
 const estimatedStatusBarHeight = NativeModules.NativeUnimoduleProxy?.modulesConstants?.ExponentConstants?.statusBarHeight ?? 0;
 
@@ -15,7 +16,7 @@ const Wrapper = typeof APPROX_STATUSBAR_HEIGHT.statusBarHeight === 'number' ? Vi
 
 const NavBar = ({ title, next, nextTitle }) => {
   return (
-    <Wrapper style={{ margin: 0, backgroundColor: '#00ff00', zIndex: 999 }}>
+    <Wrapper style={{ margin: 0, backgroundColor: CLR_PRIMARY, zIndex: 999 }}>
       <View
         style={{
           width: '100%',

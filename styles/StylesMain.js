@@ -192,12 +192,12 @@ const StylesMain = StyleSheet.create({
     fontFamily: 'Helviotopia',
     fontWeight: '500',
     color: 'black',
-    fontSize: 33,
+    fontSize: 23,
     textAlign: 'center',
     textTransform: 'lowercase',
     marginBottom: 0,
     overflow: 'hidden',
-    marginBottom: 50,
+    marginBottom: 10,
   },
   tag: {
     fontFamily: 'HelviotopiaBold',
@@ -220,7 +220,7 @@ const StylesMain = StyleSheet.create({
     textTransform: 'lowercase',
     borderRadius: 10,
     padding: 10,
-    maxHeight: 200,
+    height: 90,
   },
 });
 

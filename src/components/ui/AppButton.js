@@ -25,7 +25,7 @@ const AppButton = ({ onPress, title, color = CLR_PRIMARY, style }) => {
   return (
     <Pressable
       onPressIn={() => {
-        playSound();
+        // playSound();
         setActive(true);
       }}
       onPressOut={() => {

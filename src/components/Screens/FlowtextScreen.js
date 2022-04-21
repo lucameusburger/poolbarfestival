@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, memo } from 'react';
-import { Text, View, TouchableOpacity, Dimensions, Animated, ScrollView } from 'react-native';
+import { Text, View, Pressable, Dimensions, Animated, ScrollView } from 'react-native';
 import { useMemoOne } from 'use-memo-one';
 import NavBar from '../ui/NavBar';
 import FadeInView from '../ui/FadeInView';
@@ -18,6 +18,7 @@ function getWord() {
 const FlowtextElement = memo(({ text, y, _key }) => {
   const dispatch = useDispatch();
   const phrase = useSelector((state) => state.flowText.phrase);
+  const [active, setActive] = useState(false);
 
   const { scrollX } = useMemoOne(() => {
     return {
@@ -41,7 +42,7 @@ const FlowtextElement = memo(({ text, y, _key }) => {
 
   useEffect(() => {
     Animated.timing(scrollX, {
-      toValue: -SCREEN_WIDTH - 300,
+      toValue: -SCREEN_WIDTH,
       duration: 10000,
       useNativeDriver: true,
     }).start(removeElement);
@@ -52,19 +53,25 @@ const FlowtextElement = memo(({ text, y, _key }) => {
       style={{
         position: 'absolute',
         top: y,
-        right: -300,
+        right: 0,
         zIndex: 1000,
         transform: [{ translateX: scrollX }],
       }}
     >
-      <TouchableOpacity
+      <Pressable
+        onPressIn={() => {
+          setActive(true);
+        }}
+        onPressOut={() => {
+          setActive(false);
+        }}
         onPress={() => {
           addToPhrase(text);
           removeElement();
         }}
         style={{
           borderColor: 'black',
-          backgroundColor: 'white',
+          backgroundColor: (active && '#00ff00') || '#ffffff',
           borderWidth: 2,
           padding: 10,
           borderRadius: 50,
@@ -72,7 +79,7 @@ const FlowtextElement = memo(({ text, y, _key }) => {
         }}
       >
         <Text style={StylesMain.flowTextElement}>{text}</Text>
-      </TouchableOpacity>
+      </Pressable>
     </Animated.View>
   );
 });
@@ -141,7 +148,7 @@ const FlowtextScreen = ({ navigation }) => {
                 backgroundColor: 'white',
               }}
             >
-              <View style={[StylesMain.flowTextContainer, { maxHeight: null }]}>
+              <View style={[StylesMain.flowTextContainer, { maxHeight: null, height: null }]}>
                 <Text style={[StylesMain.flowTextPhrase, { marginBottom: 0 }]}>{phrase}</Text>
               </View>
             </View>
@@ -199,7 +206,7 @@ const FlowtextScreen = ({ navigation }) => {
               }}
               style={StylesMain.flowTextContainer}
             >
-              <Text style={StylesMain.flowTextPhrase}>{phrase}</Text>
+              {phrase ? <Text style={StylesMain.flowTextPhrase}>{phrase}</Text> : <Text style={[StylesMain.flowTextPhrase, { color: '#00ff00' }]}>fange an wörter anzutippen</Text>}
             </ScrollView>
           </View>
         </View>
