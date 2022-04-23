@@ -20,15 +20,14 @@ const ArtistDetailScreen = ({ artist }) => {
   const filteredEvents = events.filter((event) => event.artist === artist.id);
   return (
     <View style={{ flex: 1, width: '100%', height: '100%' }}>
-      <View style={{ paddingLeft: 20, paddingRight: 20, paddingTop: 20, marginTop: 10 }}>
-        <View>
+      <View style={{ padding: 10, marginTop: 10 }}>
+        <View style={{ marginBottom: 20 }}>
           <Text style={StylesMain.artistDetailsDateText}>{artist.category}</Text>
           <Text style={StylesMain.artistDetailsMainText}>{artist.name}</Text>
           <Text style={StylesMain.text}>{artist.description}</Text>
-          <View style={{ height: 20 }}></View>
         </View>
       </View>
-      <View style={{ paddingLeft: 20, paddingRight: 20 }}>
+      <View style={{ padding: 10 }}>
         {artist.url_spotify && (
           <AppButton
             style={{
@@ -62,8 +61,8 @@ const ArtistDetailScreen = ({ artist }) => {
         }}
       />
 
-      <View style={{ padding: 0 }}>
-        <Text style={[StylesMain.artistDetailsDateText, { padding: 20 }]}>kommende events</Text>
+      <View>
+        <Text style={[StylesMain.artistDetailsDateText, { paddingVertical: 20, paddingHorizontal: 10 }]}>kommende events</Text>
         <View style={{ flex: 1, borderTopWidth: 2 }}>
           {filteredEvents.map((event) => (
             <EventComponent key={event.id} item={event} />

@@ -15,7 +15,7 @@ const ArtistListScreen = ({ item }) => {
   return (
     <TouchableOpacity
       style={{
-        padding: 20,
+        padding: 10,
         borderBottomWidth: 2,
         borderBottomColor: 'black',
       }}
@@ -38,8 +38,8 @@ const ArtistListScreen = ({ item }) => {
           imageId={item.image}
           fallback={artistPlaceholder}
           style={{
-            width: 100,
-            height: 100,
+            width: 50,
+            height: 50,
             borderRadius: 300,
             alignItems: 'center',
           }}

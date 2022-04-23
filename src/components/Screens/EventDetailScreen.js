@@ -29,7 +29,7 @@ const EventDetailScreen = ({ route }) => {
 
     return (
       <View style={{ flex: 1, width: '100%', height: '100%' }}>
-        <View style={{ paddingLeft: 20, paddingRight: 20, paddingTop: 20, marginTop: 10, flexDirection: 'row' }}>
+        <View style={{ padding: 10, marginTop: 10, flexDirection: 'row' }}>
           <View style={{ flex: 1 }}>
             <Text style={styles.eventDateText}>{dateString}</Text>
             <Text style={styles.eventMainText}>{item.name}</Text>
@@ -47,7 +47,7 @@ const EventDetailScreen = ({ route }) => {
           </View>
         </View>
 
-        <View style={{ padding: 20, marginTop: 0 }}>
+        <View style={{ padding: 10, marginTop: 0 }}>
           <View>
             <Text style={StylesMain.text}>{item.description_short}</Text>
             <View style={{ height: 20 }}></View>
@@ -56,7 +56,7 @@ const EventDetailScreen = ({ route }) => {
           </View>
         </View>
 
-        <View style={{ padding: 20 }}>
+        <View style={{ padding: 10 }}>
           {item.url_ticket && (
             <AppButton
               style={{

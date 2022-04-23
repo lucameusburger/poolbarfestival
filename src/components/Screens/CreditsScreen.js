@@ -56,7 +56,7 @@ const CreditsScreen = ({}) => {
     <View style={StylesMain.mainView}>
       <FadeInView style={{ flex: 1, width: '100%', height: '100%' }}>
         <NavBar title="credits" />
-        <ScrollView style={{ flex: 1, marginTop: 'auto', padding: 10 }}>{!isLoaded ? <LoadingText /> : <Credits />}</ScrollView>
+        <ScrollView style={{ flex: 1, marginTop: 10, padding: 10 }}>{!isLoaded ? <LoadingText /> : <Credits />}</ScrollView>
       </FadeInView>
     </View>
   );

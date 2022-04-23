@@ -1,20 +1,20 @@
-import { useState, useEffect } from "react";
-import { StyleSheet, Text, View, ScrollView } from "react-native";
-import NavBar from "../ui/NavBar";
-import FadeInView from "../ui/FadeInView";
-import StylesMain from "../../../styles/StylesMain";
-import { useDispatch, useSelector } from "react-redux";
-import PoolbarImage from "../ui/PoolbarImage";
-import { fetchVenue } from "../../redux/venueThunk";
-import LoadingText from "../ui/LoadingText";
-import EventComponent from "../ui/EventComponent";
+import { useState, useEffect } from 'react';
+import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import NavBar from '../ui/NavBar';
+import FadeInView from '../ui/FadeInView';
+import StylesMain from '../../../styles/StylesMain';
+import { useDispatch, useSelector } from 'react-redux';
+import PoolbarImage from '../ui/PoolbarImage';
+import { fetchVenue } from '../../redux/venueThunk';
+import LoadingText from '../ui/LoadingText';
+import EventComponent from '../ui/EventComponent';
 
 const RenderElement = ({ venue }) => {
   const events = useSelector((state) => state.events.data);
   const filteredEvents = events.filter((event) => event.room === venue.id);
   return (
-    <View style={{ flex: 1, width: "100%", height: "100%" }}>
-      <View style={{ padding: 20, marginTop: 10 }}>
+    <View style={{ flex: 1, width: '100%', height: '100%' }}>
+      <View style={{ padding: 10, marginTop: 10 }}>
         <View>
           <Text style={styles.roomDateText}>poolbar</Text>
           <Text style={styles.roomMainText}>{venue.name}</Text>
@@ -26,20 +26,12 @@ const RenderElement = ({ venue }) => {
         imageId={venue.image}
         style={{
           flex: 1,
-          width: "100%",
+          width: '100%',
           height: 320,
-          marginBottom: 30,
         }}
       />
       <View style={{ flex: 1 }}>
-        <Text
-          style={[
-            StylesMain.artistDetailsDateText,
-            { marginBottom: 20, marginHorizontal: 20 },
-          ]}
-        >
-          kommende events
-        </Text>
+        <Text style={[StylesMain.artistDetailsDateText, { paddingVertical: 20, paddingHorizontal: 10 }]}>kommende events</Text>
         <View style={{ flex: 1, borderTopWidth: 2 }}>
           {filteredEvents.map((event) => (
             <EventComponent item={event} key={event.id} />
@@ -67,15 +59,9 @@ const RoomDetailScreen = ({ route, navigation }) => {
 
   return (
     <View style={StylesMain.mainView}>
-      <FadeInView style={{ flex: 1, width: "100%" }}>
-        <NavBar navigation={navigation} title={"venue"} />
-        <ScrollView style={{ flex: 1 }}>
-          {selectedVenue ? (
-            <RenderElement venue={selectedVenue} />
-          ) : (
-            <LoadingText />
-          )}
-        </ScrollView>
+      <FadeInView style={{ flex: 1, width: '100%' }}>
+        <NavBar navigation={navigation} title={'venue'} />
+        <ScrollView style={{ flex: 1 }}>{selectedVenue ? <RenderElement venue={selectedVenue} /> : <LoadingText />}</ScrollView>
       </FadeInView>
     </View>
   );
@@ -83,23 +69,23 @@ const RoomDetailScreen = ({ route, navigation }) => {
 
 const styles = StyleSheet.create({
   roomDateText: {
-    fontFamily: "HelviotopiaBold",
-    color: "black",
-    alignSelf: "flex-start",
-    marginTop: "auto",
+    fontFamily: 'HelviotopiaBold',
+    color: 'black',
+    alignSelf: 'flex-start',
+    marginTop: 'auto',
     fontSize: 24,
-    textAlign: "left",
-    textTransform: "uppercase",
+    textAlign: 'left',
+    textTransform: 'uppercase',
   },
   roomMainText: {
-    fontFamily: "Helviotopia",
-    fontWeight: "500",
-    color: "black",
-    alignSelf: "flex-start",
-    marginTop: "auto",
+    fontFamily: 'Helviotopia',
+    fontWeight: '500',
+    color: 'black',
+    alignSelf: 'flex-start',
+    marginTop: 'auto',
     fontSize: 32,
-    textAlign: "left",
-    textTransform: "uppercase",
+    textAlign: 'left',
+    textTransform: 'uppercase',
   },
 });
 
