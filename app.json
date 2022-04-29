@@ -36,6 +36,7 @@
       "config":{
         "googleMaps":{
           "apiKey": "AIzaSyAA0lcngeZZfnz6xuc1UapGDEgeG27JYAo"
+        }
       },
       "permissions": ["READ_CALENDAR", "WRITE_CALENDAR", "CAMERA"]
     },
