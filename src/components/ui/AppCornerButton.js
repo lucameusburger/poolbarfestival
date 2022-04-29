@@ -49,8 +49,8 @@ const styles = StyleSheet.create({
     marginBottom: 'auto',
     alignSelf: 'center',
     opacity: 1,
-    width: '100%',
-    height: '100%',
+    width: 36,
+    height: 36,
   },
 });
 
