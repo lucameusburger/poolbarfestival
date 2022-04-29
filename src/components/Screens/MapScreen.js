@@ -166,12 +166,14 @@ const MapScreen = ({ navigation }) => {
           ref={mapRef}
           initialRegion={initial}
         >
-          <CustomPolygon
-            coordinates={geodata}
-            strokeWidth={5}
-            strokeColor="black"
-            fillColor="rgba(0,0,0,0.135)"
-          />
+          {isLoaded && locations && (
+            <CustomPolygon
+              coordinates={geodata}
+              strokeWidth={5}
+              strokeColor="black"
+              fillColor="rgba(0,0,0,0.135)"
+            />
+          )}
           <RenderMarkers
             locations={isLoaded && locations ? locations.data : []}
             infoBarVisible={infoBarVisible}
