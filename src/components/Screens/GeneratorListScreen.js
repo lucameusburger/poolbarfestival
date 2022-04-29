@@ -43,12 +43,17 @@ const GeneratorListScreen = ({ router, navigation }) => {
     dispatch(fetchGenerators());
   }, []);
 
-  console.log(generators);
-
   return (
     <View style={StylesMain.mainView}>
       <FadeInView style={{ flex: 1, width: '100%', height: '100%' }}>
-        <NavBar title="generator" navigation={navigation} />
+        <NavBar
+          title="generator"
+          navigation={navigation}
+          next={() => {
+            navigation.navigate('GeneratorInfo');
+          }}
+          nextTitle={'info'}
+        />
         <View style={{ flex: 1, marginBottom: 'auto', marginTop: 'auto' }}>{generators ? <FlatList style={{ flex: 1 }} data={generators} renderItem={RenderElement} keyExtractor={(item) => item.id} /> : <LoadingText />}</View>
       </FadeInView>
     </View>

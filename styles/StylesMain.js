@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, Button, Item, FlatList } from 'react-native';
+import { CLR_PRIMARY } from '../src/core/Theme';
 
 const StylesMain = StyleSheet.create({
   text: {
     fontFamily: 'Helviotopia',
     fontSize: 17,
-    lineHeight: 20.5,
+    lineHeight: 22,
+  },
+  textBold: {
+    fontFamily: 'HelviotopiaBold',
+    fontSize: 17,
   },
   mainHeader: {
     //fontFamily: 'Outfit_900Black',
@@ -50,7 +55,7 @@ const StylesMain = StyleSheet.create({
   card: {
     marginTop: 10,
     padding: 16,
-    backgroundColor: '#00ff00',
+    backgroundColor: CLR_PRIMARY,
     borderRadius: 26,
   },
   card_header: {
@@ -63,14 +68,14 @@ const StylesMain = StyleSheet.create({
     color: 'white',
     paddingVertical: 3,
     paddingHorizontal: 8,
-    backgroundColor: '#00ff00',
+    backgroundColor: CLR_PRIMARY,
     borderRadius: 12,
     overflow: 'hidden',
   },
   labelContainer: {
     fontFamily: 'Helviotopia',
     fontSize: 30,
-    backgroundColor: '#00ff00',
+    backgroundColor: CLR_PRIMARY,
     borderRadius: 30,
     minWidth: 140,
     textAlign: 'center',
@@ -187,10 +192,25 @@ const StylesMain = StyleSheet.create({
     fontFamily: 'Helviotopia',
     fontWeight: '500',
     color: 'black',
-    fontSize: 33,
+    fontSize: 23,
     textAlign: 'center',
     textTransform: 'lowercase',
     marginBottom: 0,
+    overflow: 'hidden',
+    marginBottom: 10,
+  },
+  tag: {
+    fontFamily: 'HelviotopiaBold',
+    fontWeight: '500',
+    color: 'black',
+    fontSize: 22,
+    textAlign: 'left',
+    textTransform: 'lowercase',
+    color: '#000',
+    marginTop: 10,
+    backgroundColor: '#00ff00',
+    padding: 6,
+    width: 140,
   },
   flowTextContainer: {
     color: 'black',
@@ -198,12 +218,9 @@ const StylesMain = StyleSheet.create({
     fontSize: 33,
     textAlign: 'center',
     textTransform: 'lowercase',
-    borderWidth: 2,
-    borderColor: 'black',
     borderRadius: 10,
     padding: 10,
-    maxHeight: 200,
-    overflow: 'hidden',
+    height: 90,
   },
 });
 

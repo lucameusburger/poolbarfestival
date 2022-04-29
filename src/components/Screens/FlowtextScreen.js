@@ -1,14 +1,13 @@
 import { useState, useEffect, useRef, memo } from 'react';
-import { Text, View, TouchableOpacity, Dimensions, Animated, ScrollView } from 'react-native';
+import { Text, View, Pressable, Dimensions, Animated, ScrollView } from 'react-native';
 import { useMemoOne } from 'use-memo-one';
 import NavBar from '../ui/NavBar';
-import * as Sharing from 'expo-sharing';
-import ViewShot from 'react-native-view-shot';
 import FadeInView from '../ui/FadeInView';
 import StylesMain from '../../../styles/StylesMain';
 import wordlist from '../../../assets/data/wordlist';
 import { useDispatch, useSelector } from 'react-redux';
 import AppButton from '../ui/AppButton';
+import { navigate } from '../../core/RootNavigation';
 
 const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
 
@@ -19,6 +18,7 @@ function getWord() {
 const FlowtextElement = memo(({ text, y, _key }) => {
   const dispatch = useDispatch();
   const phrase = useSelector((state) => state.flowText.phrase);
+  const [active, setActive] = useState(false);
 
   const { scrollX } = useMemoOne(() => {
     return {
@@ -42,7 +42,7 @@ const FlowtextElement = memo(({ text, y, _key }) => {
 
   useEffect(() => {
     Animated.timing(scrollX, {
-      toValue: -SCREEN_WIDTH - 300,
+      toValue: -SCREEN_WIDTH,
       duration: 10000,
       useNativeDriver: true,
     }).start(removeElement);
@@ -53,19 +53,25 @@ const FlowtextElement = memo(({ text, y, _key }) => {
       style={{
         position: 'absolute',
         top: y,
-        right: -300,
+        right: 0,
         zIndex: 1000,
         transform: [{ translateX: scrollX }],
       }}
     >
-      <TouchableOpacity
+      <Pressable
+        onPressIn={() => {
+          setActive(true);
+        }}
+        onPressOut={() => {
+          setActive(false);
+        }}
         onPress={() => {
           addToPhrase(text);
           removeElement();
         }}
         style={{
           borderColor: 'black',
-          backgroundColor: 'white',
+          backgroundColor: (active && '#00ff00') || '#ffffff',
           borderWidth: 2,
           padding: 10,
           borderRadius: 50,
@@ -73,7 +79,7 @@ const FlowtextElement = memo(({ text, y, _key }) => {
         }}
       >
         <Text style={StylesMain.flowTextElement}>{text}</Text>
-      </TouchableOpacity>
+      </Pressable>
     </Animated.View>
   );
 });
@@ -83,7 +89,6 @@ const FlowtextScreen = ({ navigation }) => {
   const elements = useSelector((state) => state.flowText.elements);
   const phrase = useSelector((state) => state.flowText.phrase);
   const [height, setHeight] = useState(0);
-  const viewShotRef = useRef();
   const scrollViewRef = useRef();
 
   const addElement = (element) => {
@@ -129,9 +134,29 @@ const FlowtextScreen = ({ navigation }) => {
   }, [height]);
 
   let openShareDialogAsync = async () => {
-    viewShotRef.current.capture({ format: 'jpg', quality: 80 }).then(async (uri) => {
-      await Sharing.shareAsync('file://' + uri);
-    });
+    if (phrase.length > 0) {
+      navigate('Capture', {
+        children: (
+          <View>
+            <View
+              style={{
+                padding: 5,
+                borderWidth: 2,
+                borderColor: 'black',
+                borderRadius: 10,
+                overflow: 'hidden',
+                backgroundColor: 'white',
+              }}
+            >
+              <View style={[StylesMain.flowTextContainer, { maxHeight: null, height: null }]}>
+                <Text style={[StylesMain.flowTextPhrase, { marginBottom: 0 }]}>{phrase}</Text>
+              </View>
+            </View>
+            <Text style={StylesMain.tag}>#poolbar22</Text>
+          </View>
+        ),
+      });
+    }
   };
 
   return (
@@ -164,11 +189,26 @@ const FlowtextScreen = ({ navigation }) => {
             <View style={{ width: 20 }}></View>
             <AppButton style={{ flex: 1 }} title="umbruch" onPress={() => addToPhrase('\n')} bevelLeft={false} />
           </View>
-          <ViewShot ref={viewShotRef} style={{ backgroundColor: 'transparent' }}>
-            <ScrollView ref={scrollViewRef} onContentSizeChange={() => scrollViewRef.current.scrollToEnd({ animated: true })} style={StylesMain.flowTextContainer}>
-              <Text style={StylesMain.flowTextPhrase}>{phrase}</Text>
+          <View
+            style={{
+              padding: 5,
+              borderWidth: 2,
+              borderColor: 'black',
+              borderRadius: 10,
+              overflow: 'hidden',
+              backgroundColor: 'white',
+            }}
+          >
+            <ScrollView
+              ref={scrollViewRef}
+              onContentSizeChange={() => {
+                scrollViewRef.current.scrollToEnd({ animated: true });
+              }}
+              style={StylesMain.flowTextContainer}
+            >
+              {phrase ? <Text style={StylesMain.flowTextPhrase}>{phrase}</Text> : <Text style={[StylesMain.flowTextPhrase, { color: '#00ff00' }]}>fange an wörter anzutippen</Text>}
             </ScrollView>
-          </ViewShot>
+          </View>
         </View>
       </FadeInView>
     </View>

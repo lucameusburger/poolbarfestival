@@ -1,23 +1,38 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Text, StyleSheet, Pressable } from 'react-native';
+import { CLR_PRIMARY } from '../../core/Theme';
+import { Audio } from 'expo-av';
 
-const AppButton = ({ onPress, title, color = '#00ff00', style }) => {
+const AppButton = ({ onPress, title, color = CLR_PRIMARY, style }) => {
   const [active, setActive] = useState(false);
+  const [sound, setSound] = useState();
+
+  async function playSound() {
+    const { sound } = await Audio.Sound.createAsync(require('../../../assets/sound/button.mp3'));
+    setSound(sound);
+
+    await sound.playAsync();
+  }
+
+  useEffect(() => {
+    return sound
+      ? () => {
+          sound.unloadAsync();
+        }
+      : undefined;
+  }, [sound]);
 
   return (
     <Pressable
       onPressIn={() => {
+        // playSound();
         setActive(true);
       }}
       onPressOut={() => {
         setActive(false);
       }}
       onPress={onPress}
-      style={[
-        styles.buttonContainer,
-        { backgroundColor: active ? color : 'white' },
-        style
-      ]}
+      style={[styles.buttonContainer, { backgroundColor: active ? color : 'white' }, style]}
     >
       <Text style={styles.buttonText}>{title}</Text>
     </Pressable>

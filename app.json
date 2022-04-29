@@ -2,7 +2,7 @@
   "expo": {
     "name": "poolbar Festival",
     "slug": "poolbarfestival",
-    "version": "1.0.2",
+    "version": "1.1.1",
     "orientation": "portrait",
     "icon": "./assets/icon/appstore.png",
     "splash": {
@@ -15,18 +15,20 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "bundleIdentifier": "at.lume.poolbarfestival",
-      "buildNumber": "1.0.2",
+      "buildNumber": "1.1.1",
       "supportsTablet": true,
       "infoPlist": {
-        "NSRemindersUsageDescription": "Erhalte Erinnerungen wenn deine gelikten Events stadtfinden."
+        "NSRemindersUsageDescription": "Erhalte Erinnerungen wenn deine gelikten Events stadtfinden.",
+        "NSCameraUsageDescription": "Diese App benutzt die Kamera um QR-Codes zu scannen.",
+        "NSLocationWhenInUseUsageDescription": "Diese App benutzt deinen Standort um Events und mit dem Festival zusammenhängende Orte zu finden."
       }
     },
     "android": {
       "package": "at.lume.poolbarfestival",
-      "versionCode": 1,
+      "versionCode": 111,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "white"
+        "backgroundColor": "#ffffff"
       },
       "permissions": ["READ_CALENDAR", "WRITE_CALENDAR", "CAMERA"]
     },
@@ -34,7 +36,8 @@
       "favicon": "./assets/favicon.png"
     },
     "scheme": "poolbar",
-    "sdkVersion": "44.0.0"
+    "sdkVersion": "44.0.0",
+    "plugins": ["react-native-email-link"]
   },
   "name": "poolbarfestival"
 }

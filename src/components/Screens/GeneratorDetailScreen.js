@@ -18,7 +18,14 @@ const RenderMember = ({ member }) => {
         borderBottomColor: 'black',
       }}
     >
-      <View style={{ width: '100%', marginTop: 'auto', marginBottom: 'auto', flexDirection: 'row' }}>
+      <View
+        style={{
+          width: '100%',
+          marginTop: 'auto',
+          marginBottom: 'auto',
+          flexDirection: 'row',
+        }}
+      >
         <PoolbarImage
           imageId={member.image}
           fallback={artistPlaceholder}
@@ -30,7 +37,14 @@ const RenderMember = ({ member }) => {
           }}
         />
         <View style={{}}>
-          <View style={{ marginLeft: 20, marginTop: 'auto', marginBottom: 'auto', width: '100%' }}>
+          <View
+            style={{
+              marginLeft: 10,
+              marginTop: 'auto',
+              marginBottom: 'auto',
+              width: '100%',
+            }}
+          >
             <Text style={StylesMain.artistListDateText}>{member.year}</Text>
             <Text style={StylesMain.artistListMainText}>{member.name}</Text>
           </View>
@@ -43,7 +57,7 @@ const RenderMember = ({ member }) => {
 const RenderElement = ({ generator }) => {
   return (
     <View style={{ flex: 1, width: '100%', height: '100%' }}>
-      <View style={{ padding: 20, marginTop: 10 }}>
+      <View style={{ padding: 10, marginTop: 10 }}>
         <View>
           <Text style={styles.roomDateText}>{generator.lab_item.name}</Text>
           <Text style={styles.roomMainText}>{generator.name}</Text>
@@ -71,7 +85,7 @@ const RenderElement = ({ generator }) => {
             }}
           >
             <View style={{ flex: 1 }}>
-              <Text style={[StylesMain.artistDetailsDateText, { marginBottom: 20, marginHorizontal: 20 }]}>mitwirkende</Text>
+              <Text style={[StylesMain.artistDetailsDateText, { marginBottom: 20, marginHorizontal: 10 }]}>mitwirkende</Text>
               <View style={{ flex: 1, borderTopWidth: 2 }}></View>
               {generator.members.map((member) => (
                 <RenderMember key={member.id} member={member} />

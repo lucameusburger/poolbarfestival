@@ -1,33 +1,70 @@
-import { View, ImageBackground, Text, Dimensions } from 'react-native';
+import { View, ImageBackground, Text, Pressable, SafeAreaView, NativeModules, Platform } from 'react-native';
 import FadeInView from '../ui/FadeInView';
-import PoolbarLogo from '../ui/PoolbarLogo';
+import PoolbarLogoAnimated from '../ui/PoolbarLogoAnimated';
 import AppButton from '../ui/AppButton';
 import AppCornerButton from '../ui/AppCornerButton';
 import StylesMain from '../../../styles/StylesMain';
 import gridImage from '../../../assets/img/grid.png';
+import { CLR_PRIMARY } from '../../core/Theme';
 
-const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
+const estimatedStatusBarHeight = NativeModules.NativeUnimoduleProxy?.modulesConstants?.ExponentConstants?.statusBarHeight ?? 0;
+
+const APPROX_STATUSBAR_HEIGHT = Platform.select({
+  android: estimatedStatusBarHeight,
+  ios: Platform.Version < 11 ? estimatedStatusBarHeight : 0,
+});
+
+const Wrapper = typeof APPROX_STATUSBAR_HEIGHT.statusBarHeight === 'number' ? View : SafeAreaView;
 
 const HomeScreen = ({ navigation }) => {
   return (
     <View style={StylesMain.mainView}>
       <FadeInView style={{ flex: 1, width: '100%', height: '100%' }}>
+        <Wrapper style={{ margin: 0, backgroundColor: '#00ff00', zIndex: 999, position: 'absolute', left: 0, right: 0, top: 0 }}>
+          <View
+            style={{
+              width: '150%',
+              alignSelf: 'center',
+              transform: [{ rotate: '-2deg' }],
+              backgroundColor: CLR_PRIMARY,
+              paddingTop: 16,
+            }}
+          >
+            <Text
+              style={{
+                fontFamily: 'HelviotopiaMedium',
+                alignSelf: 'center',
+                marginTop: 'auto',
+                marginBottom: 5,
+                fontSize: 28,
+              }}
+            >
+              07. Jul - 14. Aug 2022
+            </Text>
+          </View>
+        </Wrapper>
         <ImageBackground source={gridImage} width="100%" height="100%" style={{ flex: 1, width: '100%', height: '100%' }}>
           <View style={{ flex: 1, justifyContent: 'center' }}>
             <View>
-              <View style={{ width: '150%', alignSelf: 'center', height: 50, transform: [{ rotate: '-6deg' }], backgroundColor: '#00ff00', marginBottom: 10 + SCREEN_HEIGHT / 30 }}>
-                <Text style={{ fontFamily: 'Helviotopia', alignSelf: 'center', marginTop: 'auto', marginBottom: 'auto', fontSize: 28 }}>07 Juli bis 28 August 2022</Text>
-              </View>
-              <View style={{ marginBottom: 10 + SCREEN_HEIGHT / 40, width: '80%', height: '33%', alignSelf: 'center' }}>
-                <PoolbarLogo style={{ alignSelf: 'center' }} width="100%" height="100%" fill="black" />
+              <View
+                style={{
+                  marginBottom: '10%',
+                  width: '80%',
+                  height: '33%',
+                  alignSelf: 'center',
+                }}
+              >
+                <Pressable onPress={() => navigation.navigate('Credits')}>
+                  <PoolbarLogoAnimated style={{ alignSelf: 'center' }} width="100%" height="100%" fill="black" />
+                </Pressable>
               </View>
               <View style={{ top: 0, marginTop: 0 }}>
                 <AppButton style={{ width: '50%' }} title="events" onPress={() => navigation.navigate('Events')} bevelLeft={true} />
-                <View style={{ height: 4 + SCREEN_HEIGHT / 60 }} />
+                <View style={{ height: '3%' }} />
                 <AppButton style={{ width: '50%' }} title="artists" onPress={() => navigation.navigate('Artists')} />
-                <View style={{ height: 4 + SCREEN_HEIGHT / 60 }} />
+                <View style={{ height: '3%' }} />
                 <AppButton style={{ width: '50%' }} title="generator" onPress={() => navigation.navigate('Generators')} bevelLeft={true} />
-                <View style={{ height: 4 + SCREEN_HEIGHT / 60 }} />
+                <View style={{ height: '3%' }} />
                 <AppButton style={{ width: '50%' }} title="fließtext" onPress={() => navigation.navigate('Flowtext')} bevelLeft={false} />
               </View>
             </View>

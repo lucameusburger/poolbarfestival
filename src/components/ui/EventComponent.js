@@ -10,7 +10,8 @@ const EventComponent = ({ item }) => {
   return (
     <TouchableOpacity
       style={{
-        padding: 20,
+        paddingHorizontal: 10,
+        paddingVertical: 20,
         borderBottomWidth: 2,
         borderBottomColor: 'black',
         width: '100%',

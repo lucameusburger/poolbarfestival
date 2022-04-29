@@ -17,6 +17,8 @@ const FadeInView = ({ children, style, duration = 1000 }) => {
       style={[
         style,
         {
+          margin: 0,
+          padding: 0,
           opacity: fadeAnim, // Bind opacity to animated value
         },
       ]}

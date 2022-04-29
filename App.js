@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { Text } from 'react-native';
+import { Text, NativeModules, Platform, SafeAreaView } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import AppLoading from 'expo-app-loading';
@@ -18,8 +18,9 @@ import EventLikedListScreen from './src/components/Screens/EventLikedListScreen'
 import EventDetailScreen from './src/components/Screens/EventDetailScreen';
 import ScanScreen from './src/components/Screens/ScanScreen';
 import MapScreen from './src/components/Screens/MapScreen';
+import CreditsScreen from './src/components/Screens/CreditsScreen';
+import GeneratorInfoScreen from './src/components/Screens/GeneratorInfoScreen';
 import FlowtextScreen from './src/components/Screens/FlowtextScreen';
-import SplashScreen from './src/components/Screens/SplashScreen';
 
 import { Provider, useDispatch } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
@@ -35,6 +36,7 @@ import { fetchArtists } from './src/redux/artistsThunk';
 import { fetchVenues } from './src/redux/venueThunk';
 import GeneratorDetailScreen from './src/components/Screens/GeneratorDetailScreen';
 import { fetchGenerators } from './src/redux/generatorsThunk';
+import CaptureScreen from './src/components/Screens/CaptureScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -62,7 +64,9 @@ function Navigator() {
       <Stack.Screen name="Map" component={MapScreen} options={{ title: 'Map', headerShown: false }} />
       <Stack.Screen name="Generator" component={GeneratorDetailScreen} options={{ title: 'Generator', headerShown: false }} />
       <Stack.Screen name="Flowtext" component={FlowtextScreen} options={{ title: 'Flowtext', headerShown: false }} />
-      <Stack.Screen name="SplashScreen" component={SplashScreen} options={{ title: 'SplashScreen', headerShown: false }} />
+      <Stack.Screen name="Capture" component={CaptureScreen} options={{ title: 'Capture', headerShown: false }} />
+      <Stack.Screen name="Credits" component={CreditsScreen} options={{ title: 'Credits', headerShown: false }} />
+      <Stack.Screen name="GeneratorInfo" component={GeneratorInfoScreen} options={{ title: 'GeneratorInfo', headerShown: false }} />
     </Stack.Navigator>
   );
 }

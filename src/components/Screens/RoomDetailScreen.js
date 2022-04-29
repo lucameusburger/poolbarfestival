@@ -14,7 +14,7 @@ const RenderElement = ({ venue }) => {
   const filteredEvents = events.filter((event) => event.room === venue.id);
   return (
     <View style={{ flex: 1, width: '100%', height: '100%' }}>
-      <View style={{ padding: 20, marginTop: 10 }}>
+      <View style={{ padding: 10, marginTop: 10 }}>
         <View>
           <Text style={styles.roomDateText}>poolbar</Text>
           <Text style={styles.roomMainText}>{venue.name}</Text>
@@ -28,11 +28,10 @@ const RenderElement = ({ venue }) => {
           flex: 1,
           width: '100%',
           height: 320,
-          marginBottom: 30,
         }}
       />
       <View style={{ flex: 1 }}>
-        <Text style={[StylesMain.artistDetailsDateText, { marginBottom: 20, marginHorizontal: 20 }]}>kommende events</Text>
+        <Text style={[StylesMain.artistDetailsDateText, { paddingVertical: 20, paddingHorizontal: 10 }]}>kommende events</Text>
         <View style={{ flex: 1, borderTopWidth: 2 }}>
           {filteredEvents.map((event) => (
             <EventComponent item={event} key={event.id} />
