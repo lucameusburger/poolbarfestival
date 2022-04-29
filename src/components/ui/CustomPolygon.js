@@ -6,7 +6,11 @@ function CustomPolygon({ onLayout, ...props }) {
 
   function onLayoutPolygon() {
     if (ref.current) {
-      ref.current.setNativeProps({ fillColor: props.fillColor });
+      ref.current.setNativeProps({
+        fillColor: props.fillColor,
+        strokeColor: props.strokeColor,
+        strokeWidth: props.strokeWidth,
+      });
     }
     // call onLayout() from the props if you need it
   }
