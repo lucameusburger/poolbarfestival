@@ -30,7 +30,7 @@
     "expo-linking": "~3.0.0",
     "expo-sharing": "^10.1.1",
     "expo-status-bar": "~1.2.0",
-    "expo-updates": "~0.11.6",
+    "expo-updates": "~0.11.7",
     "lottie-react-native": "5.0.1",
     "react": "18.0.0",
     "react-dom": "18.0.0",
