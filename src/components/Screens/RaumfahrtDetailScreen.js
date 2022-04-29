@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Text, View, ScrollView, StyleSheet, Pressable } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { openInbox, openComposer } from 'react-native-email-link';
@@ -12,24 +12,32 @@ import { fetchLocations } from '../../redux/locationsThunk';
 
 const BASE_URL = 'https://www.admin.poolbar.at/';
 
-const RaumfahrtDetail = () => {
+const RaumfahrtDetail = ({ spaceLocation }) => {
+  console.log('sl', spaceLocation);
   return (
     <View style={StylesMain.credits}>
-      <Text style={StylesMain.text}>info raumfahrtprogramm</Text>
+      <Text style={StylesMain.text}>{spaceLocation.name}</Text>
     </View>
   );
 };
 
-const RaumfahrtDetailScreen = ({}) => {
+const RaumfahrtDetailScreen = ({ route }) => {
+  const id = route.params.id.trim();
   const dispatch = useDispatch();
 
-  const isLoaded = useSelector((state) => state.artists.isLoaded);
+  const isLoaded = useSelector((state) => state.spaceLocations.isLoaded);
+  const spaceLocations = useSelector((state) => state.spaceLocations.data);
+  const [selectedSpaceLocation, setSelectedSpaceLocation] = useState(null);
+
+  useEffect(() => {
+    setSelectedSpaceLocation(spaceLocations.find((spaceLocation) => spaceLocation.id === id));
+  }, [spaceLocations]);
 
   return (
     <View style={StylesMain.mainView}>
       <FadeInView style={{ flex: 1, width: '100%', height: '100%' }}>
-        <NavBar title="raumfahrtprogramm" />
-        <ScrollView style={{ flex: 1, marginTop: 10, padding: 10 }}>{!isLoaded ? <LoadingText /> : <RaumfahrtDetail />}</ScrollView>
+        <NavBar title="raumfahrt" />
+        <ScrollView style={{ flex: 1, marginTop: 10, padding: 10 }}>{!isLoaded || !selectedSpaceLocation ? <LoadingText /> : <RaumfahrtDetail spaceLocation={selectedSpaceLocation} />}</ScrollView>
       </FadeInView>
     </View>
   );
