@@ -1,13 +1,13 @@
-import { useEffect } from "react";
-import { View, FlatList } from "react-native";
-import LoadingText from "../ui/LoadingText";
-import NavBar from "../ui/NavBar";
-import FadeInView from "../ui/FadeInView";
-import StylesMain from "../../../styles/StylesMain";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchEvents } from "../../redux/eventsThunk";
-import EventComponent from "../ui/EventComponent";
-import { navigate } from "../../core/RootNavigation";
+import { useEffect } from 'react';
+import { View, FlatList } from 'react-native';
+import LoadingText from '../ui/LoadingText';
+import NavBar from '../ui/NavBar';
+import FadeInView from '../ui/FadeInView';
+import StylesMain from '../../../styles/StylesMain';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchEvents } from '../../redux/eventsThunk';
+import EventComponent from '../ui/EventComponent';
+import { navigate } from '../../core/RootNavigation';
 
 const EventListScreen = ({ router }) => {
   const dispatch = useDispatch();
@@ -19,26 +19,15 @@ const EventListScreen = ({ router }) => {
 
   return (
     <View style={StylesMain.mainView}>
-      <FadeInView style={{ flex: 1, width: "100%", height: "100%" }}>
+      <FadeInView style={{ flex: 1, width: '100%', height: '100%' }}>
         <NavBar
           title="events"
           next={() => {
-            navigate("LikedEvents");
+            navigate('LikedEvents');
           }}
-          nextTitle="meine events"
+          nextTitle="merkliste"
         />
-        <View style={{ flex: 1, margin: 0 }}>
-          {events ? (
-            <FlatList
-              style={{ flex: 1, padding: 0 }}
-              data={events}
-              renderItem={EventComponent}
-              keyExtractor={(item) => item.id}
-            />
-          ) : (
-            <LoadingText />
-          )}
-        </View>
+        <View style={{ flex: 1, margin: 0 }}>{events ? <FlatList style={{ flex: 1, padding: 0 }} data={events} renderItem={EventComponent} keyExtractor={(item) => item.id} /> : <LoadingText />}</View>
       </FadeInView>
     </View>
   );
