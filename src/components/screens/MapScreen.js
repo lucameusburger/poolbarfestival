@@ -187,70 +187,31 @@ const MapScreen = ({ navigation }) => {
               fontFamily: "Helviotopia",
               position: "absolute",
               bottom: 0,
-              backgroundColor: "white",
               width: "100%",
               height: "15%",
               zIndex: 10,
               display: "flex",
               flexDirection: "row",
-              justifyContent: "space-between",
-              borderWidth: 2,
-              padding: 20,
-              paddingBottom: 30,
+              justifyContent: "center",
+              flexDirection: "column",
+              //space-between
+              alignItems: "center",
             }}
           >
             <View
               style={{
-                marginTop: "auto",
-                marginBottom: "auto",
+                flexDirection: "row",
+                marginHorizontal: 20,
               }}
             >
-              <Text
-                style={{
-                  fontSize: 18,
-                  marginBottom: 10,
-                  marginTop: 10,
-                  fontFamily: "Helviotopia",
-                }}
-              >
-                {currentLocation.name}
-              </Text>
-              <Text style={{ fontFamily: "Helviotopia" }}>
-                {currentLocation.description}
-              </Text>
-            </View>
-            <View
-              style={{
-                marginTop: "auto",
-                marginBottom: "auto",
-              }}
-            >
-              {/* <TouchableOpacity
-                onPress={() => {
-                  console.log('go to detail screen location');
-                }}
-              >
-                <FontAwesome
-                  style={{
-                    marginTop: 'auto',
-                    marginBottom: 'auto',
-                    alignSelf: 'center',r
-                    opacity: 1,
-                  }}
-                  name={'info'}
-                  size={36}
-                  color="black"
-                />
-              </TouchableOpacity> */}
               <AppButton
                 title="navigieren"
-                style={{
-                  marginTop: "auto",
-                  marginBottom: "auto",
-                  marginLeft: "auto",
-                }}
                 textProps={{
                   numberOfLines: 1,
+                }}
+                style={{
+                  flex: 1,
+                  marginRight: 10,
                 }}
                 onPress={() => {
                   openGoogleMaps(
@@ -264,13 +225,12 @@ const MapScreen = ({ navigation }) => {
               />
               <AppButton
                 title="details"
-                style={{
-                  marginTop: "auto",
-                  marginBottom: "auto",
-                  marginLeft: "auto",
-                }}
                 textProps={{
                   numberOfLines: 1,
+                }}
+                style={{
+                  flex: 1,
+                  marginLeft: 10,
                 }}
                 onPress={() =>
                   navigation.navigate("Raumfahrtprogramm", {
@@ -278,6 +238,37 @@ const MapScreen = ({ navigation }) => {
                   })
                 }
               />
+            </View>
+            <View
+              style={{
+                backgroundColor: "white",
+                borderTopWidth: 2,
+                borderColor: "black",
+                width: "100%",
+                marginTop: 10,
+                height: "60%",
+                padding: 10,
+              }}
+            >
+              <Text
+                style={{
+                  fontSize: 18,
+                  marginBottom: 0,
+                  fontFamily: "Helviotopia",
+                  width: "100%",
+                }}
+              >
+                {currentLocation.name}
+              </Text>
+              <Text
+                style={{
+                  fontFamily: "Helviotopia",
+                  marginBottom: 10,
+                  width: "100%",
+                }}
+              >
+                {currentLocation.description}
+              </Text>
             </View>
           </View>
         )}
