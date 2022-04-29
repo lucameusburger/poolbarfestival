@@ -7,6 +7,9 @@ import StylesMain from '../../../styles/StylesMain';
 import gridImage from '../../../assets/img/grid.png';
 import { CLR_PRIMARY } from '../../core/Theme';
 
+// import image
+import { cameraIcon } from '../../../assets/img/camera-icon.png';
+
 const estimatedStatusBarHeight = NativeModules.NativeUnimoduleProxy?.modulesConstants?.ExponentConstants?.statusBarHeight ?? 0;
 
 const APPROX_STATUSBAR_HEIGHT = Platform.select({
@@ -69,8 +72,8 @@ const HomeScreen = ({ navigation }) => {
               </View>
             </View>
 
-            <AppCornerButton icon="map" position="lb" onPress={() => navigation.navigate('Map')} bevelLeft={false} />
-            <AppCornerButton icon="camera" position="rb" onPress={() => navigation.navigate('Scan')} bevelLeft={false} />
+            <AppCornerButton icon={cameraIcon} position="lb" onPress={() => navigation.navigate('Map')} bevelLeft={false} />
+            <AppCornerButton icon={cameraIcon} position="rb" onPress={() => navigation.navigate('Scan')} bevelLeft={false} />
           </View>
         </ImageBackground>
       </FadeInView>

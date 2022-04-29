@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { StyleSheet, Pressable } from 'react-native';
+import { StyleSheet, Pressable, Image } from 'react-native';
 
 import { FontAwesome } from '@expo/vector-icons';
 
@@ -27,7 +27,8 @@ const AppCornerButton = ({ onPress, icon, color = CLR_PRIMARY, style, position =
       ]}
       onPress={onPress}
     >
-      <FontAwesome style={styles.buttonIcon} name={icon} size={36} color="black" />
+      {/* <FontAwesome style={styles.buttonIcon} name={icon} size={36} color="black" /> */}
+      <Image source={icon} style={styles.buttonIcon} />
     </Pressable>
   );
 };
@@ -48,6 +49,8 @@ const styles = StyleSheet.create({
     marginBottom: 'auto',
     alignSelf: 'center',
     opacity: 1,
+    width: '100%',
+    height: '100%',
   },
 });
 
