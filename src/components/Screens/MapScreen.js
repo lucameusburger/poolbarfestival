@@ -167,12 +167,14 @@ const MapScreen = ({ navigation }) => {
                     onMapReady={setBoundingAustria}
                     ref={mapRef}
                     initialRegion={initial}>
+                    {(isLoaded && locations) &&
                     <Polygon
                         coordinates={geodata}
                         strokeWidth={5}
                         strokeColor='black'
                         fillColor='rgba(0,0,0,0.135)'
                     />
+                    }
                     <RenderMarkers
                         locations={
                             (isLoaded && locations) ?

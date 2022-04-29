@@ -16,6 +16,9 @@
     "ios": {
       "bundleIdentifier": "at.lume.poolbarfestival",
       "buildNumber": "1.1.1",
+      "config":{
+        "googleMapsApiKey":"AIzaSyAgEpn0ugrIibLauZXRg5Jh5PN1kjdHxUs"
+      },
       "supportsTablet": true,
       "infoPlist": {
         "NSRemindersUsageDescription": "Erhalte Erinnerungen wenn deine gelikten Events stadtfinden.",
@@ -26,6 +29,11 @@
     "android": {
       "package": "at.lume.poolbarfestival",
       "versionCode": 111,
+      "config":{
+        "googleMaps":{
+          "apiKey": "AIzaSyAA0lcngeZZfnz6xuc1UapGDEgeG27JYAo"
+        }
+      },
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
