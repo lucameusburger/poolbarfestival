@@ -19,6 +19,7 @@ import EventDetailScreen from './src/components/Screens/EventDetailScreen';
 import ScanScreen from './src/components/Screens/ScanScreen';
 import MapScreen from './src/components/Screens/MapScreen';
 import CreditsScreen from './src/components/Screens/CreditsScreen';
+import RaumfahrtDetailScreen from './src/components/Screens/RaumfahrtDetailScreen';
 import GeneratorInfoScreen from './src/components/Screens/GeneratorInfoScreen';
 import FlowtextScreen from './src/components/Screens/FlowtextScreen';
 
@@ -66,6 +67,7 @@ function Navigator() {
       <Stack.Screen name="Flowtext" component={FlowtextScreen} options={{ title: 'Flowtext', headerShown: false }} />
       <Stack.Screen name="Capture" component={CaptureScreen} options={{ title: 'Capture', headerShown: false }} />
       <Stack.Screen name="Credits" component={CreditsScreen} options={{ title: 'Credits', headerShown: false }} />
+      <Stack.Screen name="Raumfahrtprogramm" component={RaumfahrtDetailScreen} options={{ title: 'Raumfahrtprogramm', headerShown: false }} />
       <Stack.Screen name="GeneratorInfo" component={GeneratorInfoScreen} options={{ title: 'GeneratorInfo', headerShown: false }} />
     </Stack.Navigator>
   );
