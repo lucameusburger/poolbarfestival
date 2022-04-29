@@ -24,6 +24,9 @@
         "NSRemindersUsageDescription": "Erhalte Erinnerungen wenn deine gelikten Events stadtfinden.",
         "NSCameraUsageDescription": "Diese App benutzt die Kamera um QR-Codes zu scannen.",
         "NSLocationWhenInUseUsageDescription": "Diese App benutzt deinen Standort um Events und mit dem Festival zusammenhängende Orte zu finden."
+      },
+      "config": {
+        "googleMapsApiKey": "AIzaSyAgEpn0ugrIibLauZXRg5Jh5PN1kjdHxUs"
       }
     },
     "android": {
@@ -37,6 +40,11 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
+      },
+      "config":{
+        "googleMaps":{
+          "apiKey": "AIzaSyAA0lcngeZZfnz6xuc1UapGDEgeG27JYAo"
+        }
       },
       "permissions": ["READ_CALENDAR", "WRITE_CALENDAR", "CAMERA"]
     },
