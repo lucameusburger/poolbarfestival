@@ -1,20 +1,33 @@
-import { Animated, Pressable } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
-import { addCallenderEvent, deleteCallenderEvent } from '../../redux/callenderThunk';
-import { useEffect, useRef } from 'react';
-import { FontAwesome } from '@expo/vector-icons';
+import { Animated, Pressable } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addCallenderEvent,
+  deleteCallenderEvent,
+} from "../../redux/callenderThunk";
+import { useEffect, useRef } from "react";
+import { FontAwesome } from "@expo/vector-icons";
 
-import heardfade from '../../../assets/animations/heartfade.json';
-import { CLR_PRIMARY } from '../../core/Theme';
+import heardfade from "../../../assets/animations/heartfade.json";
+import { CLR_PRIMARY } from "../../core/Theme";
 
 const hexToRgb = (hex) =>
   hex
-    .replace(/^#?([a-f\d])([a-f\d])([a-f\d])$/i, (m, r, g, b) => '#' + r + r + g + g + b + b)
+    .replace(
+      /^#?([a-f\d])([a-f\d])([a-f\d])$/i,
+      (m, r, g, b) => "#" + r + r + g + g + b + b
+    )
     .substring(1)
     .match(/.{2}/g)
     .map((x) => parseInt(x, 16));
 
-const LikeIcon = ({ eventId, size = 32, style, colorOff = '#000', colorOn = CLR_PRIMARY }) => {
+const LikeIcon = ({
+  eventId,
+  size = 32,
+  style,
+  colorOff = "#000",
+  colorOn = CLR_PRIMARY,
+  onLike = () => {},
+}) => {
   const dispatch = useDispatch();
   const progress = useRef(new Animated.Value(isLiked ? 1 : 0)).current;
 
@@ -30,8 +43,9 @@ const LikeIcon = ({ eventId, size = 32, style, colorOff = '#000', colorOn = CLR_
   heardfade.layers[0].shapes[0].it[1].c.k[0].s[2] = rgbOff[2] / 255;
 
   const likeEvent = (id) => {
+    onLike();
     dispatch({
-      type: 'ADD_TO_LIKED_EVENTS',
+      type: "ADD_TO_LIKED_EVENTS",
       payload: id,
     });
     dispatch(addCallenderEvent(id));
@@ -39,7 +53,7 @@ const LikeIcon = ({ eventId, size = 32, style, colorOff = '#000', colorOn = CLR_
 
   const unLikeEvent = (id) => {
     dispatch({
-      type: 'REMOVE_FROM_LIKED_EVENTS',
+      type: "REMOVE_FROM_LIKED_EVENTS",
       payload: id,
     });
     dispatch(deleteCallenderEvent(id));
@@ -65,7 +79,6 @@ const LikeIcon = ({ eventId, size = 32, style, colorOff = '#000', colorOn = CLR_
       }).start();
     }
   }, [isLiked]);
-
   return (
     <>
       <Pressable
@@ -78,9 +91,9 @@ const LikeIcon = ({ eventId, size = 32, style, colorOff = '#000', colorOn = CLR_
         }}
         style={[
           {
-            alignSelf: 'flex-end',
-            marginBottom: 'auto',
-            marginTop: 'auto',
+            alignSelf: "flex-end",
+            marginBottom: "auto",
+            marginTop: "auto",
             width: size,
           },
           style,
@@ -89,13 +102,13 @@ const LikeIcon = ({ eventId, size = 32, style, colorOff = '#000', colorOn = CLR_
         <FontAwesome
           style={[
             {
-              alignSelf: 'flex-end',
-              marginBottom: 'auto',
-              marginTop: 'auto',
+              alignSelf: "flex-end",
+              marginBottom: "auto",
+              marginTop: "auto",
             },
             style,
           ]}
-          name={isLiked ? 'heart' : 'heart-o'}
+          name={isLiked ? "heart" : "heart-o"}
           size={32}
           color={isLiked ? colorOn : colorOff}
           onPress={() => {
