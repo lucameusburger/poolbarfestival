@@ -39,7 +39,7 @@ const HomeScreen = ({ navigation }) => {
                 fontSize: 28,
               }}
             >
-              07. Jul - 14. Aug 2022
+              07. Jul – 14. Aug 2022
             </Text>
           </View>
         </Wrapper>

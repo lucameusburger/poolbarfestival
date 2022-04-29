@@ -1,5 +1,11 @@
-import React, { useState, useEffect } from "react";
-import { Text, View, StyleSheet, Linking } from "react-native";
+import React, { useState, useEffect, memo } from "react";
+import {
+  Text,
+  View,
+  StyleSheet,
+  Linking,
+  TouchableOpacity,
+} from "react-native";
 
 import { useDispatch, useSelector } from "react-redux";
 
@@ -10,7 +16,7 @@ import AppButton from "../ui/AppButton";
 
 import geodata from "../../../assets/geodata.json";
 
-import MapView, { Marker } from "react-native-maps";
+import MapView, { Marker, Callout, Polygon } from "react-native-maps";
 
 import { fetchSpaceLocations } from "../../redux/spaceLocationThunk";
 import markerImage from "../../../assets/img/marker.png";
@@ -255,6 +261,22 @@ const MapScreen = ({ navigation }) => {
                     currentLocation.name
                   );
                 }}
+              />
+              <AppButton
+                title="details"
+                style={{
+                  marginTop: "auto",
+                  marginBottom: "auto",
+                  marginLeft: "auto",
+                }}
+                textProps={{
+                  numberOfLines: 1,
+                }}
+                onPress={() =>
+                  navigation.navigate("Raumfahrtprogramm", {
+                    id: currentLocation.id,
+                  })
+                }
               />
             </View>
           </View>
