@@ -8,20 +8,20 @@ import * as Linking from 'expo-linking';
 
 import { navigationRef } from './src/core/RootNavigation';
 
-import GeneratorListScreen from './src/components/Screens/GeneratorListScreen';
-import ArtistListScreen from './src/components/Screens/ArtistListScreen';
-import ArtistHistoryListScreen from './src/components/Screens/ArtistHistoryListScreen';
-import ArtistDetailScreen from './src/components/Screens/ArtistDetailScreen';
-import RoomDetailScreen from './src/components/Screens/RoomDetailScreen';
-import EventListScreen from './src/components/Screens/EventListScreen';
-import EventLikedListScreen from './src/components/Screens/EventLikedListScreen';
-import EventDetailScreen from './src/components/Screens/EventDetailScreen';
-import ScanScreen from './src/components/Screens/ScanScreen';
-import MapScreen from './src/components/Screens/MapScreen';
-import CreditsScreen from './src/components/Screens/CreditsScreen';
-import RaumfahrtDetailScreen from './src/components/Screens/RaumfahrtDetailScreen';
-import GeneratorInfoScreen from './src/components/Screens/GeneratorInfoScreen';
-import FlowtextScreen from './src/components/Screens/FlowtextScreen';
+import GeneratorListScreen from './src/components/screens/GeneratorListScreen';
+import ArtistListScreen from './src/components/screens/ArtistListScreen';
+import ArtistHistoryListScreen from './src/components/screens/ArtistHistoryListScreen';
+import ArtistDetailScreen from './src/components/screens/ArtistDetailScreen';
+import RoomDetailScreen from './src/components/screens/RoomDetailScreen';
+import EventListScreen from './src/components/screens/EventListScreen';
+import EventLikedListScreen from './src/components/screens/EventLikedListScreen';
+import EventDetailScreen from './src/components/screens/EventDetailScreen';
+import ScanScreen from './src/components/screens/ScanScreen';
+import MapScreen from './src/components/screens/MapScreen';
+import CreditsScreen from './src/components/screens/CreditsScreen';
+import RaumfahrtDetailScreen from './src/components/screens/RaumfahrtDetailScreen';
+import GeneratorInfoScreen from './src/components/screens/GeneratorInfoScreen';
+import FlowtextScreen from './src/components/screens/FlowtextScreen';
 
 import { Provider, useDispatch } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
@@ -31,13 +31,13 @@ import { persistor, store } from './src/redux/store';
 const prefix = Linking.createURL('/');
 
 import { useFonts } from '@expo-google-fonts/outfit';
-import HomeScreen from './src/components/Screens/HomeScreen';
+import HomeScreen from './src/components/screens/HomeScreen';
 import { fetchEvents } from './src/redux/eventsThunk';
 import { fetchArtists } from './src/redux/artistsThunk';
 import { fetchVenues } from './src/redux/venueThunk';
-import GeneratorDetailScreen from './src/components/Screens/GeneratorDetailScreen';
+import GeneratorDetailScreen from './src/components/screens/GeneratorDetailScreen';
 import { fetchGenerators } from './src/redux/generatorsThunk';
-import CaptureScreen from './src/components/Screens/CaptureScreen';
+import CaptureScreen from './src/components/screens/CaptureScreen';
 import { fetchPOI } from './src/redux/poiThunk';
 
 const Stack = createNativeStackNavigator();
