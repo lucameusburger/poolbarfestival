@@ -38,6 +38,7 @@ import { fetchVenues } from './src/redux/venueThunk';
 import GeneratorDetailScreen from './src/components/Screens/GeneratorDetailScreen';
 import { fetchGenerators } from './src/redux/generatorsThunk';
 import CaptureScreen from './src/components/Screens/CaptureScreen';
+import { fetchPOI } from './src/redux/poiThunk';
 
 const Stack = createNativeStackNavigator();
 
@@ -48,6 +49,7 @@ function Navigator() {
     dispatch(fetchArtists());
     dispatch(fetchVenues());
     dispatch(fetchGenerators());
+    dispatch(fetchPOI());
   }, []);
 
   return (
