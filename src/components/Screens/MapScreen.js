@@ -396,8 +396,8 @@ const generatedMapStyle = [
 ];
 
 const initial = {
-    latitude: 47.36321774000127,
-    longitude: 9.689607548263336,
+    latitude: 47.164254,
+    longitude: 9.987285,
     latitudeDelta: 1,
     longitudeDelta: 1,
 };
