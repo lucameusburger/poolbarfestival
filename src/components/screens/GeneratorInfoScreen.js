@@ -51,7 +51,7 @@ const GeneratorInfoScreen = ({}) => {
   return (
     <View style={StylesMain.mainView}>
       <FadeInView style={{ flex: 1, width: '100%', height: '100%' }}>
-        <NavBar title="generator info" />
+        <NavBar title="generator" />
         <ScrollView style={{ flex: 1, marginTop: 10, padding: 10 }}>{!isLoaded ? <LoadingText /> : <Info />}</ScrollView>
       </FadeInView>
     </View>
