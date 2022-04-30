@@ -2,7 +2,7 @@
   "expo": {
     "name": "poolbar",
     "slug": "poolbarfestival",
-    "version": "1.1.3",
+    "version": "1.1.4",
     "orientation": "portrait",
     "icon": "./assets/icon/appstore.png",
     "splash": {
@@ -12,12 +12,10 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "bundleIdentifier": "at.lume.poolbarfestival",
-      "buildNumber": "1.1.3",
+      "buildNumber": "1.1.4",
       "supportsTablet": true,
       "infoPlist": {
         "NSRemindersUsageDescription": "Erhalte Erinnerungen wenn deine gelikten Events stadtfinden.",
@@ -30,7 +28,7 @@
     },
     "android": {
       "package": "at.lume.poolbarfestival",
-      "versionCode": 113,
+      "versionCode": 114,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
@@ -40,20 +38,14 @@
           "apiKey": "AIzaSyAA0lcngeZZfnz6xuc1UapGDEgeG27JYAo"
         }
       },
-      "permissions": [
-        "READ_CALENDAR",
-        "WRITE_CALENDAR",
-        "CAMERA"
-      ]
+      "permissions": ["READ_CALENDAR", "WRITE_CALENDAR", "CAMERA"]
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "scheme": "poolbar",
     "sdkVersion": "44.0.0",
-    "plugins": [
-      "react-native-email-link"
-    ]
+    "plugins": ["react-native-email-link"]
   },
   "name": "poolbarfestival"
 }
