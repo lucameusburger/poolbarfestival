@@ -1,7 +1,8 @@
 import { Text, View } from "react-native";
 
-import { openGoogleMaps } from "../../core/helpers";
-import AppButton from "./AppButton";
+import { openGoogleMaps } from "../../../core/helpers";
+import { navigate } from "../../../core/RootNavigation";
+import AppButton from "../AppButton";
 
 const LocationInfoBottomBar = ({ location, ...props }) => {
   return (
@@ -48,7 +49,7 @@ const LocationInfoBottomBar = ({ location, ...props }) => {
             marginLeft: 10,
           }}
           onPress={() =>
-            navigation.navigate("Raumfahrtprogramm", {
+            navigate("Raumfahrtprogramm", {
               id: location.id,
             })
           }
