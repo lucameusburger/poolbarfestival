@@ -74,7 +74,7 @@ const ScanCollection = ({ collection }) => {
         </TouchableOpacity>
       ))
   ) : (
-    <Text style={{ alignSelf: 'center', marginTop: 30 }}>Noch keine Scans vorhanden</Text>
+    <Text style={{ alignSelf: 'center', marginTop: 30 }}>Noch keine Scans vorhanden 💔</Text>
   );
 };
 
