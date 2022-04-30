@@ -1,23 +1,14 @@
-import { useState, useEffect } from "react";
-import { Text, StyleSheet, Pressable } from "react-native";
-import { CLR_PRIMARY } from "../../core/Theme";
-import { Audio } from "expo-av";
+import { useState, useEffect } from 'react';
+import { Text, StyleSheet, Pressable } from 'react-native';
+import { CLR_PRIMARY } from '../../core/Theme';
+import { Audio } from 'expo-av';
 
-const AppButton = ({
-  onPress,
-  title,
-  color = CLR_PRIMARY,
-  style,
-  textStyle,
-  textProps,
-}) => {
+const AppButton = ({ onPress, title, color = CLR_PRIMARY, style, textStyle, textProps }) => {
   const [active, setActive] = useState(false);
   const [sound, setSound] = useState();
 
   async function playSound() {
-    const { sound } = await Audio.Sound.createAsync(
-      require("../../../assets/sound/button.mp3")
-    );
+    const { sound } = await Audio.Sound.createAsync(require('../../../assets/sound/button.mp3'));
     setSound(sound);
 
     await sound.playAsync();
@@ -41,11 +32,7 @@ const AppButton = ({
         setActive(false);
       }}
       onPress={onPress}
-      style={[
-        styles.buttonContainer,
-        { backgroundColor: active ? color : "white" },
-        style,
-      ]}
+      style={[styles.buttonContainer, { backgroundColor: active ? color : 'white' }, style]}
     >
       <Text {...textProps} style={[styles.buttonText, textStyle]}>
         {title}
@@ -56,22 +43,22 @@ const AppButton = ({
 
 const styles = StyleSheet.create({
   buttonContainer: {
-    alignSelf: "center",
+    alignSelf: 'center',
     borderRadius: 12,
-    textAlign: "center",
+    textAlign: 'center',
     borderWidth: 2,
-    borderColor: "black",
+    borderColor: 'black',
     padding: 10,
   },
   buttonText: {
-    fontFamily: "Helviotopia",
-    color: "black",
-    alignSelf: "center",
-    marginTop: "auto",
-    marginBottom: "auto",
+    fontFamily: 'Helviotopia',
+    color: 'black',
+    alignSelf: 'center',
+    marginTop: 'auto',
+    marginBottom: 'auto',
     fontSize: 18,
-    textAlign: "center",
-    alignSelf: "center",
+    textAlign: 'center',
+    alignSelf: 'center',
   },
 });
 

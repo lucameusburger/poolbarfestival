@@ -7,6 +7,9 @@ import StylesMain from '../../../styles/StylesMain';
 import gridImage from '../../../assets/img/grid.png';
 import { CLR_PRIMARY } from '../../core/Theme';
 
+const cameraIcon = require('../../../assets/img/camera-icon.png');
+const mapIcon = require('../../../assets/img/map-icon.png');
+
 const estimatedStatusBarHeight = NativeModules.NativeUnimoduleProxy?.modulesConstants?.ExponentConstants?.statusBarHeight ?? 0;
 
 const APPROX_STATUSBAR_HEIGHT = Platform.select({
@@ -49,6 +52,7 @@ const HomeScreen = ({ navigation }) => {
               <View
                 style={{
                   marginBottom: '10%',
+                  marginTop: '15%',
                   width: '80%',
                   height: '33%',
                   alignSelf: 'center',
@@ -58,19 +62,19 @@ const HomeScreen = ({ navigation }) => {
                   <PoolbarLogoAnimated style={{ alignSelf: 'center' }} width="100%" height="100%" fill="black" />
                 </Pressable>
               </View>
-              <View style={{ top: 0, marginTop: 0 }}>
+              <View style={{ top: 0, margin: 0 }}>
                 <AppButton style={{ width: '50%' }} title="events" onPress={() => navigation.navigate('Events')} bevelLeft={true} />
                 <View style={{ height: '3%' }} />
                 <AppButton style={{ width: '50%' }} title="artists" onPress={() => navigation.navigate('Artists')} />
                 <View style={{ height: '3%' }} />
                 <AppButton style={{ width: '50%' }} title="generator" onPress={() => navigation.navigate('Generators')} bevelLeft={true} />
                 <View style={{ height: '3%' }} />
-                <AppButton style={{ width: '50%' }} title="fließtext" onPress={() => navigation.navigate('Flowtext')} bevelLeft={false} />
+                <AppButton style={{ width: '50%', marginBottom: 0 }} title="fließtext" onPress={() => navigation.navigate('Flowtext')} bevelLeft={false} />
               </View>
             </View>
 
-            <AppCornerButton icon="map" position="lb" onPress={() => navigation.navigate('Map')} bevelLeft={false} />
-            <AppCornerButton icon="camera" position="rb" onPress={() => navigation.navigate('Scan')} bevelLeft={false} />
+            <AppCornerButton icon={mapIcon} position="lb" onPress={() => navigation.navigate('Map')} bevelLeft={false} />
+            <AppCornerButton icon={cameraIcon} position="rb" onPress={() => navigation.navigate('Scan')} bevelLeft={false} />
           </View>
         </ImageBackground>
       </FadeInView>
