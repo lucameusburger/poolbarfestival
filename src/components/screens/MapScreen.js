@@ -14,6 +14,10 @@ import CustomPolygon from "../ui/mapUi/CustomPolygon";
 import LocationInfoBottomBar from "../ui/mapUi/LocationInfoBottomBar";
 import CustomMarker from "../ui/mapUi/CustomMarker";
 import CustomMap from "../ui/mapUi/CustomMap";
+import markerImageSpace from "../../../../assets/img/markers/markerSpace.png";
+import selectedMarkerImageSpace from "../../../../assets/img/markers/selectedMarkerSpace.png";
+import markerImagePOI from "../../../../assets/img/markers/markerPOI.png";
+import selectedMarkerImagePOI from "../../../../assets/img/markers/selectedMarkerPOI.png";
 
 const initialRegion = {
   latitude: 47.36321774000127,
@@ -63,16 +67,34 @@ const RenderMarkers = ({ setInfoBarVisible, infoBarVisible }) => {
     });
   };
 
-  return [...spaceLocations, ...poiLocations].map((location) => (
-    <CustomMarker
-      location={location}
-      setCurrentLocation={setCurrentLocation}
-      setInfoBarVisible={setInfoBarVisible}
-      infoBarVisible={infoBarVisible}
-      currentLocation={currentLocation}
-      key={"marker_" + location.id}
-    />
-  ));
+  return (
+    <>
+      {spaceLocations.map((location) => (
+        <CustomMarker
+          location={location}
+          setCurrentLocation={setCurrentLocation}
+          setInfoBarVisible={setInfoBarVisible}
+          infoBarVisible={infoBarVisible}
+          currentLocation={currentLocation}
+          markerImage={markerImageSpace}
+          selectedMarkerImage={selectedMarkerImageSpace}
+          key={"marker_" + location.id}
+        />
+      ))}
+      {poiLocations.map((location) => (
+        <CustomMarker
+          location={location}
+          setCurrentLocation={setCurrentLocation}
+          setInfoBarVisible={setInfoBarVisible}
+          infoBarVisible={infoBarVisible}
+          currentLocation={currentLocation}
+          markerImage={markerImagePOI}
+          selectedMarkerImage={selectedMarkerImagePOI}
+          key={"marker_" + location.id}
+        />
+      ))}
+    </>
+  );
 };
 
 const MapScreen = ({ navigation }) => {
