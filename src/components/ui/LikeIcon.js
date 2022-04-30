@@ -4,7 +4,7 @@ import {
   addCallenderEvent,
   deleteCallenderEvent,
 } from "../../redux/callenderThunk";
-import { useEffect, useRef } from "react";
+import { memo, useEffect, useRef } from "react";
 
 import LottieView from "lottie-react-native";
 
@@ -136,4 +136,4 @@ const LikeIcon = ({
                 }}
             />
  */
-export default LikeIcon;
+export default memo(LikeIcon);
