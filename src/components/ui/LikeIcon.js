@@ -4,7 +4,7 @@ import {
   addCallenderEvent,
   deleteCallenderEvent,
 } from "../../redux/callenderThunk";
-import { memo, useEffect, useRef } from "react";
+import { memo, useEffect, useRef, useState } from "react";
 
 import LottieView from "lottie-react-native";
 
@@ -30,6 +30,11 @@ const LikeIcon = ({
   onLike = () => {},
 }) => {
   const dispatch = useDispatch();
+
+  const likedEvents = useSelector((state) => state.favorites.likedEvents);
+
+  const isLiked = likedEvents.includes(eventId);
+
   const progress = useRef(new Animated.Value(isLiked ? 1 : 0)).current;
 
   const rgbOff = hexToRgb(colorOff);
@@ -45,6 +50,11 @@ const LikeIcon = ({
 */
   const likeEvent = (id) => {
     onLike();
+    Animated.timing(progress, {
+      toValue: 1,
+      duration: animationDuration,
+      useNativeDriver: true,
+    }).start();
 
     dispatch({
       type: "ADD_TO_LIKED_EVENTS",
@@ -54,6 +64,11 @@ const LikeIcon = ({
   };
 
   const unLikeEvent = (id) => {
+    Animated.timing(progress, {
+      toValue: 0,
+      duration: animationDuration,
+      useNativeDriver: true,
+    }).start();
     dispatch({
       type: "REMOVE_FROM_LIKED_EVENTS",
       payload: id,
@@ -61,24 +76,17 @@ const LikeIcon = ({
     dispatch(deleteCallenderEvent(id));
   };
 
-  const likedEvents = useSelector((state) => state.favorites.likedEvents);
-
-  const isLiked = likedEvents.includes(eventId);
-
   const animationDuration = 300;
+
+  const [likeInited, setLikeInited] = useState(false);
+
   useEffect(() => {
-    if (isLiked) {
-      Animated.timing(progress, {
-        toValue: 1,
-        duration: animationDuration,
-        useNativeDriver: true,
-      }).start();
-    } else {
-      Animated.timing(progress, {
-        toValue: 0,
-        duration: animationDuration,
-        useNativeDriver: true,
-      }).start();
+    if (!likeInited && typeof isLiked === "boolean") {
+      setLikeInited(true);
+    }
+
+    if (isLiked && !likeInited) {
+      progress.setValue(1);
     }
   }, [isLiked]);
 
@@ -114,26 +122,5 @@ const LikeIcon = ({
     </>
   );
 };
-/**
- * <FontAwesome
-                style={[
-                    {
-                        alignSelf: 'flex-end',
-                        marginBottom: 'auto',
-                        marginTop: 'auto'
-                    },
-                    style
-                ]}
-                name={isLiked ? 'heart' : 'heart-o'}
-                size={32}
-                color={color}
-                onPress={() => {
-                    if (isLiked) {
-                        unLikeEvent(eventId);
-                    } else {
-                        likeEvent(eventId);
-                    }
-                }}
-            />
- */
+
 export default memo(LikeIcon);
