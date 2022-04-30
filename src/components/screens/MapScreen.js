@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View } from "react-native";
+import { NativeModules, Platform, SafeAreaView, View } from "react-native";
 
 import { useDispatch, useSelector } from "react-redux";
 
@@ -32,6 +32,20 @@ const bboxAustria = [
     longitude: 12.109966,
   },
 ];
+
+const estimatedStatusBarHeight =
+  NativeModules.NativeUnimoduleProxy?.modulesConstants?.ExponentConstants
+    ?.statusBarHeight ?? 0;
+
+const APPROX_STATUSBAR_HEIGHT = Platform.select({
+  android: estimatedStatusBarHeight,
+  ios: Platform.Version < 11 ? estimatedStatusBarHeight : 0,
+});
+
+const Wrapper =
+  typeof APPROX_STATUSBAR_HEIGHT.statusBarHeight === "number"
+    ? View
+    : SafeAreaView;
 
 const RenderMarkers = ({ locations, setInfoBarVisible, infoBarVisible }) => {
   const dispatch = useDispatch();
@@ -76,7 +90,7 @@ const MapScreen = ({ navigation }) => {
   }, []);
 
   return (
-    <View style={StylesMain.mainView}>
+    <Wrapper style={[StylesMain.mainView, { position: "absolute" }]}>
       <FadeInView style={{ flex: 1, width: "100%", height: "100%" }}>
         <NavBar navigation={navigation} title="map" />
         <CustomMap
@@ -107,7 +121,7 @@ const MapScreen = ({ navigation }) => {
 
         {infoBarVisible && <LocationInfoBottomBar location={currentLocation} />}
       </FadeInView>
-    </View>
+    </Wrapper>
   );
 };
 
