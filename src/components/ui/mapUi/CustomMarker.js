@@ -1,14 +1,13 @@
 import { Marker } from "react-native-maps";
 
-import markerImage from "../../../../assets/img/marker.png";
-import selectedMarkerImage from "../../../../assets/img/selectedMarker.png";
-
 function CustomMarker({
   location,
   setCurrentLocation,
   currentLocation,
   infoBarVisible,
   setInfoBarVisible,
+  markerImage,
+  selectedMarkerImage,
 }) {
   return (
     <Marker
@@ -27,7 +26,7 @@ function CustomMarker({
         setInfoBarVisible(true);
         setCurrentLocation(location);
       }}
-    ></Marker>
+    />
   );
 }
 

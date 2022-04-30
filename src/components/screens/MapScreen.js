@@ -14,6 +14,10 @@ import CustomPolygon from "../ui/mapUi/CustomPolygon";
 import LocationInfoBottomBar from "../ui/mapUi/LocationInfoBottomBar";
 import CustomMarker from "../ui/mapUi/CustomMarker";
 import CustomMap from "../ui/mapUi/CustomMap";
+import markerImageSpace from "../../../assets/img/markers/markerSpace.png";
+import selectedMarkerImageSpace from "../../../assets/img/markers/selectedMarkerSpace.png";
+import markerImagePOI from "../../../assets/img/markers/markerPOI.png";
+import selectedMarkerImagePOI from "../../../assets/img/markers/selectedMarkerPOI.png";
 
 const initialRegion = {
   latitude: 47.36321774000127,
@@ -47,10 +51,14 @@ const Wrapper =
     ? View
     : SafeAreaView;
 
-const RenderMarkers = ({ locations, setInfoBarVisible, infoBarVisible }) => {
+const RenderMarkers = ({ setInfoBarVisible, infoBarVisible }) => {
   const dispatch = useDispatch();
 
   const currentLocation = useSelector((state) => state.currentLocation.data);
+
+  const spaceLocations = useSelector((state) => state.spaceLocations.data);
+
+  const poiLocations = useSelector((state) => state.poi.data);
 
   const setCurrentLocation = (newLocation) => {
     dispatch({
@@ -59,16 +67,34 @@ const RenderMarkers = ({ locations, setInfoBarVisible, infoBarVisible }) => {
     });
   };
 
-  return locations.map((location) => (
-    <CustomMarker
-      location={location}
-      setCurrentLocation={setCurrentLocation}
-      setInfoBarVisible={setInfoBarVisible}
-      infoBarVisible={infoBarVisible}
-      currentLocation={currentLocation}
-      key={"marker_" + location.id}
-    />
-  ));
+  return (
+    <>
+      {spaceLocations.map((location) => (
+        <CustomMarker
+          location={location}
+          setCurrentLocation={setCurrentLocation}
+          setInfoBarVisible={setInfoBarVisible}
+          infoBarVisible={infoBarVisible}
+          currentLocation={currentLocation}
+          markerImage={markerImageSpace}
+          selectedMarkerImage={selectedMarkerImageSpace}
+          key={"marker_" + location.id}
+        />
+      ))}
+      {poiLocations.map((location) => (
+        <CustomMarker
+          location={location}
+          setCurrentLocation={setCurrentLocation}
+          setInfoBarVisible={setInfoBarVisible}
+          infoBarVisible={infoBarVisible}
+          currentLocation={currentLocation}
+          markerImage={markerImagePOI}
+          selectedMarkerImage={selectedMarkerImagePOI}
+          key={"marker_" + location.id}
+        />
+      ))}
+    </>
+  );
 };
 
 const MapScreen = ({ navigation }) => {
@@ -78,8 +104,6 @@ const MapScreen = ({ navigation }) => {
   const [infoBarVisible, setInfoBarVisible] = useState(false);
 
   const currentLocation = useSelector((state) => state.currentLocation.data);
-  const locations = useSelector((state) => state.spaceLocations);
-  const isLoaded = useSelector((state) => state.spaceLocations.isLoaded);
 
   function setBoundingAustria() {
     mapRef.current.setMapBoundaries(bboxAustria[0], bboxAustria[1]);
@@ -104,16 +128,14 @@ const MapScreen = ({ navigation }) => {
           mapRef={mapRef}
           initialRegion={initialRegion}
         >
-          {isLoaded && locations && (
-            <CustomPolygon
-              coordinates={geodata}
-              strokeWidth={5}
-              strokeColor="black"
-              fillColor="rgba(0,0,0,0.135)"
-            />
-          )}
+          <CustomPolygon
+            coordinates={geodata}
+            strokeWidth={5}
+            strokeColor="black"
+            fillColor="rgba(0,0,0,0.135)"
+          />
+
           <RenderMarkers
-            locations={isLoaded && locations ? locations.data : []}
             infoBarVisible={infoBarVisible}
             setInfoBarVisible={setInfoBarVisible}
           />
