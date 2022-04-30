@@ -46,7 +46,7 @@ const ScanScreen = ({ navigation }) => {
           next={() => {
             navigate('ScanCollection');
           }}
-          nextTitle={'sammlung'}
+          nextTitle={'scans'}
         />
         <View style={{ flex: 1 }}>
           <View

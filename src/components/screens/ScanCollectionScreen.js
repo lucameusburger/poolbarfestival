@@ -13,9 +13,8 @@ import { fetchArtists } from '../../redux/artistsThunk';
 
 import ProgressBar from '../ui/ProgressBar';
 
-import artistPlaceholder from '../../../assets/img/artistPlaceholder.jpg';
-
 import { Video, AVPlaybackStatus } from 'expo-av';
+import { FontAwesome } from '@expo/vector-icons';
 
 const BASE_URL = 'https://www.admin.poolbar.at/';
 
@@ -33,11 +32,7 @@ const ScanCollection = ({ collection }) => {
             borderBottomColor: 'black',
           }}
           key={item.id}
-          onPress={() =>
-            navigate('Artist', {
-              id: item.id,
-            })
-          }
+          onPress={() => alert('hallo')}
         >
           <View
             style={{
@@ -47,16 +42,7 @@ const ScanCollection = ({ collection }) => {
               flexDirection: 'row',
             }}
           >
-            <PoolbarImage
-              imageId={item.image}
-              fallback={artistPlaceholder}
-              style={{
-                width: 50,
-                height: 50,
-                borderRadius: 300,
-                alignItems: 'center',
-              }}
-            />
+            <FontAwesome style={{ alignSelf: 'flex-end', marginBottom: 'auto', marginTop: 'auto', alignItems: 'center' }} name={'qrcode'} size={50} color={'#000000'} />
             <View style={{}}>
               <View
                 style={{
@@ -88,7 +74,7 @@ const ScanCollectionScreen = ({}) => {
   return (
     <View style={StylesMain.mainView}>
       <FadeInView style={{ flex: 1, width: '100%', height: '100%' }}>
-        <NavBar title="sammlung" />
+        <NavBar title="scans" />
         <View style={{ padding: 10, borderBottomColor: '#000000', borderBottomWidth: 2 }}>
           <ProgressBar value={33} />
         </View>
