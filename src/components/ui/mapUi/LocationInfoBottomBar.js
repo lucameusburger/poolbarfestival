@@ -35,7 +35,7 @@ const LocationInfoBottomBar = ({ location, ...props }) => {
                 latitude: location.location.coordinates[1],
                 longitude: location.location.coordinates[0],
               },
-              location.name
+              location?.name
             );
           }}
         />
@@ -74,7 +74,7 @@ const LocationInfoBottomBar = ({ location, ...props }) => {
             width: "100%",
           }}
         >
-          {location.name}
+          {location?.name}
         </Text>
         <Text
           style={{
@@ -83,7 +83,7 @@ const LocationInfoBottomBar = ({ location, ...props }) => {
             width: "100%",
           }}
         >
-          {location.description}
+          {location?.description}
         </Text>
       </View>
     </View>
