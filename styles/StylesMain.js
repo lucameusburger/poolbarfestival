@@ -136,7 +136,7 @@ const StylesMain = StyleSheet.create({
     color: 'black',
     alignSelf: 'flex-start',
     marginTop: 'auto',
-    fontSize: 18,
+    fontSize: 14,
     textAlign: 'left',
     textTransform: 'uppercase',
   },
