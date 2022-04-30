@@ -25,7 +25,7 @@ const RenderElement = ({ item }) => {
     >
       <View key={item.id} style={{ width: '100%', marginTop: 'auto', flexDirection: 'row' }}>
         <View style={{ width: '100%', marginTop: 'auto', flexDirection: 'row' }}>
-          <View style={{ width: '80%' }}>
+          <View style={{ width: '100%' }}>
             <Text style={StylesMain.artistListDateText}>{(item.lab_item && item.lab_item.name) || 'no lab'}</Text>
             <Text style={StylesMain.artistListMainText}>{item.name || 'no name'}</Text>
           </View>

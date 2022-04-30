@@ -36,7 +36,6 @@ export function fetchPOI() {
           if (response.ok) {
             const data = await response.json();
             let fetchedPOI = data.data || [];
-            console.log("pois", fetchedPOI);
 
             dispatch(setPOI(fetchedPOI));
           } else {
