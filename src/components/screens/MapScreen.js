@@ -14,10 +14,10 @@ import CustomPolygon from "../ui/mapUi/CustomPolygon";
 import LocationInfoBottomBar from "../ui/mapUi/LocationInfoBottomBar";
 import CustomMarker from "../ui/mapUi/CustomMarker";
 import CustomMap from "../ui/mapUi/CustomMap";
-import markerImageSpace from "../../../../assets/img/markers/markerSpace.png";
-import selectedMarkerImageSpace from "../../../../assets/img/markers/selectedMarkerSpace.png";
-import markerImagePOI from "../../../../assets/img/markers/markerPOI.png";
-import selectedMarkerImagePOI from "../../../../assets/img/markers/selectedMarkerPOI.png";
+import markerImageSpace from "../../../assets/img/markers/markerSpace.png";
+import selectedMarkerImageSpace from "../../../assets/img/markers/selectedMarkerSpace.png";
+import markerImagePOI from "../../../assets/img/markers/markerPOI.png";
+import selectedMarkerImagePOI from "../../../assets/img/markers/selectedMarkerPOI.png";
 
 const initialRegion = {
   latitude: 47.36321774000127,
