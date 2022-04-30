@@ -1,16 +1,15 @@
-import React, { useEffect, useRef } from "react";
-import { Text, View, ScrollView, StyleSheet, Pressable } from "react-native";
+import { useRef } from "react";
+import { Text, View, ScrollView, StyleSheet } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import { openInbox, openComposer } from "react-native-email-link";
+import { openComposer } from "react-native-email-link";
 
 import AppButton from "../ui/AppButton";
 import NavBar from "../ui/NavBar";
 import LoadingText from "../ui/LoadingText";
 import FadeInView from "../ui/FadeInView";
 import StylesMain from "../../../styles/StylesMain";
-import { fetchArtists } from "../../redux/artistsThunk";
 
-import { Video, AVPlaybackStatus } from "expo-av";
+import { Video } from "expo-av";
 
 const BASE_URL = "https://www.admin.poolbar.at/";
 
