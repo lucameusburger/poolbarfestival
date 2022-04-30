@@ -24,8 +24,8 @@ import selectedMarkerImage from "../../../assets/img/selectedMarker.png";
 import CustomPolygon from "../ui/CustomPolygon";
 import { navigate } from "../../core/RootNavigation";
 import LocationInfoBottomBar from "../ui/LocationInfoBottomBar";
+import mapStyle from "../../../assets/data/mapStyle.json";
 
-const BASE_URL = "https://www.admin.poolbar.at/";
 const mapRef = React.createRef();
 
 function CustomMarker({
@@ -143,7 +143,7 @@ const MapScreen = ({ navigation }) => {
           maxZoomLevel={15}
           style={styles.map}
           provider={MapView.PROVIDER_GOOGLE}
-          customMapStyle={generatedMapStyle}
+          customMapStyle={mapStyle}
           onPress={(event) => {
             if (event.nativeEvent.action === "marker-press") {
               return;
@@ -194,147 +194,6 @@ const styles = StyleSheet.create({
     height: "100%",
   },
 });
-
-const generatedMapStyle = [
-  {
-    featureType: "water",
-    elementType: "all",
-    stylers: [
-      {
-        color: "#000000",
-      },
-      {
-        visibility: "on",
-      },
-    ],
-  },
-  {
-    featureType: "landscape",
-    elementType: "all",
-    stylers: [
-      {
-        hue: "white",
-      },
-      {
-        saturation: -100,
-      },
-      {
-        lightness: 100,
-      },
-      {
-        visibility: "off",
-      },
-    ],
-  },
-  {
-    featureType: "road",
-    elementType: "geometry",
-    stylers: [
-      {
-        hue: "black",
-      },
-      {
-        saturation: -100,
-      },
-      {
-        lightness: -100,
-      },
-      {
-        visibility: "simplified",
-      },
-    ],
-  },
-  {
-    featureType: "road",
-    elementType: "labels",
-    stylers: [
-      {
-        hue: "white",
-      },
-      {
-        saturation: -100,
-      },
-      {
-        lightness: 100,
-      },
-      {
-        visibility: "off",
-      },
-    ],
-  },
-  {
-    featureType: "poi",
-    elementType: "all",
-    stylers: [
-      {
-        hue: "white",
-      },
-      {
-        saturation: -100,
-      },
-      {
-        lightness: 100,
-      },
-      {
-        visibility: "off",
-      },
-    ],
-  },
-  {
-    featureType: "administrative",
-    elementType: "all",
-    stylers: [
-      {
-        hue: "white",
-      },
-      {
-        saturation: 0,
-      },
-      {
-        lightness: 100,
-      },
-      {
-        visibility: "off",
-      },
-    ],
-  },
-  {
-    featureType: "transit",
-    elementType: "geometry",
-    stylers: [
-      {
-        hue: "black",
-      },
-      {
-        saturation: 0,
-      },
-      {
-        lightness: -100,
-      },
-      {
-        visibility: "on",
-      },
-    ],
-  },
-  {
-    featureType: "transit",
-    elementType: "labels",
-    stylers: [
-      {
-        hue: "white",
-      },
-      {
-        saturation: 0,
-      },
-      {
-        lightness: 100,
-      },
-      {
-        visibility: "off",
-      },
-    ],
-  },
-];
 
 const initial = {
   latitude: 47.36321774000127,
