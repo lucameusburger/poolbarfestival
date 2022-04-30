@@ -76,7 +76,7 @@ const ScanCollectionScreen = ({}) => {
       <FadeInView style={{ flex: 1, width: '100%', height: '100%' }}>
         <NavBar title="scans" />
         <View style={{ padding: 10, borderBottomColor: '#000000', borderBottomWidth: 2 }}>
-          <ProgressBar value={33} />
+          <ProgressBar value={66} />
         </View>
         <ScrollView style={{ flex: 1 }}>{!isLoaded ? <LoadingText /> : <ScanCollection collection={collection} />}</ScrollView>
       </FadeInView>

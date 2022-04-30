@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, ScrollView, StyleSheet, Pressable, TouchableOpacity } from 'react-native';
+import { Text, View, ScrollView, StyleSheet, Pressable, TouchableOpacity, Animated } from 'react-native';
 
 const ProgressBar = ({ value }) => {
   return (
