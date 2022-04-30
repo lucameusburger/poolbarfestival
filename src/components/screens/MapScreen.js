@@ -47,10 +47,14 @@ const Wrapper =
     ? View
     : SafeAreaView;
 
-const RenderMarkers = ({ locations, setInfoBarVisible, infoBarVisible }) => {
+const RenderMarkers = ({ setInfoBarVisible, infoBarVisible }) => {
   const dispatch = useDispatch();
 
   const currentLocation = useSelector((state) => state.currentLocation.data);
+
+  const spaceLocations = useSelector((state) => state.spaceLocations.data);
+
+  const poiLocations = useSelector((state) => state.poi.data);
 
   const setCurrentLocation = (newLocation) => {
     dispatch({
@@ -59,7 +63,7 @@ const RenderMarkers = ({ locations, setInfoBarVisible, infoBarVisible }) => {
     });
   };
 
-  return locations.map((location) => (
+  return [...spaceLocations, ...poiLocations].map((location) => (
     <CustomMarker
       location={location}
       setCurrentLocation={setCurrentLocation}
@@ -78,8 +82,6 @@ const MapScreen = ({ navigation }) => {
   const [infoBarVisible, setInfoBarVisible] = useState(false);
 
   const currentLocation = useSelector((state) => state.currentLocation.data);
-  const locations = useSelector((state) => state.spaceLocations);
-  const isLoaded = useSelector((state) => state.spaceLocations.isLoaded);
 
   function setBoundingAustria() {
     mapRef.current.setMapBoundaries(bboxAustria[0], bboxAustria[1]);
@@ -104,16 +106,14 @@ const MapScreen = ({ navigation }) => {
           mapRef={mapRef}
           initialRegion={initialRegion}
         >
-          {isLoaded && locations && (
-            <CustomPolygon
-              coordinates={geodata}
-              strokeWidth={5}
-              strokeColor="black"
-              fillColor="rgba(0,0,0,0.135)"
-            />
-          )}
+          <CustomPolygon
+            coordinates={geodata}
+            strokeWidth={5}
+            strokeColor="black"
+            fillColor="rgba(0,0,0,0.135)"
+          />
+
           <RenderMarkers
-            locations={isLoaded && locations ? locations.data : []}
             infoBarVisible={infoBarVisible}
             setInfoBarVisible={setInfoBarVisible}
           />

@@ -39,21 +39,23 @@ const LocationInfoBottomBar = ({ location, ...props }) => {
             );
           }}
         />
-        <AppButton
-          title="details"
-          textProps={{
-            numberOfLines: 1,
-          }}
-          style={{
-            flex: 1,
-            marginLeft: 10,
-          }}
-          onPress={() =>
-            navigate("Raumfahrtprogramm", {
-              id: location.id,
-            })
-          }
-        />
+        {location?.id && (
+          <AppButton
+            title="details"
+            textProps={{
+              numberOfLines: 1,
+            }}
+            style={{
+              flex: 1,
+              marginLeft: 10,
+            }}
+            onPress={() =>
+              navigate("Raumfahrtprogramm", {
+                id: location.id,
+              })
+            }
+          />
+        )}
       </View>
       <View
         style={{
