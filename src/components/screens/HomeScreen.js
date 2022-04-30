@@ -52,6 +52,7 @@ const HomeScreen = ({ navigation }) => {
               <View
                 style={{
                   marginBottom: '10%',
+                  marginTop: '15%',
                   width: '80%',
                   height: '33%',
                   alignSelf: 'center',
@@ -61,14 +62,14 @@ const HomeScreen = ({ navigation }) => {
                   <PoolbarLogoAnimated style={{ alignSelf: 'center' }} width="100%" height="100%" fill="black" />
                 </Pressable>
               </View>
-              <View style={{ top: 0, marginTop: 0 }}>
+              <View style={{ top: 0, margin: 0 }}>
                 <AppButton style={{ width: '50%' }} title="events" onPress={() => navigation.navigate('Events')} bevelLeft={true} />
                 <View style={{ height: '3%' }} />
                 <AppButton style={{ width: '50%' }} title="artists" onPress={() => navigation.navigate('Artists')} />
                 <View style={{ height: '3%' }} />
                 <AppButton style={{ width: '50%' }} title="generator" onPress={() => navigation.navigate('Generators')} bevelLeft={true} />
                 <View style={{ height: '3%' }} />
-                <AppButton style={{ width: '50%' }} title="fließtext" onPress={() => navigation.navigate('Flowtext')} bevelLeft={false} />
+                <AppButton style={{ width: '50%', marginBottom: 0 }} title="fließtext" onPress={() => navigation.navigate('Flowtext')} bevelLeft={false} />
               </View>
             </View>
 

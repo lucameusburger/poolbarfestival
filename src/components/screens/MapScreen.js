@@ -1,46 +1,31 @@
-import React, { useState, useEffect, memo } from "react";
-import {
-  Text,
-  View,
-  StyleSheet,
-  Linking,
-  TouchableOpacity,
-} from "react-native";
+import React, { useState, useEffect, memo } from 'react';
+import { Text, View, StyleSheet, Linking, TouchableOpacity } from 'react-native';
 
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from 'react-redux';
 
-import NavBar from "../ui/NavBar";
-import FadeInView from "../ui/FadeInView";
-import StylesMain from "../../../styles/StylesMain";
-import AppButton from "../ui/AppButton";
+import NavBar from '../ui/NavBar';
+import FadeInView from '../ui/FadeInView';
+import StylesMain from '../../../styles/StylesMain';
+import AppButton from '../ui/AppButton';
 
-import geodata from "../../../assets/geodata.json";
+import geodata from '../../../assets/geodata.json';
 
-import MapView, { Marker, Callout, Polygon } from "react-native-maps";
+import MapView, { Marker, Callout, Polygon } from 'react-native-maps';
 
-import { fetchSpaceLocations } from "../../redux/spaceLocationThunk";
-import markerImage from "../../../assets/img/marker.png";
-import selectedMarkerImage from "../../../assets/img/selectedMarker.png";
-import CustomPolygon from "../ui/CustomPolygon";
+import { fetchSpaceLocations } from '../../redux/spaceLocationThunk';
+import markerImage from '../../../assets/img/marker.png';
+import selectedMarkerImage from '../../../assets/img/selectedMarker.png';
+import CustomPolygon from '../ui/CustomPolygon';
+import { navigate } from '../../core/RootNavigation';
 
-const BASE_URL = "https://www.admin.poolbar.at/";
+const BASE_URL = 'https://www.admin.poolbar.at/';
 const mapRef = React.createRef();
 
-function CustomMarker({
-  location,
-  setCurrentLocation,
-  currentLocation,
-  infoBarVisible,
-  setInfoBarVisible,
-}) {
+function CustomMarker({ location, setCurrentLocation, currentLocation, infoBarVisible, setInfoBarVisible }) {
   return (
     <Marker
       key={location.id}
-      image={
-        currentLocation?.id === location.id && infoBarVisible
-          ? selectedMarkerImage
-          : markerImage
-      }
+      image={currentLocation?.id === location.id && infoBarVisible ? selectedMarkerImage : markerImage}
       coordinate={{
         longitude: location.location.coordinates[0],
         latitude: location.location.coordinates[1],
@@ -71,29 +56,20 @@ const RenderMarkers = ({ locations, setInfoBarVisible, infoBarVisible }) => {
 
   const setCurrentLocation = (newLocation) => {
     dispatch({
-      type: "SET_CURRENTLOCATION",
+      type: 'SET_CURRENTLOCATION',
       payload: newLocation,
     });
   };
-  return locations.map((location) => (
-    <CustomMarker
-      location={location}
-      setCurrentLocation={setCurrentLocation}
-      setInfoBarVisible={setInfoBarVisible}
-      infoBarVisible={infoBarVisible}
-      currentLocation={currentLocation}
-      key={"marker_" + location.id}
-    />
-  ));
+  return locations.map((location) => <CustomMarker location={location} setCurrentLocation={setCurrentLocation} setInfoBarVisible={setInfoBarVisible} infoBarVisible={infoBarVisible} currentLocation={currentLocation} key={'marker_' + location.id} />);
 };
 
 function openGoogleMaps(location, name) {
   const scheme = Platform.select({
-    ios: "maps:0,0?q=",
-    android: "geo:0,0?q=",
+    ios: 'maps:0,0?q=',
+    android: 'geo:0,0?q=',
   });
   const latLng = `${location.latitude},${location.longitude}`;
-  const label = "Custom Label";
+  const label = 'Custom Label';
   const url = Platform.select({
     ios: `${scheme}${name}@${latLng}`,
     android: `${scheme}${latLng}(${name})`,
@@ -128,19 +104,15 @@ const MapScreen = ({ navigation }) => {
 
   const setCurrentLocation = (newLocation) => {
     dispatch({
-      type: "SET_CURRENTLOCATION",
+      type: 'SET_CURRENTLOCATION',
       payload: newLocation,
     });
   };
 
   const locations = useSelector((state) => state.spaceLocations);
   const isLoaded = useSelector((state) => state.spaceLocations.isLoaded);
-  const isFetchingData = useSelector(
-    (state) => state.spaceLocations.isFetchingData
-  );
-  const hasFetchingDataError = useSelector(
-    (state) => state.spaceLocations.hasFetchingDataError
-  );
+  const isFetchingData = useSelector((state) => state.spaceLocations.isFetchingData);
+  const hasFetchingDataError = useSelector((state) => state.spaceLocations.hasFetchingDataError);
 
   useEffect(() => {
     dispatch(fetchSpaceLocations());
@@ -148,7 +120,7 @@ const MapScreen = ({ navigation }) => {
 
   return (
     <View style={StylesMain.mainView}>
-      <FadeInView style={{ flex: 1, width: "100%", height: "100%" }}>
+      <FadeInView style={{ flex: 1, width: '100%', height: '100%' }}>
         <NavBar navigation={navigation} title="map" />
         <MapView
           minZoomLevel={7}
@@ -157,7 +129,7 @@ const MapScreen = ({ navigation }) => {
           provider={MapView.PROVIDER_GOOGLE}
           customMapStyle={generatedMapStyle}
           onPress={(event) => {
-            if (event.nativeEvent.action === "marker-press") {
+            if (event.nativeEvent.action === 'marker-press') {
               return;
             }
             setInfoBarVisible(false);
@@ -166,41 +138,30 @@ const MapScreen = ({ navigation }) => {
           ref={mapRef}
           initialRegion={initial}
         >
-          {isLoaded && locations && (
-            <CustomPolygon
-              coordinates={geodata}
-              strokeWidth={5}
-              strokeColor="black"
-              fillColor="rgba(0,0,0,0.135)"
-            />
-          )}
-          <RenderMarkers
-            locations={isLoaded && locations ? locations.data : []}
-            infoBarVisible={infoBarVisible}
-            setInfoBarVisible={setInfoBarVisible}
-          />
+          {isLoaded && locations && <CustomPolygon coordinates={geodata} strokeWidth={5} strokeColor="black" fillColor="rgba(0,0,0,0.135)" />}
+          <RenderMarkers locations={isLoaded && locations ? locations.data : []} infoBarVisible={infoBarVisible} setInfoBarVisible={setInfoBarVisible} />
         </MapView>
 
         {infoBarVisible && (
           <View
             style={{
-              fontFamily: "Helviotopia",
-              position: "absolute",
+              fontFamily: 'Helviotopia',
+              position: 'absolute',
               bottom: 0,
-              width: "100%",
-              height: "15%",
+              width: '100%',
+              height: '15%',
               zIndex: 10,
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "center",
-              flexDirection: "column",
+              display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'center',
+              flexDirection: 'column',
               //space-between
-              alignItems: "center",
+              alignItems: 'center',
             }}
           >
             <View
               style={{
-                flexDirection: "row",
+                flexDirection: 'row',
                 marginHorizontal: 20,
               }}
             >
@@ -233,7 +194,7 @@ const MapScreen = ({ navigation }) => {
                   marginLeft: 10,
                 }}
                 onPress={() =>
-                  navigation.navigate("Raumfahrtprogramm", {
+                  navigation.navigate('Raumfahrtprogramm', {
                     id: currentLocation.id,
                   })
                 }
@@ -241,30 +202,30 @@ const MapScreen = ({ navigation }) => {
             </View>
             <View
               style={{
-                backgroundColor: "white",
+                backgroundColor: '#fff',
                 borderTopWidth: 2,
-                borderColor: "black",
-                width: "100%",
+                borderColor: 'black',
+                width: '100%',
                 marginTop: 10,
-                height: "60%",
+                height: '100%',
                 padding: 10,
               }}
             >
               <Text
                 style={{
-                  fontSize: 18,
+                  fontSize: 22,
                   marginBottom: 0,
-                  fontFamily: "Helviotopia",
-                  width: "100%",
+                  fontFamily: 'Helviotopia',
+                  width: '100%',
                 }}
               >
                 {currentLocation.name}
               </Text>
               <Text
                 style={{
-                  fontFamily: "Helviotopia",
-                  marginBottom: 10,
-                  width: "100%",
+                  fontFamily: 'Helviotopia',
+                  marginBottom: 0,
+                  width: '100%',
                 }}
               >
                 {currentLocation.description}
@@ -280,35 +241,35 @@ const MapScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "white",
-    alignItems: "center",
-    justifyContent: "center",
+    backgroundColor: 'white',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   map: {
-    width: "100%",
-    height: "82%",
+    width: '100%',
+    height: '100%',
   },
 });
 
 const generatedMapStyle = [
   {
-    featureType: "water",
-    elementType: "all",
+    featureType: 'water',
+    elementType: 'all',
     stylers: [
       {
-        color: "#666666",
+        color: '#000000',
       },
       {
-        visibility: "on",
+        visibility: 'on',
       },
     ],
   },
   {
-    featureType: "landscape",
-    elementType: "all",
+    featureType: 'landscape',
+    elementType: 'all',
     stylers: [
       {
-        hue: "white",
+        hue: 'white',
       },
       {
         saturation: -100,
@@ -317,16 +278,16 @@ const generatedMapStyle = [
         lightness: 100,
       },
       {
-        visibility: "off",
+        visibility: 'off',
       },
     ],
   },
   {
-    featureType: "road",
-    elementType: "geometry",
+    featureType: 'road',
+    elementType: 'geometry',
     stylers: [
       {
-        hue: "black",
+        hue: 'black',
       },
       {
         saturation: -100,
@@ -335,16 +296,16 @@ const generatedMapStyle = [
         lightness: -100,
       },
       {
-        visibility: "simplified",
+        visibility: 'simplified',
       },
     ],
   },
   {
-    featureType: "road",
-    elementType: "labels",
+    featureType: 'road',
+    elementType: 'labels',
     stylers: [
       {
-        hue: "white",
+        hue: 'white',
       },
       {
         saturation: -100,
@@ -353,16 +314,16 @@ const generatedMapStyle = [
         lightness: 100,
       },
       {
-        visibility: "off",
+        visibility: 'off',
       },
     ],
   },
   {
-    featureType: "poi",
-    elementType: "all",
+    featureType: 'poi',
+    elementType: 'all',
     stylers: [
       {
-        hue: "white",
+        hue: 'white',
       },
       {
         saturation: -100,
@@ -371,16 +332,16 @@ const generatedMapStyle = [
         lightness: 100,
       },
       {
-        visibility: "off",
+        visibility: 'off',
       },
     ],
   },
   {
-    featureType: "administrative",
-    elementType: "all",
+    featureType: 'administrative',
+    elementType: 'all',
     stylers: [
       {
-        hue: "white",
+        hue: 'white',
       },
       {
         saturation: 0,
@@ -389,16 +350,16 @@ const generatedMapStyle = [
         lightness: 100,
       },
       {
-        visibility: "off",
+        visibility: 'off',
       },
     ],
   },
   {
-    featureType: "transit",
-    elementType: "geometry",
+    featureType: 'transit',
+    elementType: 'geometry',
     stylers: [
       {
-        hue: "black",
+        hue: 'black',
       },
       {
         saturation: 0,
@@ -407,16 +368,16 @@ const generatedMapStyle = [
         lightness: -100,
       },
       {
-        visibility: "on",
+        visibility: 'on',
       },
     ],
   },
   {
-    featureType: "transit",
-    elementType: "labels",
+    featureType: 'transit',
+    elementType: 'labels',
     stylers: [
       {
-        hue: "white",
+        hue: 'white',
       },
       {
         saturation: 0,
@@ -425,7 +386,7 @@ const generatedMapStyle = [
         lightness: 100,
       },
       {
-        visibility: "off",
+        visibility: 'off',
       },
     ],
   },
