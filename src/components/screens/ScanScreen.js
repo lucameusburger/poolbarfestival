@@ -6,12 +6,15 @@ import StylesMain from '../../../styles/StylesMain';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import { FontAwesome } from '@expo/vector-icons';
 import { navigate } from '../../core/RootNavigation';
+import { useDispatch } from 'react-redux';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
 const ScanScreen = ({ navigation }) => {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     (async () => {
@@ -29,8 +32,17 @@ const ScanScreen = ({ navigation }) => {
     setScanned(true);
     const canOpen = await Linking.canOpenURL(data);
     if (canOpen) {
+      const parts = data.split('/');
+      const type = parts[parts.length - 2];
+      const id = parts[parts.length - 1];
+      dispatch({
+        type: 'ADD_SCANN',
+        payload: {
+          id,
+          type,
+        },
+      });
       await Linking.openURL(data);
-      //timeout 3s
       setTimeout(() => {
         setScanned(false);
       }, 1000);
