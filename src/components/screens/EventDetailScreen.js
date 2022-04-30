@@ -33,19 +33,20 @@ const EventDetailScreen = ({ route }) => {
       <View style={{ flex: 1, width: "100%", height: "100%" }}>
         <View style={{ padding: 10, marginTop: 10, flexDirection: "row" }}>
           <View style={{ flex: 1 }}>
-            <Text style={styles.eventDateText}>{dateString}</Text>
-            <Text style={styles.eventMainText}>{item.name}</Text>
-          </View>
-          <View style={{ width: 32 }}>
-            <LikeIcon
-              eventId={item.id}
+            <View
               style={{
-                marginTop: "auto",
-                marginBottom: "auto",
-                right: 0,
-                zIndex: 1000,
+                flexDirection: "row",
               }}
-            />
+            >
+              <LikeIcon
+                eventId={item.id}
+                style={{
+                  marginRight: 10,
+                }}
+              />
+              <Text style={styles.eventDateText}>{dateString}</Text>
+            </View>
+            <Text style={styles.eventMainText}>{item.name}</Text>
           </View>
         </View>
 
@@ -155,10 +156,9 @@ const styles = StyleSheet.create({
   eventDateText: {
     fontFamily: "HelviotopiaBold",
     color: "black",
-    alignSelf: "flex-start",
     marginTop: "auto",
+    marginBottom: "auto",
     fontSize: 20,
-    textAlign: "left",
     textTransform: "uppercase",
   },
   eventMainText: {
