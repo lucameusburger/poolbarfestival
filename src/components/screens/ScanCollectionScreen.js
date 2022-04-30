@@ -11,6 +11,8 @@ import StylesMain from '../../../styles/StylesMain';
 import PoolbarImage from '../ui/PoolbarImage';
 import { fetchArtists } from '../../redux/artistsThunk';
 
+import ProgressBar from '../ui/ProgressBar';
+
 import artistPlaceholder from '../../../assets/img/artistPlaceholder.jpg';
 
 import { Video, AVPlaybackStatus } from 'expo-av';
@@ -72,7 +74,7 @@ const ScanCollection = ({ collection }) => {
         </TouchableOpacity>
       ))
   ) : (
-    <Text style={{ alignSelf: 'center' }}>Noch keine Scans vorhanden.</Text>
+    <Text style={{ alignSelf: 'center', marginTop: 30 }}>Noch keine Scans vorhanden</Text>
   );
 };
 
@@ -87,31 +89,13 @@ const ScanCollectionScreen = ({}) => {
     <View style={StylesMain.mainView}>
       <FadeInView style={{ flex: 1, width: '100%', height: '100%' }}>
         <NavBar title="sammlung" />
+        <View style={{ padding: 10, borderBottomColor: '#000000', borderBottomWidth: 2 }}>
+          <ProgressBar value={33} />
+        </View>
         <ScrollView style={{ flex: 1 }}>{!isLoaded ? <LoadingText /> : <ScanCollection collection={collection} />}</ScrollView>
       </FadeInView>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  creditsDateText: {
-    fontFamily: 'HelviotopiaBold',
-    color: 'black',
-    alignSelf: 'flex-start',
-    marginTop: 'auto',
-    fontSize: 20,
-    textAlign: 'left',
-    textTransform: 'uppercase',
-  },
-  creditsMainText: {
-    fontFamily: 'Helviotopia',
-    color: 'black',
-    alignSelf: 'flex-start',
-    marginTop: 'auto',
-    fontSize: 42,
-    textAlign: 'left',
-    textTransform: 'uppercase',
-  },
-});
 
 export default ScanCollectionScreen;
