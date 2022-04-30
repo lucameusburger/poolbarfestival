@@ -20,7 +20,7 @@ const EventListScreen = ({ router }) => {
 
   const [blinkLike, setBlinkLike] = useState(false);
   const [blinkLightInterval, setBlinkLightInterval] = useState(null);
-  const blinkDuration = 200;
+  const blinkDuration = 300;
   const onLike = () => {
     setBlinkLike(true);
     clearInterval(blinkLightInterval);

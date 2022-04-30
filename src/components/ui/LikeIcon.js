@@ -1,13 +1,14 @@
-import { Animated, Pressable } from "react-native";
+import { Animated, TouchableOpacity } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addCallenderEvent,
   deleteCallenderEvent,
 } from "../../redux/callenderThunk";
 import { useEffect, useRef } from "react";
-import { FontAwesome } from "@expo/vector-icons";
 
-import heardfade from "../../../assets/animations/heartfade.json";
+import LottieView from "lottie-react-native";
+
+import checkerherz from "../../../assets/animations/checkerherz.json";
 import { CLR_PRIMARY } from "../../core/Theme";
 
 const hexToRgb = (hex) =>
@@ -33,7 +34,7 @@ const LikeIcon = ({
 
   const rgbOff = hexToRgb(colorOff);
   const rgbOn = hexToRgb(colorOn);
-
+  /*
   heardfade.layers[0].shapes[0].it[1].c.k[1].s[0] = rgbOn[0] / 255;
   heardfade.layers[0].shapes[0].it[1].c.k[1].s[1] = rgbOn[1] / 255;
   heardfade.layers[0].shapes[0].it[1].c.k[1].s[2] = rgbOn[2] / 255;
@@ -41,9 +42,10 @@ const LikeIcon = ({
   heardfade.layers[0].shapes[0].it[1].c.k[0].s[0] = rgbOff[0] / 255;
   heardfade.layers[0].shapes[0].it[1].c.k[0].s[1] = rgbOff[1] / 255;
   heardfade.layers[0].shapes[0].it[1].c.k[0].s[2] = rgbOff[2] / 255;
-
+*/
   const likeEvent = (id) => {
     onLike();
+
     dispatch({
       type: "ADD_TO_LIKED_EVENTS",
       payload: id,
@@ -63,7 +65,7 @@ const LikeIcon = ({
 
   const isLiked = likedEvents.includes(eventId);
 
-  const animationDuration = 1000;
+  const animationDuration = 300;
   useEffect(() => {
     if (isLiked) {
       Animated.timing(progress, {
@@ -79,9 +81,10 @@ const LikeIcon = ({
       }).start();
     }
   }, [isLiked]);
+
   return (
     <>
-      <Pressable
+      <TouchableOpacity
         onPress={() => {
           if (isLiked) {
             unLikeEvent(eventId);
@@ -99,29 +102,38 @@ const LikeIcon = ({
           style,
         ]}
       >
-        <FontAwesome
-          style={[
-            {
-              alignSelf: "flex-end",
-              marginBottom: "auto",
-              marginTop: "auto",
-            },
-            style,
-          ]}
-          name={isLiked ? "heart" : "heart-o"}
-          size={32}
-          color={isLiked ? colorOn : colorOff}
-          onPress={() => {
-            if (isLiked) {
-              unLikeEvent(eventId);
-            } else {
-              likeEvent(eventId);
-            }
+        <LottieView
+          style={{
+            height: size,
+            width: size,
           }}
+          progress={progress}
+          source={checkerherz}
         />
-      </Pressable>
+      </TouchableOpacity>
     </>
   );
 };
-
+/**
+ * <FontAwesome
+                style={[
+                    {
+                        alignSelf: 'flex-end',
+                        marginBottom: 'auto',
+                        marginTop: 'auto'
+                    },
+                    style
+                ]}
+                name={isLiked ? 'heart' : 'heart-o'}
+                size={32}
+                color={color}
+                onPress={() => {
+                    if (isLiked) {
+                        unLikeEvent(eventId);
+                    } else {
+                        likeEvent(eventId);
+                    }
+                }}
+            />
+ */
 export default LikeIcon;
