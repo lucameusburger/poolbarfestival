@@ -40,6 +40,10 @@ import {
   reducer as flowTextReducer,
   initialState as flowTextInitialState,
 } from "./flowTextReducer";
+import {
+  reducer as scannsReducer,
+  initialState as scannsInitialState,
+} from "./scannsReducer";
 
 export const initialState = {
   artists: artistsInitialState,
@@ -52,6 +56,7 @@ export const initialState = {
   currentLocation: currentLocationInitialState,
   flowText: flowTextInitialState,
   poi: poiInitialState,
+  scanns: scannsInitialState,
 };
 
 export const rootReducer = combineReducers({
@@ -65,4 +70,5 @@ export const rootReducer = combineReducers({
   flowText: flowTextReducer,
   currentLocation: currentLocactionReducers,
   poi: poiReducer,
+  scanns: scannsReducer,
 });
