@@ -36,7 +36,7 @@ export function fetchGenerators() {
       const memberResponse = await fetch(BASE_URL + 'items/generator_members');
       const memberD = await memberResponse.json();
       const memberData = memberD.data;
-      fetch(BASE_URL + 'items/generator_projects')
+      fetch(BASE_URL + 'items/generator_projects?limit=9999')
         .then(async (response) => {
           // check for error response
           console.log(response.ok);

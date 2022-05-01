@@ -32,7 +32,7 @@ export function fetchEvents() {
       console.log('fetching events...');
       dispatch(setIsFetchingData(true));
       dispatch(fetchArtists());
-      fetch(BASE_URL + 'items/events')
+      fetch(BASE_URL + 'items/events?limit=9999')
         .then(async (response) => {
           // check for error response
           if (response.ok) {

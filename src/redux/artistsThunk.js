@@ -28,12 +28,15 @@ export function fetchArtists() {
       return;
     } else {
       dispatch(setIsFetchingData(true));
-      fetch(BASE_URL + 'items/artists')
+      fetch(BASE_URL + 'items/artists?limit=9999')
         .then(async (response) => {
           // check for error response
 
           if (response.ok) {
             const data = await response.json();
+
+            // console log all names of data
+            console.log(data.data.map((artist) => artist.name));
 
             dispatch(setArtists(data.data));
           } else {
