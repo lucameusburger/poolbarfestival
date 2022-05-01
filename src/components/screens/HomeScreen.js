@@ -7,7 +7,7 @@ import StylesMain from '../../../styles/StylesMain';
 import gridImage from '../../../assets/img/grid.png';
 import { CLR_PRIMARY } from '../../core/Theme';
 
-const cameraIcon = require('../../../assets/img/camera-icon.png');
+const cameraIcon = require('../../../assets/img/cam-icon.png');
 const mapIcon = require('../../../assets/img/map-icon.png');
 
 const estimatedStatusBarHeight = NativeModules.NativeUnimoduleProxy?.modulesConstants?.ExponentConstants?.statusBarHeight ?? 0;

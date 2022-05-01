@@ -45,11 +45,10 @@ const ArtistListScreen = ({ item }) => {
             alignItems: 'center',
           }}
         />
-        <View style={{}}></View>
         <View style={{}}>
           <View
             style={{
-              marginLeft: 20,
+              marginLeft: 10,
               marginTop: 'auto',
               marginBottom: 'auto',
               width: '100%',

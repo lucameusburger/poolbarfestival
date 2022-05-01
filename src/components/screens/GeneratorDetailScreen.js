@@ -16,6 +16,7 @@ const RenderMember = ({ member }) => {
         padding: 10,
         borderBottomWidth: 2,
         borderBottomColor: 'black',
+        width: '100%',
       }}
     >
       <View
@@ -36,7 +37,7 @@ const RenderMember = ({ member }) => {
             alignItems: 'center',
           }}
         />
-        <View style={{}}>
+        <View style={{ width: '100%' }}>
           <View
             style={{
               marginLeft: 10,
@@ -46,7 +47,9 @@ const RenderMember = ({ member }) => {
             }}
           >
             <Text style={StylesMain.artistListDateText}>{member.year}</Text>
-            <Text style={StylesMain.artistListMainText}>{member.name}</Text>
+            <Text style={[StylesMain.artistListMainText, { flex: 1, flexWrap: 'wrap', width: '100%' }]} numberOfLines={2} ellipsizeMode="tail">
+              {member.name}
+            </Text>
           </View>
         </View>
       </View>

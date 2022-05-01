@@ -35,9 +35,6 @@ export function fetchArtists() {
           if (response.ok) {
             const data = await response.json();
 
-            // console log all names of data
-            console.log(data.data.map((artist) => artist.name));
-
             dispatch(setArtists(data.data));
           } else {
             const error = (data && data.message) || response.status;
