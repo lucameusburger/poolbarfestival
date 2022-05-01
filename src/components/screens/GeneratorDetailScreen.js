@@ -66,7 +66,7 @@ const RenderElement = ({ generator }) => {
         </View>
       </View>
       <PoolbarImage
-        imageId={generator.image}
+        imageId={generator.file_image}
         fallback={artistPlaceholder}
         style={{
           flex: 1,
