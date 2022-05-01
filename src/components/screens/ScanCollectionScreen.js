@@ -9,7 +9,6 @@ import LoadingText from '../ui/LoadingText';
 import FadeInView from '../ui/FadeInView';
 import StylesMain from '../../../styles/StylesMain';
 import PoolbarImage from '../ui/PoolbarImage';
-import { fetchArtists } from '../../redux/artistsThunk';
 
 import ProgressBar from '../ui/ProgressBar';
 
