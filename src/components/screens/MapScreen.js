@@ -135,7 +135,7 @@ const MapScreen = ({ navigation }) => {
             coordinates={geodata}
             strokeWidth={5}
             strokeColor="black"
-            fillColor="rgba(0,0,0,0.135)"
+            fillColor="rgba(0,0,0,0)"
           />
           }
           
