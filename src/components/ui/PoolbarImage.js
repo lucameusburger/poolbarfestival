@@ -4,11 +4,11 @@ import { Image } from 'react-native';
 const BASE_URL = 'https://www.admin.poolbar.at/';
 const PARAMS = '?fit=cover&width=800&height=600&quality=80';
 
-function PoolbarImage({ imageId, fallback, style }) {
+function PoolbarImage({ imageId, fallback, style, params = PARAMS }) {
   const [url, setUrl] = useState(null);
   useEffect(() => {
     if (imageId) {
-      setUrl({ uri: BASE_URL + 'assets/' + imageId + PARAMS });
+      setUrl({ uri: BASE_URL + 'assets/' + imageId + params });
     } else if (fallback) {
       setUrl(fallback);
     }

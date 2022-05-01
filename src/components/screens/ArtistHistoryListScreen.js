@@ -10,27 +10,27 @@ import { fetchArtists } from '../../redux/artistsThunk';
 
 const BASE_URL = 'https://www.admin.poolbar.at/';
 
-const ArtistHistoryListScreen = ({ item }) => {
-  const img = item.image
-    ? {
-        uri: BASE_URL + 'assets/' + item.image + '?fit=cover&width=500&height=200&quality=80',
-      }
-    : {
-        uri: BASE_URL + 'assets/9c6f223c-795a-4bf5-b8c0-0630a555e465?fit=cover&width=500&height=200&quality=80',
-      };
-
-  return <Text style={{ display: 'inline-block' }}>{item.name + ' // '}</Text>;
-};
-
 const ArtistsList = ({ artists }) => {
   let text = '';
+
+  // sort artists by abc
+  artists.sort((a, b) => {
+    if (a.name < b.name) {
+      return -1;
+    }
+    if (a.name > b.name) {
+      return 1;
+    }
+    return 0;
+  });
+
   artists.forEach((item) => {
     text += item.name + ' //';
   });
   return <Text style={StylesMain.artistHistory}>{text}</Text>;
 };
 
-const ArtistsScreen = ({}) => {
+const ArtistHistoryListScreen = ({}) => {
   const dispatch = useDispatch();
 
   const artists = useSelector((state) => state.artists.artists);
@@ -51,4 +51,4 @@ const ArtistsScreen = ({}) => {
   );
 };
 
-export default ArtistsScreen;
+export default ArtistHistoryListScreen;

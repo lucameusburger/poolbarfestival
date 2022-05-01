@@ -148,6 +148,7 @@ const StylesMain = StyleSheet.create({
     fontSize: 22,
     textAlign: 'left',
     textTransform: 'uppercase',
+    lineHeight: 28,
   },
   artistDetailsDateText: {
     fontFamily: 'HelviotopiaBold',
@@ -169,14 +170,14 @@ const StylesMain = StyleSheet.create({
   },
   artistHistory: {
     fontFamily: 'Helviotopia',
-    fontWeight: '500',
     color: 'black',
     alignSelf: 'flex-start',
     marginTop: 'auto',
     fontSize: 22,
     textAlign: 'left',
     textTransform: 'uppercase',
-    marginBottom: 20,
+    marginBottom: 30,
+    lineHeight: 22,
   },
   flowTextElement: {
     fontFamily: 'Helviotopia',

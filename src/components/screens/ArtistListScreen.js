@@ -36,6 +36,7 @@ const ArtistListScreen = ({ item }) => {
       >
         <PoolbarImage
           imageId={item.image}
+          params={'?fit=cover&width=96&height=96&quality=80'}
           fallback={artistPlaceholder}
           style={{
             width: 50,
