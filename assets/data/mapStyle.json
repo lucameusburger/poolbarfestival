@@ -12,23 +12,18 @@
       ]
    },
    {
-      "featureType":"landscape",
-      "elementType":"all",
-      "stylers":[
-         {
-            "hue":"white"
-         },
-         {
-            "saturation":-100
-         },
-         {
-            "lightness":100
-         },
-         {
-            "visibility":"off"
-         }
-      ]
-   },
+        "featureType": "landscape",
+        "elementType": "all",
+        "stylers": [
+            {
+                "color": "#ffffff"
+            },
+            {
+            "visibility":"on"
+            }
+        ]
+    },
+
    {
       "featureType":"road",
       "elementType":"geometry",
