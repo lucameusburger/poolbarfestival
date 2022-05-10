@@ -1,6 +1,5 @@
 import { useEffect, useRef } from 'react';
 import { View, FlatList, Text } from 'react-native';
-import * as Sharing from 'expo-sharing';
 import ViewShot from 'react-native-view-shot';
 import LoadingText from '../ui/LoadingText';
 import NavBar from '../ui/NavBar';

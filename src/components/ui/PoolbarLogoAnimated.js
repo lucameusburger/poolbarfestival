@@ -1,6 +1,6 @@
-import React, { useRef, useEffect } from 'react';
-import { Animated, View } from 'react-native';
-import Svg, { G, Path } from 'react-native-svg';
+import { useEffect } from 'react';
+import { Animated } from 'react-native';
+import Svg, { Path } from 'react-native-svg';
 
 const PoolbarLogo = (props) => {
   const startValue = new Animated.Value(0.9);

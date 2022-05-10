@@ -9,7 +9,7 @@ const EventComponent = ({ item, onLike }) => {
 
   const today = new Date();
   const date = new Date(item.day_item.date_start);
-  const isToday = date.getDate() == today.getDate() && date.getMonth() == today.getMonth() && date.getFullYear() == today.getFullYear() ? true : false;
+  const isToday = date.getDate() == today.getDate() && date.getMonth() == today.getMonth() && date.getFullYear() == today.getFullYear();
 
   return (
     <TouchableOpacity

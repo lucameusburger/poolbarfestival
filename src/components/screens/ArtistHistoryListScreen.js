@@ -8,8 +8,6 @@ import FadeInView from '../ui/FadeInView';
 import StylesMain from '../../../styles/StylesMain';
 import { fetchArtists } from '../../redux/artistsThunk';
 
-const BASE_URL = 'https://www.admin.poolbar.at/';
-
 const ArtistsList = ({ artists }) => {
   let text = '';
 
