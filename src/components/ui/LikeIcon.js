@@ -7,13 +7,6 @@ import { CLR_PRIMARY } from '../../core/Theme';
 import { FontAwesome } from '@expo/vector-icons';
 import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
 
-const hexToRgb = (hex) =>
-  hex
-    .replace(/^#?([a-f\d])([a-f\d])([a-f\d])$/i, (m, r, g, b) => '#' + r + r + g + g + b + b)
-    .substring(1)
-    .match(/.{2}/g)
-    .map((x) => parseInt(x, 16));
-
 const LikeIcon = ({ eventId, size = 32, style, onLike = () => {}, mode = 'icon' }) => {
   const dispatch = useDispatch();
 
