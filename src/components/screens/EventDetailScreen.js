@@ -44,7 +44,7 @@ const EventDetailScreen = ({ route }) => {
                 width: '100%',
               }}
             >
-              <Text style={[styles.eventDateText, { backgroundColor: isToday ? '#00ff00' : '#ffffff' }]}>{dateString}</Text>
+              <Text style={[StylesMain.eventDateText, { backgroundColor: isToday ? '#00ff00' : '#ffffff' }]}>{dateString}</Text>
             </View>
             {item.soldout && (
               <View
@@ -54,12 +54,12 @@ const EventDetailScreen = ({ route }) => {
                 }}
               >
                 <View>
-                  <Text style={[styles.eventDateText, { backgroundColor: '#00ff00' }]}>SOLD OUT</Text>
+                  <Text style={[StylesMain.textSmall, { backgroundColor: '#00ff00' }]}>SOLD OUT</Text>
                 </View>
               </View>
             )}
 
-            <Text style={styles.eventMainText}>{item.name}</Text>
+            <Text style={StylesMain.eventMainText}>{item.name}</Text>
           </View>
         </View>
 
@@ -156,24 +156,5 @@ const EventDetailScreen = ({ route }) => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  eventDateText: {
-    fontFamily: 'HelviotopiaBold',
-    color: 'black',
-    marginTop: 'auto',
-    marginBottom: 'auto',
-    fontSize: 20,
-    textTransform: 'uppercase',
-  },
-  eventMainText: {
-    fontFamily: 'Helviotopia',
-    color: '#000',
-    alignSelf: 'flex-start',
-    fontSize: 42,
-    textAlign: 'left',
-    textTransform: 'uppercase',
-  },
-});
 
 export default EventDetailScreen;

@@ -6,7 +6,10 @@ const StylesMain = StyleSheet.create({
   text: {
     fontFamily: 'Helviotopia',
     fontSize: 17,
-    lineHeight: 22,
+  },
+  text: {
+    fontFamily: 'Helviotopia',
+    fontSize: 12,
   },
   textBold: {
     fontFamily: 'HelviotopiaBold',
@@ -222,6 +225,22 @@ const StylesMain = StyleSheet.create({
     borderRadius: 10,
     padding: 10,
     height: 90,
+  },
+  eventDateText: {
+    fontFamily: 'HelviotopiaBold',
+    color: 'black',
+    marginTop: 'auto',
+    marginBottom: 'auto',
+    fontSize: 20,
+    textTransform: 'uppercase',
+  },
+  eventMainText: {
+    fontFamily: 'Helviotopia',
+    color: '#000',
+    alignSelf: 'flex-start',
+    fontSize: 42,
+    textAlign: 'left',
+    textTransform: 'uppercase',
   },
 });
 

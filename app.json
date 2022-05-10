@@ -2,7 +2,7 @@
   "expo": {
     "name": "poolbar",
     "slug": "poolbarfestival",
-    "version": "1.1.4",
+    "version": "1.1.5",
     "orientation": "portrait",
     "icon": "./assets/icon/appstore.png",
     "splash": {
@@ -15,7 +15,7 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "bundleIdentifier": "at.lume.poolbarfestival",
-      "buildNumber": "1.1.4",
+      "buildNumber": "1.1.5",
       "supportsTablet": true,
       "infoPlist": {
         "NSRemindersUsageDescription": "Erhalte Erinnerungen wenn deine gelikten Events stadtfinden.",
@@ -28,7 +28,7 @@
     },
     "android": {
       "package": "at.lume.poolbarfestival",
-      "versionCode": 114,
+      "versionCode": 115,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"

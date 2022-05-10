@@ -40,7 +40,7 @@ const EventComponent = ({ item, onLike }) => {
         >
           <Text style={StylesMain.artistListMainText}>{item.name}</Text>
           <Text style={[StylesMain.artistListDateText, { backgroundColor: isToday ? '#00ff00' : '#ffffff' }]}>{dateString}</Text>
-          {item.soldout && <Text style={[StylesMain.artistListDateText, { backgroundColor: '#00ff00' }]}>SOLD OUT</Text>}
+          {item.soldout && <Text style={[StylesMain.textSmall, { backgroundColor: '#00ff00', alignSelf: 'flex-start' }]}>SOLD OUT</Text>}
         </View>
         <View
           style={{

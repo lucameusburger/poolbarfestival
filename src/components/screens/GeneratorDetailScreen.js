@@ -50,6 +50,18 @@ const RenderMember = ({ member }) => {
             <Text style={[StylesMain.artistListMainText, { flex: 1, flexWrap: 'wrap', width: '100%' }]} numberOfLines={2} ellipsizeMode="tail">
               {member.name}
             </Text>
+            {member.is_head && (
+              <View
+                style={{
+                  flexDirection: 'row',
+                  width: '100%',
+                }}
+              >
+                <View>
+                  <Text style={[StylesMain.textSmall, { backgroundColor: '#00ff00' }]}>Laborleiter·in</Text>
+                </View>
+              </View>
+            )}
           </View>
         </View>
       </View>
