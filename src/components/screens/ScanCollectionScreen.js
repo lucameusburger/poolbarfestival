@@ -110,7 +110,7 @@ const ScanCollectionScreen = ({}) => {
   const dispatch = useDispatch();
 
   const [generatorsCount, setGeneratorsCount] = useState(0);
-  const [generatorsSScannedCount, setGeneratorsScannedCount] = useState(0);
+  const [generatorsScannedCount, setGeneratorsScannedCount] = useState(0);
 
   const scans = useSelector((state) => state.scanns.data);
   const events = useSelector((state) => state.events.data);
@@ -121,11 +121,6 @@ const ScanCollectionScreen = ({}) => {
   useEffect(() => {
     setGeneratorsCount(generators.length);
     setGeneratorsScannedCount(scans.filter((item) => item.type === 'generator').length);
-
-    if (generatorsSScannedCount >= generatorsCount && beerCode !== null) {
-      //dispatch({ type: "SET_CODE", payload: true });
-      alert('h');
-    }
   }, [generators]);
 
   return (
@@ -139,7 +134,7 @@ const ScanCollectionScreen = ({}) => {
             borderBottomWidth: 2,
           }}
         >
-          <ProgressBar text={beerCode} value={generatorsSScannedCount} maxvalue={generatorsCount} />
+          <ProgressBar text={beerCode} value={generatorsScannedCount} maxvalue={generatorsCount} />
         </View>
         <ScrollView style={{ flex: 1 }}>{!scans || !artists || !events || !generators ? <LoadingText /> : <ScanCollection events={events} collection={scans} generators={generators} artists={artists} />}</ScrollView>
       </FadeInView>
