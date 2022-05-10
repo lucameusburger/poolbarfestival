@@ -44,6 +44,10 @@ import {
   reducer as scannsReducer,
   initialState as scannsInitialState,
 } from "./scannsReducer";
+import {
+  reducer as beerReducer,
+  initialState as beerInitialState,
+} from "./beerReducer";
 
 export const initialState = {
   artists: artistsInitialState,
@@ -57,6 +61,7 @@ export const initialState = {
   flowText: flowTextInitialState,
   poi: poiInitialState,
   scanns: scannsInitialState,
+  beer: beerInitialState,
 };
 
 export const rootReducer = combineReducers({
@@ -71,4 +76,5 @@ export const rootReducer = combineReducers({
   currentLocation: currentLocactionReducers,
   poi: poiReducer,
   scanns: scannsReducer,
+  beer: beerReducer,
 });
