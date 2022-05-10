@@ -1,22 +1,22 @@
-import { Text, View } from "react-native";
+import { Text, View } from 'react-native';
 
-import { openGoogleMaps } from "../../../core/helpers";
-import { navigate } from "../../../core/RootNavigation";
-import AppButton from "../AppButton";
+import { openGoogleMaps } from '../../../core/helpers';
+import { navigate } from '../../../core/RootNavigation';
+import AppButton from '../AppButton';
 
-const LocationInfoBottomBar = ({ location, ...props }) => {
+const LocationInfoBottomBar = ({ location }) => {
   return (
     <View
       style={{
-        position: "absolute",
+        position: 'absolute',
         bottom: 0,
-        width: "100%",
-        flexDirection: "column",
+        width: '100%',
+        flexDirection: 'column',
       }}
     >
       <View
         style={{
-          flexDirection: "row",
+          flexDirection: 'row',
           marginHorizontal: 20,
         }}
       >
@@ -50,7 +50,7 @@ const LocationInfoBottomBar = ({ location, ...props }) => {
               marginLeft: 10,
             }}
             onPress={() =>
-              navigate("Raumfahrtprogramm", {
+              navigate('Raumfahrtprogramm', {
                 id: location.id,
               })
             }
@@ -59,12 +59,12 @@ const LocationInfoBottomBar = ({ location, ...props }) => {
       </View>
       <View
         style={{
-          backgroundColor: "#fff",
+          backgroundColor: '#fff',
           borderTopWidth: 2,
-          borderColor: "black",
-          width: "100%",
+          borderColor: 'black',
+          width: '100%',
           marginTop: 10,
-          height: "100%",
+          height: '100%',
           padding: 10,
         }}
       >
@@ -72,17 +72,17 @@ const LocationInfoBottomBar = ({ location, ...props }) => {
           style={{
             fontSize: 22,
             marginBottom: 0,
-            fontFamily: "Helviotopia",
-            width: "100%",
+            fontFamily: 'Helviotopia',
+            width: '100%',
           }}
         >
           {location?.name}
         </Text>
         <Text
           style={{
-            fontFamily: "Helviotopia",
+            fontFamily: 'Helviotopia',
             marginBottom: 0,
-            width: "100%",
+            width: '100%',
           }}
         >
           {location?.description}

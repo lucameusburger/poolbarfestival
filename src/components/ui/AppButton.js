@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Text, StyleSheet, Pressable, Animated } from 'react-native';
+import { Text, StyleSheet, Pressable } from 'react-native';
 import { CLR_PRIMARY } from '../../core/Theme';
 import { Audio } from 'expo-av';
 

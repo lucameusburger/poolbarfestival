@@ -1,8 +1,6 @@
 import { useState } from 'react';
 import { StyleSheet, Pressable, Image } from 'react-native';
 
-import { FontAwesome } from '@expo/vector-icons';
-
 import { CLR_PRIMARY } from '../../core/Theme';
 
 const AppCornerButton = ({ onPress, icon, color = CLR_PRIMARY, style, position = 'lb' }) => {

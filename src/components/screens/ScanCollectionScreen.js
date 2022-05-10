@@ -5,9 +5,7 @@ import NavBar from '../ui/NavBar';
 import LoadingText from '../ui/LoadingText';
 import FadeInView from '../ui/FadeInView';
 import StylesMain from '../../../styles/StylesMain';
-import { randomId } from '../../core/helpers';
 import ProgressBar from '../ui/ProgressBar';
-import { CLR_PRIMARY } from '../../core/Theme';
 import { FontAwesome } from '@expo/vector-icons';
 import { navigate } from '../../core/RootNavigation';
 

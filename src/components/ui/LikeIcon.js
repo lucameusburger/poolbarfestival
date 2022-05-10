@@ -1,7 +1,6 @@
-import { Animated, TouchableOpacity } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { addCallenderEvent, deleteCallenderEvent } from '../../redux/callenderThunk';
-import { memo, useEffect, useRef, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 
 import { CLR_PRIMARY } from '../../core/Theme';
 import { FontAwesome } from '@expo/vector-icons';

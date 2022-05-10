@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import { Text, View, ScrollView } from 'react-native';
 import NavBar from '../ui/NavBar';
 import FadeInView from '../ui/FadeInView';
 import StylesMain from '../../../styles/StylesMain';

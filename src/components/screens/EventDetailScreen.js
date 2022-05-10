@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import * as Linking from 'expo-linking';
-import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import { Text, View, ScrollView } from 'react-native';
 import AppButton from '../ui/AppButton';
 import NavBar from '../ui/NavBar';
 import FadeInView from '../ui/FadeInView';
