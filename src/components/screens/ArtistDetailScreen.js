@@ -15,7 +15,7 @@ import PoolbarImage from '../ui/PoolbarImage';
 import artistPlaceholder from '../../../assets/img/artistPlaceholder.jpg';
 import EventComponent from '../ui/EventComponent';
 
-const ArtistDetailScreen = ({ artist }) => {
+const ArtistDetail = ({ artist }) => {
   const events = useSelector((state) => state.events.data);
   const filteredEvents = events.filter((event) => event.artist === artist.id);
   return (
@@ -79,10 +79,13 @@ const ArtistDetailScreen = ({ artist }) => {
   );
 };
 
-const ArtistScreen = ({ route }) => {
+const ArtistDetailScreen = ({ route }) => {
   const id = route.params.id.trim();
+
   const artists = useSelector((state) => state.artists.artists);
+
   const [selectedArtist, setSelectedArtist] = useState(null);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -97,10 +100,10 @@ const ArtistScreen = ({ route }) => {
     <View style={StylesMain.mainView}>
       <FadeInView style={{ flex: 1, width: '100%' }}>
         <NavBar title={'artist'} />
-        <ScrollView style={{ flex: 1 }}>{selectedArtist ? <ArtistDetailScreen artist={selectedArtist} /> : <LoadingText />}</ScrollView>
+        <ScrollView style={{ flex: 1 }}>{selectedArtist ? <ArtistDetail artist={selectedArtist} /> : <LoadingText />}</ScrollView>
       </FadeInView>
     </View>
   );
 };
 
-export default ArtistScreen;
+export default ArtistDetailScreen;

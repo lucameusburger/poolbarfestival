@@ -1,22 +1,11 @@
-import { Marker } from "react-native-maps";
+import { FontAwesome } from '@expo/vector-icons';
+import { Marker } from 'react-native-maps';
 
-function CustomMarker({
-  location,
-  setCurrentLocation,
-  currentLocation,
-  infoBarVisible,
-  setInfoBarVisible,
-  markerImage,
-  selectedMarkerImage,
-}) {
+function CustomMarker({ location, setCurrentLocation, currentLocation, infoBarVisible, setInfoBarVisible, markerIcon }) {
   return (
     <Marker
       key={location.id}
-      image={
-        currentLocation?.id === location.id && infoBarVisible
-          ? selectedMarkerImage
-          : markerImage
-      }
+      children={<FontAwesome name={markerIcon} color={currentLocation?.id === location.id && infoBarVisible ? '#00ff00' : '#000000'} size={64} />}
       coordinate={{
         longitude: location.location.coordinates[0],
         latitude: location.location.coordinates[1],
