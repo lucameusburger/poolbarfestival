@@ -12,9 +12,10 @@ import { FontAwesome } from '@expo/vector-icons';
 import { navigate } from '../../core/RootNavigation';
 
 function openScann(scann) {
-  console.log(scann);
   const screens = {
     event: 'Event',
+    artist: 'Artist',
+    generator: 'Generator',
   };
   navigate(screens[scann.type], {
     id: scann.id,
@@ -23,12 +24,10 @@ function openScann(scann) {
 
 const ScanCollection = ({ collection, events, artists, generators }) => {
   const showCollection = [];
-  console.log(events.find((event) => event.id === '80a90e9a-ec1c-4354-b256-673d107b8c06'));
 
   collection.forEach((item) => {
     let name = '';
     let type_name = '';
-    console.log(item.id);
 
     if (item.type === 'generator') {
       type_name = 'generator projekt';
@@ -42,13 +41,10 @@ const ScanCollection = ({ collection, events, artists, generators }) => {
 
     if (item.type === 'event') {
       type_name = 'event';
-      console.log('char: ', '80a90e9a-ec1c-4354-b256-673d107b8c06'.charAt(9));
-      console.log('charcode: ', '80a90e9a-ec1c-4354-b256-673d107b8c06'.charCodeAt(9));
-
       name = events.find((event) => event.id === item.id)?.name;
     }
 
-    if (true || name) {
+    if (name) {
       showCollection.push({
         ...item,
         name,
@@ -143,30 +139,7 @@ const ScanCollectionScreen = ({}) => {
             borderBottomWidth: 2,
           }}
         >
-          <ProgressBar value={generatorsSScannedCount} maxvalue={generatorsCount} />
-          <View
-            style={{
-              backgroundColor: CLR_PRIMARY,
-              width: '100%',
-              height: 30,
-              marginTop: 10,
-              borderRadius: 5,
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
-          >
-            {beerCode && (
-              <Text
-                style={{
-                  fontFamily: 'Helviotopia',
-                  color: 'black',
-                  fontSize: 18,
-                }}
-              >
-                {beerCode}
-              </Text>
-            )}
-          </View>
+          <ProgressBar text={beerCode} value={generatorsSScannedCount} maxvalue={generatorsCount} />
         </View>
         <ScrollView style={{ flex: 1 }}>{!scans || !artists || !events || !generators ? <LoadingText /> : <ScanCollection events={events} collection={scans} generators={generators} artists={artists} />}</ScrollView>
       </FadeInView>
