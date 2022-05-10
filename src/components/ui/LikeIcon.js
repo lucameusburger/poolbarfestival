@@ -2,6 +2,7 @@ import { Animated, TouchableOpacity } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { addCallenderEvent, deleteCallenderEvent } from '../../redux/callenderThunk';
 import { memo, useEffect, useRef, useState } from 'react';
+import AppButton from './AppButton';
 
 import { CLR_PRIMARY } from '../../core/Theme';
 import { FontAwesome } from '@expo/vector-icons';
@@ -14,7 +15,7 @@ const hexToRgb = (hex) =>
     .match(/.{2}/g)
     .map((x) => parseInt(x, 16));
 
-const LikeIcon = ({ eventId, size = 32, style, onLike = () => {} }) => {
+const LikeIcon = ({ eventId, size = 32, style, onLike = () => {}, mode = 'icon' }) => {
   const dispatch = useDispatch();
 
   const likedEvents = useSelector((state) => state.favorites.likedEvents);
@@ -23,7 +24,6 @@ const LikeIcon = ({ eventId, size = 32, style, onLike = () => {} }) => {
 
   const likeEvent = (id) => {
     onLike();
-
     dispatch({
       type: 'ADD_TO_LIKED_EVENTS',
       payload: id,
@@ -47,7 +47,7 @@ const LikeIcon = ({ eventId, size = 32, style, onLike = () => {} }) => {
     }
   }, [isLiked]);
 
-  return (
+  return mode === 'icon' ? (
     <Pressable
       onPress={() => {
         if (isLiked) {
@@ -57,6 +57,7 @@ const LikeIcon = ({ eventId, size = 32, style, onLike = () => {} }) => {
         }
       }}
       style={[
+        style,
         {
           alignItems: 'flex-end',
           alignSelf: 'flex-end',
@@ -65,11 +66,27 @@ const LikeIcon = ({ eventId, size = 32, style, onLike = () => {} }) => {
           width: size * 2,
           height: size,
         },
-        style,
       ]}
     >
       <FontAwesome style={{ alignSelf: 'flex-end' }} name={isLiked ? 'heart' : 'heart-o'} size={size} color={isLiked ? CLR_PRIMARY : '#000000'} />
     </Pressable>
+  ) : (
+    <AppButton
+      title="merken"
+      style={[
+        style,
+        {
+          backgroundColor: isLiked ? CLR_PRIMARY : '#ffffff',
+        },
+      ]}
+      onPress={() => {
+        if (isLiked) {
+          unLikeEvent(eventId);
+        } else {
+          likeEvent(eventId);
+        }
+      }}
+    />
   );
 };
 
