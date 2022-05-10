@@ -118,7 +118,9 @@ const FlowtextScreen = ({ navigation }) => {
   const add = () => {
     const word = getWord();
     const y = Math.floor(Math.random() * height);
-    const key = word + '-' + y;
+    // make unique key
+    const unique = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+    const key = word + '-' + y + '-' + unique;
 
     const newElement = <FlowtextElement text={word} key={key} _key={key} y={y} />;
     addElement(newElement);
@@ -128,7 +130,7 @@ const FlowtextScreen = ({ navigation }) => {
     if (height) {
       const adder = setInterval(() => {
         add();
-      }, 1000);
+      }, 800);
       return () => clearInterval(adder);
     }
   }, [height]);
@@ -175,7 +177,7 @@ const FlowtextScreen = ({ navigation }) => {
             flex: 1,
             width: '100%',
             height: '100%',
-            marginBottom: 15,
+            marginBottom: 40,
           }}
           onLayout={(e) => {
             setHeight(e.nativeEvent.layout.height);

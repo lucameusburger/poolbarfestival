@@ -32,6 +32,7 @@ const ArtistListScreen = ({ item }) => {
           marginTop: 'auto',
           marginBottom: 'auto',
           flexDirection: 'row',
+          alignItems: 'center',
         }}
       >
         <PoolbarImage
@@ -45,12 +46,13 @@ const ArtistListScreen = ({ item }) => {
             alignItems: 'center',
           }}
         />
-        <View style={{}}>
+        <View style={{ flex: 1 }}>
           <View
             style={{
               marginLeft: 10,
               marginTop: 'auto',
               marginBottom: 'auto',
+              width: '100%',
               width: '100%',
             }}
           >

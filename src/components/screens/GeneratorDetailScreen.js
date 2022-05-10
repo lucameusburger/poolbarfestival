@@ -25,6 +25,8 @@ const RenderMember = ({ member }) => {
           marginTop: 'auto',
           marginBottom: 'auto',
           flexDirection: 'row',
+          display: 'flex',
+          alignItems: 'center',
         }}
       >
         <PoolbarImage
@@ -37,17 +39,18 @@ const RenderMember = ({ member }) => {
             alignItems: 'center',
           }}
         />
-        <View style={{ width: '100%' }}>
+        <View style={{ width: '100%', flex: 1, alignItems: 'center' }}>
           <View
             style={{
               marginLeft: 10,
               marginTop: 'auto',
               marginBottom: 'auto',
               width: '100%',
+              alignItems: 'center',
             }}
           >
             <Text style={StylesMain.artistListDateText}>{member.year}</Text>
-            <Text style={[StylesMain.artistListMainText, { flex: 1, flexWrap: 'wrap', width: '100%' }]} numberOfLines={2} ellipsizeMode="tail">
+            <Text style={[StylesMain.artistListMainText, { flex: 1, width: '100%' }]} ellipsizeMode="tail">
               {member.name}
             </Text>
             {member.is_head && (
