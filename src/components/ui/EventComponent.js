@@ -6,7 +6,12 @@ import { getDateString } from '../../core/helpers';
 
 const EventComponent = ({ item, onLike }) => {
   let dateString = item.day_item.date_start ? getDateString(new Date(item.day_item.date_start)) : 'tba';
+<<<<<<< HEAD
   const today = new Date('2022-07-12');
+=======
+
+  const today = new Date();
+>>>>>>> master
   const date = new Date(item.day_item.date_start);
   const isToday = date.getDate() == today.getDate() && date.getMonth() == today.getMonth() && date.getFullYear() == today.getFullYear() ? true : false;
 

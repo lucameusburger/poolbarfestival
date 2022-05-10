@@ -45,7 +45,19 @@
     },
     "scheme": "poolbar",
     "sdkVersion": "44.0.0",
-    "plugins": ["react-native-email-link"]
+    "plugins": ["sentry-expo"]
   },
-  "name": "poolbarfestival"
+  "name": "poolbarfestival",
+  "hooks": {
+    "postPublish": [
+      {
+        "file": "sentry-expo/upload-sourcemaps",
+        "config": {
+          "organization": "LUME",
+          "project": "poolbar",
+          "authToken": "9753e83f41264cffba993aa95b10d4f237b7d75721554851a1129f590c117ebd"
+        }
+      }
+    ]
+  }
 }
