@@ -6,7 +6,7 @@ import StylesMain from '../../../styles/StylesMain';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import { FontAwesome } from '@expo/vector-icons';
 import { navigate } from '../../core/RootNavigation';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
@@ -15,6 +15,9 @@ const ScanScreen = ({ navigation }) => {
   const [scanned, setScanned] = useState(false);
 
   const dispatch = useDispatch();
+  const events = useSelector((state) => state.events.data);
+  const artists = useSelector((state) => state.artists.artists);
+  const generators = useSelector((state) => state.generators.data);
 
   useEffect(() => {
     (async () => {
@@ -28,6 +31,15 @@ const ScanScreen = ({ navigation }) => {
     })();
   }, []);
 
+  const unknownQRCode = async () => {
+    alert('Unbekannter QR code', {
+      cancelable: false,
+    });
+    setTimeout(() => {
+      setScanned(false);
+    }, 1000);
+  };
+
   const handleBarCodeScanned = async ({ type, data }) => {
     setScanned(true);
     const canOpen = await Linking.canOpenURL(data);
@@ -35,6 +47,27 @@ const ScanScreen = ({ navigation }) => {
       const parts = data.split('/');
       const type = parts[parts.length - 2];
       const id = parts[parts.length - 1].replace('\u2013', '-');
+      if (type === 'generator') {
+        if (!generators.find((generator) => generator.id === id)) {
+          unknownQRCode();
+          return;
+        }
+      } else if (type === 'artist') {
+        if (!artists.find((artist) => artist.id === id)) {
+          unknownQRCode();
+
+          return;
+        }
+      } else if (type === 'event') {
+        if (!events.find((event) => event.id === id)) {
+          unknownQRCode();
+
+          return;
+        }
+      } else {
+        unknownQRCode();
+        return;
+      }
       dispatch({
         type: 'ADD_SCANN',
         payload: {
@@ -46,6 +79,9 @@ const ScanScreen = ({ navigation }) => {
       setTimeout(() => {
         setScanned(false);
       }, 1000);
+    } else {
+      unknownQRCode();
+      return;
     }
   };
 
