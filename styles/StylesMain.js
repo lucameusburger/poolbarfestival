@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, Button, Item, FlatList } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { CLR_PRIMARY } from '../src/core/Theme';
 
 const StylesMain = StyleSheet.create({
