@@ -45,7 +45,7 @@ const Stack = createNativeStackNavigator();
 
 Sentry.init({
   dsn: 'https://2a19ef9fa8a94e85bf68253dcd673713@o1240265.ingest.sentry.io/6392297',
-  enableInExpoDevelopment: true,
+  enableInExpoDevelopment: false,
   debug: true, // If `true`, Sentry will try to print out useful debugging information if something goes wrong with sending the event. Set it to `false` in production
 });
 
