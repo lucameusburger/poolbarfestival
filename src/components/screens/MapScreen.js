@@ -61,7 +61,7 @@ const RenderMarkers = ({ setInfoBarVisible, infoBarVisible }) => {
         <CustomMarker location={location} setCurrentLocation={setCurrentLocation} setInfoBarVisible={setInfoBarVisible} infoBarVisible={infoBarVisible} currentLocation={currentLocation} markerIcon={'map-pin'} key={'marker_' + location.id} />
       ))}
       {poiLocations.map((location) => (
-        <CustomMarker location={location} setCurrentLocation={setCurrentLocation} setInfoBarVisible={setInfoBarVisible} infoBarVisible={infoBarVisible} currentLocation={currentLocation} markerIcon={'map-marker'} key={'marker_' + location.id} />
+        <CustomMarker location={location} setCurrentLocation={setCurrentLocation} setInfoBarVisible={setInfoBarVisible} infoBarVisible={infoBarVisible} currentLocation={currentLocation} markerIcon={'map-marker-alt'} key={'marker_' + location.id} />
       ))}
     </>
   );
