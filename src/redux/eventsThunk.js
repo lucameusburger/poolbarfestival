@@ -58,8 +58,6 @@ export function fetchEvents() {
               const dateStartB = new Date(b.day_item.date_start);
               const dateStartBFormatted = dateStartB.getFullYear() + '-' + (dateStartB.getMonth() + 1).toString().padStart(2, '0') + '-' + dateStartB.getDate().toString().padStart(2, '0');
 
-              console.log(dateStartAFormatted, dateStartBFormatted);
-
               return new Date(dateStartBFormatted + 'T' + (b.time_show_start || '12:00:00')) - new Date(dateStartAFormatted + 'T' + (a.time_show_start || '12:00:00'));
             });
 

@@ -45,7 +45,7 @@ const EventComponent = ({ item, onLike }) => {
         <View
           style={{
             flex: 1,
-            justifyContent: 'center',
+            justifyContent: 'flex-end',
             alignItems: 'center',
           }}
         >

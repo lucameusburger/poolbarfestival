@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { View, FlatList } from 'react-native';
+import { View, FlatList, Text } from 'react-native';
 import * as Sharing from 'expo-sharing';
 import ViewShot from 'react-native-view-shot';
 import LoadingText from '../ui/LoadingText';
@@ -9,6 +9,7 @@ import StylesMain from '../../../styles/StylesMain';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchEvents } from '../../redux/eventsThunk';
 import EventComponent from '../ui/EventComponent';
+import { navigate } from '../../core/RootNavigation';
 
 const EventLikedListScreen = ({ router }) => {
   const dispatch = useDispatch();
@@ -22,9 +23,34 @@ const EventLikedListScreen = ({ router }) => {
   }, []);
 
   let openShareDialogAsync = async () => {
-    viewShotRef.current.capture({ format: 'jpg', quality: 80 }).then(async (uri) => {
-      await Sharing.shareAsync('file://' + uri);
-    });
+    if (likedEvents && likedEvents.length > 0) {
+      navigate('Capture', {
+        children: (
+          <View style={{ margin: 20 }}>
+            <View
+              style={{
+                padding: 10,
+                borderWidth: 2,
+                borderColor: 'black',
+                borderRadius: 10,
+                overflow: 'hidden',
+                backgroundColor: 'white',
+              }}
+            >
+              {events
+                .filter((event) => likedEvents.includes(event.id))
+                .map((event) => (
+                  <View key={event.id} style={{ marginBottom: 20 }}>
+                    <Text style={[StylesMain.textBold, { fontSize: 22 }]}>{event.name}</Text>
+                    <Text style={StylesMain.textBold}>{event.day_item.date_start}</Text>
+                  </View>
+                ))}
+            </View>
+            <Text style={StylesMain.tag}>#poolbar22</Text>
+          </View>
+        ),
+      });
+    }
   };
 
   return (

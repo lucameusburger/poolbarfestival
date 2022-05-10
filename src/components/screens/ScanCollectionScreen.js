@@ -8,11 +8,9 @@ import NavBar from '../ui/NavBar';
 import LoadingText from '../ui/LoadingText';
 import FadeInView from '../ui/FadeInView';
 import StylesMain from '../../../styles/StylesMain';
-import PoolbarImage from '../ui/PoolbarImage';
 
 import ProgressBar from '../ui/ProgressBar';
 
-import { Video, AVPlaybackStatus } from 'expo-av';
 import { FontAwesome } from '@expo/vector-icons';
 
 const BASE_URL = 'https://www.admin.poolbar.at/';
