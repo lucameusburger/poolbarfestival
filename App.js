@@ -5,6 +5,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import AppLoading from 'expo-app-loading';
 import * as Linking from 'expo-linking';
+import * as Sentry from 'sentry-expo';
 
 import { navigationRef } from './src/core/RootNavigation';
 
@@ -29,8 +30,6 @@ import { PersistGate } from 'redux-persist/integration/react';
 
 import { persistor, store } from './src/redux/store';
 
-const prefix = Linking.createURL('/');
-
 import { useFonts } from '@expo-google-fonts/outfit';
 import HomeScreen from './src/components/screens/HomeScreen';
 import { fetchEvents } from './src/redux/eventsThunk';
@@ -41,7 +40,14 @@ import { fetchGenerators } from './src/redux/generatorsThunk';
 import CaptureScreen from './src/components/screens/CaptureScreen';
 import { fetchPOI } from './src/redux/poiThunk';
 
+const prefix = Linking.createURL('/');
 const Stack = createNativeStackNavigator();
+
+Sentry.init({
+  dsn: 'https://2a19ef9fa8a94e85bf68253dcd673713@o1240265.ingest.sentry.io/6392297',
+  enableInExpoDevelopment: true,
+  debug: true, // If `true`, Sentry will try to print out useful debugging information if something goes wrong with sending the event. Set it to `false` in production
+});
 
 function Navigator() {
   const dispatch = useDispatch();

@@ -51,11 +51,19 @@ export function fetchEvents() {
               })
             );
 
-            const filteredFetchedEvents = fetchedEvents.sort((b, a) => {
-              return new Date(b.day_item.date_start) - new Date(a.day_item.date_start);
+            const sortedFetchedEvents = fetchedEvents.sort((b, a) => {
+              const dateStartA = new Date(a.day_item.date_start);
+              const dateStartAFormatted = dateStartA.getFullYear() + '-' + (dateStartA.getMonth() + 1).toString().padStart(2, '0') + '-' + dateStartA.getDate().toString().padStart(2, '0');
+
+              const dateStartB = new Date(b.day_item.date_start);
+              const dateStartBFormatted = dateStartB.getFullYear() + '-' + (dateStartB.getMonth() + 1).toString().padStart(2, '0') + '-' + dateStartB.getDate().toString().padStart(2, '0');
+
+              console.log(dateStartAFormatted, dateStartBFormatted);
+
+              return new Date(dateStartBFormatted + 'T' + (b.time_show_start || '12:00:00')) - new Date(dateStartAFormatted + 'T' + (a.time_show_start || '12:00:00'));
             });
 
-            dispatch(setEvents(filteredFetchedEvents));
+            dispatch(setEvents(sortedFetchedEvents));
           } else {
             const error = (data && data.message) || response.status;
             console.log('Fetching Events Error: ', error);
