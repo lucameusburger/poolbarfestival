@@ -1,34 +1,27 @@
-import { Text, View } from "react-native";
-import { FontAwesome } from "@expo/vector-icons";
+import { Text, View } from 'react-native';
+import { FontAwesome5 } from '@expo/vector-icons';
 
 const MyCalloutView = (props) => {
   return (
     <View
       style={{
-        display: "flex",
+        display: 'flex',
         flex: 1,
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
 
-        height: "100%",
-        width: "100%",
+        height: '100%',
+        width: '100%',
         borderWidth: 0,
         borderRadius: 40,
         bottom: 5,
-        backgroundColor: "grey",
+        backgroundColor: 'grey',
       }}
     >
-      <Text style={{ marginTop: 40, fontSize: 30, color: "white" }}>
-        {props.name}
-      </Text>
+      <Text style={{ marginTop: 40, fontSize: 30, color: 'white' }}>{props.name}</Text>
       <Text>{props.description}</Text>
-      <FontAwesome
-        style={{ marginTop: "auto", marginBottom: "auto", alignSelf: "center" }}
-        name={"location-arrow"}
-        size={50}
-        color="white"
-      />
+      <FontAwesome5 style={{ marginTop: 'auto', marginBottom: 'auto', alignSelf: 'center' }} name={'location-arrow'} size={50} color="white" />
     </View>
   );
 };
