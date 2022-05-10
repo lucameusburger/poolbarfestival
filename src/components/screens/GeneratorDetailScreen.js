@@ -58,7 +58,7 @@ const RenderMember = ({ member }) => {
                 }}
               >
                 <View>
-                  <Text style={[StylesMain.textSmall, { backgroundColor: '#00ff00' }]}>Laborleiter·in</Text>
+                  <Text style={[StylesMain.textSmallBold, { backgroundColor: '#00ff00' }]}>Laborleiter·in</Text>
                 </View>
               </View>
             )}
@@ -72,13 +72,11 @@ const RenderMember = ({ member }) => {
 const RenderElement = ({ generator }) => {
   return (
     <View style={{ flex: 1, width: '100%', height: '100%' }}>
-      <View style={{ padding: 10, marginTop: 10 }}>
-        <View>
-          <Text style={styles.roomDateText}>{generator.lab_item.name}</Text>
-          <Text style={styles.roomMainText}>{generator.name}</Text>
-          <Text style={StylesMain.text}>{generator.description_full || generator.description_short}</Text>
-          <View style={{ height: 20 }}></View>
-        </View>
+      <View style={{ padding: 10, borderBottomWidth: 2 }}>
+        <Text style={StylesMain.eventMainText}>{generator.name}</Text>
+      </View>
+      <View style={{ padding: 10, borderBottomWidth: 2 }}>
+        <Text style={StylesMain.eventDateText}>{generator.lab_item.name}</Text>
       </View>
       <PoolbarImage
         imageId={generator.file_image}
@@ -87,25 +85,24 @@ const RenderElement = ({ generator }) => {
           flex: 1,
           width: '100%',
           height: 320,
-          marginBottom: 30,
         }}
       />
+      {generator.description_short && (
+        <View style={{ padding: 10, borderTopWidth: 2 }}>
+          <View>
+            <Text style={StylesMain.text}>{generator.description_short}</Text>
+          </View>
+        </View>
+      )}
       {generator.members.length > 0 && (
         <View style={{ flex: 1 }}>
-          <View
-            style={{
-              flex: 1,
-              width: '100%',
-              height: '100%',
-            }}
-          >
-            <View style={{ flex: 1 }}>
-              <Text style={[StylesMain.artistDetailsDateText, { marginBottom: 20, marginHorizontal: 10 }]}>mitwirkende</Text>
-              <View style={{ flex: 1, borderTopWidth: 2 }}></View>
-              {generator.members.map((member) => (
-                <RenderMember key={member.id} member={member} />
-              ))}
-            </View>
+          <View style={{ flex: 1, borderTopWidth: 2, borderBottomWidth: 2, padding: 10 }}>
+            <Text style={StylesMain.artistDetailsDateText}>mitwirkende</Text>
+          </View>
+          <View style={{ flex: 1 }}>
+            {generator.members.map((member) => (
+              <RenderMember key={member.id} member={member} />
+            ))}
           </View>
         </View>
       )}
@@ -137,27 +134,5 @@ const GeneratorDetailScreen = ({ route, navigation }) => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  roomDateText: {
-    fontFamily: 'HelviotopiaBold',
-    color: 'black',
-    alignSelf: 'flex-start',
-    marginTop: 'auto',
-    fontSize: 24,
-    textAlign: 'left',
-    textTransform: 'uppercase',
-  },
-  roomMainText: {
-    fontFamily: 'Helviotopia',
-    fontWeight: '500',
-    color: 'black',
-    alignSelf: 'flex-start',
-    marginTop: 'auto',
-    fontSize: 32,
-    textAlign: 'left',
-    textTransform: 'uppercase',
-  },
-});
 
 export default GeneratorDetailScreen;

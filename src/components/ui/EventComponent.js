@@ -39,8 +39,8 @@ const EventComponent = ({ item, onLike }) => {
           }}
         >
           <Text style={StylesMain.artistListMainText}>{item.name}</Text>
-          <Text style={[StylesMain.artistListDateText, { backgroundColor: isToday ? '#00ff00' : '#ffffff' }]}>{dateString}</Text>
-          {item.soldout && <Text style={[StylesMain.textSmall, { backgroundColor: '#00ff00', alignSelf: 'flex-start' }]}>SOLD OUT</Text>}
+          <Text style={[StylesMain.textSmallBold, { backgroundColor: isToday ? '#00ff00' : '#ffffff', alignSelf: 'flex-start' }]}>{isToday ? 'HEUTE' : dateString}</Text>
+          {item.soldout && <Text style={[StylesMain.textSmallBold, { backgroundColor: '#00ff00', alignSelf: 'flex-start' }]}>SOLD OUT</Text>}
         </View>
         <View
           style={{

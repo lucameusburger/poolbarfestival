@@ -7,9 +7,13 @@ const StylesMain = StyleSheet.create({
     fontFamily: 'Helviotopia',
     fontSize: 17,
   },
-  text: {
+  textSmall: {
     fontFamily: 'Helviotopia',
-    fontSize: 12,
+    fontSize: 14,
+  },
+  textSmallBold: {
+    fontFamily: 'HelviotopiaBold',
+    fontSize: 14,
   },
   textBold: {
     fontFamily: 'HelviotopiaBold',
@@ -224,7 +228,7 @@ const StylesMain = StyleSheet.create({
     textTransform: 'lowercase',
     borderRadius: 10,
     padding: 10,
-    height: 90,
+    height: 120,
   },
   eventDateText: {
     fontFamily: 'HelviotopiaBold',

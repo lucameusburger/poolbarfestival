@@ -13,6 +13,9 @@ import { fetchArtists } from '../../redux/artistsThunk';
 import { navigate } from '../../core/RootNavigation';
 import { fetchVenues } from '../../redux/venueThunk';
 import { getDateString } from '../../core/helpers';
+import PoolbarImage from '../ui/PoolbarImage';
+
+import artistPlaceholder from '../../../assets/img/artistPlaceholder.jpg';
 
 const EventDetailScreen = ({ route }) => {
   const id = route.params.id.trim();
@@ -36,34 +39,28 @@ const EventDetailScreen = ({ route }) => {
 
     return (
       <View style={{ flex: 1, width: '100%', height: '100%' }}>
-        <View style={{ padding: 10, marginTop: 10, flexDirection: 'row' }}>
-          <View style={{ flex: 1, width: '100%' }}>
-            <View
-              style={{
-                flexDirection: 'row',
-                width: '100%',
-              }}
-            >
-              <Text style={[StylesMain.eventDateText, { backgroundColor: isToday ? '#00ff00' : '#ffffff' }]}>{dateString}</Text>
-            </View>
-            {item.soldout && (
-              <View
-                style={{
-                  flexDirection: 'row',
-                  width: '100%',
-                }}
-              >
-                <View>
-                  <Text style={[StylesMain.textSmall, { backgroundColor: '#00ff00' }]}>SOLD OUT</Text>
-                </View>
-              </View>
-            )}
-
-            <Text style={StylesMain.eventMainText}>{item.name}</Text>
-          </View>
+        <View style={{ flex: 1, width: '100%', padding: 10, borderBottomWidth: 2 }}>
+          <Text style={StylesMain.eventMainText}>{item.name}</Text>
         </View>
 
-        <View style={{ padding: 10, marginTop: 0 }}>
+        <View style={{ flex: 1, width: '100%', padding: 10, flexDirection: 'row', borderBottomWidth: 2 }}>
+          <View>
+            <Text style={[StylesMain.eventDateText, { backgroundColor: isToday ? '#00ff00' : '#ffffff', alignSelf: 'flex-start' }]}>{isToday ? 'HEUTE' + time_show_start : dateString}</Text>
+          </View>
+          <View style={{ flex: 1 }}>{item.soldout && <Text style={[StylesMain.eventDateText, { backgroundColor: '#00ff00', alignSelf: 'flex-end' }]}>SOLD OUT</Text>}</View>
+        </View>
+
+        <PoolbarImage
+          imageId={artist.image}
+          fallback={artistPlaceholder}
+          style={{
+            flex: 1,
+            width: '100%',
+            height: 320,
+          }}
+        />
+
+        <View style={{ padding: 10, borderTopWidth: 2 }}>
           <View>
             <Text style={StylesMain.text}>{item.description_short}</Text>
             <View style={{ height: 20 }}></View>
@@ -72,7 +69,7 @@ const EventDetailScreen = ({ route }) => {
           </View>
         </View>
 
-        <View style={{ padding: 10 }}>
+        <View style={{ padding: 10, marginBottom: 30 }}>
           <LikeIcon
             eventId={item.id}
             style={{

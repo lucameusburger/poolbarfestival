@@ -183,18 +183,17 @@ const FlowtextScreen = ({ navigation }) => {
         >
           {elements.map((element) => element)}
         </View>
-        <View style={{ margin: 20 }}>
-          <View style={{ flexDirection: 'row', marginBottom: 10, width: '100%' }}>
+        <View style={{ margin: 10 }}>
+          <View style={{ flexDirection: 'row', width: '100%' }}>
             <AppButton style={{ flex: 1 }} title="neu anfangen" onPress={clear} bevelLeft={false} />
-            <View style={{ width: 20 }}></View>
+            <View style={{ width: 10 }}></View>
             <AppButton style={{ flex: 1 }} title="umbruch" onPress={() => addToPhrase('\n')} bevelLeft={false} />
           </View>
+        </View>
+        <View>
           <View
             style={{
-              padding: 5,
-              borderWidth: 2,
-              borderColor: 'black',
-              borderRadius: 10,
+              borderTopWidth: 2,
               overflow: 'hidden',
               backgroundColor: 'white',
             }}
@@ -206,7 +205,7 @@ const FlowtextScreen = ({ navigation }) => {
               }}
               style={StylesMain.flowTextContainer}
             >
-              {phrase ? <Text style={StylesMain.flowTextPhrase}>{phrase}</Text> : <Text style={[StylesMain.flowTextPhrase, { color: '#00ff00' }]}>fange an wörter anzutippen</Text>}
+              {phrase ? <Text style={[StylesMain.flowTextPhrase, { marginBottom: 30 }]}>{phrase}</Text> : <Text style={[StylesMain.flowTextPhrase, { margin: 'auto', height: '100%' }]}>fange an wörter anzutippen ...</Text>}
             </ScrollView>
           </View>
         </View>
