@@ -28,7 +28,7 @@ export function fetchArtists() {
       return;
     } else {
       dispatch(setIsFetchingData(true));
-      fetch(BASE_URL + 'items/artists')
+      fetch(BASE_URL + 'items/artists?limit=9999')
         .then(async (response) => {
           // check for error response
 

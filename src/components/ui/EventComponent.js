@@ -6,6 +6,11 @@ import { getDateString } from '../../core/helpers';
 
 const EventComponent = ({ item, onLike }) => {
   let dateString = item.day_item.date_start ? getDateString(new Date(item.day_item.date_start)) : 'tba';
+
+  const today = new Date('2022-07-12');
+  const date = new Date(item.day_item.date_start);
+  const isToday = date.getDate() == today.getDate() && date.getMonth() == today.getMonth() && date.getFullYear() == today.getFullYear() ? true : false;
+
   return (
     <TouchableOpacity
       style={{
@@ -34,7 +39,8 @@ const EventComponent = ({ item, onLike }) => {
           }}
         >
           <Text style={StylesMain.artistListMainText}>{item.name}</Text>
-          <Text style={StylesMain.artistListDateText}>{dateString}</Text>
+          <Text style={[StylesMain.textSmallBold, { backgroundColor: isToday ? '#00ff00' : '#ffffff', alignSelf: 'flex-start' }]}>{isToday ? 'HEUTE' : dateString}</Text>
+          {item.soldout && <Text style={[StylesMain.textSmallBold, { backgroundColor: '#00ff00', alignSelf: 'flex-start' }]}>SOLD OUT</Text>}
         </View>
         <View
           style={{

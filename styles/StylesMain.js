@@ -6,7 +6,14 @@ const StylesMain = StyleSheet.create({
   text: {
     fontFamily: 'Helviotopia',
     fontSize: 17,
-    lineHeight: 22,
+  },
+  textSmall: {
+    fontFamily: 'Helviotopia',
+    fontSize: 14,
+  },
+  textSmallBold: {
+    fontFamily: 'HelviotopiaBold',
+    fontSize: 14,
   },
   textBold: {
     fontFamily: 'HelviotopiaBold',
@@ -148,6 +155,7 @@ const StylesMain = StyleSheet.create({
     fontSize: 22,
     textAlign: 'left',
     textTransform: 'uppercase',
+    lineHeight: 28,
   },
   artistDetailsDateText: {
     fontFamily: 'HelviotopiaBold',
@@ -169,14 +177,14 @@ const StylesMain = StyleSheet.create({
   },
   artistHistory: {
     fontFamily: 'Helviotopia',
-    fontWeight: '500',
     color: 'black',
     alignSelf: 'flex-start',
     marginTop: 'auto',
     fontSize: 22,
     textAlign: 'left',
     textTransform: 'uppercase',
-    marginBottom: 20,
+    marginBottom: 30,
+    lineHeight: 22,
   },
   flowTextElement: {
     fontFamily: 'Helviotopia',
@@ -220,7 +228,23 @@ const StylesMain = StyleSheet.create({
     textTransform: 'lowercase',
     borderRadius: 10,
     padding: 10,
-    height: 90,
+    height: 120,
+  },
+  eventDateText: {
+    fontFamily: 'HelviotopiaBold',
+    color: 'black',
+    marginTop: 'auto',
+    marginBottom: 'auto',
+    fontSize: 20,
+    textTransform: 'uppercase',
+  },
+  eventMainText: {
+    fontFamily: 'Helviotopia',
+    color: '#000',
+    alignSelf: 'flex-start',
+    fontSize: 42,
+    textAlign: 'left',
+    textTransform: 'uppercase',
   },
 });
 

@@ -51,6 +51,7 @@ const styles = StyleSheet.create({
     opacity: 1,
     width: 36,
     height: 36,
+    resizeMode: 'contain',
   },
 });
 

@@ -20,10 +20,23 @@ const ArtistDetailScreen = ({ artist }) => {
   const filteredEvents = events.filter((event) => event.artist === artist.id);
   return (
     <View style={{ flex: 1, width: '100%', height: '100%' }}>
-      <View style={{ padding: 10, marginTop: 10 }}>
+      <View style={{ padding: 10, borderBottomWidth: 2 }}>
+        <Text style={StylesMain.eventMainText}>{artist.name}</Text>
+      </View>
+      <View style={{ padding: 10, borderBottomWidth: 2 }}>
+        <Text style={StylesMain.eventDateText}>{artist.category}</Text>
+      </View>
+      <PoolbarImage
+        imageId={artist.image}
+        fallback={artistPlaceholder}
+        style={{
+          flex: 1,
+          width: '100%',
+          height: 320,
+        }}
+      />
+      <View style={{ padding: 10, borderTopWidth: 2 }}>
         <View style={{ marginBottom: 20 }}>
-          <Text style={StylesMain.artistDetailsDateText}>{artist.category}</Text>
-          <Text style={StylesMain.artistDetailsMainText}>{artist.name}</Text>
           <Text style={StylesMain.text}>{artist.description}</Text>
         </View>
       </View>
@@ -51,19 +64,12 @@ const ArtistDetailScreen = ({ artist }) => {
           />
         )}
       </View>
-      <PoolbarImage
-        imageId={artist.image}
-        fallback={artistPlaceholder}
-        style={{
-          flex: 1,
-          width: '100%',
-          height: 320,
-        }}
-      />
 
       <View>
-        <Text style={[StylesMain.artistDetailsDateText, { paddingVertical: 20, paddingHorizontal: 10 }]}>kommende events</Text>
-        <View style={{ flex: 1, borderTopWidth: 2 }}>
+        <View style={{ flex: 1, borderTopWidth: 2, borderBottomWidth: 2, padding: 10 }}>
+          <Text style={[StylesMain.artistDetailsDateText]}>bevorstehende events</Text>
+        </View>
+        <View style={{ flex: 1 }}>
           {filteredEvents.map((event) => (
             <EventComponent key={event.id} item={event} />
           ))}
@@ -92,7 +98,6 @@ const ArtistScreen = ({ route }) => {
       <FadeInView style={{ flex: 1, width: '100%' }}>
         <NavBar title={'artist'} />
         <ScrollView style={{ flex: 1 }}>{selectedArtist ? <ArtistDetailScreen artist={selectedArtist} /> : <LoadingText />}</ScrollView>
-        <StatusBar style="auto" />
       </FadeInView>
     </View>
   );

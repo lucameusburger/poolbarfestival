@@ -32,10 +32,12 @@ const ArtistListScreen = ({ item }) => {
           marginTop: 'auto',
           marginBottom: 'auto',
           flexDirection: 'row',
+          alignItems: 'center',
         }}
       >
         <PoolbarImage
           imageId={item.image}
+          params={'?fit=cover&width=96&height=96&quality=80'}
           fallback={artistPlaceholder}
           style={{
             width: 50,
@@ -44,13 +46,13 @@ const ArtistListScreen = ({ item }) => {
             alignItems: 'center',
           }}
         />
-        <View style={{}}></View>
-        <View style={{}}>
+        <View style={{ flex: 1 }}>
           <View
             style={{
-              marginLeft: 20,
+              marginLeft: 10,
               marginTop: 'auto',
               marginBottom: 'auto',
+              width: '100%',
               width: '100%',
             }}
           >
