@@ -34,7 +34,7 @@ const ScanScreen = ({ navigation }) => {
     if (canOpen) {
       const parts = data.split('/');
       const type = parts[parts.length - 2];
-      const id = parts[parts.length - 1];
+      const id = parts[parts.length - 1].replace('\u2013', '-');
       dispatch({
         type: 'ADD_SCANN',
         payload: {
@@ -42,7 +42,7 @@ const ScanScreen = ({ navigation }) => {
           type,
         },
       });
-      await Linking.openURL(data);
+      await Linking.openURL(data.replace('\u2013', '-'));
       setTimeout(() => {
         setScanned(false);
       }, 1000);
