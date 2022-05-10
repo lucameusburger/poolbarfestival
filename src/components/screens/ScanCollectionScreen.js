@@ -1,19 +1,26 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Text, View, ScrollView, StyleSheet, Pressable, TouchableOpacity } from 'react-native';
+import { useEffect, useState } from 'react';
+import { Text, View, ScrollView, TouchableOpacity } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { openInbox, openComposer } from 'react-native-email-link';
-
-import AppButton from '../ui/AppButton';
 import NavBar from '../ui/NavBar';
 import LoadingText from '../ui/LoadingText';
 import FadeInView from '../ui/FadeInView';
 import StylesMain from '../../../styles/StylesMain';
-
+import { randomId } from '../../core/helpers';
 import ProgressBar from '../ui/ProgressBar';
-
+import { CLR_PRIMARY } from '../../core/Theme';
 import { FontAwesome } from '@expo/vector-icons';
+import { navigate } from '../../core/RootNavigation';
 
-const BASE_URL = 'https://www.admin.poolbar.at/';
+function openScann(scann) {
+  const screens = {
+    event: 'Event',
+    artist: 'Artist',
+    generator: 'Generator',
+  };
+  navigate(screens[scann.type], {
+    id: scann.id,
+  });
+}
 
 const ScanCollection = ({ collection, events, artists, generators }) => {
   const showCollection = [];
@@ -24,20 +31,20 @@ const ScanCollection = ({ collection, events, artists, generators }) => {
 
     if (item.type === 'generator') {
       type_name = 'generator projekt';
-      name = generators.find((generator) => generator.id === item.id).name;
+      name = generators.find((generator) => generator.id === item.id)?.name;
     }
 
     if (item.type === 'artist') {
       type_name = 'artist';
-      name = artists.find((artist) => artist.id === item.id).name;
+      name = artists.find((artist) => artist.id === item.id)?.name;
     }
 
     if (item.type === 'event') {
       type_name = 'event';
-      name = events.find((event) => event.id === item.id).name;
+      name = events.find((event) => event.id === item.id)?.name;
     }
 
-    if (name != '') {
+    if (name) {
       showCollection.push({
         ...item,
         name,
@@ -56,7 +63,7 @@ const ScanCollection = ({ collection, events, artists, generators }) => {
             borderBottomColor: 'black',
           }}
           key={item.id}
-          onPress={() => alert('hallo')}
+          onPress={() => openScann(item)}
         >
           <View
             style={{
@@ -66,7 +73,17 @@ const ScanCollection = ({ collection, events, artists, generators }) => {
               flexDirection: 'row',
             }}
           >
-            <FontAwesome style={{ alignSelf: 'flex-end', marginBottom: 'auto', marginTop: 'auto', alignItems: 'center' }} name={'qrcode'} size={50} color={'#000000'} />
+            <FontAwesome
+              style={{
+                alignSelf: 'flex-end',
+                marginBottom: 'auto',
+                marginTop: 'auto',
+                alignItems: 'center',
+              }}
+              name={'qrcode'}
+              size={50}
+              color={'#000000'}
+            />
             <View style={{}}>
               <View
                 style={{
@@ -99,15 +116,15 @@ const ScanCollectionScreen = ({}) => {
   const events = useSelector((state) => state.events.data);
   const artists = useSelector((state) => state.artists.artists);
   const generators = useSelector((state) => state.generators.data);
-
+  const beerCode = useSelector((state) => state.beer.code);
+  const redemed = useSelector((state) => state.beer.redemed);
   useEffect(() => {
     setGeneratorsCount(generators.length);
     setGeneratorsScannedCount(scans.filter((item) => item.type === 'generator').length);
 
-    console.log(generatorsCount + ' / ' + generatorsSScannedCount);
-
-    if (generatorsSScannedCount >= generatorsCount) {
-      alert('Freibier 💚');
+    if (generatorsSScannedCount >= generatorsCount && beerCode !== null) {
+      //dispatch({ type: "SET_CODE", payload: true });
+      alert('h');
     }
   }, [generators]);
 
@@ -115,8 +132,14 @@ const ScanCollectionScreen = ({}) => {
     <View style={StylesMain.mainView}>
       <FadeInView style={{ flex: 1, width: '100%', height: '100%' }}>
         <NavBar title="scans" />
-        <View style={{ padding: 10, borderBottomColor: '#000000', borderBottomWidth: 2 }}>
-          <ProgressBar value={generatorsSScannedCount} maxvalue={generatorsCount} />
+        <View
+          style={{
+            padding: 10,
+            borderBottomColor: '#000000',
+            borderBottomWidth: 2,
+          }}
+        >
+          <ProgressBar text={beerCode} value={generatorsSScannedCount} maxvalue={generatorsCount} />
         </View>
         <ScrollView style={{ flex: 1 }}>{!scans || !artists || !events || !generators ? <LoadingText /> : <ScanCollection events={events} collection={scans} generators={generators} artists={artists} />}</ScrollView>
       </FadeInView>
