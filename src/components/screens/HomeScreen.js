@@ -23,22 +23,21 @@ const HomeScreen = ({ navigation }) => {
   return (
     <View style={StylesMain.mainView}>
       <FadeInView style={{ flex: 1, width: '100%', height: '100%' }}>
-        <Wrapper style={{ margin: 0, backgroundColor: '#00ff00', zIndex: 999, position: 'absolute', left: 0, right: 0, top: 0 }}>
+        <Wrapper style={{ margin: 0, zIndex: 999, position: 'absolute', left: 0, right: 0, top: 0 }}>
           <View
             style={{
               width: '150%',
               alignSelf: 'center',
-              transform: [{ rotate: '-2deg' }],
+              transform: [{ rotate: '-4deg' }],
               backgroundColor: CLR_PRIMARY,
-              paddingTop: 16,
+              paddingVertical: 10,
+              marginTop: 32,
             }}
           >
             <Text
               style={{
                 fontFamily: 'HelviotopiaMedium',
                 alignSelf: 'center',
-                marginTop: 'auto',
-                marginBottom: 5,
                 fontSize: 28,
               }}
             >

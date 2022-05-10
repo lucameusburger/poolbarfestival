@@ -19,10 +19,11 @@ const FlowtextElement = memo(({ text, y, _key }) => {
   const dispatch = useDispatch();
   const phrase = useSelector((state) => state.flowText.phrase);
   const [active, setActive] = useState(false);
+  const [width, setWidth] = useState(0);
 
   const { scrollX } = useMemoOne(() => {
     return {
-      scrollX: new Animated.Value(0),
+      scrollX: new Animated.Value(SCREEN_WIDTH),
     };
   }, []);
 
@@ -41,12 +42,15 @@ const FlowtextElement = memo(({ text, y, _key }) => {
   };
 
   useEffect(() => {
-    Animated.timing(scrollX, {
-      toValue: -SCREEN_WIDTH,
-      duration: 10000,
-      useNativeDriver: true,
-    }).start(removeElement);
-  }, []);
+    if (width !== 0) {
+      scrollX.setValue(width);
+      Animated.timing(scrollX, {
+        toValue: -SCREEN_WIDTH,
+        duration: 10000,
+        useNativeDriver: true,
+      }).start(removeElement);
+    }
+  }, [width]);
 
   return (
     <Animated.View
@@ -56,6 +60,9 @@ const FlowtextElement = memo(({ text, y, _key }) => {
         right: 0,
         zIndex: 1000,
         transform: [{ translateX: scrollX }],
+      }}
+      onLayout={(event) => {
+        setWidth(event.nativeEvent.layout.width);
       }}
     >
       <Pressable
