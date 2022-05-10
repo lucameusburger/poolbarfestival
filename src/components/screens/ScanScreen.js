@@ -61,7 +61,7 @@ const ScanScreen = ({ navigation }) => {
           console.log('generatorsCount', generatorsCount);
           console.log(id);
           if (newGeneratorAlreadyScanned && generatorsCount === generatorsScannedCount - 1) {
-            alert('Du hast alle Generatorprojekte gescannt!     Du kannst deinen Code für ein Gratisbier bei deinen Scanns finden.');
+            alert('Du hast alle Generatorprojekte gescannt!     Du kannst deinen Code für ein Gratisbier bei deinen Scanns finden. Solange der Vorrat reicht.');
 
             dispatch({
               type: 'SET_CODE',
