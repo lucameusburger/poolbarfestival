@@ -8,6 +8,7 @@ import { FontAwesome } from '@expo/vector-icons';
 import { navigate } from '../../core/RootNavigation';
 import { useDispatch, useSelector } from 'react-redux';
 import { randomId } from '../../core/helpers';
+import { useIsFocused } from '@react-navigation/native';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
@@ -20,6 +21,7 @@ const ScanScreen = ({ navigation }) => {
   const artists = useSelector((state) => state.artists.artists);
   const generators = useSelector((state) => state.generators.data);
   const scanns = useSelector((state) => state.scanns.data);
+  const isFocused = useIsFocused();
 
   useEffect(() => {
     (async () => {
@@ -39,7 +41,7 @@ const ScanScreen = ({ navigation }) => {
     });
     setTimeout(() => {
       setScanned(false);
-    }, 1000);
+    }, 3000);
   };
 
   const handleBarCodeScanned = async ({ type, data }) => {
@@ -136,7 +138,7 @@ const ScanScreen = ({ navigation }) => {
               color="white"
             />
           </View>
-          {hasPermission && <BarCodeScanner onBarCodeScanned={scanned ? undefined : handleBarCodeScanned} style={[StyleSheet.absoluteFillObject, { margin: -20 }]} />}
+          {hasPermission && isFocused && <BarCodeScanner onBarCodeScanned={scanned ? undefined : handleBarCodeScanned} style={[StyleSheet.absoluteFillObject, { margin: -20 }]} />}
         </View>
       </FadeInView>
     </View>
