@@ -103,7 +103,7 @@ const App = () => {
           path: '/artist/:id',
         },
         Generator: {
-          path: '/generator/:id',
+          path: '/generator/:id/:isDeepLink',
         },
         Home: '*',
       },

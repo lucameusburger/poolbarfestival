@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Text, View, ScrollView } from 'react-native';
+import { Text, View, ScrollView, Alert } from 'react-native';
 import NavBar from '../ui/NavBar';
 import FadeInView from '../ui/FadeInView';
 import StylesMain from '../../../styles/StylesMain';
@@ -8,6 +8,7 @@ import PoolbarImage from '../ui/PoolbarImage';
 import LoadingText from '../ui/LoadingText';
 import { fetchGenerators } from '../../redux/generatorsThunk';
 import artistPlaceholder from '../../../assets/img/generatorProjectPlaceholder.jpg';
+import { randomId } from '../../core/helpers';
 
 const RenderMember = ({ member }) => {
   return (
@@ -115,13 +116,34 @@ const RenderElement = ({ generator }) => {
 
 const GeneratorDetailScreen = ({ route, navigation }) => {
   const id = route.params.id.trim();
+  const isDeepLink = !!route.params.isDeepLink;
+  const areGeneratorsLoaded = useSelector((state) => state.generators.isLoaded);
   const generators = useSelector((state) => state.generators.data);
+  const scanns = useSelector((state) => state.scanns.data);
   const [selectedGenerator, setSelectedGenerator] = useState(null);
   const dispatch = useDispatch();
+  const [addedDeepLink, setAddedDeepLink] = useState(false);
 
   useEffect(() => {
     dispatch(fetchGenerators());
   }, []);
+
+  useEffect(() => {
+    if (isDeepLink && !addedDeepLink && areGeneratorsLoaded && scanns) {
+      setAddedDeepLink(true);
+      const generatorsCount = generators.length;
+      const generatorsScannedCount = scanns.filter((scann) => scann.type === 'generator').length;
+      const newGeneratorAlreadyScanned = scanns.find((scann) => scann.id === id && scann.type === 'generator');
+      if (!newGeneratorAlreadyScanned && generatorsCount === generatorsScannedCount - 1) {
+        Alert.alert('Du hast alle Generatorprojekte gescannt!', 'Du kannst deinen Code für ein Gratisbier bei deinen Scanns finden. Solange der Vorrat reicht.');
+
+        dispatch({
+          type: 'SET_CODE',
+          payload: randomId(8),
+        });
+      }
+    }
+  }, [generators, scanns, isDeepLink, areGeneratorsLoaded]);
 
   useEffect(() => {
     const generator = generators.find((generator) => generator.id === id);
