@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { StyleSheet, View, Linking, Dimensions } from 'react-native';
+import { StyleSheet, View, Linking, Dimensions, Alert } from 'react-native';
 import FadeInView from '../ui/FadeInView';
 import NavBar from '../ui/NavBar';
 import StylesMain from '../../../styles/StylesMain';
@@ -34,12 +34,22 @@ const ScanScreen = ({ navigation }) => {
   }, []);
 
   const unknownQRCode = async () => {
-    alert('Unbekannter QR code', {
-      cancelable: false,
-    });
-    setTimeout(() => {
-      setScanned(false);
-    }, 3000);
+    Alert.alert(
+      'Unbekannter QR code',
+      '',
+      [
+        {
+          text: 'OK',
+          onPress: () =>
+            setTimeout(() => {
+              setScanned(false);
+            }, 1000),
+        },
+      ],
+      {
+        cancelable: false,
+      }
+    );
   };
 
   const handleBarCodeScanned = async ({ type, data }) => {
