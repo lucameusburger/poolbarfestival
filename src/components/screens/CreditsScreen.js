@@ -17,7 +17,7 @@ const Credits = () => {
   return (
     <View style={StylesMain.credits}>
       <Text style={StylesMain.text}>Diese App wurde im Rahmen des poolbar Generator 2022 in Hohenems innerhalb einer Woche mit viel Liebe, Schweiß und Herzblut entwickelt ❤️ Es wurden dabei unzählige Tassen Kaffee konsumiert und genauso viele Ideen produziert. Wir hoffen die App gefällt Dir!</Text>
-      <Video rate={1.0} isMuted={true} resizeMode="contain" ref={video} style={styles.video} source={require('../../../assets/video/ladder.mp4')} shouldPlay isLooping />
+      <Video rate={1.0} isMuted={true} resizeMode="contain" ref={video} style={{ height: 300, shadowColor: 'white', shadowOpacity: 1 }} source={require('../../../assets/video/ladder.mp4')} shouldPlay isLooping />
       <Text style={[StylesMain.textBold, { marginTop: 30 }]}>Idee und Konzept</Text>
       <Text style={[StylesMain.text, { marginTop: 0 }]}>Luca Meusburger</Text>
       <Text style={[StylesMain.textBold, { marginTop: 30 }]}>Programmierung</Text>
@@ -58,31 +58,5 @@ const CreditsScreen = ({}) => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  video: {
-    height: 300,
-    shadowColor: 'white',
-    shadowOpacity: 1,
-  },
-  creditsDateText: {
-    fontFamily: 'HelviotopiaBold',
-    color: 'black',
-    alignSelf: 'flex-start',
-    marginTop: 'auto',
-    fontSize: 20,
-    textAlign: 'left',
-    textTransform: 'uppercase',
-  },
-  creditsMainText: {
-    fontFamily: 'Helviotopia',
-    color: 'black',
-    alignSelf: 'flex-start',
-    marginTop: 'auto',
-    fontSize: 42,
-    textAlign: 'left',
-    textTransform: 'uppercase',
-  },
-});
 
 export default CreditsScreen;

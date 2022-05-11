@@ -66,26 +66,20 @@ const LocationInfoBottomBar = ({ location }) => {
           marginTop: 10,
           height: '100%',
           padding: 10,
+          display: 'flex',
+          alignContent: 'center',
+          alignItems: 'center',
         }}
       >
         <Text
           style={{
             fontSize: 22,
-            marginBottom: 0,
+            margin: 'auto',
             fontFamily: 'Helviotopia',
-            width: '100%',
+            alignSelf: 'center',
           }}
         >
           {location?.name}
-        </Text>
-        <Text
-          style={{
-            fontFamily: 'Helviotopia',
-            marginBottom: 0,
-            width: '100%',
-          }}
-        >
-          {location?.description}
         </Text>
       </View>
     </View>

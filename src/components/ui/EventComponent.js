@@ -38,7 +38,7 @@ const EventComponent = ({ item, onLike }) => {
             flex: 8,
           }}
         >
-          <Text style={StylesMain.artistListMainText}>{item.name}</Text>
+          <Text style={StylesMain.listMainText}>{item.name}</Text>
           <Text
             style={[
               StylesMain.textSmallBold,

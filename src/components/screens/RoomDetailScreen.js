@@ -31,7 +31,7 @@ const RenderElement = ({ venue }) => {
         }}
       />
       <View style={{ flex: 1 }}>
-        <Text style={[StylesMain.artistDetailsDateText, { paddingVertical: 20, paddingHorizontal: 10 }]}>kommende events</Text>
+        <Text style={[StylesMain.detailsDateText, { paddingVertical: 20, paddingHorizontal: 10 }]}>kommende events</Text>
         <View style={{ flex: 1, borderTopWidth: 2 }}>
           {filteredEvents.map((event) => (
             <EventComponent item={event} key={event.id} />
@@ -60,7 +60,7 @@ const RoomDetailScreen = ({ route, navigation }) => {
   return (
     <View style={StylesMain.mainView}>
       <FadeInView style={{ flex: 1, width: '100%' }}>
-        <NavBar navigation={navigation} title={'venue'} />
+        <NavBar navigation={navigation} title={'stage'} />
         <ScrollView style={{ flex: 1 }}>{selectedVenue ? <RenderElement venue={selectedVenue} /> : <LoadingText />}</ScrollView>
       </FadeInView>
     </View>

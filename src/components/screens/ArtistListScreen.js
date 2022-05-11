@@ -33,6 +33,7 @@ const ArtistListScreen = ({ item }) => {
           marginBottom: 'auto',
           flexDirection: 'row',
           alignItems: 'center',
+          display: 'flex',
         }}
       >
         <PoolbarImage
@@ -53,11 +54,10 @@ const ArtistListScreen = ({ item }) => {
               marginTop: 'auto',
               marginBottom: 'auto',
               width: '100%',
-              width: '100%',
             }}
           >
-            <Text style={StylesMain.artistListMainText}>{item.name}</Text>
-            <Text style={StylesMain.artistListDateText}>{item.category}</Text>
+            <Text style={StylesMain.listMainText}>{item.name}</Text>
+            <Text style={StylesMain.listDateText}>{item.category}</Text>
           </View>
         </View>
       </View>

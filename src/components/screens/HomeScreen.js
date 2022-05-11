@@ -25,6 +25,7 @@ const HomeScreen = ({ navigation }) => {
       <FadeInView style={{ flex: 1, width: '100%', height: '100%' }}>
         <Wrapper style={{ margin: 0, zIndex: 999, position: 'absolute', left: 0, right: 0, top: 0 }}>
           <View
+            shouldRasterizeIOS
             style={{
               width: '150%',
               alignSelf: 'center',

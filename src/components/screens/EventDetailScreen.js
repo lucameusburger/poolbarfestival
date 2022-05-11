@@ -29,14 +29,14 @@ const EventDetail = ({ item, artist, venue }) => {
   return (
     <View style={{ flex: 1, width: '100%', height: '100%' }}>
       <View style={{ flex: 1, width: '100%', padding: 10, borderBottomWidth: 2 }}>
-        <Text style={StylesMain.eventMainText}>{item.name}</Text>
+        <Text style={StylesMain.detailsMainText}>{item.name}</Text>
       </View>
 
       <View style={{ flex: 1, width: '100%', padding: 10, flexDirection: 'row', borderBottomWidth: 2 }}>
         <View>
-          <Text style={[StylesMain.eventDateText, { backgroundColor: isToday ? '#00ff00' : '#ffffff', alignSelf: 'flex-start' }]}>{isToday ? 'HEUTE' + time_show_start : dateString}</Text>
+          <Text style={[StylesMain.detailsDateText, { backgroundColor: isToday ? '#00ff00' : '#ffffff', alignSelf: 'flex-start' }]}>{isToday ? 'HEUTE' + time_show_start : dateString}</Text>
         </View>
-        <View style={{ flex: 1 }}>{item.soldout && <Text style={[StylesMain.eventDateText, { backgroundColor: '#00ff00', alignSelf: 'flex-end' }]}>SOLD OUT</Text>}</View>
+        <View style={{ flex: 1 }}>{item.soldout && <Text style={[StylesMain.detailsDateText, { backgroundColor: '#00ff00', alignSelf: 'flex-end' }]}>SOLD OUT</Text>}</View>
       </View>
 
       <PoolbarImage
@@ -53,8 +53,10 @@ const EventDetail = ({ item, artist, venue }) => {
         <View>
           <Text style={StylesMain.text}>{item.description_short}</Text>
           <View style={{ height: 20 }}></View>
-          <Text style={[StylesMain.text, { fontFamily: 'HelviotopiaBold' }]}>{artist?.category ? '#' + artist.category : '#tba'}</Text>
-          <Text style={[StylesMain.text, { fontFamily: 'HelviotopiaBold' }]}>{venue?.name ? '#' + venue.name : '#tba'}</Text>
+          <Text style={[StylesMain.text, { fontFamily: 'HelviotopiaBold' }]}>
+            {artist?.category ? '#' + artist.category + ' ' : ''}
+            {venue?.name ? '#' + venue.name : ''}
+          </Text>
         </View>
       </View>
 
@@ -95,7 +97,7 @@ const EventDetail = ({ item, artist, venue }) => {
         {item.room && (
           <AppButton
             style={{ marginRight: 'auto', marginLeft: 0 }}
-            title="venue ansehen"
+            title="stage ansehen"
             onPress={() =>
               navigate('Room', {
                 id: item.room,

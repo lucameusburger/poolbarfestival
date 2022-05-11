@@ -1,18 +1,18 @@
-import { useEffect, useState } from "react";
-import { Text, View, ScrollView, StyleSheet, Linking } from "react-native";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from 'react';
+import { Text, View, ScrollView, StyleSheet, Linking } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 
-import AppButton from "../ui/AppButton";
-import NavBar from "../ui/NavBar";
-import LoadingText from "../ui/LoadingText";
-import FadeInView from "../ui/FadeInView";
-import StylesMain from "../../../styles/StylesMain";
-import { fetchPOI } from "../../redux/poiThunk";
+import AppButton from '../ui/AppButton';
+import NavBar from '../ui/NavBar';
+import LoadingText from '../ui/LoadingText';
+import FadeInView from '../ui/FadeInView';
+import StylesMain from '../../../styles/StylesMain';
+import { fetchPOI } from '../../redux/poiThunk';
 
 function openGoogleMaps(location, name) {
   const scheme = Platform.select({
-    ios: "maps:0,0?q=",
-    android: "geo:0,0?q=",
+    ios: 'maps:0,0?q=',
+    android: 'geo:0,0?q=',
   });
   const latLng = `${location.latitude},${location.longitude}`;
   const url = Platform.select({
@@ -25,26 +25,25 @@ function openGoogleMaps(location, name) {
 
 const RaumfahrtDetail = ({ spaceLocation }) => {
   return (
-    <View style={{ flex: 1, width: "100%", height: "100%" }}>
-      <View style={{ padding: 10, marginTop: 10 }}>
-        <View style={{ marginBottom: 20 }}>
-          <Text style={StylesMain.artistDetailsDateText}>
-            {spaceLocation.year}
-          </Text>
-
-          <Text style={StylesMain.artistDetailsMainText}>
-            {spaceLocation.name}
-          </Text>
-          <Text style={StylesMain.description}>
-            {spaceLocation.description}
-          </Text>
-        </View>
+    <View style={{ flex: 1, width: '100%', height: '100%' }}>
+      <View style={{ padding: 10, borderBottomWidth: 2 }}>
+        <Text style={StylesMain.detailsMainText}>{spaceLocation.name}</Text>
       </View>
+      <View style={{ padding: 10, borderBottomWidth: 2 }}>
+        <Text style={StylesMain.detailsDateText}>{spaceLocation.year}</Text>
+      </View>
+      {spaceLocation.description && (
+        <View style={{ padding: 10 }}>
+          <View>
+            <Text style={StylesMain.text}>{spaceLocation.description}</Text>
+          </View>
+        </View>
+      )}
       <View style={{ padding: 10 }}>
         <AppButton
           title="navigieren"
           style={{
-            marginRight: "auto",
+            marginRight: 'auto',
             marginLeft: 0,
             marginBottom: 10,
           }}
@@ -79,50 +78,17 @@ const RaumfahrtDetailScreen = ({ route }) => {
   }, []);
 
   useEffect(() => {
-    setSelectedSpaceLocation(
-      spaceLocations.find((spaceLocation) => spaceLocation.id === id)
-    );
+    setSelectedSpaceLocation(spaceLocations.find((spaceLocation) => spaceLocation.id === id));
   }, [spaceLocations]);
 
   return (
     <View style={StylesMain.mainView}>
-      <FadeInView style={{ flex: 1, width: "100%", height: "100%" }}>
+      <FadeInView style={{ flex: 1, width: '100%', height: '100%' }}>
         <NavBar title="raumfahrt" />
-        <ScrollView style={{ flex: 1, marginTop: 10, padding: 10 }}>
-          {!isLoaded || !selectedSpaceLocation ? (
-            <LoadingText />
-          ) : (
-            <RaumfahrtDetail spaceLocation={selectedSpaceLocation} />
-          )}
-        </ScrollView>
+        <ScrollView style={{ flex: 1 }}>{!isLoaded || !selectedSpaceLocation ? <LoadingText /> : <RaumfahrtDetail spaceLocation={selectedSpaceLocation} />}</ScrollView>
       </FadeInView>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  video: {
-    width: "100%",
-    height: 300,
-  },
-  creditsDateText: {
-    fontFamily: "HelviotopiaBold",
-    color: "black",
-    alignSelf: "flex-start",
-    marginTop: "auto",
-    fontSize: 20,
-    textAlign: "left",
-    textTransform: "uppercase",
-  },
-  creditsMainText: {
-    fontFamily: "Helviotopia",
-    color: "black",
-    alignSelf: "flex-start",
-    marginTop: "auto",
-    fontSize: 42,
-    textAlign: "left",
-    textTransform: "uppercase",
-  },
-});
 
 export default RaumfahrtDetailScreen;
