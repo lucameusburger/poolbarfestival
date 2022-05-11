@@ -7,7 +7,6 @@ import { BarCodeScanner } from 'expo-barcode-scanner';
 import { FontAwesome } from '@expo/vector-icons';
 import { navigate } from '../../core/RootNavigation';
 import { useDispatch, useSelector } from 'react-redux';
-import { randomId } from '../../core/helpers';
 import { useIsFocused } from '@react-navigation/native';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
@@ -20,7 +19,6 @@ const ScanScreen = ({ navigation }) => {
   const events = useSelector((state) => state.events.data);
   const artists = useSelector((state) => state.artists.artists);
   const generators = useSelector((state) => state.generators.data);
-  const scanns = useSelector((state) => state.scanns.data);
   const isFocused = useIsFocused();
 
   useEffect(() => {
@@ -49,29 +47,16 @@ const ScanScreen = ({ navigation }) => {
     const canOpen = await Linking.canOpenURL(data);
     if (canOpen) {
       const parts = data.split('/');
-      const type = parts[parts.length - 2];
-      const id = parts[parts.length - 1].replace('\u2013', '-');
+      const type = parts[parts.length - 3];
+      const id = parts[parts.length - 2].replace('\u2013', '-');
       if (type === 'generator') {
         if (!generators.find((generator) => generator.id === id)) {
           unknownQRCode();
           return;
-        } else {
-          const generatorsCount = generators.length;
-          const generatorsScannedCount = scanns.filter((scann) => scann.type === 'generator').length;
-          const newGeneratorAlreadyScanned = scanns.find((scann) => scann.id === id && scann.type === 'generator');
-          if (newGeneratorAlreadyScanned && generatorsCount === generatorsScannedCount - 1) {
-            alert('Du hast alle Generatorprojekte gescannt!     Du kannst deinen Code für ein Gratisbier bei deinen Scanns finden. Solange der Vorrat reicht.');
-
-            dispatch({
-              type: 'SET_CODE',
-              payload: randomId(8),
-            });
-          }
         }
       } else if (type === 'artist') {
         if (!artists.find((artist) => artist.id === id)) {
           unknownQRCode();
-
           return;
         }
       } else if (type === 'event') {
