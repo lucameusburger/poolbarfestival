@@ -56,8 +56,8 @@ const ArtistListScreen = ({ item }) => {
               width: '100%',
             }}
           >
-            <Text style={StylesMain.artistListMainText}>{item.name}</Text>
-            <Text style={StylesMain.artistListDateText}>{item.category}</Text>
+            <Text style={StylesMain.listMainText}>{item.name}</Text>
+            <Text style={StylesMain.listDateText}>{item.category}</Text>
           </View>
         </View>
       </View>

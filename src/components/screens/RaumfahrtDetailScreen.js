@@ -27,10 +27,10 @@ const RaumfahrtDetail = ({ spaceLocation }) => {
   return (
     <View style={{ flex: 1, width: '100%', height: '100%' }}>
       <View style={{ padding: 10, borderBottomWidth: 2 }}>
-        <Text style={StylesMain.eventMainText}>{spaceLocation.name}</Text>
+        <Text style={StylesMain.detailsMainText}>{spaceLocation.name}</Text>
       </View>
       <View style={{ padding: 10, borderBottomWidth: 2 }}>
-        <Text style={StylesMain.eventDateText}>{spaceLocation.year}</Text>
+        <Text style={StylesMain.detailsDateText}>{spaceLocation.year}</Text>
       </View>
       {spaceLocation.description && (
         <View style={{ padding: 10 }}>
@@ -90,30 +90,5 @@ const RaumfahrtDetailScreen = ({ route }) => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  video: {
-    width: '100%',
-    height: 300,
-  },
-  creditsDateText: {
-    fontFamily: 'HelviotopiaBold',
-    color: 'black',
-    alignSelf: 'flex-start',
-    marginTop: 'auto',
-    fontSize: 20,
-    textAlign: 'left',
-    textTransform: 'uppercase',
-  },
-  creditsMainText: {
-    fontFamily: 'Helviotopia',
-    color: 'black',
-    alignSelf: 'flex-start',
-    marginTop: 'auto',
-    fontSize: 42,
-    textAlign: 'left',
-    textTransform: 'uppercase',
-  },
-});
 
 export default RaumfahrtDetailScreen;

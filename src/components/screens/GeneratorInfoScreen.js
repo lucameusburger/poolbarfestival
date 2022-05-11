@@ -19,8 +19,11 @@ const Info = () => {
   return (
     <View>
       <Text style={[StylesMain.textBold, { marginBottom: 10 }]}>Der poolbar Generator 2022</Text>
-      <Text style={StylesMain.text}>Die nächsten heißen Sommerabende im Reichenfeldpark und Alten Hallenbad in Feldkirch kommen bestimmt. Die jährlich neue gestalterische Basis für den Festivalspaß wird in der Osterwoche im Poolbar Generator gelegt, dem Labor für Festivaldesign. Kunst-, Design-, Architektur-, Sprach- und IT-Talente können sich ab sofort bewerben, um das Erscheinungsbild des kommenden Festivals mitzuentwickeln.</Text>
-      <Video rate={1.0} isMuted={true} resizeMode="contain" ref={video} style={styles.video} source={require('../../../assets/video/ladder.mp4')} shouldPlay isLooping />
+      <Text style={StylesMain.text}>
+        Die nächsten heißen Sommerabende im Reichenfeldpark und Alten Hallenbad in Feldkirch kommen bestimmt. Die jährlich neue gestalterische Basis für den Festivalspaß wird in der Osterwoche im Poolbar Generator gelegt, dem Labor für Festivaldesign. Kunst-, Design-, Architektur-, Sprach- und
+        IT-Talente können sich ab sofort bewerben, um das Erscheinungsbild des kommenden Festivals mitzuentwickeln.
+      </Text>
+      <Video rate={1.0} isMuted={true} resizeMode="contain" ref={video} style={{ width: '100%', height: 300 }} source={require('../../../assets/video/ladder.mp4')} shouldPlay isLooping />
       <Text style={[StylesMain.textBold, { marginTop: 30 }]}>Kostenlos</Text>
       <Text style={[StylesMain.text, { marginTop: 10 }]}>Teilnahme Unterkunft in Hohenems Verpflegung in Hohenems Exkursionen, Museumseintritte Festivalpass bzw. Punktekarte</Text>
       <Text style={[StylesMain.textBold, { marginTop: 30 }]}>Input & Inspiration</Text>
@@ -55,30 +58,5 @@ const GeneratorInfoScreen = ({}) => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  video: {
-    width: '100%',
-    height: 300,
-  },
-  creditsDateText: {
-    fontFamily: 'HelviotopiaBold',
-    color: 'black',
-    alignSelf: 'flex-start',
-    marginTop: 'auto',
-    fontSize: 20,
-    textAlign: 'left',
-    textTransform: 'uppercase',
-  },
-  creditsMainText: {
-    fontFamily: 'Helviotopia',
-    color: 'black',
-    alignSelf: 'flex-start',
-    marginTop: 'auto',
-    fontSize: 42,
-    textAlign: 'left',
-    textTransform: 'uppercase',
-  },
-});
 
 export default GeneratorInfoScreen;

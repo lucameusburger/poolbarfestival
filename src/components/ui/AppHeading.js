@@ -66,7 +66,7 @@ const AppHeading = ({ title }) => {
 const styles = StyleSheet.create({
   heading: {
     fontFamily: 'Helviotopia',
-    fontSize: SCREEN_HEIGHT / 10,
+    fontSize: SCREEN_HEIGHT / 12,
     color: 'black',
     alignSelf: 'center',
   },

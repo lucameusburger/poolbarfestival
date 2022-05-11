@@ -21,10 +21,10 @@ const ArtistDetail = ({ artist }) => {
   return (
     <View style={{ flex: 1, width: '100%', height: '100%' }}>
       <View style={{ padding: 10, borderBottomWidth: 2 }}>
-        <Text style={StylesMain.eventMainText}>{artist.name}</Text>
+        <Text style={StylesMain.detailsMainText}>{artist.name}</Text>
       </View>
       <View style={{ padding: 10, borderBottomWidth: 2 }}>
-        <Text style={StylesMain.eventDateText}>{artist.category}</Text>
+        <Text style={StylesMain.detailsDateText}>{artist.category}</Text>
       </View>
       <PoolbarImage
         imageId={artist.image}
@@ -33,40 +33,45 @@ const ArtistDetail = ({ artist }) => {
           flex: 1,
           width: '100%',
           height: 320,
+          padding: 0,
         }}
       />
-      <View style={{ padding: 10, borderTopWidth: 2 }}>
-        <View style={{ marginBottom: 0 }}>
-          <Text style={StylesMain.text}>{artist.description}</Text>
+      {artist.description && (
+        <View style={{ padding: 10, borderTopWidth: 2 }}>
+          <View style={{ marginBottom: 0 }}>
+            <Text style={StylesMain.text}>{artist.description}</Text>
+          </View>
         </View>
-      </View>
-      <View style={{ padding: 10 }}>
-        {artist.url_spotify && (
-          <AppButton
-            style={{
-              marginRight: 'auto',
-              marginLeft: 0,
-            }}
-            title="auf spotify spielen"
-            onPress={() => Linking.openURL(artist.url_spotify)}
-          />
-        )}
-        {artist.website && (
-          <AppButton
-            style={{
-              marginRight: 'auto',
-              marginLeft: 0,
-              marginTop: 10,
-            }}
-            title="zur webseite"
-            onPress={() => Linking.openURL(artist.website)}
-          />
-        )}
-      </View>
+      )}
+      {(artist.website || artist.url_spotify) && (
+        <View style={{ padding: 10 }}>
+          {artist.url_spotify && (
+            <AppButton
+              style={{
+                marginRight: 'auto',
+                marginLeft: 0,
+              }}
+              title="auf spotify spielen"
+              onPress={() => Linking.openURL(artist.url_spotify)}
+            />
+          )}
+          {artist.website && (
+            <AppButton
+              style={{
+                marginRight: 'auto',
+                marginLeft: 0,
+                marginTop: 10,
+              }}
+              title="zur webseite"
+              onPress={() => Linking.openURL(artist.website)}
+            />
+          )}
+        </View>
+      )}
 
-      <View style={{ marginBottom: 30 }}>
+      <View>
         <View style={{ flex: 1, borderTopWidth: 2, borderBottomWidth: 2, padding: 10 }}>
-          <Text style={[StylesMain.artistDetailsDateText]}>bevorstehende events</Text>
+          <Text style={[StylesMain.detailsDateText]}>bevorstehende events</Text>
         </View>
         <View style={{ flex: 1 }}>
           {filteredEvents.map((event) => (

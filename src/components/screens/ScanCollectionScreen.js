@@ -91,8 +91,8 @@ const ScanCollection = ({ collection, events, artists, generators }) => {
                   width: '100%',
                 }}
               >
-                <Text style={StylesMain.artistListMainText}>{item.name}</Text>
-                <Text style={StylesMain.artistListDateText}>{item.type_name}</Text>
+                <Text style={StylesMain.listMainText}>{item.name}</Text>
+                <Text style={StylesMain.listDateText}>{item.type_name}</Text>
               </View>
             </View>
           </View>

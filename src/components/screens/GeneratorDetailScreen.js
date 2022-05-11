@@ -49,8 +49,8 @@ const RenderMember = ({ member }) => {
               alignItems: 'center',
             }}
           >
-            <Text style={StylesMain.artistListDateText}>{member.year}</Text>
-            <Text style={[StylesMain.artistListMainText, { flex: 1, width: '100%' }]} ellipsizeMode="tail">
+            <Text style={StylesMain.listDateText}>{member.year}</Text>
+            <Text style={[StylesMain.listMainText, { flex: 1, width: '100%' }]} ellipsizeMode="tail">
               {member.name}
             </Text>
             {member.is_head && (
@@ -76,10 +76,10 @@ const RenderElement = ({ generator }) => {
   return (
     <View style={{ flex: 1, width: '100%', height: '100%' }}>
       <View style={{ padding: 10, borderBottomWidth: 2 }}>
-        <Text style={StylesMain.eventMainText}>{generator.name}</Text>
+        <Text style={StylesMain.detailsMainText}>{generator.name}</Text>
       </View>
       <View style={{ padding: 10, borderBottomWidth: 2 }}>
-        <Text style={StylesMain.eventDateText}>{generator.lab_item.name}</Text>
+        <Text style={StylesMain.detailsDateText}>{generator.lab_item.name}</Text>
       </View>
       <PoolbarImage
         imageId={generator.file_image}
@@ -100,7 +100,7 @@ const RenderElement = ({ generator }) => {
       {generator.members.length > 0 && (
         <View style={{ flex: 1 }}>
           <View style={{ flex: 1, borderTopWidth: 2, borderBottomWidth: 2, padding: 10 }}>
-            <Text style={StylesMain.artistDetailsDateText}>mitwirkende</Text>
+            <Text style={StylesMain.detailsDateText}>mitwirkende</Text>
           </View>
           <View style={{ flex: 1 }}>
             {generator.members.map((member) => (

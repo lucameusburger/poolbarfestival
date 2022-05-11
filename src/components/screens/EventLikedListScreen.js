@@ -38,12 +38,20 @@ const EventLikedListScreen = ({ router }) => {
             >
               {events
                 .filter((event) => likedEvents.includes(event.id))
-                .map((event) => (
-                  <View key={event.id} style={{ marginBottom: 20 }}>
-                    <Text style={[StylesMain.textBold, { fontSize: 22 }]}>{event.name}</Text>
-                    <Text style={StylesMain.textBold}>{event.day_item.date_start}</Text>
-                  </View>
-                ))}
+                .map((event) => {
+                  const dateString = new Date(event.day_item.date_start).toLocaleDateString('de-DE', {
+                    weekday: 'long',
+                    day: 'numeric',
+                    month: 'long',
+                    year: 'numeric',
+                  });
+                  return (
+                    <View key={event.id} style={{ marginBottom: 20 }}>
+                      <Text style={[StylesMain.textBold, { fontSize: 22 }]}>{event.name}</Text>
+                      <Text style={StylesMain.textBold}>{dateString}</Text>
+                    </View>
+                  );
+                })}
             </View>
             <Text style={StylesMain.tag}>#poolbar22</Text>
           </View>
