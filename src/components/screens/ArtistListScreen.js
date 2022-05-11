@@ -74,6 +74,7 @@ const ArtistsScreen = ({ navigation }) => {
   const events = useSelector((state) => state.events.data);
   const [displayedArtists, setDisplayedArtists] = useState([]);
   const isLoaded = useSelector((state) => state.artists.isLoaded);
+  const [searchText, setSearchText] = useState('');
 
   function sortArtistsAlphabetically(artists) {
     if (!artists) return null;
@@ -107,8 +108,8 @@ const ArtistsScreen = ({ navigation }) => {
   }, []);
 
   useEffect(() => {
-    setDisplayedArtists(sortArtistsAlphabetically(filterPlaysInCurrentYear(artists)));
-  }, [artists]);
+    setDisplayedArtists(sortArtistsAlphabetically(filterPlaysInCurrentYear(artists).filter((s) => s.name.toLowerCase().includes(searchText.toLowerCase()))));
+  }, [artists, searchText]);
 
   return (
     <View style={StylesMain.mainView}>
@@ -120,6 +121,8 @@ const ArtistsScreen = ({ navigation }) => {
             navigation.navigate('ArtistHistory');
           }}
           nextTitle={'history'}
+          searchText={searchText}
+          setSearchText={setSearchText}
         />
         <View style={{ flex: 1 }}>{!isLoaded ? <LoadingText /> : displayedArtists ? <ArtistsList artists={displayedArtists} /> : <LoadingText />}</View>
       </FadeInView>
