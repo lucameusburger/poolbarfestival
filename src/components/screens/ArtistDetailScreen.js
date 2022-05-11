@@ -36,7 +36,7 @@ const ArtistDetail = ({ artist }) => {
         }}
       />
       <View style={{ padding: 10, borderTopWidth: 2 }}>
-        <View style={{ marginBottom: 20 }}>
+        <View style={{ marginBottom: 0 }}>
           <Text style={StylesMain.text}>{artist.description}</Text>
         </View>
       </View>
@@ -46,7 +46,6 @@ const ArtistDetail = ({ artist }) => {
             style={{
               marginRight: 'auto',
               marginLeft: 0,
-              marginBottom: 10,
             }}
             title="auf spotify spielen"
             onPress={() => Linking.openURL(artist.url_spotify)}
@@ -57,7 +56,7 @@ const ArtistDetail = ({ artist }) => {
             style={{
               marginRight: 'auto',
               marginLeft: 0,
-              marginBottom: 10,
+              marginTop: 10,
             }}
             title="zur webseite"
             onPress={() => Linking.openURL(artist.website)}
@@ -65,7 +64,7 @@ const ArtistDetail = ({ artist }) => {
         )}
       </View>
 
-      <View>
+      <View style={{ marginBottom: 30 }}>
         <View style={{ flex: 1, borderTopWidth: 2, borderBottomWidth: 2, padding: 10 }}>
           <Text style={[StylesMain.artistDetailsDateText]}>bevorstehende events</Text>
         </View>

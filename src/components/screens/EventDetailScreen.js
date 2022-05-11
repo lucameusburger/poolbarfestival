@@ -53,8 +53,10 @@ const EventDetail = ({ item, artist, venue }) => {
         <View>
           <Text style={StylesMain.text}>{item.description_short}</Text>
           <View style={{ height: 20 }}></View>
-          <Text style={[StylesMain.text, { fontFamily: 'HelviotopiaBold' }]}>{artist?.category ? '#' + artist.category : '#tba'}</Text>
-          <Text style={[StylesMain.text, { fontFamily: 'HelviotopiaBold' }]}>{venue?.name ? '#' + venue.name : '#tba'}</Text>
+          <Text style={[StylesMain.text, { fontFamily: 'HelviotopiaBold' }]}>
+            {artist?.category ? '#' + artist.category + ' ' : ''}
+            {venue?.name ? '#' + venue.name : ''}
+          </Text>
         </View>
       </View>
 
