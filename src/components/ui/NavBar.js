@@ -4,6 +4,7 @@ import AppHeading from './AppHeading';
 import AppButton from './AppButton';
 import { memo } from 'react';
 import { CLR_PRIMARY } from '../../core/Theme';
+import SearchBar from './SearchBar';
 
 const estimatedStatusBarHeight = NativeModules.NativeUnimoduleProxy?.modulesConstants?.ExponentConstants?.statusBarHeight ?? 0;
 
@@ -14,7 +15,7 @@ const APPROX_STATUSBAR_HEIGHT = Platform.select({
 
 const Wrapper = typeof APPROX_STATUSBAR_HEIGHT.statusBarHeight === 'number' ? View : SafeAreaView;
 
-const NavBar = ({ title, next, nextTitle, nextButtonStyle }) => {
+const NavBar = ({ title, next, nextTitle, nextButtonStyle, searchText, setSearchText }) => {
   return (
     <Wrapper style={{ margin: 0, backgroundColor: CLR_PRIMARY, zIndex: 999 }}>
       <View
@@ -56,6 +57,7 @@ const NavBar = ({ title, next, nextTitle, nextButtonStyle }) => {
             </>
           )}
         </View>
+        {setSearchText && <SearchBar text={searchText} setText={setSearchText} />}
       </View>
     </Wrapper>
   );
