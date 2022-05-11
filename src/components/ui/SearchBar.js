@@ -10,7 +10,7 @@ const SearchBar = ({ text, setText }) => {
       <TextInput
         autoCorrect={false}
         autoCapitalize="none"
-        placeholder="suchen ..."
+        placeholder="stöbern ..."
         placeholderTextColor={'#000000'}
         style={{ width: '100%', borderBottomColor: '#000000', borderWidth: 2, minHeight: 10, borderRadius: 12, fontFamily: 'Helviotopia', color: 'black', alignSelf: 'center', marginTop: 'auto', marginBottom: 'auto', fontSize: 18, padding: 10 }}
         onChangeText={setText}
