@@ -87,7 +87,7 @@ const StylesMain = StyleSheet.create({
     textTransform: 'lowercase',
     color: '#000',
     marginTop: 10,
-    backgroundColor: '#00ff00',
+    backgroundColor: CLR_PRIMARY,
     padding: 6,
     width: 140,
   },

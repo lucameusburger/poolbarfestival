@@ -59,6 +59,8 @@ const ScanCollection = ({ collection, events, artists, generators }) => {
             padding: 10,
             borderBottomWidth: 2,
             borderBottomColor: 'black',
+            display: 'flex',
+            flex: 1,
           }}
           key={item.id}
           onPress={() => openScann(item)}
@@ -69,11 +71,11 @@ const ScanCollection = ({ collection, events, artists, generators }) => {
               marginTop: 'auto',
               marginBottom: 'auto',
               flexDirection: 'row',
+              alignItems: 'center',
             }}
           >
             <FontAwesome
               style={{
-                alignSelf: 'flex-end',
                 marginBottom: 'auto',
                 marginTop: 'auto',
                 alignItems: 'center',
@@ -82,10 +84,10 @@ const ScanCollection = ({ collection, events, artists, generators }) => {
               size={50}
               color={'#000000'}
             />
-            <View style={{}}>
+            <View style={{ flex: 1 }}>
               <View
                 style={{
-                  marginLeft: 20,
+                  marginLeft: 10,
                   marginTop: 'auto',
                   marginBottom: 'auto',
                   width: '100%',

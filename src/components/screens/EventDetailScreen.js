@@ -97,7 +97,7 @@ const EventDetail = ({ item, artist, venue }) => {
         {item.room && (
           <AppButton
             style={{ marginRight: 'auto', marginLeft: 0 }}
-            title="venue ansehen"
+            title="stage ansehen"
             onPress={() =>
               navigate('Room', {
                 id: item.room,

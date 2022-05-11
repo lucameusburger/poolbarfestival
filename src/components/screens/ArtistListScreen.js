@@ -33,6 +33,7 @@ const ArtistListScreen = ({ item }) => {
           marginBottom: 'auto',
           flexDirection: 'row',
           alignItems: 'center',
+          display: 'flex',
         }}
       >
         <PoolbarImage
@@ -52,7 +53,6 @@ const ArtistListScreen = ({ item }) => {
               marginLeft: 10,
               marginTop: 'auto',
               marginBottom: 'auto',
-              width: '100%',
               width: '100%',
             }}
           >

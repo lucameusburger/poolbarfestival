@@ -60,7 +60,7 @@ const RoomDetailScreen = ({ route, navigation }) => {
   return (
     <View style={StylesMain.mainView}>
       <FadeInView style={{ flex: 1, width: '100%' }}>
-        <NavBar navigation={navigation} title={'venue'} />
+        <NavBar navigation={navigation} title={'stage'} />
         <ScrollView style={{ flex: 1 }}>{selectedVenue ? <RenderElement venue={selectedVenue} /> : <LoadingText />}</ScrollView>
       </FadeInView>
     </View>
