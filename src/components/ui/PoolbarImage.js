@@ -13,7 +13,7 @@ function PoolbarImage({ imageId, fallback, style, params = PARAMS }) {
       setUrl(fallback);
     }
   }, [imageId, fallback]);
-  return <>{url ? <Image source={url} loadingIndicatorSource={fallback} resizeMode="cover" style={[style, { backgroundColor: '#fff' }]} onError={() => setUrl(fallback)} /> : null}</>;
+  return <>{url ? <Image source={url} onError={() => setUrl(fallback)} resizeMode="cover" style={[style, { backgroundColor: '#fff' }]} onError={() => setUrl(fallback)} /> : null}</>;
 }
 
 export default memo(PoolbarImage);

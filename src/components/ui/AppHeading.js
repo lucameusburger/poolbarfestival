@@ -7,7 +7,7 @@ const AppHeading = ({ title }) => {
   const duration = 5000;
   const startValue = new Animated.Value(SCREEN_WIDTH);
   const startValue0 = new Animated.Value(SCREEN_WIDTH);
-  const endValue = -SCREEN_WIDTH * 1.2;
+  const endValue = -SCREEN_WIDTH;
 
   useEffect(() => {
     Animated.parallel([
@@ -35,7 +35,7 @@ const AppHeading = ({ title }) => {
   }, [startValue, endValue]);
 
   return (
-    <View style={{ flexDirection: 'row', marginBottom: 0 }}>
+    <View style={{ flexDirection: 'row', marginBottom: 5 }}>
       <Animated.View
         style={{
           display: 'flex',
