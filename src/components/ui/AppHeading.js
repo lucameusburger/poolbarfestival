@@ -3,7 +3,7 @@ import { Animated, Dimensions, View, StyleSheet, Text } from 'react-native';
 
 const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
 
-const AppHeading = ({ title }) => {
+const AppHeading = ({ title, slide = true }) => {
   const duration = 5000;
   const startValue = new Animated.Value(SCREEN_WIDTH);
   const startValue0 = new Animated.Value(SCREEN_WIDTH);
@@ -34,7 +34,7 @@ const AppHeading = ({ title }) => {
     ]).start();
   }, [startValue, endValue]);
 
-  return (
+  return slide ? (
     <View style={{ flexDirection: 'row', marginBottom: 5 }}>
       <Animated.View
         style={{
@@ -59,6 +59,12 @@ const AppHeading = ({ title }) => {
           {title}
         </Text>
       </Animated.View>
+    </View>
+  ) : (
+    <View>
+      <Text numberOfLines={1} style={styles.heading}>
+        {title}
+      </Text>
     </View>
   );
 };

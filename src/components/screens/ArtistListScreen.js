@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Text, View, FlatList, TouchableOpacity } from 'react-native';
+import { Text, View, FlatList, TouchableOpacity, Keyboard } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
 import NavBar from '../ui/NavBar';
@@ -65,7 +65,17 @@ const ArtistListScreen = ({ item }) => {
   );
 };
 
-const ArtistsList = ({ artists }) => <FlatList style={{ flex: 1, height: '100%' }} data={artists} renderItem={ArtistListScreen} keyExtractor={(item) => item.id} />;
+const ArtistsList = ({ artists }) => (
+  <FlatList
+    onMomentumScrollBegin={() => {
+      Keyboard.dismiss();
+    }}
+    style={{ flex: 1, height: '100%' }}
+    data={artists}
+    renderItem={ArtistListScreen}
+    keyExtractor={(item) => item.id}
+  />
+);
 
 const ArtistsScreen = ({ navigation }) => {
   const dispatch = useDispatch();

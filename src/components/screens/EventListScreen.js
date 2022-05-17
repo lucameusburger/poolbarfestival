@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { View, FlatList } from 'react-native';
+import { View, FlatList, Keyboard, TouchableWithoutFeedback } from 'react-native';
 import LoadingText from '../ui/LoadingText';
 import NavBar from '../ui/NavBar';
 import FadeInView from '../ui/FadeInView';
@@ -50,7 +50,21 @@ const EventListScreen = ({ router }) => {
           searchText={searchText}
           setSearchText={setSearchText}
         />
-        <View style={{ flex: 1, margin: 0 }}>{displayedEvents ? <FlatList style={{ flex: 1, padding: 0 }} data={displayedEvents} keyExtractor={(item) => item.id} renderItem={({ item }) => <EventComponent item={item} onLike={onLike} />} /> : <LoadingText />}</View>
+        <View style={{ flex: 1, margin: 0 }}>
+          {displayedEvents ? (
+            <FlatList
+              onMomentumScrollBegin={() => {
+                Keyboard.dismiss();
+              }}
+              style={{ flex: 1, padding: 0 }}
+              data={displayedEvents}
+              keyExtractor={(item) => item.id}
+              renderItem={({ item }) => <EventComponent item={item} onLike={onLike} />}
+            />
+          ) : (
+            <LoadingText />
+          )}
+        </View>
       </FadeInView>
     </View>
   );
