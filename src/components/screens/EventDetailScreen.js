@@ -14,6 +14,7 @@ import { navigate } from '../../core/RootNavigation';
 import { fetchVenues } from '../../redux/venueThunk';
 import { getDateString } from '../../core/helpers';
 import PoolbarImage from '../ui/PoolbarImage';
+import { useIsFocused } from '@react-navigation/native';
 
 import artistPlaceholder from '../../../assets/img/artistPlaceholder.jpg';
 
@@ -113,6 +114,8 @@ const EventDetail = ({ item, artist, venue }) => {
 const EventDetailScreen = ({ route }) => {
   const id = route.params.id.trim();
 
+  const isFocused = useIsFocused();
+
   const events = useSelector((state) => state.events.data);
   const artists = useSelector((state) => state.artists.artists);
   const venues = useSelector((state) => state.venues.data);
@@ -131,7 +134,7 @@ const EventDetailScreen = ({ route }) => {
 
   useEffect(() => {
     setSelectedEvent(events.find((event) => event.id === id));
-  }, [events]);
+  }, [events, route]);
 
   useEffect(() => {
     if (selectedEvent) {
@@ -144,7 +147,7 @@ const EventDetailScreen = ({ route }) => {
     <View style={StylesMain.mainView}>
       <FadeInView style={{ flex: 1, width: '100%' }}>
         <NavBar title={'event'} />
-        <ScrollView style={{ flex: 1 }}>{selectedEvent ? <EventDetail item={selectedEvent} artist={selectedArtist} venue={selectedVenue} /> : <LoadingText />}</ScrollView>
+        <ScrollView style={{ flex: 1 }}>{selectedEvent && isFocused ? <EventDetail item={selectedEvent} artist={selectedArtist} venue={selectedVenue} /> : <LoadingText />}</ScrollView>
       </FadeInView>
     </View>
   );
