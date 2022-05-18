@@ -30,14 +30,19 @@ const bboxAustria = [
   },
 ];
 
-const estimatedStatusBarHeight = NativeModules.NativeUnimoduleProxy?.modulesConstants?.ExponentConstants?.statusBarHeight ?? 0;
+const estimatedStatusBarHeight =
+  NativeModules.NativeUnimoduleProxy?.modulesConstants?.ExponentConstants
+    ?.statusBarHeight ?? 0;
 
 const APPROX_STATUSBAR_HEIGHT = Platform.select({
   android: estimatedStatusBarHeight,
   ios: Platform.Version < 11 ? estimatedStatusBarHeight : 0,
 });
 
-const Wrapper = typeof APPROX_STATUSBAR_HEIGHT.statusBarHeight === 'number' ? View : SafeAreaView;
+const Wrapper =
+  typeof APPROX_STATUSBAR_HEIGHT.statusBarHeight === 'number'
+    ? View
+    : SafeAreaView;
 
 const RenderMarkers = ({ setInfoBarVisible, infoBarVisible }) => {
   const dispatch = useDispatch();
@@ -58,10 +63,36 @@ const RenderMarkers = ({ setInfoBarVisible, infoBarVisible }) => {
   return (
     <>
       {spaceLocations.map((location) => (
-        <CustomMarker location={location} setCurrentLocation={setCurrentLocation} setInfoBarVisible={setInfoBarVisible} infoBarVisible={infoBarVisible} currentLocation={currentLocation} markerIcon={'map-pin'} key={'marker_' + location.id} />
+        <CustomMarker
+          location={location}
+          onPress={() => {
+            setInfoBarVisible(true);
+            setCurrentLocation(location);
+          }}
+          markerIcon={'map-pin'}
+          iconColor={
+            currentLocation?.id === location.id && infoBarVisible
+              ? '#00ff00'
+              : 'black'
+          }
+          key={'marker_' + location.id}
+        />
       ))}
       {poiLocations.map((location) => (
-        <CustomMarker location={location} setCurrentLocation={setCurrentLocation} setInfoBarVisible={setInfoBarVisible} infoBarVisible={infoBarVisible} currentLocation={currentLocation} markerIcon={'map-marker-alt'} key={'marker_' + location.id} />
+        <CustomMarker
+          location={location}
+          onPress={() => {
+            setInfoBarVisible(true);
+            setCurrentLocation(location);
+          }}
+          markerIcon={'map-marker-alt'}
+          iconColor={
+            currentLocation?.id === location.id && infoBarVisible
+              ? '#00ff00'
+              : 'black'
+          }
+          key={'marker_' + location.id}
+        />
       ))}
     </>
   );
@@ -98,7 +129,10 @@ const MapScreen = ({ navigation }) => {
           mapRef={mapRef}
           initialRegion={initialRegion}
         >
-          <RenderMarkers infoBarVisible={infoBarVisible} setInfoBarVisible={setInfoBarVisible} />
+          <RenderMarkers
+            infoBarVisible={infoBarVisible}
+            setInfoBarVisible={setInfoBarVisible}
+          />
         </CustomMap>
 
         {infoBarVisible && <LocationInfoBottomBar location={currentLocation} />}
