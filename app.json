@@ -3,8 +3,6 @@
     "name": "poolbar",
     "slug": "poolbarfestival",
     "version": "1.1.8",
-    "language": "de",
-    "lang": "de",
     "orientation": "portrait",
     "icon": "./assets/icon/appstore.png",
     "splash": {
