@@ -1,3 +1,3 @@
 # poolbar Festival
 
-An app for the poolbar Festival ❤️
+An app for the Poolbar Festival ❤️
