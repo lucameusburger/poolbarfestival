@@ -1,6 +1,7 @@
 import { Text, View } from 'react-native';
 
 const ProgressBar = ({ value, maxvalue, text }) => {
+  console.log(maxvalue);
   return (
     <View
       style={{
@@ -13,7 +14,7 @@ const ProgressBar = ({ value, maxvalue, text }) => {
       <View
         style={{
           backgroundColor: '#00ff00',
-          width: Math.min(maxvalue, (100 / maxvalue) * value) + '%',
+          width: Math.min(100, (100 / maxvalue) * value) + '%',
           alignItems: 'center',
           minHeight: 6,
         }}
