@@ -8,12 +8,26 @@ import { initialState, rootReducer } from './reducers';
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  whitelist: ['favorites', 'beer', 'scanns'],
+  whitelist: [
+    'favorites',
+    'beer',
+    'scanns',
+    'artists',
+    'events',
+    'venues',
+    'generators',
+    'spaceLocations',
+    'poi',
+  ],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-const store = createStore(persistedReducer, initialState, applyMiddleware(thunk));
+const store = createStore(
+  persistedReducer,
+  initialState,
+  applyMiddleware(thunk)
+);
 
 const persistor = persistStore(store);
 
