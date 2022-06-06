@@ -1,7 +1,6 @@
 import { Text, View } from 'react-native';
 
 const ProgressBar = ({ value, maxvalue, text }) => {
-  console.log(maxvalue);
   return (
     <View
       style={{
