@@ -14,7 +14,6 @@ function PoolbarImage({ imageId, fallback, style, params = PARAMS }) {
     } else if (fallback) {
       setUrl(fallback);
     }
-    console.log('?fit=cover&width=' + SCREEN_WIDTH + '&quality=80');
   }, [imageId, fallback]);
   return <>{url ? <Image source={url} resizeMode="cover" style={[{ backgroundColor: '#fff', height: imageHeight }, style]} onError={() => setUrl(fallback)} /> : null}</>;
 }
