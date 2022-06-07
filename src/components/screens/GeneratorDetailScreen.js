@@ -51,7 +51,10 @@ const RenderMember = ({ member }) => {
             }}
           >
             <Text style={StylesMain.listDateText}>{member.year}</Text>
-            <Text style={[StylesMain.listMainText, { flex: 1, width: '100%' }]} ellipsizeMode="tail">
+            <Text
+              style={[StylesMain.listMainText, { flex: 1, width: '100%' }]}
+              ellipsizeMode="tail"
+            >
               {member.name}
             </Text>
             {member.is_head && (
@@ -62,7 +65,14 @@ const RenderMember = ({ member }) => {
                 }}
               >
                 <View>
-                  <Text style={[StylesMain.textSmallBold, { backgroundColor: '#00ff00' }]}>Laborleiter·in</Text>
+                  <Text
+                    style={[
+                      StylesMain.textSmallBold,
+                      { backgroundColor: '#00ff00' },
+                    ]}
+                  >
+                    Laborleiter·in
+                  </Text>
                 </View>
               </View>
             )}
@@ -80,7 +90,9 @@ const RenderElement = ({ generator }) => {
         <Text style={StylesMain.detailsMainText}>{generator.name}</Text>
       </View>
       <View style={{ padding: 10, borderBottomWidth: 2 }}>
-        <Text style={StylesMain.detailsDateText}>{generator.lab_item.name}</Text>
+        <Text style={StylesMain.detailsDateText}>
+          {generator.lab_item.name}
+        </Text>
       </View>
       <PoolbarImage
         imageId={generator.file_image}
@@ -99,7 +111,14 @@ const RenderElement = ({ generator }) => {
       )}
       {generator.members.length > 0 && (
         <View style={{ flex: 1 }}>
-          <View style={{ flex: 1, borderTopWidth: 2, borderBottomWidth: 2, padding: 10 }}>
+          <View
+            style={{
+              flex: 1,
+              borderTopWidth: 2,
+              borderBottomWidth: 2,
+              padding: 10,
+            }}
+          >
             <Text style={StylesMain.detailsDateText}>mitwirkende</Text>
           </View>
           <View style={{ flex: 1 }}>
@@ -128,13 +147,27 @@ const GeneratorDetailScreen = ({ route, navigation }) => {
   }, []);
 
   useEffect(() => {
+    setAddedDeepLink(false);
+  }, [id]);
+
+  useEffect(() => {
     if (isDeepLink && !addedDeepLink && areGeneratorsLoaded && scanns) {
       setAddedDeepLink(true);
       const generatorsCount = generators.length;
-      const generatorsScannedCount = scanns.filter((scann) => scann.type === 'generator').length;
-      const newGeneratorAlreadyScanned = scanns.find((scann) => scann.id === id && scann.type === 'generator');
-      if (!newGeneratorAlreadyScanned && generatorsCount === generatorsScannedCount - 1) {
-        Alert.alert('Du hast alle Generatorprojekte gescannt!', 'Du kannst deinen Code für ein Gratisbier bei deinen Scanns finden. Solange der Vorrat reicht.');
+      const generatorsScannedCount = scanns.filter(
+        (scann) => scann.type === 'generator'
+      ).length;
+      const newGeneratorAlreadyScanned = scanns.find(
+        (scann) => scann.id === id && scann.type === 'generator'
+      );
+      if (
+        !newGeneratorAlreadyScanned &&
+        generatorsCount === generatorsScannedCount - 1
+      ) {
+        Alert.alert(
+          'Du hast alle Generatorprojekte gescannt!',
+          'Du kannst deinen Code für ein Gratisbier bei deinen Scanns finden. Solange der Vorrat reicht.'
+        );
 
         dispatch({
           type: 'SET_CODE',
@@ -153,7 +186,13 @@ const GeneratorDetailScreen = ({ route, navigation }) => {
     <View style={StylesMain.mainView}>
       <FadeInView style={{ flex: 1, width: '100%' }}>
         <NavBar navigation={navigation} title={'projekt'} />
-        <ScrollView style={{ flex: 1 }}>{selectedGenerator ? <RenderElement generator={selectedGenerator} /> : <LoadingText />}</ScrollView>
+        <ScrollView style={{ flex: 1 }}>
+          {selectedGenerator ? (
+            <RenderElement generator={selectedGenerator} />
+          ) : (
+            <LoadingText />
+          )}
+        </ScrollView>
       </FadeInView>
     </View>
   );

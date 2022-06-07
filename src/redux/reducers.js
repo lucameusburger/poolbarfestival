@@ -1,53 +1,53 @@
-import { combineReducers } from "redux";
+import { combineReducers } from 'redux';
 
 import {
   reducer as artistsReducers,
   initialState as artistsInitialState,
-} from "./artistsReducer";
+} from './artistsReducer';
 import {
   reducer as eventsReducers,
   initialState as eventsInitialState,
-} from "./eventsReducer";
+} from './eventsReducer';
 import {
   reducer as favoritesReducers,
   initialState as favoritesInitialState,
-} from "./favoritesReducer";
+} from './favoritesReducer';
 import {
   reducer as callenderReducer,
   initialState as callenderInitialState,
-} from "./callenderReducer";
+} from './callenderReducer';
 import {
   reducer as venuesReducers,
   initialState as venuesInitialState,
-} from "./venueReducer";
+} from './venueReducer';
 import {
   reducer as spaceLocationsReducers,
   initialState as spaceLocationsInitialState,
-} from "./spaceLocationReducer";
+} from './spaceLocationReducer';
 import {
   reducer as currentLocactionReducers,
   initialState as currentLocationInitialState,
-} from "./currentLocationReducer";
+} from './currentLocationReducer';
 import {
   reducer as generatorsReducers,
   initialState as generatorsInitialState,
-} from "./generatorsReducer";
+} from './generatorsReducer';
 import {
   reducer as poiReducer,
   initialState as poiInitialState,
-} from "./poiReducer";
+} from './poiReducer';
 import {
   reducer as flowTextReducer,
   initialState as flowTextInitialState,
-} from "./flowTextReducer";
+} from './flowTextReducer';
 import {
   reducer as scannsReducer,
   initialState as scannsInitialState,
-} from "./scannsReducer";
+} from './scannsReducer';
 import {
   reducer as beerReducer,
   initialState as beerInitialState,
-} from "./beerReducer";
+} from './beerReducer';
 
 export const initialState = {
   artists: artistsInitialState,
@@ -64,7 +64,7 @@ export const initialState = {
   beer: beerInitialState,
 };
 
-export const rootReducer = combineReducers({
+const appReducer = combineReducers({
   artists: artistsReducers,
   events: eventsReducers,
   favorites: favoritesReducers,
@@ -78,3 +78,11 @@ export const rootReducer = combineReducers({
   scanns: scannsReducer,
   beer: beerReducer,
 });
+
+export const rootReducer = (state, action) => {
+  if (action.type === 'RESET_STORE') {
+    state = initialState;
+  }
+
+  return appReducer(state, action);
+};
