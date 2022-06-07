@@ -119,7 +119,7 @@ const ArtistsScreen = ({ navigation }) => {
 
   useEffect(() => {
     setDisplayedArtists(sortArtistsAlphabetically(filterPlaysInCurrentYear(artists).filter((s) => s.name.toLowerCase().includes(searchText.toLowerCase()))));
-  }, [artists, searchText]);
+  }, [artists, events, searchText]);
 
   return (
     <View style={StylesMain.mainView}>
@@ -134,7 +134,7 @@ const ArtistsScreen = ({ navigation }) => {
           searchText={searchText}
           setSearchText={setSearchText}
         />
-        <View style={{ flex: 1 }}>{!isLoaded ? <LoadingText /> : displayedArtists ? <ArtistsList artists={displayedArtists} /> : <LoadingText />}</View>
+        <View style={{ flex: 1 }}>{!isLoaded || !artists || !events || !displayedArtists || !displayedArtists.length ? <LoadingText /> : <ArtistsList artists={displayedArtists} />}</View>
       </FadeInView>
     </View>
   );

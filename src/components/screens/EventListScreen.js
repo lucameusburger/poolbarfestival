@@ -13,6 +13,7 @@ import { CLR_PRIMARY } from '../../core/Theme';
 const EventListScreen = ({ router }) => {
   const dispatch = useDispatch();
   const events = useSelector((state) => state.events.data);
+  const isLoaded = useSelector((state) => state.events.isLoaded);
   const [displayedEvents, setDisplayedEvents] = useState([]);
   const [searchText, setSearchText] = useState('');
 
@@ -51,7 +52,7 @@ const EventListScreen = ({ router }) => {
           setSearchText={setSearchText}
         />
         <View style={{ flex: 1, margin: 0 }}>
-          {displayedEvents ? (
+          {isLoaded && events && displayedEvents ? (
             <FlatList
               onMomentumScrollBegin={() => {
                 Keyboard.dismiss();
