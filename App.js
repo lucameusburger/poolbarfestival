@@ -1,6 +1,12 @@
 import { useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { Text, NativeModules, Platform, SafeAreaView, Keyboard } from 'react-native';
+import {
+  Text,
+  NativeModules,
+  Platform,
+  SafeAreaView,
+  Keyboard,
+} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import AppLoading from 'expo-app-loading';
@@ -61,24 +67,96 @@ function Navigator() {
 
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Home" component={HomeScreen} options={{ title: 'Home', headerShown: false }} />
-      <Stack.Screen name="Events" component={EventListScreen} options={{ title: 'Events', headerShown: false }} />
-      <Stack.Screen name="LikedEvents" component={EventLikedListScreen} options={{ title: 'LikedEvents', headerShown: false }} />
-      <Stack.Screen name="Event" component={EventDetailScreen} options={{ title: 'Event', headerShown: false }} />
-      <Stack.Screen name="Artists" component={ArtistListScreen} options={{ title: 'Artists', headerShown: false }} />
-      <Stack.Screen name="ArtistHistory" component={ArtistHistoryListScreen} options={{ title: 'ArtistHistory', headerShown: false }} />
-      <Stack.Screen name="Artist" component={ArtistDetailScreen} options={{ title: 'Artist', headerShown: false }} />
-      <Stack.Screen name="Room" component={RoomDetailScreen} options={{ title: 'Room', headerShown: false }} />
-      <Stack.Screen name="Generators" component={GeneratorListScreen} options={{ title: 'Generator', headerShown: false }} />
-      <Stack.Screen name="Scan" component={ScanScreen} options={{ title: 'Scan', headerShown: false }} />
-      <Stack.Screen name="Map" component={MapScreen} options={{ title: 'Map', headerShown: false }} />
-      <Stack.Screen name="Generator" component={GeneratorDetailScreen} options={{ title: 'Generator', headerShown: false }} />
-      <Stack.Screen name="Flowtext" component={FlowtextScreen} options={{ title: 'Flowtext', headerShown: false }} />
-      <Stack.Screen name="Capture" component={CaptureScreen} options={{ title: 'Capture', headerShown: false }} />
-      <Stack.Screen name="Credits" component={CreditsScreen} options={{ title: 'Credits', headerShown: false }} />
-      <Stack.Screen name="Raumfahrtprogramm" component={RaumfahrtDetailScreen} options={{ title: 'Raumfahrtprogramm', headerShown: false }} />
-      <Stack.Screen name="GeneratorInfo" component={GeneratorInfoScreen} options={{ title: 'GeneratorInfo', headerShown: false }} />
-      <Stack.Screen name="ScanCollection" component={ScanCollectionScreen} options={{ title: 'ScanCollection', headerShown: false }} />
+      <Stack.Screen
+        name="Home"
+        component={HomeScreen}
+        options={{ title: 'Home', headerShown: false }}
+      />
+      <Stack.Screen
+        name="Events"
+        component={EventListScreen}
+        options={{ title: 'Events', headerShown: false }}
+      />
+      <Stack.Screen
+        name="LikedEvents"
+        component={EventLikedListScreen}
+        options={{ title: 'LikedEvents', headerShown: false }}
+      />
+      <Stack.Screen
+        name="Event"
+        component={EventDetailScreen}
+        options={{ title: 'Event', headerShown: false }}
+      />
+      <Stack.Screen
+        name="Artists"
+        component={ArtistListScreen}
+        options={{ title: 'Artists', headerShown: false }}
+      />
+      <Stack.Screen
+        name="ArtistHistory"
+        component={ArtistHistoryListScreen}
+        options={{ title: 'ArtistHistory', headerShown: false }}
+      />
+      <Stack.Screen
+        name="Artist"
+        component={ArtistDetailScreen}
+        options={{ title: 'Artist', headerShown: false }}
+      />
+      <Stack.Screen
+        name="Room"
+        component={RoomDetailScreen}
+        options={{ title: 'Room', headerShown: false }}
+      />
+      <Stack.Screen
+        name="Generators"
+        component={GeneratorListScreen}
+        options={{ title: 'Generator', headerShown: false }}
+      />
+      <Stack.Screen
+        name="Scan"
+        component={ScanScreen}
+        options={{ title: 'Scan', headerShown: false }}
+      />
+      <Stack.Screen
+        name="Map"
+        component={MapScreen}
+        options={{ title: 'Map', headerShown: false }}
+      />
+      <Stack.Screen
+        name="Generator"
+        component={GeneratorDetailScreen}
+        options={{ title: 'Generator', headerShown: false }}
+      />
+      <Stack.Screen
+        name="Flowtext"
+        component={FlowtextScreen}
+        options={{ title: 'Flowtext', headerShown: false }}
+      />
+      <Stack.Screen
+        name="Capture"
+        component={CaptureScreen}
+        options={{ title: 'Capture', headerShown: false }}
+      />
+      <Stack.Screen
+        name="Credits"
+        component={CreditsScreen}
+        options={{ title: 'Credits', headerShown: false }}
+      />
+      <Stack.Screen
+        name="Raumfahrtprogramm"
+        component={RaumfahrtDetailScreen}
+        options={{ title: 'Raumfahrtprogramm', headerShown: false }}
+      />
+      <Stack.Screen
+        name="GeneratorInfo"
+        component={GeneratorInfoScreen}
+        options={{ title: 'GeneratorInfo', headerShown: false }}
+      />
+      <Stack.Screen
+        name="ScanCollection"
+        component={ScanCollectionScreen}
+        options={{ title: 'ScanCollection', headerShown: false }}
+      />
     </Stack.Navigator>
   );
 }
@@ -103,7 +181,7 @@ const App = () => {
           path: '/artist/:id',
         },
         Generator: {
-          path: '/generator/:id/:isDeepLink',
+          path: '/generator/:id/:isDeepLink?',
         },
         Home: '*',
       },
@@ -116,7 +194,11 @@ const App = () => {
     return (
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-          <NavigationContainer linking={linking} fallback={<Text>Loading...</Text>} ref={navigationRef}>
+          <NavigationContainer
+            linking={linking}
+            fallback={<Text>Loading...</Text>}
+            ref={navigationRef}
+          >
             <Navigator />
           </NavigationContainer>
           <StatusBar style="dark" />
