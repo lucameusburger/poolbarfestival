@@ -150,6 +150,8 @@ const GeneratorDetailScreen = ({ route, navigation }) => {
     setAddedDeepLink(false);
   }, [id]);
 
+  const beerCode = useSelector((state) => state.beer.code);
+
   useEffect(() => {
     if (isDeepLink && !addedDeepLink && areGeneratorsLoaded && scanns) {
       setAddedDeepLink(true);
@@ -160,9 +162,11 @@ const GeneratorDetailScreen = ({ route, navigation }) => {
       const newGeneratorAlreadyScanned = scanns.find(
         (scann) => scann.id === id && scann.type === 'generator'
       );
+
       if (
-        !newGeneratorAlreadyScanned &&
-        generatorsCount === generatorsScannedCount - 1
+        (!newGeneratorAlreadyScanned &&
+          generatorsCount === generatorsScannedCount - 1) ||
+        (generatorsCount === generatorsScannedCount && !beerCode)
       ) {
         Alert.alert(
           'Du hast alle Generatorprojekte gescannt!',
