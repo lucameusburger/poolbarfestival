@@ -56,20 +56,31 @@ const ScanScreen = ({ navigation }) => {
     setScanned(true);
     const canOpen = await Linking.canOpenURL(data);
     if (canOpen) {
-      const parts = data.split('/');
-      const type = parts[parts.length - 3];
-      const id = parts[parts.length - 2].replace('\u2013', '-');
-      if (type === 'generator') {
+      const senetizedData = data.replace('\u2013', '-').replace(/\s/g, '');
+
+      const parts = senetizedData.split('/');
+      let type = '';
+      const id =
+        parts[parts.length - 1].length === 36
+          ? parts[parts.length - 1]
+          : parts[parts.length - 2];
+      console.log(senetizedData);
+      if (senetizedData.includes('generator')) {
+        type = 'generator';
         if (!generators.find((generator) => generator.id === id)) {
           unknownQRCode();
           return;
         }
-      } else if (type === 'artist') {
+      } else if (senetizedData.includes('artist')) {
+        type = 'artist';
+
         if (!artists.find((artist) => artist.id === id)) {
           unknownQRCode();
           return;
         }
-      } else if (type === 'event') {
+      } else if (senetizedData.includes('event')) {
+        type = 'event';
+
         if (!events.find((event) => event.id === id)) {
           unknownQRCode();
 
@@ -86,7 +97,7 @@ const ScanScreen = ({ navigation }) => {
           type,
         },
       });
-      await Linking.openURL(data.replace('\u2013', '-'));
+      await Linking.openURL(senetizedData);
       setTimeout(() => {
         setScanned(false);
       }, 1000);
@@ -133,7 +144,12 @@ const ScanScreen = ({ navigation }) => {
               color="white"
             />
           </View>
-          {hasPermission && isFocused && <BarCodeScanner onBarCodeScanned={scanned ? undefined : handleBarCodeScanned} style={[StyleSheet.absoluteFillObject, { margin: -20 }]} />}
+          {hasPermission && isFocused && (
+            <BarCodeScanner
+              onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
+              style={[StyleSheet.absoluteFillObject, { margin: -20 }]}
+            />
+          )}
         </View>
       </FadeInView>
     </View>
