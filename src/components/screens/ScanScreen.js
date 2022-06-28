@@ -53,57 +53,59 @@ const ScanScreen = ({ navigation }) => {
   };
 
   const handleBarCodeScanned = async ({ type, data }) => {
-    setScanned(true);
-    const canOpen = await Linking.canOpenURL(data);
-    if (canOpen) {
-      const senetizedData = data.replace('\u2013', '-').replace(/\s/g, '');
+    try {
+      setScanned(true);
+      const canOpen = await Linking.canOpenURL(data);
+      if (canOpen) {
+        const senetizedData = data.replace('\u2013', '-').replace(/\s/g, '');
 
-      const parts = senetizedData.split('/');
-      let type = '';
-      const id =
-        parts[parts.length - 1].length === 36
-          ? parts[parts.length - 1]
-          : parts[parts.length - 2];
-      console.log(senetizedData);
-      if (senetizedData.includes('generator')) {
-        type = 'generator';
-        if (!generators.find((generator) => generator.id === id)) {
+        const parts = senetizedData.split('/');
+        let type = '';
+        const id =
+          parts[parts.length - 1].length === 36
+            ? parts[parts.length - 1]
+            : parts[parts.length - 2];
+        if (senetizedData.includes('generator')) {
+          type = 'generator';
+          if (!generators.find((generator) => generator.id === id)) {
+            unknownQRCode();
+            return;
+          }
+        } else if (senetizedData.includes('artist')) {
+          type = 'artist';
+
+          if (!artists.find((artist) => artist.id === id)) {
+            unknownQRCode();
+            return;
+          }
+        } else if (senetizedData.includes('event')) {
+          type = 'event';
+
+          if (!events.find((event) => event.id === id)) {
+            unknownQRCode();
+
+            return;
+          }
+        } else {
           unknownQRCode();
           return;
         }
-      } else if (senetizedData.includes('artist')) {
-        type = 'artist';
-
-        if (!artists.find((artist) => artist.id === id)) {
-          unknownQRCode();
-          return;
-        }
-      } else if (senetizedData.includes('event')) {
-        type = 'event';
-
-        if (!events.find((event) => event.id === id)) {
-          unknownQRCode();
-
-          return;
-        }
+        dispatch({
+          type: 'ADD_SCANN',
+          payload: {
+            id,
+            type,
+          },
+        });
+        await Linking.openURL(data).then(() => setScanned(false));
       } else {
         unknownQRCode();
         return;
       }
-      dispatch({
-        type: 'ADD_SCANN',
-        payload: {
-          id,
-          type,
-        },
-      });
-      await Linking.openURL(senetizedData);
+    } catch {
       setTimeout(() => {
         setScanned(false);
       }, 1000);
-    } else {
-      unknownQRCode();
-      return;
     }
   };
 
