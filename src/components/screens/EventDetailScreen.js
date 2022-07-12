@@ -94,6 +94,7 @@ const EventDetail = ({ item, artist, venue }) => {
             }
           />
         )}
+        {artist && artist.url_spotify && <AppButton style={{ marginRight: 'auto', marginLeft: 0, marginBottom: 10 }} title="auf spotify spielen" onPress={() => Linking.openURL(artist.url_spotify)} />}
         {item.room && (
           <AppButton
             style={{ marginRight: 'auto', marginLeft: 0 }}
