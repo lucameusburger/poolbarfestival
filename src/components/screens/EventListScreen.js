@@ -63,7 +63,7 @@ const EventListScreen = ({ router }) => {
           }
         });
         scrollToIndex(todayIndex);
-      }, 100);
+      }, 400);
     }
   }, [events, displayedEvents, initialScrollFinished]);
 
