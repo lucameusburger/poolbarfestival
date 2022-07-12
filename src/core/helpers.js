@@ -1,5 +1,16 @@
 import { Linking, Platform } from 'react-native';
 
+export function isToday(date) {
+  const today = new Date();
+  const target = new Date(date);
+
+  return (
+    target.getDate() == today.getDate() &&
+    target.getMonth() == today.getMonth() &&
+    target.getFullYear() == today.getFullYear()
+  );
+}
+
 export function getDateString(date) {
   const monthName = [
     'January',
