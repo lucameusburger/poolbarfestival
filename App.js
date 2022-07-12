@@ -1,12 +1,6 @@
 import { useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import {
-  Text,
-  NativeModules,
-  Platform,
-  SafeAreaView,
-  Keyboard,
-} from 'react-native';
+import { Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import AppLoading from 'expo-app-loading';
@@ -52,11 +46,12 @@ const Stack = createNativeStackNavigator();
 Sentry.init({
   dsn: 'https://2a19ef9fa8a94e85bf68253dcd673713@o1240265.ingest.sentry.io/6392297',
   enableInExpoDevelopment: false,
-  debug: true, // If `true`, Sentry will try to print out useful debugging information if something goes wrong with sending the event. Set it to `false` in production
+  debug: true,
 });
 
 function Navigator() {
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(fetchEvents());
     dispatch(fetchArtists());
