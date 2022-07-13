@@ -27,7 +27,7 @@ export function getDateString(date) {
     'December',
   ];
 
-  const weekdayName = ['MO', 'DI', 'MI', 'DO', 'FR', 'SA', 'SO'];
+  const weekdayName = ['SO', 'MO', 'DI', 'MI', 'DO', 'FR', 'SA'];
 
   return (
     weekdayName[date.getDay()] +
