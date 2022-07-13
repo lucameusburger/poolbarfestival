@@ -42,13 +42,24 @@ const ArtistDetail = ({ artist }) => {
           </View>
         </View>
       )}
+      <View>
+        <View style={{ flex: 1, borderTopWidth: 2, borderBottomWidth: 2, padding: 10 }}>
+          <Text style={[StylesMain.detailsDateText]}>bevorstehende events</Text>
+        </View>
+        <View style={{ flex: 1 }}>
+          {filteredEvents.map((event) => (
+            <EventComponent key={event.id} item={event} />
+          ))}
+        </View>
+      </View>
       {(artist.website || artist.url_spotify) && (
-        <View style={{ padding: 10 }}>
+        <View style={{ padding: 10, marginBottom: 30 }}>
           {artist.url_spotify && (
             <AppButton
               style={{
                 marginRight: 'auto',
                 marginLeft: 0,
+                width: '100%',
               }}
               title="auf spotify spielen"
               onPress={() => Linking.openURL(artist.url_spotify)}
@@ -60,6 +71,7 @@ const ArtistDetail = ({ artist }) => {
                 marginRight: 'auto',
                 marginLeft: 0,
                 marginTop: 10,
+                width: '100%',
               }}
               title="zur webseite"
               onPress={() => Linking.openURL(artist.website)}
@@ -67,17 +79,6 @@ const ArtistDetail = ({ artist }) => {
           )}
         </View>
       )}
-
-      <View>
-        <View style={{ flex: 1, borderTopWidth: 2, borderBottomWidth: 2, padding: 10 }}>
-          <Text style={[StylesMain.detailsDateText]}>bevorstehende events</Text>
-        </View>
-        <View style={{ flex: 1 }}>
-          {filteredEvents.map((event) => (
-            <EventComponent key={event.id} item={event} />
-          ))}
-        </View>
-      </View>
     </View>
   );
 };

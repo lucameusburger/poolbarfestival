@@ -43,7 +43,7 @@ const RenderMember = ({ member }) => {
         <View style={{ width: '100%', flex: 1, alignItems: 'center' }}>
           <View
             style={{
-              marginLeft: 10,
+              marginLeft: 20,
               marginTop: 'auto',
               marginBottom: 'auto',
               width: '100%',
@@ -51,10 +51,7 @@ const RenderMember = ({ member }) => {
             }}
           >
             <Text style={StylesMain.listDateText}>{member.year}</Text>
-            <Text
-              style={[StylesMain.listMainText, { flex: 1, width: '100%' }]}
-              ellipsizeMode="tail"
-            >
+            <Text style={[StylesMain.listMainText, { flex: 1, width: '100%' }]} ellipsizeMode="tail">
               {member.name}
             </Text>
             {member.is_head && (
@@ -65,14 +62,7 @@ const RenderMember = ({ member }) => {
                 }}
               >
                 <View>
-                  <Text
-                    style={[
-                      StylesMain.textSmallBold,
-                      { backgroundColor: '#00ff00' },
-                    ]}
-                  >
-                    Laborleiter·in
-                  </Text>
+                  <Text style={[StylesMain.textSmallBold, { backgroundColor: '#00ff00' }]}>Laborleiter·in</Text>
                 </View>
               </View>
             )}
@@ -90,9 +80,7 @@ const RenderElement = ({ generator }) => {
         <Text style={StylesMain.detailsMainText}>{generator.name}</Text>
       </View>
       <View style={{ padding: 10, borderBottomWidth: 2 }}>
-        <Text style={StylesMain.detailsDateText}>
-          {generator.lab_item.name}
-        </Text>
+        <Text style={StylesMain.detailsDateText}>{generator.lab_item.name}</Text>
       </View>
       <PoolbarImage
         imageId={generator.file_image}
@@ -119,7 +107,7 @@ const RenderElement = ({ generator }) => {
               padding: 10,
             }}
           >
-            <Text style={StylesMain.detailsDateText}>mitwirkende</Text>
+            <Text style={StylesMain.detailsDateText}>Mitwirkende</Text>
           </View>
           <View style={{ flex: 1 }}>
             {generator.members.map((member) => (
@@ -156,22 +144,11 @@ const GeneratorDetailScreen = ({ route, navigation }) => {
     if (isDeepLink && !addedDeepLink && areGeneratorsLoaded && scanns) {
       setAddedDeepLink(true);
       const generatorsCount = generators.length;
-      const generatorsScannedCount = scanns.filter(
-        (scann) => scann.type === 'generator'
-      ).length;
-      const newGeneratorAlreadyScanned = scanns.find(
-        (scann) => scann.id === id && scann.type === 'generator'
-      );
+      const generatorsScannedCount = scanns.filter((scann) => scann.type === 'generator').length;
+      const newGeneratorAlreadyScanned = scanns.find((scann) => scann.id === id && scann.type === 'generator');
 
-      if (
-        (!newGeneratorAlreadyScanned &&
-          generatorsCount === generatorsScannedCount - 1) ||
-        (generatorsCount === generatorsScannedCount && !beerCode)
-      ) {
-        Alert.alert(
-          'Du hast alle Generatorprojekte gescannt!',
-          'Du kannst deinen Code für ein Gratisbier bei deinen Scanns finden. Solange der Vorrat reicht.'
-        );
+      if ((!newGeneratorAlreadyScanned && generatorsCount === generatorsScannedCount - 1) || (generatorsCount === generatorsScannedCount && !beerCode)) {
+        Alert.alert('Du hast alle Generatorprojekte gescannt!', 'Du kannst deinen Code für ein Gratisbier bei deinen Scanns finden. Solange der Vorrat reicht.');
 
         dispatch({
           type: 'SET_CODE',
@@ -190,13 +167,7 @@ const GeneratorDetailScreen = ({ route, navigation }) => {
     <View style={StylesMain.mainView}>
       <FadeInView style={{ flex: 1, width: '100%' }}>
         <NavBar navigation={navigation} title={'projekt'} />
-        <ScrollView style={{ flex: 1 }}>
-          {selectedGenerator ? (
-            <RenderElement generator={selectedGenerator} />
-          ) : (
-            <LoadingText />
-          )}
-        </ScrollView>
+        <ScrollView style={{ flex: 1 }}>{selectedGenerator ? <RenderElement generator={selectedGenerator} /> : <LoadingText />}</ScrollView>
       </FadeInView>
     </View>
   );

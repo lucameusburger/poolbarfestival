@@ -49,15 +49,17 @@ const EventDetail = ({ item, artist, venue }) => {
         }}
       />
 
-      <View style={{ padding: 10, borderTopWidth: 2 }}>
-        <View>
+      {item.description_short && (
+        <View style={{ padding: 10, borderTopWidth: 2 }}>
           <Text style={StylesMain.text}>{item.description_short}</Text>
-          <View style={{ height: 20 }}></View>
-          <Text style={[StylesMain.text, { fontFamily: 'HelviotopiaBold' }]}>
-            {artist?.category ? '#' + artist.category + ' ' : ''}
-            {venue?.name ? '#' + venue.name : ''}
-          </Text>
         </View>
+      )}
+
+      <View style={{ padding: 10, borderTopWidth: 2, borderBottomWidth: 2 }}>
+        <Text style={[StylesMain.text, { fontFamily: 'HelviotopiaBold' }]}>
+          {artist?.category ? '‡' + artist.category + ' ' : ''}
+          {venue?.name ? '‡' + venue.name : ''}
+        </Text>
       </View>
 
       <View style={{ padding: 10, marginBottom: 30 }}>
@@ -69,6 +71,7 @@ const EventDetail = ({ item, artist, venue }) => {
             marginLeft: 0,
             alignSelf: 'flex-start',
             marginBottom: 10,
+            width: '100%',
           }}
         />
         {item.url_ticket && (
@@ -77,6 +80,7 @@ const EventDetail = ({ item, artist, venue }) => {
               marginRight: 'auto',
               marginLeft: 0,
               marginBottom: 10,
+              width: '100%',
             }}
             title="hol dir tickets"
             onPress={() => Linking.openURL(item.url_ticket)}
@@ -85,7 +89,7 @@ const EventDetail = ({ item, artist, venue }) => {
         )}
         {artist && (
           <AppButton
-            style={{ marginRight: 'auto', marginLeft: 0, marginBottom: 10 }}
+            style={{ marginRight: 'auto', marginLeft: 0, marginBottom: 10, width: '100%' }}
             title="artist ansehen"
             onPress={() =>
               navigate('Artist', {
@@ -94,10 +98,10 @@ const EventDetail = ({ item, artist, venue }) => {
             }
           />
         )}
-        {artist && artist.url_spotify && <AppButton style={{ marginRight: 'auto', marginLeft: 0, marginBottom: 10 }} title="auf spotify spielen" onPress={() => Linking.openURL(artist.url_spotify)} />}
+        {artist && artist.url_spotify && <AppButton style={{ marginRight: 'auto', marginLeft: 0, marginBottom: 10, width: '100%' }} title="auf spotify spielen" onPress={() => Linking.openURL(artist.url_spotify)} />}
         {item.room && (
           <AppButton
-            style={{ marginRight: 'auto', marginLeft: 0 }}
+            style={{ marginRight: 'auto', marginLeft: 0, width: '100%' }}
             title="stage ansehen"
             onPress={() =>
               navigate('Room', {

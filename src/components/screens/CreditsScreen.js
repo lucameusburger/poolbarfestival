@@ -1,11 +1,5 @@
 import { useRef, useState } from 'react';
-import {
-  Text,
-  View,
-  ScrollView,
-  TouchableWithoutFeedback,
-  Alert,
-} from 'react-native';
+import { Text, View, ScrollView, TouchableWithoutFeedback, Alert } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { openComposer } from 'react-native-email-link';
 
@@ -34,61 +28,29 @@ const Credits = () => {
   };
   return (
     <View style={StylesMain.credits}>
-      <Text style={StylesMain.text}>
-        Diese App wurde im Rahmen des poolbar Generator 2022 in Hohenems
-        innerhalb einer Woche mit viel Liebe, Schweiß und Herzblut entwickelt ❤️
-        Es wurden dabei unzählige Tassen Kaffee konsumiert und genauso viele
-        Ideen produziert. Wir hoffen die App gefällt Dir!
-      </Text>
+      <Text style={StylesMain.text}>Diese App wurde im Rahmen des poolbar Generator 2022 in Hohenems innerhalb einer Woche mit viel Liebe, Schweiß und Herzblut entwickelt ❤️ Es wurden dabei unzählige Tassen Kaffee konsumiert und genauso viele Ideen produziert. Wir hoffen die App gefällt Dir!</Text>
       <TouchableWithoutFeedback
         onPress={incrementTabCounter}
         style={{
           flex: 1,
         }}
       >
-        <Video
-          rate={1.0}
-          isMuted={true}
-          resizeMode="contain"
-          ref={video}
-          style={{ height: 300, shadowColor: 'white', shadowOpacity: 1 }}
-          source={require('../../../assets/video/ladder.mp4')}
-          shouldPlay
-          isLooping
-        />
+        <Video rate={1.0} isMuted={true} resizeMode="contain" ref={video} style={{ height: 300, shadowColor: 'white', shadowOpacity: 1 }} source={require('../../../assets/video/ladder.mp4')} shouldPlay isLooping />
       </TouchableWithoutFeedback>
 
-      <Text style={[StylesMain.textBold, { marginTop: 30 }]}>
-        Idee und Konzept
-      </Text>
+      <Text style={[StylesMain.textBold, { marginTop: 30 }]}>‡ Idee und Konzept</Text>
       <Text style={[StylesMain.text, { marginTop: 0 }]}>Luca Meusburger</Text>
-      <Text style={[StylesMain.textBold, { marginTop: 30 }]}>
-        Programmierung
-      </Text>
-      <Text style={[StylesMain.text, { marginTop: 0 }]}>
-        Lukas Fritsch, Luca Meusburger, Felix Kaufmann
-      </Text>
-      <Text style={[StylesMain.textBold, { marginTop: 30 }]}>
-        Grafik und Design
-      </Text>
-      <Text style={[StylesMain.text, { marginTop: 0 }]}>
-        Flurina Schneider, Allan Tavares
-      </Text>
-      <Text style={[StylesMain.textBold, { marginTop: 30 }]}>
-        Kreatives Mitwirken
-      </Text>
-      <Text style={[StylesMain.text, { marginTop: 0 }]}>
-        Alle bisher genannten
-      </Text>
-      <Text style={[StylesMain.text, { marginTop: 30 }]}>
-        Interesse am Mitwirken an der App?
-      </Text>
-      <Text style={[StylesMain.text, { marginTop: 0 }]}>
-        Melde Dich bei uns!
-      </Text>
+      <Text style={[StylesMain.textBold, { marginTop: 30 }]}>‡ Programmierung</Text>
+      <Text style={[StylesMain.text, { marginTop: 0 }]}>Lukas Fritsch, Luca Meusburger, Felix Kaufmann</Text>
+      <Text style={[StylesMain.textBold, { marginTop: 30 }]}>‡ Grafik und Design</Text>
+      <Text style={[StylesMain.text, { marginTop: 0 }]}>Flurina Schneider, Allan Tavares</Text>
+      <Text style={[StylesMain.textBold, { marginTop: 30 }]}>‡ Kreatives Mitwirken</Text>
+      <Text style={[StylesMain.text, { marginTop: 0 }]}>Alle bisher genannten</Text>
+      <Text style={[StylesMain.text, { marginTop: 30 }]}>Interesse am Mitwirken an der App?</Text>
+      <Text style={[StylesMain.text, { marginTop: 0 }]}>Melde Dich bei uns!</Text>
 
       <AppButton
-        style={{ marginTop: 30, marginBottom: 30, alignSelf: 'flex-start' }}
+        style={{ marginTop: 30, marginBottom: 40, alignSelf: 'flex-start', width: '100%' }}
         onPress={() => {
           openComposer({
             to: 'luca@lume.work',
@@ -107,7 +69,7 @@ const CreditsScreen = ({}) => {
     <View style={StylesMain.mainView}>
       <FadeInView style={{ flex: 1, width: '100%', height: '100%' }}>
         <NavBar title="credits" />
-        <ScrollView style={{ flex: 1, marginTop: 10, padding: 10 }}>
+        <ScrollView style={{ flex: 1, padding: 10 }}>
           <Credits />
         </ScrollView>
       </FadeInView>
