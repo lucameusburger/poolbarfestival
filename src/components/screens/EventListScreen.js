@@ -46,7 +46,9 @@ const EventListScreen = ({ router }) => {
   const flatlistRef = useRef();
 
   const scrollToIndex = (index = 0) => {
-    flatlistRef.current.scrollToIndex({ animated: true, index: index });
+    if (flatlistRef.current) {
+      flatlistRef.current.scrollToIndex({ animated: true, index: index });
+    }
   };
 
   const [initialScrollFinished, setInitialScrollFinished] = useState(false);
