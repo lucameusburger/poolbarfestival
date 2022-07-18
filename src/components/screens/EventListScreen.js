@@ -52,17 +52,28 @@ const EventListScreen = ({ router }) => {
   const [initialScrollFinished, setInitialScrollFinished] = useState(false);
 
   useEffect(() => {
+    var today = new Date();
+    var tomorrow = new Date();
+
+    tomorrow.setDate(today.getDate() + 1);
+    tomorrow.setHours(0, 0, 0, 0);
+
     if (events && displayedEvents && !initialScrollFinished) {
       setInitialScrollFinished(true);
       const scrollTimer = setTimeout(() => {
-        let todayIndex = 0;
+        let closestEventIndex = 0;
         events.some((event, index) => {
-          if (isToday(event.day_item.date_start)) {
-            todayIndex = index;
+          const eventDate = new Date(event.day_item.date_start);
+          if (isToday(eventDate)) {
+            closestEventIndex = index;
+            return true;
+          } else if (eventDate >= tomorrow) {
+            closestEventIndex = index;
             return true;
           }
         });
-        scrollToIndex(todayIndex);
+        console.log(closestEventIndex);
+        scrollToIndex(closestEventIndex);
       }, 400);
     }
   }, [events, displayedEvents, initialScrollFinished]);
@@ -93,6 +104,12 @@ const EventListScreen = ({ router }) => {
                 <EventComponent item={item} onLike={onLike} />
               )}
               ref={flatlistRef}
+              onScrollToIndexFailed={() => {
+                console.log('failed');
+                setTimeout(() => {
+                  setInitialScrollFinished(false);
+                }, 100);
+              }}
             />
           ) : (
             <LoadingText />
