@@ -23,11 +23,7 @@ const EventListScreen = ({ router }) => {
   }, []);
 
   useEffect(() => {
-    setDisplayedEvents(
-      events.filter((s) =>
-        s.name.toLowerCase().includes(searchText.toLowerCase())
-      )
-    );
+    setDisplayedEvents(events.filter((s) => s.name.toLowerCase().includes(searchText.toLowerCase())));
   }, [events, searchText]);
 
   const [blinkLike, setBlinkLike] = useState(false);
@@ -75,7 +71,9 @@ const EventListScreen = ({ router }) => {
           }
         });
         console.log(closestEventIndex);
-        scrollToIndex(closestEventIndex);
+        if (closestEventIndex > 0) {
+          scrollToIndex(closestEventIndex);
+        }
       }, 400);
     }
   }, [events, displayedEvents, initialScrollFinished]);
@@ -102,9 +100,7 @@ const EventListScreen = ({ router }) => {
               style={{ flex: 1, padding: 0 }}
               data={displayedEvents}
               keyExtractor={(item) => item.id}
-              renderItem={({ item }) => (
-                <EventComponent item={item} onLike={onLike} />
-              )}
+              renderItem={({ item }) => <EventComponent item={item} onLike={onLike} />}
               ref={flatlistRef}
               onScrollToIndexFailed={() => {
                 console.log('failed');
