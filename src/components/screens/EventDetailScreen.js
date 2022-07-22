@@ -12,16 +12,22 @@ import { fetchEvents } from '../../redux/eventsThunk';
 import { fetchArtists } from '../../redux/artistsThunk';
 import { navigate } from '../../core/RootNavigation';
 import { fetchVenues } from '../../redux/venueThunk';
-import { getDateString } from '../../core/helpers';
+import { getDateString, getDayString } from '../../core/helpers';
 import PoolbarImage from '../ui/PoolbarImage';
 import { useIsFocused } from '@react-navigation/native';
 
 import artistPlaceholder from '../../../assets/img/artistPlaceholder.jpg';
 
 const EventDetail = ({ item, artist, venue }) => {
-  const time_show_start = item.time_show_start ? ' - ' + item.time_show_start.slice(0, -3) : '';
+  const time_doors = item.time_doors ? item.time_doors.slice(0, -3) : '';
+  let time_show_start = item.time_show_start ? item.time_show_start.slice(0, -3) : '';
+  const time_show_start_before0400 = item.time_show_start ? item.time_show_start.slice(0, -3) < '04:00' : false;
+  const dateString = item.day_item.date_start ? getDateString(new Date(item.day_item.date_start)) : 'tba';
+  const nextDayString = item.day_item.date_start ? getDayString(new Date(item.day_item.date_end)) : 'tba';
 
-  const dateString = item.day_item.date_start ? getDateString(new Date(item.day_item.date_start)) + time_show_start : 'tba';
+  if (time_show_start_before0400) {
+    time_show_start = time_show_start + ' (' + nextDayString + ')';
+  }
 
   const today = new Date();
   const date = new Date(item.day_item.date_start);
@@ -35,7 +41,7 @@ const EventDetail = ({ item, artist, venue }) => {
 
       <View style={{ flex: 1, width: '100%', padding: 10, flexDirection: 'row', borderBottomWidth: 2 }}>
         <View>
-          <Text style={[StylesMain.detailsDateText, { backgroundColor: isToday ? '#00ff00' : '#ffffff', alignSelf: 'flex-start' }]}>{isToday ? 'HEUTE' + time_show_start : dateString}</Text>
+          <Text style={[StylesMain.detailsDateText, { backgroundColor: isToday ? '#00ff00' : '#ffffff', alignSelf: 'flex-start' }]}>{isToday ? 'HEUTE' : dateString}</Text>
         </View>
         <View style={{ flex: 1 }}>{item.soldout && <Text style={[StylesMain.detailsDateText, { backgroundColor: '#00ff00', alignSelf: 'flex-end' }]}>SOLD OUT</Text>}</View>
       </View>
@@ -56,6 +62,13 @@ const EventDetail = ({ item, artist, venue }) => {
       )}
 
       <View style={{ padding: 10, borderTopWidth: 2, borderBottomWidth: 2 }}>
+        <Text style={[StylesMain.text, { fontFamily: 'HelviotopiaBold' }]}>
+          {time_doors ? 'Einlass ' + time_doors + ' und ' : ''}
+          {time_show_start ? 'Showtime ' + time_show_start : ''}
+        </Text>
+      </View>
+
+      <View style={{ padding: 10, borderBottomWidth: 2 }}>
         <Text style={[StylesMain.text, { fontFamily: 'HelviotopiaBold' }]}>
           {artist?.category ? '‡' + artist.category + ' ' : ''}
           {venue?.name ? '‡' + venue.name : ''}

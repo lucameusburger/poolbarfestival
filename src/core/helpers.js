@@ -4,40 +4,21 @@ export function isToday(date) {
   const today = new Date();
   const target = new Date(date);
 
-  return (
-    target.getDate() == today.getDate() &&
-    target.getMonth() == today.getMonth() &&
-    target.getFullYear() == today.getFullYear()
-  );
+  return target.getDate() == today.getDate() && target.getMonth() == today.getMonth() && target.getFullYear() == today.getFullYear();
 }
 
 export function getDateString(date) {
-  const monthName = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
-  ];
+  const monthName = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
   const weekdayName = ['SO', 'MO', 'DI', 'MI', 'DO', 'FR', 'SA'];
 
-  return (
-    weekdayName[date.getDay()] +
-    ' ' +
-    date.getDate() +
-    ' ' +
-    monthName[date.getMonth()] +
-    ' ' +
-    date.getFullYear()
-  );
+  return weekdayName[date.getDay()] + ' ' + date.getDate() + ' ' + monthName[date.getMonth()] + ' ' + date.getFullYear();
+}
+
+export function getDayString(date) {
+  const weekdayName = ['SO', 'MO', 'DI', 'MI', 'DO', 'FR', 'SA'];
+
+  return weekdayName[date.getDay()];
 }
 
 export function openGoogleMaps(location, name) {
