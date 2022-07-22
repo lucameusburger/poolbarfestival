@@ -52,8 +52,3 @@ export function fetchSpaceLocations() {
     }
   };
 }
-/***
-export function fetchVenue(id) {
-    return fetchVenues();
-}
-*/
