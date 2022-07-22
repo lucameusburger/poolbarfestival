@@ -39,7 +39,7 @@ const LocationInfoBottomBar = ({ location }) => {
             );
           }}
         />
-        {location?.id && (
+        {location?.id && false && (
           <AppButton
             title="details"
             textProps={{
@@ -80,6 +80,16 @@ const LocationInfoBottomBar = ({ location }) => {
           }}
         >
           {location?.name}
+        </Text>
+        <Text
+          style={{
+            fontSize: 16,
+            margin: 'auto',
+            fontFamily: 'Helviotopia',
+            alignSelf: 'center',
+          }}
+        >
+          {location?.description}
         </Text>
       </View>
     </View>
