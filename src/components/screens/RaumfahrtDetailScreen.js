@@ -8,6 +8,7 @@ import LoadingText from '../ui/LoadingText';
 import FadeInView from '../ui/FadeInView';
 import StylesMain from '../../../styles/StylesMain';
 import { fetchPOI } from '../../redux/poiThunk';
+import { fetchSpaceLocations } from '../../redux/spaceLocationThunk';
 
 function openGoogleMaps(location, name) {
   const scheme = Platform.select({
@@ -69,23 +70,30 @@ const RaumfahrtDetailScreen = ({ route }) => {
   const id = route.params.id.trim();
   const dispatch = useDispatch();
 
-  const isLoaded = useSelector((state) => state.spaceLocations.isLoaded);
   const spaceLocations = useSelector((state) => state.spaceLocations.data);
   const [selectedSpaceLocation, setSelectedSpaceLocation] = useState(null);
 
   useEffect(() => {
-    dispatch(fetchPOI(id));
+    dispatch(fetchSpaceLocations());
   }, []);
 
   useEffect(() => {
-    setSelectedSpaceLocation(spaceLocations.find((spaceLocation) => spaceLocation.id === id));
+    setSelectedSpaceLocation(
+      spaceLocations.find((spaceLocation) => spaceLocation.id === id)
+    );
   }, [spaceLocations]);
 
   return (
     <View style={StylesMain.mainView}>
       <FadeInView style={{ flex: 1, width: '100%', height: '100%' }}>
         <NavBar title="raumfahrt" />
-        <ScrollView style={{ flex: 1 }}>{!isLoaded || !selectedSpaceLocation ? <LoadingText /> : <RaumfahrtDetail spaceLocation={selectedSpaceLocation} />}</ScrollView>
+        <ScrollView style={{ flex: 1 }}>
+          {selectedSpaceLocation ? (
+            <RaumfahrtDetail spaceLocation={selectedSpaceLocation} />
+          ) : (
+            <LoadingText />
+          )}
+        </ScrollView>
       </FadeInView>
     </View>
   );
