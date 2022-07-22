@@ -4,7 +4,7 @@ export const initialState = {
 
 export function reducer(state = initialState, action) {
   switch (action.type) {
-    case "ADD_SCANN":
+    case 'ADD_SCANN':
       if (
         state.data.find(
           (scann) =>
@@ -17,7 +17,7 @@ export function reducer(state = initialState, action) {
         ...state,
         data: [...state.data, action.payload],
       };
-    case "SET_SCANNS":
+    case 'SET_SCANNS':
       return {
         ...state,
         data: action.payload,

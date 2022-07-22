@@ -23,13 +23,6 @@ export function reducer(state = initialState, action) {
         ...state,
         hasFetchingDataError: action.payload,
       };
-    case 'persist/REHYDRATE':
-      return {
-        ...state,
-        isLoaded: false,
-        isFetchingData: false,
-        hasFetchingDataError: false,
-      };
     default:
       return state;
   }

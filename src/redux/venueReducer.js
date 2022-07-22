@@ -25,7 +25,7 @@ export function reducer(state = initialState, action) {
       };
     case 'persist/REHYDRATE':
       return {
-        ...state,
+        ...action.payload.venues,
         isLoaded: false,
         isFetchingData: false,
         hasFetchingDataError: false,
