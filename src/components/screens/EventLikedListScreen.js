@@ -39,7 +39,9 @@ const EventLikedListScreen = ({ router }) => {
               {events
                 .filter((event) => likedEvents.includes(event.id))
                 .map((event) => {
-                  const dateString = new Date(event.day_item.date_start).toLocaleDateString('de-DE', {
+                  const dateString = new Date(
+                    event.day_item.date_start
+                  ).toLocaleDateString('de-DE', {
                     weekday: 'long',
                     day: 'numeric',
                     month: 'long',
@@ -47,7 +49,9 @@ const EventLikedListScreen = ({ router }) => {
                   });
                   return (
                     <View key={event.id} style={{ marginBottom: 20 }}>
-                      <Text style={[StylesMain.textBold, { fontSize: 22 }]}>{event.name}</Text>
+                      <Text style={[StylesMain.textBold, { fontSize: 22 }]}>
+                        {event.name}
+                      </Text>
                       <Text style={StylesMain.textBold}>{dateString}</Text>
                     </View>
                   );
@@ -70,14 +74,21 @@ const EventLikedListScreen = ({ router }) => {
           }}
           nextTitle="teilen"
         />
-        <ViewShot ref={viewShotRef} style={{ height: '100%', width: '100%', backgroundColor: 'white' }}>
+        <ViewShot
+          ref={viewShotRef}
+          style={{ height: '100%', width: '100%', backgroundColor: 'white' }}
+        >
           <View style={{ flex: 1, margin: 0 }}>
-            {loading && (
-              <View style={{ flex: 1, margin: 0 }}>
-                <LoadingText />
-              </View>
+            {events && events.length > 0 ? (
+              <FlatList
+                style={{ flex: 1 }}
+                data={events.filter((event) => likedEvents.includes(event.id))}
+                renderItem={EventComponent}
+                keyExtractor={(item) => item.id}
+              />
+            ) : (
+              <LoadingText />
             )}
-            {events ? <FlatList style={{ flex: 1 }} data={events.filter((event) => likedEvents.includes(event.id))} renderItem={EventComponent} keyExtractor={(item) => item.id} /> : <LoadingText />}
           </View>
         </ViewShot>
       </FadeInView>

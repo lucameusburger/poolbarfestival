@@ -15,8 +15,15 @@ const EventListScreen = ({ router }) => {
   const dispatch = useDispatch();
   const events = useSelector((state) => state.events.data);
   const isLoaded = useSelector((state) => state.events.isLoaded);
+
+  const flatlistRef = useRef();
+
   const [displayedEvents, setDisplayedEvents] = useState([]);
   const [searchText, setSearchText] = useState('');
+  const [initialScrollFinished, setInitialScrollFinished] = useState(false);
+
+  const [blinkLike, setBlinkLike] = useState(false);
+  const [blinkLightInterval, setBlinkLightInterval] = useState(null);
 
   useEffect(() => {
     dispatch(fetchEvents());
@@ -24,14 +31,12 @@ const EventListScreen = ({ router }) => {
 
   useEffect(() => {
     setDisplayedEvents(
-      events.filter((s) =>
-        s.name.toLowerCase().includes(searchText.toLowerCase())
+      events.filter((event) =>
+        event.name.toLowerCase().includes(searchText.toLowerCase())
       )
     );
   }, [events, searchText]);
 
-  const [blinkLike, setBlinkLike] = useState(false);
-  const [blinkLightInterval, setBlinkLightInterval] = useState(null);
   const blinkDuration = 300;
   const onLike = () => {
     setBlinkLike(true);
@@ -43,15 +48,11 @@ const EventListScreen = ({ router }) => {
     );
   };
 
-  const flatlistRef = useRef();
-
   const scrollToIndex = (index = 0) => {
     if (flatlistRef.current) {
       flatlistRef.current.scrollToIndex({ animated: true, index: index });
     }
   };
-
-  const [initialScrollFinished, setInitialScrollFinished] = useState(false);
 
   useEffect(() => {
     var today = new Date();
@@ -74,7 +75,6 @@ const EventListScreen = ({ router }) => {
             return true;
           }
         });
-        console.log(closestEventIndex);
         scrollToIndex(closestEventIndex);
       }, 400);
     }
@@ -94,7 +94,7 @@ const EventListScreen = ({ router }) => {
           setSearchText={setSearchText}
         />
         <View style={{ flex: 1, margin: 0 }}>
-          {events && displayedEvents ? (
+          {displayedEvents && displayedEvents.length > 0 ? (
             <FlatList
               onMomentumScrollBegin={() => {
                 Keyboard.dismiss();
