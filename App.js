@@ -39,6 +39,7 @@ import GeneratorDetailScreen from './src/components/screens/GeneratorDetailScree
 import { fetchGenerators } from './src/redux/generatorsThunk';
 import CaptureScreen from './src/components/screens/CaptureScreen';
 import { fetchPOI } from './src/redux/poiThunk';
+import { fetchSpaceLocations } from './src/redux/spaceLocationThunk';
 
 const prefix = Linking.createURL('/');
 const Stack = createNativeStackNavigator();
@@ -58,6 +59,7 @@ function Navigator() {
     dispatch(fetchVenues());
     dispatch(fetchGenerators());
     dispatch(fetchPOI());
+    dispatch(fetchSpaceLocations());
   }, []);
 
   return (
